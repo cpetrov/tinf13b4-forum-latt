@@ -15,7 +15,7 @@
 		<title>
 			<jsp:invoke fragment="title"/>
 		</title>
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="icon" type="image/png" href="favicon.png" />
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 		<jsp:invoke fragment="css"/>
 	</head>
