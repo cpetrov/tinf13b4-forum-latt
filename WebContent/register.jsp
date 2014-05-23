@@ -24,7 +24,7 @@
 		    	<label for="email">Mail-Adresse</label>
 		    	<input type="email" class="form-control" id="email" placeholder="Enter Mail Adress">
 				<div class="register-small-spacer"></div>
-				<input type="email" class="form-control" id="confirmmail" placeholder="Confirm Mail Adress">		  
+				<input type="email" class="form-control" id="confirmemail" placeholder="Confirm Mail Adress">		  
 		  	</div>
 		  
 		  	<div class="register-big-spacer"></div>
