@@ -2,14 +2,14 @@ package tinf13b4.forum.beans;
 
 public class ViewBean {
 
-	private String view;
+	private String name;
 	
-	public void setView(String view){
-		this.view = view;
+	public void setName(String name){
+		this.name = name;
 	}
 	
-	public String getView(){
-		return view;
+	public String getName(){
+		return name;
 	}
 	
 }

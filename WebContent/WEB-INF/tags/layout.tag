@@ -1,10 +1,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@attribute name="before" fragment="true" %>
 <%@attribute name="title" fragment="true" %>
 <%@attribute name="css" fragment="true" %>
 <%@attribute name="js" fragment="true" %>
 
 <jsp:useBean id="navs" class="tinf13b4.forum.beans.NavBean" scope="application" />
-<jsp:useBean id="view" class="tinf13b4.forum.beans.ViewBean" scope="application" />
+<jsp:useBean id="view" class="tinf13b4.forum.beans.ViewBean" scope="session" />
+<jsp:invoke fragment="before"/>
 
 <!doctype html>
 <html>
@@ -22,7 +24,7 @@
 			<div class="page-header">
 				<ul class="nav nav-pills pull-right">
 					<c:forEach var="nav" items="${navs.navs}">
-						<li class="${navs.getClassIfActive(nav.name, view.view)}">
+						<li class="${navs.getClassIfActive(nav.name, view.name)}">
 							<a href="${nav.href}">${nav.name}</a>
 						</li>
 					</c:forEach>
