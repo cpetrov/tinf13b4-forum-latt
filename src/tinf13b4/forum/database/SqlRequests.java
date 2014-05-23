@@ -4,13 +4,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import com.mysql.jdbc.*;
 
 public class SqlRequests 
 {
+	private ResultSet resultSet;
+	public ResultSet getResultSet() {
+		return resultSet;
+	}
 	private ConnectionManager mConnectionManager;
 	private Connection conn;
 	private Statement stat;
-	
+
 	public SqlRequests() 
 	{
 		this.mConnectionManager = new ConnectionManager();
@@ -41,14 +46,16 @@ public class SqlRequests
 		}
 	}
 	
-	public int countThreads() throws SQLException
+	
+	public void getAllThreads()
 	{
 		openConnection();
-		ResultSet rs = stat.executeQuery("SELECT COUNT...;");
-		int count = 0;
-		while (rs.next())
-			count = Integer.parseInt(rs.getString("unread"));
+		try {
+			resultSet = stat.executeQuery("SELECT * FROM Thread;");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		closeConnection();
-		return count;
 	}
 }
