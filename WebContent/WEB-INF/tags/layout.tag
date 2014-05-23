@@ -4,6 +4,7 @@
 <%@attribute name="js" fragment="true" %>
 
 <jsp:useBean id="navs" class="tinf13b4.forum.beans.NavBean" scope="application" />
+<jsp:useBean id="view" class="tinf13b4.forum.beans.ViewBean" scope="application" />
 
 <!doctype html>
 <html>
@@ -21,14 +22,14 @@
 			<div class="page-header">
 				<ul class="nav nav-pills pull-right">
 					<c:forEach var="nav" items="${navs.navs}">
-						<li class="${navs.getClassIfActive(nav.name, viewName)}">
+						<li class="${navs.getClassIfActive(nav.name, view.view)}">
 							<a href="${nav.href}">${nav.name}</a>
 						</li>
 					</c:forEach>
 				</ul>
 				<h1>
 					<span class="glyphicon glyphicon-send"></span>
-					Post It ${viewName}
+					Post It
 				</h1>
 			</div>
 			<jsp:doBody/>
