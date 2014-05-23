@@ -5,43 +5,36 @@
 		<jsp:setProperty name="view" property="name" value="Registrieren"/>
 	</jsp:attribute>
     <jsp:attribute name="title">Registrieren</jsp:attribute>
-    <jsp:attribute name="css">
-   		<link href="css/register.css" rel="stylesheet"/>
+    <jsp:attribute name="js">
+    	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    	<script src="js/register.js"></script>
     </jsp:attribute>
     <jsp:body>
-    <form role="form">
-        
-        	<!-- Input Nickname -->
-		  	<div class="form-group">
-		  		<label for="name">Nickname</label>
-		    	<input type="text" class="form-control" id="name" placeholder="Enter Nichname">
-		  	</div>
-		  
-		  	<div class="register-big-spacer"></div>
-		  	
-		  	<!-- Input Mail Adress -->
-		  	<div class="form-group">
-		    	<label for="email">Mail-Adresse</label>
-		    	<input type="email" class="form-control" id="email" placeholder="Enter Mail Adress">
-				<div class="register-small-spacer"></div>
-				<input type="email" class="form-control" id="confirmemail" placeholder="Confirm Mail Adress">		  
-		  	</div>
-		  
-		  	<div class="register-big-spacer"></div>
-		  
-		  	<!-- Input Password -->
-			<div class="form-group">
-				<label for="password">Passwort</label>
-			    <input type="password" class="form-control" id="password" placeholder="Enter Password">
-			    <div class="register-small-spacer"></div>
-			    <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
-			</div>
-			
-			<div class="register-big-spacer"></div>
-			
-			<!-- Submit Button -->
-			<button type="submit" class="btn btn-default">Absenden</button>
-			  
-	</form>
+   		<div class="row" ng-app="RegisterApp" ng-controller="RegisterController">
+   			<div class="col-md-4 center-block">
+   				<form ng-submit="register()">
+   					<div class="form-group" ng-class="hasError('name')">
+	   					<label class="control-label">Benutzername</label>
+	   					<input type="text" class="form-control" placeholder="Benutzername" ng-model="name">
+   					</div>
+   					<div class="form-group" ng-class="hasError('email')">
+	   					<label class="control-label">E-Mail</label>
+	   					<input type="text" class="form-control" placeholder="E-Mail" ng-model="email">
+   					</div>
+   					<div class="form-group" ng-class="hasError('password')">
+	   					<label class="control-label">Passwort</label>
+	   					<input type="password" class="form-control" placeholder="Passwort" ng-model="password">
+	   				</div>
+   					<div class="form-group" ng-class="hasError('confirm')">
+	   					<label class="control-label">Passwort wiederholen</label>
+	   					<input type="password" class="form-control" placeholder="Passwort wiederholen" ng-model="confirm">
+	   				</div>
+   					<hr></hr>
+   					<button type="submit" class="btn btn-primary btn-block">
+   						<strong>Registrieren</strong>
+   					</button>
+   				</form>
+   			</div>
+   		</div>
     </jsp:body>
 </t:layout>
