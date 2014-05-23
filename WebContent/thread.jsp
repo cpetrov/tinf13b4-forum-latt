@@ -7,13 +7,9 @@
 <title>Thread</title>
 </head>
 <body>
-<jsp:useBean id="database" class="tinf13b4.forum.database.SqlRequests">
-	<% 
-	database.getAllThreads();
-	while(database.getResultSet().next()) { 
-	%> 
-		<a href="thread.jsp?threadid=  ${database.resultSet.getInt("Thread_ID") }> ${database.resultSet.getString("Title") }</a>
-	<% } %>
-</jsp:useBean>
+	<%! String string = "text"; %>
+	<% for(int i = 0; i < 10; i++) {%>
+	<a href="thread.jsp?threadID=<%= i %>"><%= string + i %></a>
+	<%} %>
 </body>
 </html>
