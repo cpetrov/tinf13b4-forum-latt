@@ -1,10 +1,7 @@
-package database;
+package tinf13b4.forum.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.ArrayList;
-
+import java.sql.*;
 import tinf13b4.forum.security.DecryptBase64;
 
 public class ConnectionManager 
@@ -12,6 +9,7 @@ public class ConnectionManager
 	private ArrayList<String> data;
 	// Testing
 	private Connection connection;
+	private Statement stat;
 	public Connection getConnection() {
 		openConnection();
 		return connection;
@@ -19,7 +17,7 @@ public class ConnectionManager
 	
 	public ConnectionManager() 
 	{
-		data = new DecryptBase64().DecryptBase64(filepath);
+		data = new DecryptBase64().DecryptBase64(System.getProperty("java.class.path"));
 	}
 	
 	private Connection openConnection()
@@ -35,7 +33,7 @@ public class ConnectionManager
 					data.get(3),
 					data.get(4));
 			
-			Statement stat = conn.createStatement();
+			stat = conn.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
