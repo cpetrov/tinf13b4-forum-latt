@@ -17,21 +17,27 @@
 		    	<input type="text" class="form-control" id="name" placeholder="Enter Nichname">
 		  	</div>
 		  
+		  	<div class="register-big-spacer"></div>
+		  	
 		  	<!-- Input Mail Adress -->
 		  	<div class="form-group">
 		    	<label for="email">Mail-Adresse</label>
 		    	<input type="email" class="form-control" id="email" placeholder="Enter Mail Adress">
-				<div class="register-spacer"></div>
-				<input type="email" class="form-control" id="confirmmail" placeholder="Enter Mail Adress">		  
+				<div class="register-small-spacer"></div>
+				<input type="email" class="form-control" id="confirmmail" placeholder="Confirm Mail Adress">		  
 		  	</div>
+		  
+		  	<div class="register-big-spacer"></div>
 		  
 		  	<!-- Input Password -->
 			<div class="form-group">
 				<label for="password">Passwort</label>
 			    <input type="password" class="form-control" id="password" placeholder="Enter Password">
-			    <div class="register-spacer"></div>
-			    <input type="password" class="form-control" id="confirmpassword" placeholder="Enter Password">
+			    <div class="register-small-spacer"></div>
+			    <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
 			</div>
+			
+			<div class="register-big-spacer"></div>
 			
 			<!-- Submit Button -->
 			<button type="submit" class="btn btn-default">Absenden</button>

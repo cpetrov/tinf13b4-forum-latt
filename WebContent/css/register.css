@@ -1,4 +1,13 @@
-register-spacer {
-	height: 15px;
+.register-big-spacer {
+	height: 20px;
 	width: 100%;
+}
+
+.register-small-spacer {
+	height: 10px;
+	width: 100%;
+}
+
+.form-group {
+	width: 200px;
 }
