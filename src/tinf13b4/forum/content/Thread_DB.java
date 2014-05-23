@@ -27,5 +27,13 @@ public class Thread_DB {
 			}
 		}
 	}
+
+	public ArrayList<Thread> getThreads() {
+		return threads;
+	}
+
+	public void setThreads(ArrayList<Thread> threads) {
+		this.threads = threads;
+	}
 	
 }
