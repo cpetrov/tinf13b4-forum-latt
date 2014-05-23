@@ -17,6 +17,7 @@
 		</title>
 		<link rel="icon" type="image/png" href="favicon.png" />
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		<jsp:invoke fragment="css"/>
 	</head>
 	<body>

@@ -1,0 +1,4 @@
+/* Bootstrap Klasse, mit float: none können damit auch Grid Columns zentriert werden */
+.center-block {
+	float: none;
+}
