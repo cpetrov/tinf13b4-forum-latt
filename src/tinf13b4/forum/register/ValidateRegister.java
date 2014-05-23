@@ -15,7 +15,7 @@ public class ValidateRegister {
 	
 	private String error;
 	
-	private Pattern pattern;
+	private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	private Matcher matcher;
  
 	private static final String EMAIL_PATTERN = 
@@ -48,11 +48,6 @@ public class ValidateRegister {
 
 	public String getError() {
 		return error;
-	}
-
-		  
-	public EmailValidator() {
-		pattern = Pattern.compile(EMAIL_PATTERN);
 	}
  
 	/**
