@@ -5,6 +5,9 @@
 		<jsp:setProperty name="view" property="name" value="Registrieren"/>
 	</jsp:attribute>
     <jsp:attribute name="title">Registrieren</jsp:attribute>
+    <jsp:attribute name="css">
+   		<link href="css/register.css" rel="stylesheet"/>
+    </jsp:attribute>
     <jsp:body>
     <form role="form">
         
