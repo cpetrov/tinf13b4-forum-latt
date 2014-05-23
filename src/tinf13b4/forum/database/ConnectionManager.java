@@ -2,22 +2,23 @@ package tinf13b4.forum.database;
 
 import java.util.ArrayList;
 import java.sql.*;
+
 import tinf13b4.forum.security.DecryptBase64;
 
 public class ConnectionManager 
 {
 	private ArrayList<String> data;
 	// Testing
-	private Connection connection;
+	private Connection conn;
 	private Statement stat;
-	public Connection getConnection() {
-		openConnection();
-		return connection;
-	}
+//	public Connection getConnection() {
+//		openConnection();
+//		return connection;
+//	}
 	
 	public ConnectionManager() 
 	{
-		data = new DecryptBase64().DecryptBase64(System.getProperty("java.class.path"));
+//		data = new DecryptBase64().DecryptBase64(System.getProperty("java.class.path"));
 	}
 	
 	public ConnectionManager(String filepath)
@@ -28,7 +29,6 @@ public class ConnectionManager
 	private Connection openConnection()
 	{
 		// Open Connection
-		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://"
@@ -43,5 +43,30 @@ public class ConnectionManager
 			e.printStackTrace();
 		}
 		return conn;
+	}
+	
+	private void closeConnection()
+	{
+		try {
+			stat.close();
+			conn.close();
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public ResultSet executeCommand(String command) {
+		openConnection();
+		ResultSet rs = null;
+		try {
+			rs = stat.executeQuery(command);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		return rs;
 	}
 }
