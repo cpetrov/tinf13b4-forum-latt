@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:genericpage>
+<t:example>
     <jsp:attribute name="header">
       <h1>Welcome</h1>
     </jsp:attribute>
@@ -12,4 +11,4 @@
     <jsp:body>
         <p>Hi I'm the heart of the message</p>
     </jsp:body>
-</t:genericpage>
+</t:example>
