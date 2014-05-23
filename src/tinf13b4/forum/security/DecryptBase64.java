@@ -14,8 +14,8 @@ public class DecryptBase64
 	public DecryptBase64() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public ArrayList<String> DecryptBase64(String filepath) 
+
+	public ArrayList<String> DecryptBase64(final String filepath) 
 	{	
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)));

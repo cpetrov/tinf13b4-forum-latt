@@ -20,6 +20,11 @@ public class ConnectionManager
 		data = new DecryptBase64().DecryptBase64(System.getProperty("java.class.path"));
 	}
 	
+	public ConnectionManager(String filepath)
+	{
+		data = new DecryptBase64().DecryptBase64(filepath);
+	}
+	
 	private Connection openConnection()
 	{
 		// Open Connection
