@@ -3,7 +3,7 @@
 (function(){
 	var app = angular.module("RegisterApp", []);
 	
-	app.controller("RegisterController", function($scope){
+	app.controller("RegisterController", function($scope, $http){
 		$scope.errors = {};
 		
 		$scope.hasError = function(key){
@@ -44,6 +44,21 @@
 				showAlert("danger", "Die Passwörter stimmen nicht überein");
 				return;
 			}
+			
+			$scope.isLoading = true;
+			
+			$http.post("api/register", {
+				name: name,
+				email: email,
+				password: password,
+				confirm: confirm
+			}).success(function(data){
+				$scope.isLoading = false;
+				
+				console.log(data);
+			}).error(function(){
+				$scope.isLoading = false;
+			});
 		};
 	});
 	

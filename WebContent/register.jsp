@@ -14,23 +14,23 @@
    			<div class="col-md-4 center-block">
    				<form ng-submit="register()">
    					<div class="form-group" ng-class="hasError('name')">
-	   					<label class="control-label">Benutzername</label>
-	   					<input type="text" class="form-control" placeholder="Benutzername" ng-model="name">
+	   					<label for="name" class="control-label">Benutzername</label>
+	   					<input id="name" type="text" class="form-control" placeholder="Benutzername" ng-model="name">
    					</div>
    					<div class="form-group" ng-class="hasError('email')">
-	   					<label class="control-label">E-Mail</label>
-	   					<input type="text" class="form-control" placeholder="E-Mail" ng-model="email">
+	   					<label for="email" class="control-label">E-Mail</label>
+	   					<input id="email" type="text" class="form-control" placeholder="E-Mail" ng-model="email">
    					</div>
    					<div class="form-group" ng-class="hasError('password')">
-	   					<label class="control-label">Passwort</label>
-	   					<input type="password" class="form-control" placeholder="Passwort" ng-model="password">
+	   					<label for="password" class="control-label">Passwort</label>
+	   					<input id="password" type="password" class="form-control" placeholder="Passwort" ng-model="password">
 	   				</div>
    					<div class="form-group" ng-class="hasError('confirm')">
-	   					<label class="control-label">Passwort wiederholen</label>
-	   					<input type="password" class="form-control" placeholder="Passwort wiederholen" ng-model="confirm">
+	   					<label for="confirm" class="control-label">Passwort wiederholen</label>
+	   					<input id="confirm" type="password" class="form-control" placeholder="Passwort wiederholen" ng-model="confirm">
 	   				</div>
    					<hr></hr>
-   					<button type="submit" class="btn btn-primary btn-block">
+   					<button type="submit" class="btn btn-primary btn-block" ng-disabled="isLoading">
    						<strong>Registrieren</strong>
    					</button>
    				</form>
