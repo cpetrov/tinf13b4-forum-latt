@@ -21,9 +21,14 @@ public class Thread_DB {
 			return;
 		else
 		{
-			while(rs.next())
-			{
-				threads.add(new Thread(rs.getInt("Thread_ID"), rs.getString("Title")));
+			try {
+				while(rs.next())
+				{
+					threads.add(new Thread(rs.getInt("Thread_ID"), rs.getString("Title")));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

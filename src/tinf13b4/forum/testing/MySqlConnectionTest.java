@@ -7,6 +7,6 @@ public class MySqlConnectionTest
 	public static void main(String[] args) 
 	{
 		ConnectionManager manager = new ConnectionManager("C:\\Users\\marius.schroeder\\Documents\\GitHub\\tinf13b4\\src\\tinf13b4\\forum\\databaseConfigurator\\DBConfig.cfg");
-		manager.getConnection();
+		manager.executeCommand("Testing Command!;");
 	}
 }
