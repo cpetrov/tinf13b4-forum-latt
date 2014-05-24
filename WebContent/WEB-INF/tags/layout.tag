@@ -16,7 +16,7 @@
 			<jsp:invoke fragment="title"/>
 		</title>
 		<link rel="icon" type="image/png" href="favicon.png" />
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link id="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<jsp:invoke fragment="css"/>
 	</head>
@@ -36,6 +36,13 @@
 				</h1>
 			</div>
 			<jsp:doBody/>
+		</div>
+		<div class="btn-group dropup style-chooser">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" ng-app="StyleChooserApp" ng-controller="StyleChooserController">
+			</ul>
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

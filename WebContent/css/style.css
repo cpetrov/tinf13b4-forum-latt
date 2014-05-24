@@ -2,3 +2,14 @@
 .center-block {
 	float: none;
 }
+
+.style-chooser {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.style-chooser .btn {
+	border-top-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
