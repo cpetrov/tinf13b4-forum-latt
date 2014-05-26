@@ -1,0 +1,20 @@
+apply from: 'versions.gradle'
+
+group = 'tinf13b4'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+apply plugin: 'java'	// for .jar, if needed, remove war
+//apply plugin: 'war'	// for .war, if needed, remove java
+
+dependencies {
+	compile (
+		//insert compile-deps
+	)
+
+	testCompile(
+		//insert test-compile-deps
+	)
+}
