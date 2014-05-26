@@ -1,6 +1,6 @@
 package tinf13b4.forum.content;
 
-public class Categorie {
+public class CategoryModel {
 	private int categorie_ID;
 	private String name;
 	private String subtitel;

@@ -1,23 +1,23 @@
 package tinf13b4.forum.content;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import tinf13b4.forum.database.ConnectionManager;
 
-import java.sql.*;
-import java.util.ArrayList;
-
-public class Thread_DB {
+public class ThreadController {
 	private ResultSet rs;
 	private ConnectionManager conn;
 	private int id;
-	private ArrayList<Thread> threads;
+	private ArrayList<ThreadModel> threads;
 	
-	public Thread_DB() {
+	public ThreadController() {
 		conn = new ConnectionManager();
 	}
 	
 	public void getAllThreads(int categorie_ID) {
 		rs = conn.executeCommand("SELECT * FROM Thread WHERE Categorie_ID = " + categorie_ID + ";");
-		threads = new ArrayList<Thread>();
+		threads = new ArrayList<ThreadModel>();
 		if(rs == null)
 			return;
 		else
@@ -25,7 +25,7 @@ public class Thread_DB {
 			try {
 				while(rs.next())
 				{
-					threads.add(new Thread(rs.getInt("Thread_ID"), rs.getString("Title")));
+					threads.add(new ThreadModel(rs.getInt("Thread_ID"), rs.getString("Title")));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -34,7 +34,7 @@ public class Thread_DB {
 		}
 	}
 
-	public ArrayList<Thread> getThreads() {
+	public ArrayList<ThreadModel> getThreads() {
 		getAllThreads(id);
 		return threads;
 	}

@@ -2,7 +2,7 @@ package tinf13b4.forum.content;
 
 import java.util.Date;
 
-public class Thread 
+public class ThreadModel 
 {
 	private int id;
 	private String title;
@@ -12,7 +12,7 @@ public class Thread
 	private boolean readonly;
 	private int categorie_ID;
 	
-	public Thread(int id, String title) {
+	public ThreadModel(int id, String title) {
 		this.id = id;
 		this.title = title;
 	}

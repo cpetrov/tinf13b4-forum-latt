@@ -2,7 +2,7 @@ package tinf13b4.forum.content;
 
 import java.util.Date;
 
-public class Post {
+public class PostModel {
 	private int post_ID;
 	private String content;
 	private String poster;
