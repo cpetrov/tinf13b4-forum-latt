@@ -1,0 +1,1 @@
+srcdirs src/main/java src/test/java
