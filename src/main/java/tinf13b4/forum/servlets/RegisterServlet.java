@@ -14,10 +14,10 @@ import org.eclipse.rap.json.JsonArray;
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
 
-import tinf13b4.forum.controller.PasswordController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.register.ConfirmationKeyController;
+import tinf13b4.forum.register.PasswordController;
 import tinf13b4.forum.register.RegisterDataValidator;
 import tinf13b4.forum.register.SendMail;
 
