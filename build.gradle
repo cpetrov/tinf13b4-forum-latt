@@ -9,9 +9,15 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'java'	// for .jar, if needed, remove war
 //apply plugin: 'war'	// for .war, if needed, remove java
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
 	compile (
 		//insert compile-deps
+		[group: 'com.mysql', name: 'management', version: '1.1.6'],
+		[group: 'com.sun.jdmk', name: 'jmxtools', version: '1.2.1']
 	)
 
 	testCompile(
