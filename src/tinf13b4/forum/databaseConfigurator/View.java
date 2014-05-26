@@ -25,7 +25,7 @@ public class View extends JFrame {
 	private JButton btnOpen;
 	private JPasswordField passwordField;
 	private JTextField textDatabaseName;
-	
+
 	public String getHostname() {
 		return textHostname.getText();
 	}
@@ -51,11 +51,11 @@ public class View extends JFrame {
 	}
 
 	public String getPassword() {
-		char[] pw =  passwordField.getPassword();
-		String password = "";
-		for (char a : pw)
-			password += a;
-		return password;
+		char[] password = passwordField.getPassword();
+		String passwordOutput = "";
+		for (char character : password)
+			passwordOutput += character;
+		return passwordOutput;
 	}
 
 	public void setPassword(String passwordField) {
@@ -70,18 +70,13 @@ public class View extends JFrame {
 		this.textDatabaseName.setText(textDatabaseName);
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	
-	public View() 
-	{
+	public View() {
 		super("Configurator");
 		initForm();
 	}
 
 	/**
-	 * Create the frame.
+	 * Initialize Frame
 	 */
 	public void initForm() {
 		setTitle("Database Configurator");
@@ -90,98 +85,152 @@ public class View extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-		JLabel lblHostname = new JLabel("Hostname:");
-		
-		JLabel lblPort = new JLabel("Port:");
-		
-		JLabel lblUsername = new JLabel("Username:");
-		
-		JLabel lblPassword = new JLabel("Password:");
-		
-		JLabel lblDatabaseName = new JLabel("Databasename:");
-		
+
+		final JLabel lblHostname = new JLabel("Hostname:");
+		final JLabel lblPort = new JLabel("Port:");
+		final JLabel lblUsername = new JLabel("Username:");
+		final JLabel lblPassword = new JLabel("Password:");
+		final JLabel lblDatabaseName = new JLabel("Databasename:");
+
 		btnSave = new JButton("Save As");
 		btnOpen = new JButton("Open");
-		
+
 		textHostname = new JTextField();
 		textHostname.setColumns(10);
-		
+
 		textPort = new JTextField();
 		textPort.setColumns(10);
-		
+
 		textUsername = new JTextField();
 		textUsername.setColumns(10);
-		
+
 		textDatabaseName = new JTextField();
 		textDatabaseName.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
-		
+
 		GroupLayout groupLayout = new GroupLayout(contentPane);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblPassword)
-						.addComponent(lblUsername)
-						.addComponent(lblDatabaseName)
-						.addComponent(lblPort)
-						.addComponent(lblHostname))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(textHostname)
-						.addComponent(textPort)
-						.addComponent(textDatabaseName)
-						.addComponent(textUsername)
-						.addComponent(passwordField))
-					.addContainerGap(97, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(165, Short.MAX_VALUE)
-					.addComponent(btnOpen)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnSave)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblHostname)
-						.addComponent(textHostname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPort)
-						.addComponent(textPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDatabaseName)
-						.addComponent(textDatabaseName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUsername)
-						.addComponent(textUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPassword)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(81, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(194, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnSave)
-						.addComponent(btnOpen)))
-		);
+		groupLayout.setHorizontalGroup(groupLayout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						groupLayout
+								.createSequentialGroup()
+								.addGroup(
+										groupLayout
+												.createParallelGroup(
+														Alignment.TRAILING)
+												.addComponent(lblPassword)
+												.addComponent(lblUsername)
+												.addComponent(lblDatabaseName)
+												.addComponent(lblPort)
+												.addComponent(lblHostname))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(
+										groupLayout
+												.createParallelGroup(
+														Alignment.LEADING,
+														false)
+												.addComponent(textHostname)
+												.addComponent(textPort)
+												.addComponent(textDatabaseName)
+												.addComponent(textUsername)
+												.addComponent(passwordField))
+								.addContainerGap(97, Short.MAX_VALUE))
+				.addGroup(
+						Alignment.TRAILING,
+						groupLayout.createSequentialGroup()
+								.addContainerGap(165, Short.MAX_VALUE)
+								.addComponent(btnOpen)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnSave).addContainerGap()));
+		groupLayout
+				.setVerticalGroup(groupLayout
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								Alignment.LEADING,
+								groupLayout
+										.createSequentialGroup()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblHostname)
+														.addComponent(
+																textHostname,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(lblPort)
+														.addComponent(
+																textPort,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblDatabaseName)
+														.addComponent(
+																textDatabaseName,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblUsername)
+														.addComponent(
+																textUsername,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblPassword)
+														.addComponent(
+																passwordField,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(81, Short.MAX_VALUE))
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap(194, Short.MAX_VALUE)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(btnSave)
+														.addComponent(btnOpen))));
 		contentPane.setLayout(groupLayout);
 	}
-	
-	public void btnSaveEventListener(ActionListener l)
-	{
-		this.btnSave.addActionListener(l);
+
+	public void btnSaveEventListener(ActionListener listener) {
+		this.btnSave.addActionListener(listener);
 	}
-	
-	public void btnOpenEventListener(ActionListener l)
-	{
-		this.btnOpen.addActionListener(l);
+
+	public void btnOpenEventListener(ActionListener listener) {
+		this.btnOpen.addActionListener(listener);
 	}
 }

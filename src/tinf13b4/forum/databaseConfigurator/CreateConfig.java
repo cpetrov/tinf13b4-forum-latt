@@ -17,57 +17,43 @@ public class CreateConfig {
 	private static View mView;
 	private static ViewModel mViewModel;
 	private static BufferedReader br;
-	
-	
+
 	public static void main(String[] args) {
 		new CreateConfig();
-//		data.add("5.45.110.9");
-//		data.add("3306");
-//		data.add("pmforum");
-//		data.add("pmforum");
-//		data.add("qh?bchqyJ*b`+Jcpah?K&:&X9w#36y");
 	}
-	
+
 	public CreateConfig() {
 		mView = new View();
 		mView.pack();
 		mView.setVisible(true);
 		addListener();
-		mViewModel = new ViewModel();	
+		mViewModel = new ViewModel();
 	}
 
 	private static void writeFile() throws IOException {
 		File file = new File(mViewModel.getPath().toString());
-// getEmpty
-		if(file.exists())
+		if (file.exists())
 			file.delete();
 		file.createNewFile();
-		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-		String[] data = { mViewModel.getHostname(), 
+		String[] data = { mViewModel.getHostname(),
 				Integer.toString(mViewModel.getPort()),
-				mViewModel.getDatabasename(),
-				mViewModel.getUsername(),
-				mViewModel.getPassword()};
-		
+				mViewModel.getDatabasename(), mViewModel.getUsername(),
+				mViewModel.getPassword() };
 		for (int i = 0; i < data.length; i++) {
-			data[i] = encrypt(data[i]);			
+			data[i] = encrypt(data[i]);
 		}
-		
 		for (String a : data)
 			bw.write(a + "\n");
 		bw.close();
 	}
-	
-	private static void testFilepath() throws IOException 
-	{
+
+	private static void testFilepath() throws IOException {
 		File file = new File(mViewModel.getPath().toString());
-		if(file.exists())
-		{
+		if (file.exists()) {
 			br = new BufferedReader(new FileReader(file));
 			int i = 0;
-			while(br.ready())
-			{
+			while (br.ready()) {
 				String text = null;
 				switch (i) {
 				case 0:
@@ -96,57 +82,51 @@ public class CreateConfig {
 			}
 		}
 	}
-	
+
 	private static void addListener() {
 		mView.btnSaveEventListener(new SaveEventListener());
 		mView.btnOpenEventListener(new OpenEventListener());
 	}
-	
-	public static String encrypt(String s){
-        return DatatypeConverter.printBase64Binary(s.getBytes());
+
+	public static String encrypt(String s) {
+		return DatatypeConverter.printBase64Binary(s.getBytes());
 	}
 
-	public static String decrypt(String s){
-        return new String(DatatypeConverter.parseBase64Binary(s));
+	public static String decrypt(String s) {
+		return new String(DatatypeConverter.parseBase64Binary(s));
 	}
-	
-	private static class SaveEventListener implements ActionListener
-	{
+
+	private static class SaveEventListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
+		public void actionPerformed(ActionEvent e) {
 			try {
 				JFileChooser chooser = new JFileChooser();
 				chooser.showSaveDialog((Component) e.getSource());
 				mViewModel.setPath(chooser.getSelectedFile().toPath());
-				
 				mViewModel.setHostname(mView.getHostname());
 				mViewModel.setPort(mView.getPort());
 				mViewModel.setUsername(mView.getUsername());
 				mViewModel.setPassword(mView.getPassword());
 				mViewModel.setDatabasename(mView.getDatabaseName());
-				
 				writeFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+				System.out.println("File can't be written!");
 			}
 		}
 	}
-	
-	private static class OpenEventListener implements ActionListener
-	{
+
+	private static class OpenEventListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
+		public void actionPerformed(ActionEvent e) {
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog((Component) e.getSource());
 			mViewModel.setPath(chooser.getSelectedFile().toPath());
 			try {
 				testFilepath();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+				System.out.println("Can't find File!");
 			}
 		}
 	}
