@@ -57,12 +57,26 @@ CREATE TABLE IF NOT EXISTS `Threads` (
   `Thread Starter` int(10) unsigned DEFAULT NULL,
   `Creation Date` date DEFAULT NULL,
   `ReadOnly` tinyint(3) unsigned DEFAULT NULL,
-  `Category_ID` int(10) NOT NULL DEFAULT '0',
+  `Category_ID` int(10) NOT NULL,
   PRIMARY KEY (`Thread_ID`),
   UNIQUE KEY `Thread_ID` (`Thread_ID`),
   KEY `FK_Threads_Category` (`Category_ID`),
   CONSTRAINT `FK_Threads_Category` FOREIGN KEY (`Category_ID`) REFERENCES `Category` (`Category_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Threads';
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
+-- Exportiere Struktur von Tabelle pmforum.Users
+CREATE TABLE IF NOT EXISTS `Users` (
+  `User_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(64) NOT NULL DEFAULT '0',
+  `EMail` varchar(254) NOT NULL DEFAULT '0',
+  `Password` varchar(60) NOT NULL DEFAULT '0',
+  `Confirmed` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `Confirmation Key` varchar(36) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`User_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Users';
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
