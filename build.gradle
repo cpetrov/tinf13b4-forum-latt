@@ -6,12 +6,19 @@ version = '0.0.1-SNAPSHOT'
 apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 
-apply plugin: 'java'	// for .jar, if needed, remove war
-//apply plugin: 'war'	// for .war, if needed, remove java
+apply plugin: 'java'
+apply plugin: 'war'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
 
 dependencies {
 	compile (
 		//insert compile-deps
+		"com.mysql:management:${versions.mysql}",
+		"com.sun.jdmk:jmxtools:${versions.jdmk}"
 	)
 
 	testCompile(
