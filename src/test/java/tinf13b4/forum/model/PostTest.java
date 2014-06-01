@@ -18,7 +18,7 @@ public class PostTest {
 	public void testStoresPostId() {
 		Post post = new Post(3, 2, 2, "foo", "bar", new Date());
 
-		assertEquals(3, post.getPostId());
+		assertEquals(3, post.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

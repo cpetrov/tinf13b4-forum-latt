@@ -16,13 +16,13 @@ public class CategoryTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNegativeCategoryId() {
+	public void testFailsWithNegativeId() {
 		new Category(-1, "foo");
 	}
 
 	@Test
-	public void testStoresCategoryId() {
-		assertEquals(1, category.getCategoryId());
+	public void testStoresId() {
+		assertEquals(1, category.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
