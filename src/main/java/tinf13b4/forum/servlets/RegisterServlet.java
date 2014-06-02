@@ -62,7 +62,7 @@ public class RegisterServlet extends JsonServlet {
 			} else {
 
 				// Get A Hashed Password
-				String hashedpassword = passwordController.encryptpassword(password.asString());
+				String hashedpassword = passwordController.encryptPassword(password.asString());
 
 				// Get A Unique Confirmation Key With Alphabet
 				String confirmationkey = confirmationKeyController.getUniqueConfirmationKey("0123456789AaBbCcDdEeFfGgHhIiJjKkLlMm0123456789NnOoPpQqRrSsTtUuVvWwXxYyZz0123456789");

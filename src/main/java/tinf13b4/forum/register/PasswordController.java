@@ -7,7 +7,7 @@ public class PasswordController {
 
 
 	// Decrypt Password For Database Insert
-	public String encryptpassword(String password) {
+	public String encryptPassword(String password) {
 
 		// Hash Password
 		String hashedpassword = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -17,10 +17,10 @@ public class PasswordController {
 
 
 	// Encrypt Password And Test Matching
-	public boolean decryptpassword(String password, String hashedpassword) {
+	public boolean decryptPassword(String password, String hashedPassword) {
 
 		// Check That An Unencrypted Password Matches
-		if (BCrypt.checkpw(hashedpassword, password)) {
+		if (BCrypt.checkpw(hashedPassword, password)) {
 			return true;
 		} else {
 			return false;

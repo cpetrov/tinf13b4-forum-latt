@@ -67,22 +67,22 @@ public class RegisterDataValidator {
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-	public List<String> registerDataValidator(String username, String emailaddress, String password) {
+	public List<String> registerDataValidator(String username, String emailAddress, String password) {
 
 		// Validate Form Data
-		if(regexDataValidator(username, emailaddress, password).size() > 0){
+		if(regexDataValidator(username, emailAddress, password).size() > 0){
 
 			// Return Regular Expression Errors
-			return regexDataValidator(username, emailaddress, password);
+			return regexDataValidator(username, emailAddress, password);
 		} else {
 
 			// Return Database Errors
-			return databaseDataValidator(username, emailaddress, password);
+			return databaseDataValidator(username, emailAddress, password);
 		}
 	}
 
 
-	public List<String> regexDataValidator(String username, String emailaddress, String password) {
+	public List<String> regexDataValidator(String username, String emailAddress, String password) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
@@ -93,7 +93,7 @@ public class RegisterDataValidator {
 			errors.add("W�hlen Sie einen neuen Namen");
 		}
 
-		if (!emailaddress.matches(EMAIL_PATTERN)) {
+		if (!emailAddress.matches(EMAIL_PATTERN)) {
 			errors.add("Email Adresse nicht g�ltig");
 		}
 
@@ -108,7 +108,7 @@ public class RegisterDataValidator {
 	}
 
 
-	public List<String>  databaseDataValidator(String username, String emailaddress, String password) {
+	public List<String>  databaseDataValidator(String username, String emailAddress, String password) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
@@ -118,7 +118,7 @@ public class RegisterDataValidator {
 		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
 				+ "FROM Users WHERE "
 				+ "Name='" + username + "' "
-				+ "OR Email='" + emailaddress + "';");
+				+ "OR Email='" + emailAddress + "';");
 
 
 		// Check Query Result
@@ -137,7 +137,7 @@ public class RegisterDataValidator {
 						errors.add("Name bereits vergeben");
 					}
 
-					if (email.equals(emailaddress)) {
+					if (email.equals(emailAddress)) {
 						errors.add("E-Mail Adresse bereits vergeben");
 					}
 				}
