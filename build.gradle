@@ -12,6 +12,13 @@ apply plugin: 'war'
 repositories {
 	mavenCentral()
 }
+<<<<<<< Upstream, based on new-connection-factory
+
+repositories {
+	mavenCentral()
+}
+=======
+>>>>>>> c078da7 Changes the project layout to comply with the Java web application conventions (referred to https://weblogs.java.net/blog/manningpubs/archive/2013/03/18/building-java-web-application-gradle). Adds stubs for CSS and JS.
 
 repositories {
 	mavenCentral()
