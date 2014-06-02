@@ -32,8 +32,18 @@ public class QueryExecutor {
 		}
 	}
 
+	public void executeUpdate(String update) {
+		checkArgument(update != null, "Update must not be null.");
+		checkArgument(!update.isEmpty(), "Update must not be empty.");
+		try {
+			connection.createStatement().executeUpdate(update);
+		} catch (SQLException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
 	public void executeSqlScript(InputStream inputStream) {
-		checkArgument(inputStream!=null, "InputStream must not be null.");
+		checkArgument(inputStream != null, "InputStream must not be null.");
 		ScriptRunner runner = new ScriptRunner(connection, false, false);
 		try {
 			runner.runScript(new BufferedReader(new InputStreamReader(inputStream)));
