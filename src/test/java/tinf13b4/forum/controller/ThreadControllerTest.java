@@ -1,5 +1,5 @@
 
-package tinf13b4.forum.thread;
+package tinf13b4.forum.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
