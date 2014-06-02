@@ -17,7 +17,11 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class ConnectionFactory {
 
-	private File dbConfig;
+	private final File dbConfig;
+
+	public ConnectionFactory() {
+		this(new File("src/main/config/DBConfig.cfg"));
+	}
 
 	public ConnectionFactory(File dbConfig) {
 		Preconditions.checkArgument(dbConfig != null, "DbConfig must not be null.");
