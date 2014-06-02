@@ -1,5 +1,5 @@
 
-package tinf13b4.forum.thread;
+package tinf13b4.forum.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,8 +17,8 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import tinf13b4.forum.database.QueryExecutor;
-import tinf13b4.forum.model.Thread;
+import tinf13b4.forum.controller.ThreadController;
+import tinf13b4.forum.database.import tinf13b4.forum.model.Thread;
 
 import com.mysql.jdbc.ResultSet;
 

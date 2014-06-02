@@ -3,17 +3,20 @@ package tinf13b4.forum.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Thread {
 
-	private int id;
-	private int threadStarterId;
-	private int categoryId;
-	private String title;
-	private String content;
-	private Date date;
-	private boolean readonly;
+	private final int id;
+	private final int threadStarterId;
+	private final int categoryId;
+	private final String title;
+	private final String content;
+	private final Date date;
+	private final boolean readonly;
+	private final List<Post> posts;
 
 	public Thread(int id, int threadStarterId, int categoryId, String title, String content, Date date, boolean readonly) {
 		validateArguments(id, threadStarterId, categoryId, title, content, date);
@@ -24,6 +27,7 @@ public class Thread {
 		this.content = content;
 		this.date = date;
 		this.readonly = readonly;
+		posts = new ArrayList<>();
 	}
 
 	private void validateArguments(int id, int threadStarterId, int categoryId, String title, String content, Date date) {
@@ -112,5 +116,13 @@ public class Thread {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void addPost(Post post) {
+		posts.add(post);
 	}
 }
