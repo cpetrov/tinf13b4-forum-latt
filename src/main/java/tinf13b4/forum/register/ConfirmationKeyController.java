@@ -15,6 +15,11 @@ public class ConfirmationKeyController {
 	private final QueryExecutor queryExecutor;
 	private String confirmationKey;
 	private final Connection connection;
+	
+	private static final int confirmationKeyLenght = 36;
+	private static final int confirmationKeyBegining = 36;
+	private static final boolean confirmationKeyAllowNumbers = true;
+	private static final boolean confirmationKeyAllowLetters = true;
 
 	public ConfirmationKeyController() {
 		connection = new ConnectionFactory().createConnection();
@@ -22,36 +27,36 @@ public class ConfirmationKeyController {
 	}
 
 	public void setConfirmationKey(String confirmationKey) {
-		this.confirmationKey = confirmationKey; //TODO: warum ist die ConfirmationKey ein Feld?
+		this.confirmationKey = confirmationKey;
 		confirmUserRegistration(confirmationKey);
 	}
 
 	// Get A Unique ConfirmationKey
-	public String getUniqueConfirmationKey(String keyalphabet) {
+	public String getUniqueConfirmationKey(String keyAlphabet) {
 		// Generate Confirmation Key with given Alphabet
-		String confirmationkey = generateConfirmationKey(keyalphabet);
+		String confirmationKey = generateConfirmationKey(keyAlphabet);
 		// If Confirmation Key Is Unique Return confirmationkey
-		if (!findExistingKeys(confirmationkey)) {
+		if (!findExistingKeys(confirmationKey)) {
 			// Call Method Again
-			return getUniqueConfirmationKey(keyalphabet);
+			return getUniqueConfirmationKey(keyAlphabet);
 		} else {
-			return confirmationkey;
+			return confirmationKey;
 		}
 	}
 
 	// Generate Confirmation Key Return confirmationkey
-	public String generateConfirmationKey(String keyalphabet) {
+	public String generateConfirmationKey(String keyAlphabet) {
 		// Generate Alpha-Numeric Random String
-		String confirmationkey = RandomStringUtils.random(36, 1, 36, true, true, keyalphabet.toCharArray());
-		return confirmationkey;
+		String confirmationKey = RandomStringUtils.random(confirmationKeyLenght, confirmationKeyBegining, confirmationKeyLenght, confirmationKeyAllowLetters, confirmationKeyAllowNumbers, keyAlphabet.toCharArray());
+		return confirmationKey;
 	}
 
 	// Check Existing Keys In Database
-	public boolean findExistingKeys(String confirmationkey) {
+	public boolean findExistingKeys(String confirmationKey) {
 		// Query Result
 		try {
 			// If Query Result Is Empty return true
-			if (query(confirmationkey).next()) {
+			if (query(confirmationKey).next()) {
 				return false;
 			} else {
 				return true;
@@ -63,10 +68,10 @@ public class ConfirmationKeyController {
 	}
 
 	// Confirm User Registration And Clean Database
-	private void confirmUserRegistration(String confirmationkey) {
+	private void confirmUserRegistration(String confirmationKey) {
 		// Check Query Result
 		try {
-			ResultSet rs = query(confirmationkey);
+			ResultSet rs = query(confirmationKey);
 			while (rs.next()) {
 				String userid = rs.getString(1);
 				queryExecutor.executeUpdate("UPDATE Users SET Confirmation_Key='0', Confirmed='1' WHERE  User_ID='"
@@ -78,11 +83,11 @@ public class ConfirmationKeyController {
 	}
 
 	// Get The Result Set From Database
-	public ResultSet query(String confirmationkey) {
+	public ResultSet query(String confirmationKey) {
 		// Query String
-		ResultSet querystring = queryExecutor
-				.executeQuery("SELECT User_ID, Confirmation_Key FROM Users WHERE Confirmation_Key='" + confirmationkey
+		ResultSet queryString = queryExecutor
+				.executeQuery("SELECT User_ID, Confirmation_Key FROM Users WHERE Confirmation_Key='" + confirmationKey
 						+ "';");
-		return querystring;
+		return queryString;
 	}
 }
