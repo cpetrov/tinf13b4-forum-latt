@@ -61,11 +61,6 @@ public class UserTest {
 		assertEquals("bar", user.getEMail());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNullJoinedOn() {
-		new User(1, "foo", null, "foo", null);
-	}
-
 	@Test
 	public void testStoresDate() {
 		Date joinedOn = new Date();

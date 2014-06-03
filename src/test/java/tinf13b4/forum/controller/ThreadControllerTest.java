@@ -53,11 +53,11 @@ public class ThreadControllerTest {
 		Date date1 = new java.sql.Date( new Date().getTime() );
 		Date date2 = new java.sql.Date( new Date().getTime() );
 		ResultSet resultSet = makeResultSet(
-				Arrays.asList("Thread_ID", "Title", "Category_ID", "Content", "Date", "Readonly", "Thread_Starter_ID"),
+				Arrays.asList("Thread_ID", "Title", "Category_ID", "Content", "Date", "ReadOnly", "User_ID"),
 				Arrays.asList(1, "foo", 2, "bar", date1, true, 3),
 				Arrays.asList(4, "baz", 5, "bac", date2, false, 6)
 				);
-		when(executor.executeQuery("SELECT * FROM Thread WHERE Category_ID = 2;")).thenReturn(resultSet);
+		when(executor.executeQuery("SELECT * FROM Threads WHERE Category_ID = 2;")).thenReturn(resultSet);
 		ThreadController controller = new ThreadController(executor);
 
 		List<Thread> threads = controller.getThreads(2);
