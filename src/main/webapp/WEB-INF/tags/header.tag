@@ -5,8 +5,8 @@
 <header>
 	<div id="login" class="pipeList">
 		<ul>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Register</a></li>
+			<li><a href="login.jsp">Login</a></li>
+			<li><a href="register.jsp">Register</a></li>
 		</ul>
 	</div>
 	<div class="holder">
