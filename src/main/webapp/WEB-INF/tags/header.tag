@@ -5,12 +5,12 @@
 <header>
 	<div id="login" class="pipeList">
 		<ul>
-			<li><a href="#">Login</a></li>
-			<li><a href="#">Register</a></li>
+			<li><a href="login.jsp">Login</a></li>
+			<li><a href="register.jsp">Register</a></li>
 		</ul>
 	</div>
 	<div class="holder">
-		<a href="index.jsp"><img src="img/logo.png" alt="Forum" /></a> 
+		<a href="index.jsp"><img src="img/logo.png" alt="Forum" /></a>
 		<span class="searchWidget">
 			<input type="text" name="q"> <input type="submit" id="submit"
 			name="btnsub" value="Search">

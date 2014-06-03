@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
+<%@attribute name="header" fragment="true"%>
+<%@attribute name="js" fragment="true"%>
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.ForumSettingsBean" scope="request" />
@@ -14,10 +16,13 @@
 	<jsp:attribute name="title">
 		<jsp:invoke fragment="title" />
 	</jsp:attribute>
+	<jsp:attribute name="js">
+		<jsp:invoke fragment="js" />
+	</jsp:attribute>
 </t:head>
 <body>
 	<div id="wrapper">
-		<t:header />
+		<jsp:invoke fragment="header" />
 		<div id="content">
 
 			<jsp:doBody />

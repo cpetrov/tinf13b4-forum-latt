@@ -15,10 +15,10 @@
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
 	<t:breadcrumbNav category="${category}" />
 	      <section>
-	      
         <header>
           <h2>${thread.title}</h2>
         </header>
@@ -33,7 +33,7 @@
                 <img src="./img/bubbles16.png" alt="Posts" /> ${members[0].posts} posts
               </div>
             </div>
-            <div class="answerBody">${thread.content} 
+            <div class="answerBody">${thread.content}
               <button>
                 <img src="./img/quill.png" alt="Quote">
                 <span>Quote</span>
@@ -42,8 +42,7 @@
             </div>
             <div class="clear"></div>
           </div>
-         
-          <c:forEach var="post" items="${posts }">
+          <c:forEach var="post" items="${posts}">
           <div class="answer">
             <div class="member">
               <div class="memberPictureHolder"></div>

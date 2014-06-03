@@ -12,6 +12,7 @@
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
 <section>
 	<header>
@@ -21,7 +22,7 @@
 		<h3>First Category Group</h3> <%-- TODO implement category groups --%>
 		<c:forEach var="category" items="${categories}">
 		<article>
-			<img src="./img/bubbles.png" alt="Category"> 
+			<img src="./img/bubbles.png" alt="Category">
 			<div>
 				<h4>
 					<a href="category.jsp?id=${category.id}">${category.title}</a>
