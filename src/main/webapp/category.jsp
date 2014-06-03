@@ -7,6 +7,6 @@
 <c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
 <t:categoryPage category="${dummyProvider.category}" 
 				threads="${dummyProvider.threads}" 
-				authors="${dummyProvider.members}">
+				authors="${dummyProvider.users}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:categoryPage>
