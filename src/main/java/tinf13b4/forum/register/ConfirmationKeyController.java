@@ -16,10 +16,10 @@ public class ConfirmationKeyController {
 	private String confirmationKey;
 	private final Connection connection;
 	
-	private static final int confirmationKeyLenght = 36;
-	private static final int confirmationKeyBegining = 36;
-	private static final boolean confirmationKeyAllowNumbers = true;
-	private static final boolean confirmationKeyAllowLetters = true;
+	private static final int CONFIRMATION_KEY_LENGHT = 36;
+	private static final int CONFIRMATION_KEY_BEGIN = 1;
+	private static final boolean CONFIRMATION_KEY_ALLOW_NUMBERS = true;
+	private static final boolean CONFIRMATION_KEY_ALLOW_LETTERS = true;
 
 	public ConfirmationKeyController() {
 		connection = new ConnectionFactory().createConnection();
@@ -47,7 +47,7 @@ public class ConfirmationKeyController {
 	// Generate Confirmation Key Return confirmationkey
 	public String generateConfirmationKey(String keyAlphabet) {
 		// Generate Alpha-Numeric Random String
-		String confirmationKey = RandomStringUtils.random(confirmationKeyLenght, confirmationKeyBegining, confirmationKeyLenght, confirmationKeyAllowLetters, confirmationKeyAllowNumbers, keyAlphabet.toCharArray());
+		String confirmationKey = RandomStringUtils.random(CONFIRMATION_KEY_LENGHT, CONFIRMATION_KEY_BEGIN, CONFIRMATION_KEY_LENGHT, CONFIRMATION_KEY_ALLOW_LETTERS, CONFIRMATION_KEY_ALLOW_NUMBERS, keyAlphabet.toCharArray());
 		return confirmationKey;
 	}
 
