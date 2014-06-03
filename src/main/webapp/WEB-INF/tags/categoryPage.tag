@@ -15,6 +15,7 @@
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
 <t:breadcrumbNav category="${category}" />
 <section>
@@ -27,7 +28,7 @@
 			<img src="./img/bubble.png" alt="Topic">
 			<div>
 				<h4>
-					<a href="thread.jsp?id=${threads[i].id}">${threads[i].title}</a> 
+					<a href="thread.jsp?id=${threads[i].id}">${threads[i].title}</a>
 				</h4>
 				<p>
 					<b>Author:</b> ${authors[i].name}
