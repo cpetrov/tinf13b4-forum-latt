@@ -3,6 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:registerPage>
+<t:loginPage>
 	<jsp:attribute name="title">Page Title</jsp:attribute>
-</t:registerPage>
+</t:loginPage>

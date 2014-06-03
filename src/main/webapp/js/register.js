@@ -20,7 +20,7 @@
 			$scope.errors.name = !name || name.length < 3;
 			
 			if($scope.errors.name){
-				showAlert("danger", "Der Benutzername muss mindestens 3 Zeichen lang sein");
+				showAlert("danger", "The username must be atleast 3 characters long!");
 				return;
 			}
 			
@@ -28,7 +28,7 @@
 			// TODO - Email Validation Like Validator Bean
 			
 			if($scope.errors.email){
-				showAlert("danger", "Die Email Adresse muss gültig sein");
+				showAlert("danger", "The email adress must be valid.");
 				return;
 			}
 			
@@ -36,17 +36,17 @@
 			// TODO - Password Validation Like Validator Bean
 			
 			if($scope.errors.password){
-				showAlert("danger", "Das Passwort muss mindestens 8 Zeichen lang sein");
+				showAlert("danger", "The password must be atleast 8 characters long!");
 				return;
 			}
 			
 			$scope.errors.confirm = !confirm || password !== confirm;
 			
 			if($scope.errors.confirm){
-				showAlert("danger", "Die Passwörter stimmen nicht überein");
+				showAlert("danger", "The passwords do not match.");
 				return;
 			}
-						
+						 
 			$scope.isLoading = true;
 			
 			$http.post("api/register", {
@@ -66,7 +66,7 @@
 	});
 	
 	function showAlert(type, message){
-		var html = '<div class="alert alert-{type} alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button>{message}</div>';
+		var html = '<div class="alert alert-{type} alert-dismissable">{message}</div>';
 		html = html.replace(/{type}/, type).replace(/{message}/, message);
 		
 		$("form").before(html);
