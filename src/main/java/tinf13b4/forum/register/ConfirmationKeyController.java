@@ -17,7 +17,7 @@ public class ConfirmationKeyController {
 	private final Connection connection;
 	
 	private static final int confirmationKeyLenght = 36;
-	private static final int confirmationKeyBegining = 36;
+	private static final int confirmationKeyBegining = 1;
 	private static final boolean confirmationKeyAllowNumbers = true;
 	private static final boolean confirmationKeyAllowLetters = true;
 

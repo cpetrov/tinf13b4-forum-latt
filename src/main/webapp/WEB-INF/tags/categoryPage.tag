@@ -19,15 +19,15 @@
 <t:breadcrumbNav category="${category}" />
 <section>
 	<header>
-		<h2>${category.name}</h2>
+		<h2>${category.title}</h2>
 	</header>
 	<section>
-	<c:forEach var="i" begin="0" end="${threads.size()-1}">
+	<c:forEach  var="thread" items="${threads}">
 		<article>
 			<img src="./img/bubble.png" alt="Topic">
 			<div>
 				<h4>
-					<a href="thread.jsp?id=${threads[i].id}">${threads[i].title}</a> 
+					<a href="thread.jsp?id=${thread.id}">${thread.title}</a> 
 				</h4>
 				<p>
 					<b>Author:</b> ${authors[i].name}
