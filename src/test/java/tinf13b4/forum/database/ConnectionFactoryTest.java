@@ -9,4 +9,9 @@ public class ConnectionFactoryTest {
 	public void testFailsWithNullPath() {
 		new ConnectionFactory(null);
 	}
+	
+	@Test
+	public void testDoesntFailWithConfigurationFromClasspath() {
+		new ConnectionFactory();
+	}
 }

@@ -12,18 +12,8 @@ import tinf13b4.forum.database.QueryExecutor;
 
 public class Installer {
 
-	private final File dbConfig;
-
-	public Installer() {
-		this.dbConfig = new File("src/main/config/DBConfig.cfg");
-	}
-
-	public Installer(File dbConfig) {
-		this.dbConfig = dbConfig;
-	}
-
 	public void install() {
-		ConnectionFactory factory = new ConnectionFactory(dbConfig);
+		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.createConnection();
 		QueryExecutor queryExecutor = new QueryExecutor(connection);
 		queryExecutor.executeSqlScript(getSqlInputStream());

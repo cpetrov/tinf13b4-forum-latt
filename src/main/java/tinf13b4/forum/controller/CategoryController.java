@@ -1,7 +1,6 @@
 
 package tinf13b4.forum.controller;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,8 +17,7 @@ public class CategoryController {
 	private QueryExecutor executor;
 
 	public CategoryController() {
-		ConnectionFactory factory = new ConnectionFactory(new File(
-				System.getProperty("user.home") + "/DBConfig.cfg"));
+		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
 	}
 
