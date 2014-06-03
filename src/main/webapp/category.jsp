@@ -5,8 +5,8 @@
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
 <c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
-<t:categoryPage category="${dummyProvider.categories[param.id]}" 
+<t:categoryPage category="${dummyProvider.category}" 
 				threads="${dummyProvider.threads}" 
-				authors="${dummyProvider.members}">
+				authors="${dummyProvider.users}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:categoryPage>

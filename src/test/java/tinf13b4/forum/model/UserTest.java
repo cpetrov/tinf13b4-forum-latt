@@ -7,7 +7,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class MemberTest {
+public class UserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNonPositiveId() throws Exception {
@@ -16,9 +16,9 @@ public class MemberTest {
 
 	@Test
 	public void testStoresId() throws Exception {
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		assertEquals(1, member.getId());
+		assertEquals(1, user.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -33,32 +33,32 @@ public class MemberTest {
 
 	@Test
 	public void testStoresName() {
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		assertEquals("foo", member.getName());
+		assertEquals("foo", user.getName());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullMail() {
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		member.setEMail(null);
+		user.setEMail(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		member.setEMail("");
+		user.setEMail("");
 	}
 
 	@Test
 	public void testStoresMail() {
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		member.setEMail("bar");
+		user.setEMail("bar");
 
-		assertEquals("bar", member.getEMail());
+		assertEquals("bar", user.getEMail());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -69,8 +69,8 @@ public class MemberTest {
 	@Test
 	public void testStoresDate() {
 		Date joinedOn = new Date();
-		User member = new User(1, "foo", null, "foo", new Date());
+		User user = new User(1, "foo", null, "foo", new Date());
 
-		assertEquals(joinedOn, member.getJoinedOn());
+		assertEquals(joinedOn, user.getJoinedOn());
 	}
 }
