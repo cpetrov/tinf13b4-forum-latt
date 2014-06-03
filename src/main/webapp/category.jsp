@@ -4,8 +4,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
-
-<t:categoryPage category="${dummyProvider.categories[0]}" 
+<c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
+<t:categoryPage category="${dummyProvider.categories[param.id]}" 
 				threads="${dummyProvider.threads}" 
 				authors="${dummyProvider.members}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>

@@ -6,20 +6,20 @@ import java.util.Date;
 public class ThreadBuilder {
 
 	private int id;
-	private int threadStarterId;
+	private int userId;
 	private int categoryId;
 	private String title;
 	private String content;
 	private Date date;
-	private boolean readonly;
+	private boolean readOnly;
 
 	public ThreadBuilder setId(int id) {
 		this.id = id;
 		return this;
 	}
 
-	public ThreadBuilder setThreadStarterId(int threadStarterId) {
-		this.threadStarterId = threadStarterId;
+	public ThreadBuilder setUserId(int userId) {
+		this.userId = userId;
 		return this;
 	}
 
@@ -43,12 +43,12 @@ public class ThreadBuilder {
 		return this;
 	}
 
-	public ThreadBuilder setReadonly(boolean readonly) {
-		this.readonly = readonly;
+	public ThreadBuilder setReadOnly(boolean readOnly) {
+		this.readOnly = readOnly;
 		return this;
 	}
 
 	public Thread build() {
-		return new Thread(id, threadStarterId, categoryId, title, content, date, readonly);
+		return new Thread(id, userId, categoryId, title, content, date, readOnly);
 	}
 }

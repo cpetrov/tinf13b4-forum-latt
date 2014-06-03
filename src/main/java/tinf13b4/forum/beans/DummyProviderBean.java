@@ -1,4 +1,3 @@
-
 package tinf13b4.forum.beans;
 
 import java.util.ArrayList;
@@ -6,8 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import tinf13b4.forum.controller.CategoryController;
+import tinf13b4.forum.controller.PostController;
+import tinf13b4.forum.controller.ThreadController;
+import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.Category;
-import tinf13b4.forum.model.Member;
+import tinf13b4.forum.model.User;
 import tinf13b4.forum.model.Post;
 import tinf13b4.forum.model.Thread;
 import tinf13b4.forum.model.ThreadBuilder;
@@ -16,16 +19,13 @@ public class DummyProviderBean {
 
 	private List<Category> categories;
 	private List<Thread> threads;
-	private List<Member> members;
+	private List<User> members;
 	private List<Post> posts;
 	private String longText;
 	private String heading;
+	private int id;
 
 	public DummyProviderBean() {
-		createFakeCategories();
-		createFakeMembers();
-		createFakeThreads();
-		createFakePosts();
 		createLongText();
 		heading = "Just a heading for static pages";
 	}
@@ -57,108 +57,47 @@ public class DummyProviderBean {
 				+ "itor malesuada mollis nisi varius ultricies: platea augue consectetur.</p> ";
 	}
 
-	private void createFakePosts() {
+	private void createPosts() {
 		posts = new ArrayList<Post>();
-		posts.add(new Post(getRandomInt(), getRandomInt(), getRandomInt(), "The post title.",
-				"<p>Some post content.</p>", new Date()));
-		posts.add(new Post(getRandomInt(), getRandomInt(), getRandomInt(), "Another post title.",
-				"<p>And more post content.</p>", new Date()));
-		posts.add(new Post(getRandomInt(), getRandomInt(), getRandomInt(), "Wow, third post",
-				"<p>That's some cool content!</p>", new Date()));
-		posts.add(new Post(getRandomInt(), getRandomInt(), getRandomInt(), "Wow, third post",
-				"<p>That's some cool content!</p>", new Date()));
+		PostController controller = new PostController();
+		posts = controller.getPosts(id);
 	}
 
-	private void createFakeMembers() {
+	private void createMembers() {
 		members = new ArrayList<>();
-		Member member = new Member(getRandomInt(), "Psychedelic Llama", getRandomInt(), new Date());
-		member.setFacebook("/pages/Lama-Kamel/108027845885579?fref=ts&rf=108586525839174");
-		member.setMail("llama@gmail.com");
-		getMembers().add(member);
-		getMembers().add(new Member(getRandomInt(), "Another Llama", getRandomInt(), new Date()));
-		getMembers().add(new Member(getRandomInt(), "Just a Llama", getRandomInt(), new Date()));
-		getMembers().add(new Member(getRandomInt(), "Another Llama", getRandomInt(), new Date()));
-		getMembers().add(new Member(getRandomInt(), "Just a Llama", getRandomInt(), new Date()));
-		getMembers().add(new Member(getRandomInt(), "Another Llama", getRandomInt(), new Date()));
+		UserController controller = new UserController();
+		members = controller.getUsers();
 	}
 
-	private void createFakeThreads() {
+	private void createThreads() {
 		threads = new ArrayList<>();
-		threads.add(buildThread1());
-		threads.add(buildThread2());
-		threads.add(buildThread1());
-		threads.add(buildThread2());
-		threads.add(buildThread1());
-		threads.add(buildThread2());
+		ThreadController controller = new ThreadController();
+		threads = controller.getThreads(id);
 	}
 
-	private Thread buildThread1() {
-		ThreadBuilder threadBuilder = new ThreadBuilder();
-		threadBuilder.setCategoryId(getRandomInt());
-		threadBuilder.setContent("<p>The thread content.</p><p>Donec tempor nibh ut quam sollicitudin, "
-				+ "et mollis lacus dictum. Nullam ultrices id orci id luctus."
-				+ " Praesent ut tellus interdum turpis tristique pellentesque "
-				+ "at quis ipsum. Cras congue nec libero nec euismod. Ut felis"
-				+ " turpis, vehicula quis posuere sit amet, placerat at quam."
-				+ " Vestibulum convallis, risus quis laoreet consequat, neque "
-				+ "nunc sollicitudin tellus, malesuada fermentum nibh nulla vitae"
-				+ " diam. Cum sociis natoque penatibus et magnis dis parturient "
-				+ "montes, nascetur ridiculus mus. Vivamus eu velit non neque "
-				+ "blandit dignissim ac quis tellus. Phasellus posuere ligula id"
-				+ " vehicula facilisis. Nullam eleifend condimentum venenatis. "
-				+ "Duis et orci id turpis tincidunt ultricies.</p>");
-		threadBuilder.setDate(new Date());
-		threadBuilder.setId(getRandomInt());
-		threadBuilder.setReadonly(false);
-		threadBuilder.setThreadStarterId(getRandomInt());
-		threadBuilder.setTitle("The thread title.");
-		return threadBuilder.build();
-	}
-
-	private Thread buildThread2() {
-		ThreadBuilder threadBuilder = new ThreadBuilder();
-		threadBuilder.setCategoryId(getRandomInt());
-		threadBuilder.setContent("The second thread content.");
-		threadBuilder.setDate(new Date());
-		threadBuilder.setId(getRandomInt());
-		threadBuilder.setReadonly(false);
-		threadBuilder.setThreadStarterId(getRandomInt());
-		threadBuilder.setTitle("The second thread title.");
-		return threadBuilder.build();
-	}
-
-	private void createFakeCategories() {
+	private void createCategories() {
 		categories = new ArrayList<>();
-		Category category1 = new Category(getRandomInt(), "First category");
-		category1.setDescription("Description of the first category");
-		Category category2 = new Category(getRandomInt(), "Second category");
-		category2.setDescription("Description of the second category");
-		categories.add(category1);
-		categories.add(category2);
-		categories.add(category1);
-		categories.add(category2);
-		categories.add(category1);
-		categories.add(category2);
-	}
-
-	private int getRandomInt() {
-		Random random = new Random();
-		return random.nextInt(100) + 1;
+		CategoryController controller = new CategoryController();
+		categories = controller.getCategories();
 	}
 
 	public List<Category> getCategories() {
+		createCategories();
 		return categories;
 	}
 
 	public List<Thread> getThreads() {
+		createThreads();
 		return threads;
 	}
 
-	public List<Member> getMembers() {
+	public List<User> getMembers() {
+		createMembers();
 		return members;
 	}
 
 	public List<Post> getPosts() {
+		createPosts();
 		return posts;
 	}
 
@@ -168,5 +107,9 @@ public class DummyProviderBean {
 
 	public String getHeading() {
 		return heading;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

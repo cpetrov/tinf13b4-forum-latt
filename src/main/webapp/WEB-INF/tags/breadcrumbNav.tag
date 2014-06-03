@@ -13,7 +13,7 @@
 		<li><a href="index.jsp">${settings.forumName}</a></li>
 		<c:choose>
 			<c:when test="${navigation.category eq 'boards'}">
-				<li><a href="category.jsp?id=${category.id}">${category.name}</a></li>
+				<li><a href="category.jsp?id=${category.id}">${category.title}</a></li>
 			</c:when>
 			<c:when test="${navigation.category eq 'members'}">
 				<li><a href="members.jsp">Members</a></li>
