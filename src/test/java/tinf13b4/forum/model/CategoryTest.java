@@ -12,12 +12,12 @@ public class CategoryTest {
 
 	@Before
 	public void setUp() {
-		category = new Category(1, "foo");
+		category = new Category(1, "foo", "foo");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNegativeId() {
-		new Category(-1, "foo");
+		new Category(-1, "foo", "foo");
 	}
 
 	@Test
@@ -27,17 +27,17 @@ public class CategoryTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new Category(2, null);
+		new Category(2, null, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new Category(2, "");
+		new Category(2, "", "");
 	}
 
 	@Test
 	public void testStoresCategoryName() {
-		assertEquals("foo", category.getName());
+		assertEquals("foo", category.getTitle());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -54,6 +54,6 @@ public class CategoryTest {
 	public void testStoresCategoryDescription() {
 		category.setDescription("bar");
 
-		assertEquals("bar", category.getDescription());
+		assertEquals("bar", category.getSubtitle());
 	}
 }

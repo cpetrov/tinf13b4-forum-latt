@@ -16,8 +16,8 @@ public class ThreadBuilderTest {
 				.setContent("foo")
 				.setDate(date)
 				.setId(2)
-				.setReadonly(true)
-				.setThreadStarterId(3)
+				.setReadOnly(true)
+				.setUserId(3)
 				.setTitle("bar");
 		Thread thread = new Thread(2, 3, 1, "bar", "foo", date, true);
 

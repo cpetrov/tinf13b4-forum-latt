@@ -11,93 +11,65 @@ public class MemberTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNonPositiveId() throws Exception {
-		new Member(0, "foo", 2, new Date());
+		new User(0, "foo", null, "foo", new Date());
 	}
 
 	@Test
 	public void testStoresId() throws Exception {
-		Member member = new Member(1, "foo", 2, new Date());
+		User member = new User(1, "foo", null, "foo", new Date());
 
 		assertEquals(1, member.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new Member(1, null, 2, new Date());
+		new User(1, null, null, "foo", new Date());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new Member(1, "", 2, new Date());
+		new User(1, "", null, "foo", new Date());
 	}
 
 	@Test
 	public void testStoresName() {
-		Member member = new Member(1, "foo", 2, new Date());
+		User member = new User(1, "foo", null, "foo", new Date());
 
 		assertEquals("foo", member.getName());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNegativePosts() {
-		new Member(2, "foo", -1, new Date());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullMail() {
-		Member member = new Member(1, "foo", 2, new Date());
+		User member = new User(1, "foo", null, "foo", new Date());
 
-		member.setMail(null);
+		member.setEMail(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
-		Member member = new Member(1, "foo", 2, new Date());
+		User member = new User(1, "foo", null, "foo", new Date());
 
-		member.setMail("");
+		member.setEMail("");
 	}
 
 	@Test
 	public void testStoresMail() {
-		Member member = new Member(1, "foo", 2, new Date());
+		User member = new User(1, "foo", null, "foo", new Date());
 
-		member.setMail("bar");
+		member.setEMail("bar");
 
-		assertEquals("bar", member.getMail());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNullFacebook() {
-		Member member = new Member(1, "foo", 2, new Date());
-
-		member.setFacebook(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithEmptyFacebook() {
-		Member member = new Member(1, "foo", 2, new Date());
-
-		member.setFacebook("");
-	}
-
-	@Test
-	public void testStoresFacebook() {
-		Member member = new Member(1, "foo", 2, new Date());
-
-		member.setFacebook("bar");
-
-		assertEquals("bar", member.getFacebook());
+		assertEquals("bar", member.getEMail());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullJoinedOn() {
-		new Member(1, "foo", 2, null);
+		new User(1, "foo", null, "foo", null);
 	}
 
 	@Test
 	public void testStoresDate() {
 		Date joinedOn = new Date();
-		Member member = new Member(1, "foo", 2, joinedOn);
+		User member = new User(1, "foo", null, "foo", new Date());
 
 		assertEquals(joinedOn, member.getJoinedOn());
 	}
