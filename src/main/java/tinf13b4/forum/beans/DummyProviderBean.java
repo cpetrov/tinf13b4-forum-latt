@@ -1,29 +1,27 @@
 package tinf13b4.forum.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import tinf13b4.forum.controller.CategoryController;
 import tinf13b4.forum.controller.PostController;
 import tinf13b4.forum.controller.ThreadController;
 import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.Category;
-import tinf13b4.forum.model.User;
 import tinf13b4.forum.model.Post;
 import tinf13b4.forum.model.Thread;
-import tinf13b4.forum.model.ThreadBuilder;
+import tinf13b4.forum.model.User;
 
 public class DummyProviderBean {
 
 	private List<Category> categories;
 	private List<Thread> threads;
-	private List<User> members;
+	private List<User> users;
 	private List<Post> posts;
 	private String longText;
 	private String heading;
 	private int id;
+	private Category category;
 
 	public DummyProviderBean() {
 		createLongText();
@@ -63,10 +61,10 @@ public class DummyProviderBean {
 		posts = controller.getPosts(id);
 	}
 
-	private void createMembers() {
-		members = new ArrayList<>();
+	private void createUsers() {
+		users = new ArrayList<>();
 		UserController controller = new UserController();
-		members = controller.getUsers();
+		users = controller.getUsers();
 	}
 
 	private void createThreads() {
@@ -92,8 +90,8 @@ public class DummyProviderBean {
 	}
 
 	public List<User> getMembers() {
-		createMembers();
-		return members;
+		createUsers();
+		return users;
 	}
 
 	public List<Post> getPosts() {
@@ -111,5 +109,21 @@ public class DummyProviderBean {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Category getCategory() {
+		setCategory(category);
+		return category;
+	}
+	
+	public void setCategory(Category category) {
+		if(categories == null)
+			createCategories();
+
+		for (Category a : categories)
+			if (a.getId() == id) {
+				this.category = a;
+				return;
+			}
 	}
 }
