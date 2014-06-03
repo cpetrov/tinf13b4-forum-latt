@@ -1,46 +1,54 @@
 
 package tinf13b4.forum.controller;
 
-import java.sql.Connection;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.model.Category;
+import tinf13b4.forum.model.CategoryBuilder;
 
 public class CategoryController {
 
-	private ArrayList<Category> categories;
-	QueryExecutor queryExecutor;
+	private ResultSet rs;
+	private QueryExecutor executor;
 
 	public CategoryController() {
-		Connection connection = new ConnectionFactory().createConnection();
-		queryExecutor = new QueryExecutor(connection);
+		ConnectionFactory factory = new ConnectionFactory(new File(
+				System.getProperty("user.home") + "/DBConfig.cfg"));
+		executor = new QueryExecutor(factory.createConnection());
 	}
 
-	public ArrayList<Category> getCategorys() {
+	protected CategoryController(QueryExecutor executor) {
+		this.executor = executor;
+	}
+
+	public List<Category> getCategories() {
+		rs = executor.executeQuery("SELECT Category_ID, Title, Subtitle" + " FROM Category" + " ORDER BY Title ASC;");
+		List<Category> categories = new ArrayList<Category>();
+		if (rs == null)
+			return new ArrayList<Category>();
+		else {
+			try {
+				while (rs.next()) {
+					categories.add(buildCategory());
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+		}
 		return categories;
 	}
-
-	public void setCategorys(ArrayList<Category> categorys) {
-		this.categories = new ArrayList<Category>();
-		getCategoriesFromDB();
-	}
-
-	private void getCategoriesFromDB() {
-		ResultSet rs = queryExecutor.executeQuery("SELECT Category_ID, Name, Subtitle" + " FROM Category" + "ORDER BY Name ASC;");
-		if (rs == null)
-			return;
-		try {
-			while (rs.next()) {
-				Category category = new Category(rs.getInt("Category_ID"), rs.getString("Name"));
-				category.setDescription("Subtitle");
-				categories.add(category);
-			}
-		} catch (SQLException e) {
-			throw new IllegalStateException(e);
-		}
+	
+	private Category buildCategory() throws SQLException {
+		CategoryBuilder categoryBuilder = new CategoryBuilder();
+		categoryBuilder.setId(rs.getInt("Category_ID"));
+		categoryBuilder.setTitle(rs.getString("Title"));
+		categoryBuilder.setSubtitle(rs.getString("Subtitle"));
+		return categoryBuilder.build();
 	}
 }

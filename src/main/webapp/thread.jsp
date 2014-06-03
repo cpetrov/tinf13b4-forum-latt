@@ -1,12 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
-
-<t:threadPage category="${dummyProvider.categories[0]}" 
+<c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
+<t:threadPage category="${dummyProvider.categories[param.id]}" 
 			  members="${dummyProvider.members}" 
 			  posts="${dummyProvider.posts}"
-			  thread="${dummyProvider.threads[0]}">
+			  thread="${dummyProvider.threads[param.id]}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:threadPage>

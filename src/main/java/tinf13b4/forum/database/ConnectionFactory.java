@@ -20,7 +20,14 @@ public class ConnectionFactory {
 	private final File dbConfig;
 
 	public ConnectionFactory() {
-		this(new File("src/main/config/DBConfig.cfg"));
+		/* TODO
+		 * Du kannst hier keinen relativen Pfad verwenden,
+		 * da diese Datei nicht mit auf den Server geladen wird
+		 * und somit nicht gefunden wird.
+		 * Deshalb war es das Homeverzeichnis!!!
+		 */
+//		this(new File("src/main/config/DBConfig.cfg"));
+		this(new File(System.getProperty("user.home") + "/DBConfig.cfg"));
 	}
 
 	public ConnectionFactory(File dbConfig) {

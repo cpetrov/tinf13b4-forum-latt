@@ -1,4 +1,3 @@
-
 package tinf13b4.forum.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -8,28 +7,22 @@ import java.util.Date;
 public class Post {
 
 	private int id;
-	private int posterId;
-	private int threadId;
-	private String title;
+	private int userId;
 	private String content;
 	private Date date;
 
-	public Post(int id, int threadId, int posterId, String title, String content, Date date) {
-		validateArguments(id, threadId, posterId, title, content, date);
+	public Post(int id, int userId, String content, Date date) {
+		validateArguments(id, userId, content, date);
 		this.id = id;
-		this.threadId = threadId;
-		this.posterId = posterId;
-		this.title = title;
+		this.setUserId(userId);
 		this.content = content;
 		this.date = date;
 	}
 
-	private void validateArguments(int postId, int threadId, int posterId, String title, String content, Date date) {
+	private void validateArguments(int postId, int userId, String content,
+			Date date) {
 		checkArgument(postId > 0, "PostId must be positive.");
-		checkArgument(threadId > 0, "ThreadId must be positive.");
-		checkArgument(posterId > 0, "PosterId must be positive.");
-		checkArgument(title != null, "Title must not be null.");
-		checkArgument(!title.isEmpty(), "Title must not be empty.");
+		checkArgument(userId > 0, "UserId must be positive.");
 		checkArgument(content != null, "Content must not be null.");
 		checkArgument(!content.isEmpty(), "Content must not be empty.");
 		checkArgument(date != null, "Date must not be null.");
@@ -37,18 +30,6 @@ public class Post {
 
 	public int getId() {
 		return id;
-	}
-
-	public int getThreadId() {
-		return threadId;
-	}
-
-	public int getPosterId() {
-		return posterId;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public String getContent() {
@@ -59,6 +40,14 @@ public class Post {
 		return date;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,9 +55,7 @@ public class Post {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		result = prime * result + posterId;
-		result = prime * result + threadId;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		// TODO userID?
 		return result;
 	}
 
@@ -93,14 +80,7 @@ public class Post {
 			return false;
 		if (id != other.id)
 			return false;
-		if (posterId != other.posterId)
-			return false;
-		if (threadId != other.threadId)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
+		if (userId != other.userId)
 			return false;
 		return true;
 	}

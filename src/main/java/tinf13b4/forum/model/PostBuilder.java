@@ -1,4 +1,3 @@
-
 package tinf13b4.forum.model;
 
 import java.util.Date;
@@ -6,43 +5,43 @@ import java.util.Date;
 public class PostBuilder {
 
 	private int postId;
-	private int posterId;
-	private int threadId;
-	private String title;
+	private int userId;
 	private String content;
 	private Date date;
 
-	public PostBuilder setPostId(int postId) {
+	public int getPostId() {
+		return postId;
+	}
+
+	public void setPostId(int postId) {
 		this.postId = postId;
-		return this;
 	}
 
-	public PostBuilder setPosterId(int posterId) {
-		this.posterId = posterId;
-		return this;
+	public int getUserId() {
+		return userId;
 	}
 
-	public PostBuilder setThreadId(int threadId) {
-		this.threadId = threadId;
-		return this;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public PostBuilder setTitle(String title) {
-		this.title = title;
-		return this;
+	public String getContent() {
+		return content;
 	}
 
-	public PostBuilder setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
-		return this;
 	}
 
-	public PostBuilder setDate(Date date) {
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
 		this.date = date;
-		return this;
 	}
 
 	public Post build() {
-		return new Post(postId, threadId, posterId, title, content, date);
+		return new Post(postId, userId, content, date);
 	}
 }

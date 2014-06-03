@@ -24,9 +24,9 @@
 			<img src="./img/bubbles.png" alt="Category"> 
 			<div>
 				<h4>
-					<a href="category.jsp?id=${category.id}">${category.name}</a>
+					<a href="category.jsp?id=${category.id}">${category.title}</a>
 				</h4>
-				<p>${category.description}</p>
+				<p>${category.subtitle}</p>
 			</div>
 		</article>
 		</c:forEach>

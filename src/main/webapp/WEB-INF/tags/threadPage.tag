@@ -43,19 +43,20 @@
             <div class="clear"></div>
           </div>
          
-          <c:forEach begin="0" var="i" end="${posts.size()-1}">
+          <c:forEach var="post" items="${posts }">
           <div class="answer">
             <div class="member">
               <div class="memberPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="member.jsp?id=${members[i+1].id}">${members[i+1].name}</a>
+                <img src="./img/user16.png" alt="Username" /> 
+                <a href="member.jsp?id=${members[i+1].id}">${members[i+1].name}</a>
               </div>
               <div class="posts">
                 <img src="./img/bubbles16.png" alt="Answers" /> ${members[i+1].posts} posts
               </div>
             </div>
             <div class="answerBody">
-              	${posts[i].content}
+              	${post.content }
               <button>
                 <img src="./img/quill.png">
                 <span>Quote</span>
