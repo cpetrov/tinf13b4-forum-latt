@@ -1,9 +1,6 @@
 
 package tinf13b4.forum.database;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.List;
@@ -17,22 +14,15 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class ConnectionFactory {
 
-	private final File dbConfig;
+	private final InputStream configurationInputStream;
 
 	public ConnectionFactory() {
-		/* TODO
-		 * Du kannst hier keinen relativen Pfad verwenden,
-		 * da diese Datei nicht mit auf den Server geladen wird
-		 * und somit nicht gefunden wird.
-		 * Deshalb war es das Homeverzeichnis!!!
-		 */
-//		this(new File("src/main/config/DBConfig.cfg"));
-		this(new File(System.getProperty("user.home") + "/DBConfig.cfg"));
+		this(Thread.currentThread().getContextClassLoader().getResourceAsStream("DBConfig.cfg"));
 	}
 
-	public ConnectionFactory(File dbConfig) {
-		Preconditions.checkArgument(dbConfig != null, "DbConfig must not be null.");
-		this.dbConfig = dbConfig;
+	public ConnectionFactory(InputStream configurationInputStream) {
+		Preconditions.checkArgument(configurationInputStream != null, "ConfigurationInputStream must not be null.");
+		this.configurationInputStream = configurationInputStream;
 	}
 
 	public Connection createConnection() {
@@ -42,13 +32,7 @@ public class ConnectionFactory {
 	}
 
 	private List<String> readDataListFromFile() {
-		InputStream inputStream;
-		try {
-			inputStream = new FileInputStream(dbConfig);
-		} catch (FileNotFoundException e) {
-			throw new IllegalStateException("File not found.", e);
-		}
-		List<String> encryptedDataList = StringUtil.getStringListFromInputStream(inputStream);
+		List<String> encryptedDataList = StringUtil.getStringListFromInputStream(configurationInputStream);
 		return Base64Decryptor.getDecryptedStringList(encryptedDataList);
 	}
 }
