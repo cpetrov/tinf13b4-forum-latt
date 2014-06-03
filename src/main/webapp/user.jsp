@@ -5,8 +5,8 @@
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
 
-<t:memberPage threads="${dummyProvider.threads}" 
-			  member="${dummyProvider.members[0]}" 
+<t:userPage threads="${dummyProvider.threads}" 
+			  user="${dummyProvider.users[0]}" 
 			  posts="${dummyProvider.posts}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
-</t:memberPage>
+</t:userPage>

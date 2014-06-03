@@ -6,31 +6,31 @@
 
 <%@attribute name="threads" type="java.util.List"%>
 <%@attribute name="posts" type="java.util.List"%>
-<%@attribute name="member" type="tinf13b4.forum.model.Member"%>
+<%@attribute name="user" type="tinf13b4.forum.model.User"%>
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
-<jsp:setProperty name="navigation" property="category" value="members" />
-<jsp:setProperty name="navigation" property="page" value="members" />
+<jsp:setProperty name="navigation" property="category" value="users" />
+<jsp:setProperty name="navigation" property="page" value="users" />
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:body>
-	<t:breadcrumbNav member="${member}" />
-      <div id="member">
-		<div id="memberBlock">
+	<t:breadcrumbNav user="${user}" />
+      <div id="user">
+		<div id="userBlock">
 			<header>
-				<h2>${member.name}</h2>
+				<h2>${user.name}</h2>
 			</header>
-			<div class="memberPictureHolder"></div>
+			<div class="userPictureHolder"></div>
 			<div id="posts">
-				<img src="./img/quill16.png" alt=""> Member has <b>${member.posts}</b> posts
+				<img src="./img/quill16.png" alt=""> User has <b>${user.posts}</b> posts
 			</div>
 			<div id="mailContact">
-				<img src="./img/mail16.png" alt=""> <a href="mailto:${member.mail}">Mail</a>
+				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
 			</div>
 			<div id="facebook">
-				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${member.facebook}">Facebook</a>
+				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
 			</div>
 		</div>
         <div id="topicBlock">

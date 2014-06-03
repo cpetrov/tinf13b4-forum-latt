@@ -4,6 +4,6 @@
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
 
-<t:membersPage members="${dummyProvider.members}" >
+<t:usersPage users="${dummyProvider.users}" >
 	<jsp:attribute name="title">Page Title</jsp:attribute>
-</t:membersPage>
+</t:usersPage>

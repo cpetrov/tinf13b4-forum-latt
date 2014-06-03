@@ -4,33 +4,33 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@attribute name="members" type="java.util.List"%>
+<%@attribute name="users" type="java.util.List"%>
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
-<jsp:setProperty name="navigation" property="category" value="members" />
-<jsp:setProperty name="navigation" property="page" value="member" />
+<jsp:setProperty name="navigation" property="category" value="users" />
+<jsp:setProperty name="navigation" property="page" value="user" />
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:body>
-      <div id="membersList">
-        <h2>Members List</h2>
+      <div id="usersList">
+        <h2>Users List</h2>
         <span class="searchWidget">
           <input type="text" name="q">
-          <input type="submit" id="submit" name="btnsub" value="Member Search">
+          <input type="submit" id="submit" name="btnsub" value="User Search">
         </span>
-        <div id="membersTable">
+        <div id="usersTable">
           <header>
             <h3>Name</h3>
-            <h3>Member since</h3>
+            <h3>User since</h3>
           </header>
           <div class="clear"></div>
-          <c:forEach var="member" items="${members}">
-          <a href="member.jsp?id=${member.id}">
-	          <div class="memberListEntry">
-	            <p>${member.name}</p>
-	            <p><fmt:formatDate value="${member.joinedOn}" pattern="dd.MM.yyyy" /></p>
+          <c:forEach var="user" items="${users}">
+          <a href="user.jsp?id=${user.id}">
+	          <div class="userListEntry">
+	            <p>${user.name}</p>
+	            <p><fmt:formatDate value="${user.joinedOn}" pattern="dd.MM.yyyy" /></p>
 	          </div>
           </a>
           </c:forEach>

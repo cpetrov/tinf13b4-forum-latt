@@ -84,8 +84,8 @@ button span {
   margin-left:10px;
   vertical-align: middle;
 }
-.memberPictureHolder {
-  background-image: url("../img/member.gif"); /* TODO: dynamize, set the background image to the avatar */
+.userPictureHolder {
+  background-image: url("../img/user.gif"); /* TODO: dynamize, set the background image to the avatar */
   width:200px;
   height:200px;
   border-radius: 30px;
@@ -217,10 +217,10 @@ header .searchWidget {
   border-color:white;
 }
 
-#topic > .answer > .member {
+#topic > .answer > .user {
   float:left;
 }
-#topic > .answer > .member div:not(:first-child) {
+#topic > .answer > .user div:not(:first-child) {
   margin-top:10px;
 }
 
@@ -257,28 +257,28 @@ header .searchWidget {
   margin-top:25px;
 }
 
-/* Member styles */
- #member > #memberBlock {
+/* User styles */
+ #user > #userBlock {
   float:left;
   width:230px;
 }
 
-#member > #memberBlock div:not(:first-child) {
+#user > #userBlock div:not(:first-child) {
   margin-top:10px;
 }
-#member > #topicBlock {
+#user > #topicBlock {
   margin-left:50px;
   width:799px;
   float:left;
 }
-/* Members List styles */
- #membersList > .searchWidget {
+/* Users List styles */
+ #usersList > .searchWidget {
   display:inline;
   text-align:center;
   width:100%;
   float:left;
 }
-#membersList > #membersTable {
+#usersList > #usersTable {
   float:left;
   width:100%;
   margin-top:25px;
@@ -290,28 +290,28 @@ header .searchWidget {
   border-color: #FFFFFF;
   border-width: 1px;
 }
-#membersList > #membersTable header, #membersList > #membersTable .memberListEntry {
+#usersList > #usersTable header, #usersList > #usersTable .userListEntry {
   box-sizing: border-box;
   padding-left:100px;
   padding-right:100px;
 }
-#membersList > #membersTable h3 {
+#usersList > #usersTable h3 {
   float:left;
 }
-#membersList > #membersTable h3:last-child {
+#usersList > #usersTable h3:last-child {
   float:right;
 }
-#membersList > #membersTable .memberListEntry {
+#usersList > #usersTable .userListEntry {
   width:100%;
   float:left;
 }
-#membersList > #membersTable a:nth-child(2n-1) div {
+#usersList > #usersTable a:nth-child(2n-1) div {
   background-color:rgba(40, 176, 237, 0.18);
 }
-#membersList > #membersTable .memberListEntry p {
+#usersList > #usersTable .userListEntry p {
   float:left;
 }
-#membersList > #membersTable .memberListEntry p:last-child {
+#usersList > #usersTable .userListEntry p:last-child {
   float:right;
 }
 /* Footer styles */

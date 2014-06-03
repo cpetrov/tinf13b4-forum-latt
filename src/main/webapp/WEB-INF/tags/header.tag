@@ -19,7 +19,7 @@
 	<nav>
 		<ul>
 			<li class="${navigation.category eq 'boards' ? 'active' : ''}"><a href="index.jsp">Boards</a></li>
-			<li class="${navigation.category eq 'members' ? 'active' : ''}"><a href="members.jsp">Members</a></li>
+			<li class="${navigation.category eq 'users' ? 'active' : ''}"><a href="users.jsp">Users</a></li>
 		</ul>
 	</nav>
 </header>
