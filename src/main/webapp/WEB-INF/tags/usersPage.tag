@@ -27,7 +27,7 @@
           </header>
           <div class="clear"></div>
           <c:forEach var="user" items="${users}">
-          <a href="user.jsp?id=${user.id}">
+          <a href="user.jsp?userId=${user.id}">
 	          <div class="userListEntry">
 	            <p>${user.name}</p>
 	            <p><fmt:formatDate value="${user.joinedOn}" pattern="dd.MM.yyyy" /></p>

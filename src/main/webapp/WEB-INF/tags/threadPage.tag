@@ -14,11 +14,11 @@
 <jsp:setProperty name="navigation" property="page" value="thread" />
 
 <t:genericPage>
-	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
-	<jsp:attribute name="header"><t:header /></jsp:attribute>
-	<jsp:body>
-	<t:breadcrumbNav category="${category}" />
-	      <section>
+    <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+    <jsp:body>
+    <t:breadcrumbNav category="${category}" />
+          <section>
+          
         <header>
           <h2>${thread.title}</h2>
         </header>
@@ -27,14 +27,13 @@
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${users[0].id}">${users[0].name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${users[0].id}">${users[0].name}</a>
               </div>
-<%--               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts} posts
+               <div class="posts">
+                <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts.size()} posts
               </div> 
---%>
             </div>
-            <div class="answerBody">${thread.content}
+            <div class="answerBody">${thread.content} 
               <button>
                 <img src="./img/quill.png" alt="Quote">
                 <span>Quote</span>
@@ -43,21 +42,21 @@
             </div>
             <div class="clear"></div>
           </div>
-          <c:forEach var="post" items="${posts}">
+         
+          <c:forEach var="post" items="${posts }">
           <div class="answer">
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-                <a href="user.jsp?id=${users[i+1].id}">${users[i+1].name}</a>
+         		<a href="user.jsp?userId=${users[0].id}">${users[0].name}</a>
               </div>
-<%--               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${users[i+1].posts} posts
+              <div class="posts">
+                <img src="./img/bubbles16.png" alt="Answers" /> ${users[0].posts.size()} posts
               </div> 
---%>
             </div>
             <div class="answerBody">
-              	${post.content }
+                ${post.content }
               <button>
                 <img src="./img/quill.png">
                 <span>Quote</span>
@@ -66,7 +65,7 @@
             </div>
             <div class="clear"></div>
           </div>
-		</c:forEach>
+        </c:forEach>
         </div>
       </section>
       <div>
@@ -75,5 +74,5 @@
           <span>New Topic</span>
         </button>
       </div>
-	</jsp:body>
+    </jsp:body>
 </t:genericPage>

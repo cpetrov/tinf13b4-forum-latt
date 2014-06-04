@@ -8,6 +8,7 @@ import java.util.List;
 
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
+import tinf13b4.forum.model.Post;
 import tinf13b4.forum.model.User;
 import tinf13b4.forum.model.UserBuilder;
 
@@ -53,7 +54,28 @@ public class UserController {
 		userBuilder.setPicture(rs.getBlob("Picture"));
 		userBuilder.setEMail(rs.getString("Email"));
 		userBuilder.setJoinedOn(rs.getDate("JoinedOn"));
+		userBuilder.setPosts(getPostsForUser(rs.getInt("User_ID")));
 		return userBuilder.build();
+	}
+
+	private ArrayList<Post> getPostsForUser(int userId) {
+		rs = executor.executeQuery("SELECT * FROM Posts "
+				+ "WHERE User_ID = " + userId + ";");
+		ArrayList<Post> posts = new ArrayList<Post>();
+		if(rs == null)
+			return new ArrayList<Post>();
+		try {
+			while(rs.next())
+			{
+				PostController postController = new PostController();
+				postController.setRs(rs);
+				posts.add(postController.buildPost());
+			}
+		} catch (SQLException e) {
+			new IllegalStateException("SQL Error: " + e);
+		}
+		
+		return posts;
 	}
 
 }
