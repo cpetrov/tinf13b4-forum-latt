@@ -5,7 +5,7 @@ public class NavBean {
 
 	private final Nav[] navs = new Nav[]{
 			new Nav("Startseite", "home.jsp"),
-			new Nav("Mitglieder", "members.jsp"),
+			new Nav("Mitglieder", "users.jsp"),
 			new Nav("Anmelden", "login.jsp"),
 			new Nav("Registrieren", "register.jsp")
 	};
