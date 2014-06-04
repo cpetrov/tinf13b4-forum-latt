@@ -24,10 +24,10 @@
 			</header>
 			<div class="userPictureHolder"></div>
 			<div id="posts">
-				<img src="./img/quill16.png" alt=""> User has <b>${user.posts}</b> posts
+				<img src="./img/quill16.png" alt=""> User has <b>${user.posts.size()}</b> posts
 			</div>
 			<div id="mailContact">
-				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.email}">Mail</a>
+				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
 			</div>
 <%-- 			<div id="facebook">
 				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
@@ -43,7 +43,7 @@
                 <img src="./img/bubble.png" alt="Category">
                 <div>
                   <h4>
-					<a href="thread.jsp?threadId=${post.threadId }">${post.title}</a>
+					<a href="thread.jsp?threadId=${post.threadId}">${post.title}</a>
                   </h4>
                   <p>${post.content}</p>
                 </div>
