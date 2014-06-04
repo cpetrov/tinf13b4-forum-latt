@@ -20,7 +20,8 @@ public class DummyProviderBean {
 	private List<Post> posts;
 	private String longText;
 	private String heading;
-	private int id;
+	private int categoryId;
+	private int threadId;
 	private Category category;
 
 	public DummyProviderBean() {
@@ -58,7 +59,7 @@ public class DummyProviderBean {
 	private void createPosts() {
 		posts = new ArrayList<Post>();
 		PostController controller = new PostController();
-		posts = controller.getPosts(id);
+		posts = controller.getPosts(threadId);
 	}
 
 	private void createUsers() {
@@ -70,7 +71,7 @@ public class DummyProviderBean {
 	private void createThreads() {
 		threads = new ArrayList<>();
 		ThreadController controller = new ThreadController();
-		threads = controller.getThreads(id);
+		threads = controller.getThreads(categoryId);
 	}
 
 	private void createCategories() {
@@ -107,8 +108,12 @@ public class DummyProviderBean {
 		return heading;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
+	public void setThreadId(int threadId) {
+		this.threadId = threadId;
 	}
 
 	public Category getCategory() {
@@ -121,7 +126,7 @@ public class DummyProviderBean {
 			createCategories();
 
 		for (Category a : categories)
-			if (a.getId() == id) {
+			if (a.getId() == categoryId) {
 				this.category = a;
 				return;
 			}

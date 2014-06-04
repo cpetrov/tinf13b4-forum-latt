@@ -29,16 +29,17 @@
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${users[0].id}">${users[0].name}</a>
               </div>
-              <div class="posts">
+<%--               <div class="posts">
                 <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts} posts
-              </div>
+              </div> 
+--%>
             </div>
             <div class="answerBody">${thread.content}
               <button>
                 <img src="./img/quill.png" alt="Quote">
                 <span>Quote</span>
               </button>
-              <div class="postedOn">Posted on 24.05 at 21:49</div>
+              <div class="postedOn">Posted on ${post.date }</div>
             </div>
             <div class="clear"></div>
           </div>
@@ -50,9 +51,10 @@
                 <img src="./img/user16.png" alt="Username" /> 
                 <a href="user.jsp?id=${users[i+1].id}">${users[i+1].name}</a>
               </div>
-              <div class="posts">
+<%--               <div class="posts">
                 <img src="./img/bubbles16.png" alt="Answers" /> ${users[i+1].posts} posts
-              </div>
+              </div> 
+--%>
             </div>
             <div class="answerBody">
               	${post.content }
@@ -60,7 +62,7 @@
                 <img src="./img/quill.png">
                 <span>Quote</span>
               </button>
-              <div class="postedOn">Posted on 24.05 at 21:49</div>
+              <div class="postedOn">Posted on ${post.date }</div>
             </div>
             <div class="clear"></div>
           </div>

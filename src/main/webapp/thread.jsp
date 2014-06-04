@@ -4,8 +4,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
-<c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
-<t:threadPage category="${dummyProvider.categories[param.id]}" 
+<c:set target="${dummyProvider }" property="threadId" value="${param.id }"></c:set>
+<t:threadPage category="${dummyProvider.category}" 
 			  users="${dummyProvider.users}" 
 			  posts="${dummyProvider.posts}"
 			  thread="${dummyProvider.threads[param.id]}">
