@@ -1,19 +1,16 @@
 package tinf13b4.forum.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import tinf13b4.forum.controller.CategoryController;
 import tinf13b4.forum.controller.PostController;
 import tinf13b4.forum.controller.ThreadController;
 import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.Category;
-import tinf13b4.forum.model.User;
 import tinf13b4.forum.model.Post;
 import tinf13b4.forum.model.Thread;
-import tinf13b4.forum.model.ThreadBuilder;
+import tinf13b4.forum.model.User;
 
 public class DummyProviderBean {
 
@@ -27,6 +24,8 @@ public class DummyProviderBean {
 	private int threadId;
 	private int userId;
 	private Category category;
+	private Thread thread;
+	private User user;
 
 	public DummyProviderBean() {
 		createLongText();
@@ -136,6 +135,36 @@ public class DummyProviderBean {
 		for (Category a : categories)
 			if (a.getId() == categoryId) {
 				this.category = a;
+				return;
+			}
+	}
+
+	public Thread getThread() {
+		setThread(thread);
+		return thread;
+	}
+
+	public void setThread(Thread thread) {
+		if(thread == null)
+			createThreads();
+		for(Thread a : threads)
+			if(a.getId() == threadId) {
+				this.thread = a;
+				return;
+			}
+	}
+
+	public User getUser() {
+		setUser(user);
+		return user;
+	}
+
+	public void setUser(User user) {
+		if(users == null)
+			createUsers();
+		for(User a : users)
+			if(a.getId() == userId) {
+				this.user = a;
 				return;
 			}
 	}
