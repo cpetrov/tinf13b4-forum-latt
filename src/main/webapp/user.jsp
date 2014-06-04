@@ -4,9 +4,9 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
-
+<c:set target="${dummyProvider }" property="userId" value="${param.userId }"></c:set>
 <t:userPage threads="${dummyProvider.threads}" 
-			  user="${dummyProvider.users[0]}" 
+			  user="${dummyProvider.users[param.userId]}" 
 			  posts="${dummyProvider.posts}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:userPage>

@@ -27,12 +27,11 @@
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${users[0].id}">${users[0].name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${users.id}">${users.name}</a>
               </div>
-<%--               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts} posts
+               <div class="posts">
+                <img src="./img/bubbles16.png" alt="Posts" /> ${users.posts.size} posts
               </div> 
---%>
             </div>
             <div class="answerBody">${thread.content} 
               <button>
@@ -50,12 +49,11 @@
               <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-                <a href="user.jsp?id=${users[i+1].id}">${users[i+1].name}</a>
+                <a href="user.jsp?userId=${users.id}">${users.name}</a>
               </div>
-<%--               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${users[i+1].posts} posts
+              <div class="posts">
+                <img src="./img/bubbles16.png" alt="Answers" /> ${users.posts} posts
               </div> 
---%>
             </div>
             <div class="answerBody">
               	${post.content }

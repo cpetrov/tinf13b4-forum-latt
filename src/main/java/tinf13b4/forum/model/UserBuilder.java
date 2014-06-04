@@ -2,6 +2,7 @@
 package tinf13b4.forum.model;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserBuilder {
@@ -11,6 +12,7 @@ public class UserBuilder {
 	private Blob picture;
 	private String eMail;
 	private Date joinedOn;
+	private ArrayList<Post> posts;
 
 	public UserBuilder setId(int id) {
 		this.id = id;
@@ -36,8 +38,13 @@ public class UserBuilder {
 		this.joinedOn = joinedOn;
 		return this;
 	}
+	
+	public UserBuilder setPosts(ArrayList<Post> posts) {
+		this.posts = posts;
+		return this;
+	}
 
 	public User build() {
-		return new User(id, name, picture, eMail, joinedOn);
+		return new User(id, name, picture, eMail, joinedOn, posts);
 	}
 }

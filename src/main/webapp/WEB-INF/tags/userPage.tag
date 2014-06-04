@@ -29,9 +29,10 @@
 			<div id="mailContact">
 				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
 			</div>
-			<div id="facebook">
+<%-- 			<div id="facebook">
 				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
-			</div>
+			</div> 
+--%>
 		</div>
         <div id="topicBlock">
           <section>
@@ -42,7 +43,7 @@
                 <img src="./img/bubble.png" alt="Category">
                 <div>
                   <h4>
-					<a href="thread.jsp?id=${post.threadId }">${post.title}</a>
+					<a href="thread.jsp?threadId=${post.threadId }">${post.title}</a>
                   </h4>
                   <p>${post.content}</p>
                 </div>

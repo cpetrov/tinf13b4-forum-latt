@@ -24,7 +24,7 @@
 			<img src="./img/bubbles.png" alt="Category"> 
 			<div>
 				<h4>
-					<a href="category.jsp?id=${category.id}">${category.title}</a>
+					<a href="category.jsp?categoryId=${category.id}">${category.title}</a>
 				</h4>
 				<p>${category.subtitle}</p>
 			</div>

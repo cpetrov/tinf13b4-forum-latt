@@ -25,6 +25,7 @@ public class DummyProviderBean {
 	private String heading;
 	private int categoryId;
 	private int threadId;
+	private int userId;
 	private Category category;
 
 	public DummyProviderBean() {
@@ -117,6 +118,10 @@ public class DummyProviderBean {
 	
 	public void setThreadId(int threadId) {
 		this.threadId = threadId;
+	}
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public Category getCategory() {

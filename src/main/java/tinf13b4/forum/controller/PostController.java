@@ -17,6 +17,10 @@ public class PostController {
 	private QueryExecutor executor;
 	private ArrayList<Post> posts;
 	private ResultSet rs;
+	
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
 
 	public PostController() {
 		ConnectionFactory factory = new ConnectionFactory(new File(System.getProperty("user.home") + "/DBConfig.cfg"));
@@ -50,7 +54,7 @@ public class PostController {
 	}
 	
 	
-	private Post buildPost() throws SQLException {
+	public Post buildPost() throws SQLException {
 		PostBuilder postBuilder = new PostBuilder();
 		postBuilder.setPostId(rs.getInt("Post_ID"));
 		postBuilder.setUserId(rs.getInt("User_ID"));
