@@ -1,5 +1,5 @@
 
-package tinf13b4.forum.register;
+package tinf13b4.forum.controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
