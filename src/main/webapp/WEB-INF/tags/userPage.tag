@@ -27,7 +27,7 @@
 				<img src="./img/quill16.png" alt=""> User has <b>${user.posts}</b> posts
 			</div>
 			<div id="mailContact">
-				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
+				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.email}">Mail</a>
 			</div>
 <%-- 			<div id="facebook">
 				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
