@@ -5,7 +5,7 @@
 
 <%@attribute name="category" type="tinf13b4.forum.model.Category"%>
 <%@attribute name="thread" type="tinf13b4.forum.model.Thread"%>
-<%@attribute name="members" type="java.util.List"%>
+<%@attribute name="users" type="java.util.List"%>
 <%@attribute name="posts" type="java.util.List"%>
 <%@attribute name="title" fragment="true"%>
 
@@ -24,13 +24,13 @@
         </header>
         <div id="topic">
           <div class="answer">
-            <div class="member">
-              <div class="memberPictureHolder"></div>
+            <div class="user">
+              <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="member.jsp?id=${members[0].id}">${members[0].name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${users[0].id}">${users[0].name}</a>
               </div>
               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${members[0].posts} posts
+                <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts} posts
               </div>
             </div>
             <div class="answerBody">${thread.content}
@@ -44,14 +44,14 @@
           </div>
           <c:forEach var="post" items="${posts}">
           <div class="answer">
-            <div class="member">
-              <div class="memberPictureHolder"></div>
+            <div class="user">
+              <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-                <a href="member.jsp?id=${members[i+1].id}">${members[i+1].name}</a>
+                <a href="user.jsp?id=${users[i+1].id}">${users[i+1].name}</a>
               </div>
               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${members[i+1].posts} posts
+                <img src="./img/bubbles16.png" alt="Answers" /> ${users[i+1].posts} posts
               </div>
             </div>
             <div class="answerBody">

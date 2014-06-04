@@ -6,7 +6,7 @@
 <jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
 <c:set target="${dummyProvider }" property="id" value="${param.id }"></c:set>
 <t:threadPage category="${dummyProvider.categories[param.id]}" 
-			  members="${dummyProvider.members}" 
+			  users="${dummyProvider.users}" 
 			  posts="${dummyProvider.posts}"
 			  thread="${dummyProvider.threads[param.id]}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>

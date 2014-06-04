@@ -89,7 +89,7 @@ public class DummyProviderBean {
 		return threads;
 	}
 
-	public List<User> getMembers() {
+	public List<User> getUsers() {
 		createUsers();
 		return users;
 	}
