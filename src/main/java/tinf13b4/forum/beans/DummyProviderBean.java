@@ -24,6 +24,8 @@ public class DummyProviderBean {
 	private int threadId;
 	private int userId;
 	private Category category;
+	private Thread thread;
+	private User user;
 
 	public DummyProviderBean() {
 		createLongText();
@@ -133,6 +135,36 @@ public class DummyProviderBean {
 		for (Category a : categories)
 			if (a.getId() == categoryId) {
 				this.category = a;
+				return;
+			}
+	}
+
+	public Thread getThread() {
+		setThread(thread);
+		return thread;
+	}
+
+	public void setThread(Thread thread) {
+		if(thread == null)
+			createThreads();
+		for(Thread a : threads)
+			if(a.getId() == threadId) {
+				this.thread = a;
+				return;
+			}
+	}
+
+	public User getUser() {
+		setUser(user);
+		return user;
+	}
+
+	public void setUser(User user) {
+		if(users == null)
+			createUsers();
+		for(User a : users)
+			if(a.getId() == userId) {
+				this.user = a;
 				return;
 			}
 	}

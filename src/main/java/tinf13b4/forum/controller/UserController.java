@@ -52,7 +52,7 @@ public class UserController {
 		userBuilder.setId(rs.getInt("User_ID"));
 		userBuilder.setName(rs.getString("Name"));
 		userBuilder.setPicture(rs.getBlob("Picture"));
-		userBuilder.setEMail(rs.getString("Email"));
+		userBuilder.setEmail(rs.getString("Email"));
 		userBuilder.setJoinedOn(rs.getDate("JoinedOn"));
 		userBuilder.setPosts(getPostsForUser(rs.getInt("User_ID")));
 		return userBuilder.build();

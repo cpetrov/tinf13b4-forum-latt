@@ -12,29 +12,29 @@ public class User {
 	private final int id;
 	private final String name;
 	private Blob picture;
-	private String eMail;
+	private String email;
 	private Date joinedOn;
 	private ArrayList<Post> posts;
 
 	// private final Date joinedOn; // TODO Noch nicht implementiert
 
-	public User(int id, String name, Blob picture, String eMail, Date joinedOn, ArrayList<Post> posts) {
-		checkArguments(id, name, picture, eMail, joinedOn, posts);
+	public User(int id, String name, Blob picture, String email, Date joinedOn, ArrayList<Post> posts) {
+		checkArguments(id, name, picture, email, joinedOn, posts);
 		this.id = id;
 		this.name = name;
 		this.setPicture(picture);
-		this.eMail = eMail;
+		this.email = email;
 		this.joinedOn = joinedOn;
 		this.posts = posts;
 	}
 
-	private void checkArguments(int id, String name, Blob picture, String eMail, Date joinedOn, ArrayList<Post> posts) {
+	private void checkArguments(int id, String name, Blob picture, String email, Date joinedOn, ArrayList<Post> posts) {
 		checkArgument(id > 0, "Id must be positive.");
 		checkArgument(name != null, "Name must not be null.");
 		checkArgument(!name.isEmpty(), "Name must not be empty.");
 		// TODO picture
-		checkArgument(eMail != null, "Mail must not be null.");
-		checkArgument(!eMail.isEmpty(), "Mail must not be empty.");
+		checkArgument(email != null, "Email must not be null.");
+		checkArgument(!email.isEmpty(), "Email must not be empty.");
 		// TODO joinedOn
 		checkArgument(posts != null, "Posts must not be null.");
 	}
@@ -47,14 +47,14 @@ public class User {
 		return name;
 	}
 
-	public String getEMail() {
-		return eMail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEMail(String eMail) {
-		checkArgument(eMail != null, "Mail must not be null.");
-		checkArgument(!eMail.isEmpty(), "Mail must not be empty.");
-		this.eMail = eMail;
+	public void setMail(String email) {
+		checkArgument(email != null, "Email must not be null.");
+		checkArgument(!email.isEmpty(), "Email must not be empty.");
+		this.email = email;
 	}
 
 	public Blob getPicture() {

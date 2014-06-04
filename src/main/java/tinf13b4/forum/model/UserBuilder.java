@@ -10,7 +10,7 @@ public class UserBuilder {
 	private int id;
 	private String name;
 	private Blob picture;
-	private String eMail;
+	private String email;
 	private Date joinedOn;
 	private ArrayList<Post> posts;
 
@@ -29,8 +29,8 @@ public class UserBuilder {
 		return this;
 	}
 
-	public UserBuilder setEMail(String eMail) {
-		this.eMail = eMail;
+	public UserBuilder setEmail(String email) {
+		this.email = email;
 		return this;
 	}
 	
@@ -45,6 +45,6 @@ public class UserBuilder {
 	}
 
 	public User build() {
-		return new User(id, name, picture, eMail, joinedOn, posts);
+		return new User(id, name, picture, email, joinedOn, posts);
 	}
 }
