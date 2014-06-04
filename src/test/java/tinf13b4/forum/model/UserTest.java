@@ -43,23 +43,23 @@ public class UserTest {
 	public void testFailsWithNullMail() {
 		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
 
-		user.setEMail(null);
+		user.setMail(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
 		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
 
-		user.setEMail("");
+		user.setMail("");
 	}
 
 	@Test
 	public void testStoresMail() {
 		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
 
-		user.setEMail("bar");
+		user.setMail("bar");
 
-		assertEquals("bar", user.getEMail());
+		assertEquals("bar", user.getMail());
 	}
 
 	@Test

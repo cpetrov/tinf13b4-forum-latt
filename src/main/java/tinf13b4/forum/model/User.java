@@ -12,7 +12,7 @@ public class User {
 	private final int id;
 	private final String name;
 	private Blob picture;
-	private String email;
+	private String mail;
 	private Date joinedOn;
 	private ArrayList<Post> posts;
 
@@ -23,7 +23,7 @@ public class User {
 		this.id = id;
 		this.name = name;
 		this.setPicture(picture);
-		this.email = email;
+		this.mail = email;
 		this.joinedOn = joinedOn;
 		this.posts = posts;
 	}
@@ -47,14 +47,14 @@ public class User {
 		return name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setMail(String email) {
-		checkArgument(email != null, "Email must not be null.");
-		checkArgument(!email.isEmpty(), "Email must not be empty.");
-		this.email = email;
+	public void setMail(String mail) {
+		checkArgument(mail != null, "Mail must not be null.");
+		checkArgument(!mail.isEmpty(), "Mail must not be empty.");
+		this.mail = mail;
 	}
 
 	public Blob getPicture() {
