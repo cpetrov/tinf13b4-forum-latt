@@ -14,26 +14,26 @@
 <jsp:setProperty name="navigation" property="page" value="users" />
 
 <t:genericPage>
-	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
-	<jsp:body>
-	<t:breadcrumbNav user="${user}" />
+    <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+    <jsp:body>
+    <t:breadcrumbNav user="${user}" />
       <div id="user">
-		<div id="userBlock">
-			<header>
-				<h2>${user.name}</h2>
-			</header>
-			<div class="userPictureHolder"></div>
-			<div id="posts">
-				<img src="./img/quill16.png" alt=""> User has <b>${user.posts}</b> posts
-			</div>
-			<div id="mailContact">
-				<img src="./img/mail16.png" alt=""> <a href="mailto:${user.email}">Mail</a>
-			</div>
-<%-- 			<div id="facebook">
-				<img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
-			</div> 
+        <div id="userBlock">
+            <header>
+                <h2>${user.name}</h2>
+            </header>
+            <div class="userPictureHolder"></div>
+            <div id="posts">
+                <img src="./img/quill16.png" alt=""> User has <b>${user.posts.size()}</b> posts
+            </div>
+            <div id="mailContact">
+                <img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
+            </div>
+<%--            <div id="facebook">
+                <img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
+            </div> 
 --%>
-		</div>
+        </div>
         <div id="topicBlock">
           <section>
             <h3>Latest Posts</h3>
@@ -43,7 +43,7 @@
                 <img src="./img/bubble.png" alt="Category">
                 <div>
                   <h4>
-					<a href="thread.jsp?threadId=${post.threadId }">${post.title}</a>
+                    <a href="thread.jsp?threadId=${post.threadId}">${post.title}</a>
                   </h4>
                   <p>${post.content}</p>
                 </div>
@@ -57,7 +57,7 @@
                 <img src="./img/bubble.png" alt="Category">
                 <div>
                   <h4>
-					<a href="#">${thread.title}</a>
+                    <a href="#">${thread.title}</a>
                   </h4>
                   <p>${thread.content.length() > 100 ? fn:substring(thread.content, 0, 100).concat('...') : thread.content }</p>
                 </div>
