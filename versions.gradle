@@ -4,7 +4,6 @@ ext.versions = [
 	eclipserap	:	'2.2.0',
 	guava		:	'17.0',
 	ibatis		:	'2.1.7.597',
-	javax		:	'3.1.0',
 	jdmk		:	'1.2.1',
 	jspapi		:	'2.2.1-b03',
 	jstl		:	'1.2',
@@ -12,5 +11,6 @@ ext.versions = [
 	mail		:	'1.4.7',
 	mindrot		:	'0.3m',
 	mockito		:	'1.9.5',
-	mysql		:	'1.1.6'
+	mysql		:	'1.1.6',
+	ckeditor	:	'3.5.3'
 ]
