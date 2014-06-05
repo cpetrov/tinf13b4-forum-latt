@@ -357,11 +357,23 @@ header .searchWidget {
   bottom: 20px;
 }
 
-.newTopic {
-  margin-top: 25px;
+button.newPost {
+	margin-top: 25px;
 }
 
-/* user styles */
+div.newPost {
+	display:none;
+	margin-top:20px;
+}
+
+div.newPost button {
+	display:block;
+	margin-left: auto;
+    margin-top: 15px;
+    background-color: rgba(248, 79, 67, 0.75);
+}
+
+/* User styles */
 #user>#userBlock {
   float: left;
   width: 230px;
