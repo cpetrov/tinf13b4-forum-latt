@@ -25,13 +25,26 @@ CREATE TABLE IF NOT EXISTS `Category` (
 CREATE TABLE IF NOT EXISTS `Posts` (
   `Post_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Content` text NOT NULL,
-  `Date` date NOT NULL,
+  `Date` datetime NOT NULL,
   `User_ID` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`Post_ID`),
   UNIQUE KEY `Post_ID` (`Post_ID`),
   KEY `FK_Posts_Users` (`User_ID`),
   CONSTRAINT `FK_Posts_Users` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Posts';
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
+-- Exportiere Struktur von Tabelle pmforum.Settings
+CREATE TABLE IF NOT EXISTS `Settings` (
+  `Settings_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Pagedescription` text NOT NULL,
+  `Inprint` text NOT NULL,
+  `TermsOfUse` text NOT NULL,
+  `Notification` text NOT NULL,
+  PRIMARY KEY (`Settings_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Settings for Adminsettings';
 
 -- Daten Export vom Benutzer nicht ausgewählt
 
@@ -56,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `Threads` (
   `Thread_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Title` text NOT NULL,
   `Content` text NOT NULL,
-  `Date` date NOT NULL,
+  `Date` datetime NOT NULL,
   `ReadOnly` tinyint(3) unsigned NOT NULL,
   `User_ID` int(10) unsigned NOT NULL,
   `Category_ID` int(10) unsigned NOT NULL,
@@ -77,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `Name` varchar(64) NOT NULL DEFAULT '0',
   `Picture` blob,
   `Email` varchar(254) NOT NULL DEFAULT '0',
-  `Password` varchar(60) NOT NULL DEFAULT '0',
+  `Password` varchar(61) NOT NULL DEFAULT '0',
   `JoinedOn` date NOT NULL,
   `Confirmed` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `Confirmation_Key` varchar(36) NOT NULL DEFAULT '0',
