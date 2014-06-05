@@ -5,7 +5,7 @@ import java.util.Date;
 public class PostBuilder {
 
 	private int postId;
-	private int userId;
+	private User user;
 	private int threadId;
 	private String content;
 	private Date date;
@@ -18,12 +18,12 @@ public class PostBuilder {
 		this.postId = postId;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getContent() {
@@ -51,7 +51,7 @@ public class PostBuilder {
 	}
 	
 	public Post build() {
-		return new Post(postId, userId, threadId, content, date);
+		return new Post(postId, user, threadId, content, date);
 	}
 
 }

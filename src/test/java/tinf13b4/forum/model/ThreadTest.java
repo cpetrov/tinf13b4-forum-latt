@@ -30,7 +30,7 @@ public class ThreadTest {
 	public void testStoresThreadStarterId() {
 		Thread thread = new Thread(1, 2, 3, "foo", "bar", new Date(), false);
 
-		assertEquals(2, thread.getThreadStarterId());
+		assertEquals(2, thread.getUserId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

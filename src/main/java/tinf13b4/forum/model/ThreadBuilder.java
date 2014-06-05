@@ -6,7 +6,7 @@ import java.util.Date;
 public class ThreadBuilder {
 
 	private int id;
-	private int userId;
+	private User user;
 	private int categoryId;
 	private String title;
 	private String content;
@@ -18,8 +18,8 @@ public class ThreadBuilder {
 		return this;
 	}
 
-	public ThreadBuilder setUserId(int userId) {
-		this.userId = userId;
+	public ThreadBuilder setUser(User user) {
+		this.user = user;
 		return this;
 	}
 
@@ -49,6 +49,6 @@ public class ThreadBuilder {
 	}
 
 	public Thread build() {
-		return new Thread(id, userId, categoryId, title, content, date, readOnly);
+		return new Thread(id, user, categoryId, title, content, date, readOnly);
 	}
 }

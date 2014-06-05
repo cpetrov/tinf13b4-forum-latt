@@ -10,7 +10,7 @@ import java.util.List;
 public class Thread {
 
 	private final int id;
-	private final int threadStarterId;
+	private final User user;
 	private final int categoryId;
 	private final String title;
 	private final String content;
@@ -18,10 +18,10 @@ public class Thread {
 	private final boolean readonly;
 	private final List<Post> posts;
 
-	public Thread(int id, int threadStarterId, int categoryId, String title, String content, Date date, boolean readonly) {
-		validateArguments(id, threadStarterId, categoryId, title, content, date);
+	public Thread(int id, User user, int categoryId, String title, String content, Date date, boolean readonly) {
+		validateArguments(id, user, categoryId, title, content, date);
 		this.id = id;
-		this.threadStarterId = threadStarterId;
+		this.user = user;
 		this.categoryId = categoryId;
 		this.title = title;
 		this.content = content;
@@ -30,9 +30,9 @@ public class Thread {
 		posts = new ArrayList<>();
 	}
 
-	private void validateArguments(int id, int threadStarterId, int categoryId, String title, String content, Date date) {
+	private void validateArguments(int id, User user, int categoryId, String title, String content, Date date) {
 		checkArgument(id > 0, "Id must be positive.");
-		checkArgument(threadStarterId > 0, "ThreadStarterId must be positive.");
+		checkArgument(user != null, "User must not be null.");
 		checkArgument(categoryId > 0, "CategoryId must be positive.");
 		checkArgument(title != null, "Title must not be null.");
 		checkArgument(!title.isEmpty(), "Title must not be empty.");
@@ -45,8 +45,8 @@ public class Thread {
 		return id;
 	}
 
-	public int getThreadStarterId() {
-		return threadStarterId;
+	public User getUser() {
+		return user;
 	}
 
 	public int getCategoryId() {
@@ -78,7 +78,7 @@ public class Thread {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + (readonly ? 1231 : 1237);
-		result = prime * result + threadStarterId;
+//		result = prime * result + userId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -108,7 +108,7 @@ public class Thread {
 			return false;
 		if (readonly != other.readonly)
 			return false;
-		if (threadStarterId != other.threadStarterId)
+		if (user != other.user)
 			return false;
 		if (title == null) {
 			if (other.title != null)
