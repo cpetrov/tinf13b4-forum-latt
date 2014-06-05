@@ -20,7 +20,7 @@ public class ConnectionFactory {
 	private final File dbConfig;
 
 	public ConnectionFactory() {
-		this(new File("src/main/config/DBConfig.cfg"));
+		this(new File(System.getProperty("user.home") + "/DBConfig.cfg"));
 	}
 
 	public ConnectionFactory(File dbConfig) {
