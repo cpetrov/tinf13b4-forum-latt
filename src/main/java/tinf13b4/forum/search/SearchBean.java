@@ -110,8 +110,7 @@ public class SearchBean {
 			threads = new ArrayList<Thread>();
 
 		threads = new ArrayList<Thread>();
-		while(resultSet.next())
-		{
+		while(resultSet.next()) {
 			ThreadController controller = new ThreadController();
 			controller.setRs(resultSet);
 			threads.add(controller.buildThread());

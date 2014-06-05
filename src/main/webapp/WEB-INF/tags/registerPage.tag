@@ -20,7 +20,7 @@
 	</jsp:attribute>
 	<jsp:body>
 		<div id="inputBlock" ng-app="RegisterApp" ng-controller="RegisterController">
-		<div id="inputHolder">
+		<div class="inputHolder">
 		<form ng-submit="register()">
 			<div class="alert"></div>
 			<div class="form-group" ng-class="hasError('name')">

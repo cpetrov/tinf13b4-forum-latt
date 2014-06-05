@@ -3,6 +3,7 @@ package tinf13b4.forum.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static tinf13b4.forum.test.TestUtil.makeResultSet;
 
@@ -39,6 +40,15 @@ public class ThreadControllerTest {
 	}
 
 	@Test
+	public void testCreatesThread() {
+		Timestamp datePosted = new Timestamp(new Date().getTime());
+
+		new ThreadController(executor).createThread("title", "content", 1, 2, false);
+
+		verify(executor).executeUpdate("INSERT INTO Threads (Title, Content, Date, ReadOnly, User_ID, Category_ID) VALUES ('title', 'content', '" + datePosted + "', 0, 1, 2);");
+	}
+
+	@Test
 	public void testReturnsEmptyListWhenResultSetNull() {
 		Mockito.when(executor.executeQuery("SELECT * FROM Thread WHERE Category_ID = 2;")).thenReturn(null);
 		ThreadController controller = new ThreadController(executor);
@@ -49,7 +59,7 @@ public class ThreadControllerTest {
 	}
 
 	@Test
-	public void testReturnsThreadList() throws Exception { //TODO broken
+	public void testReturnsThreadList() throws Exception {
 		Date date = new Timestamp( new Date().getTime() );
 		Date joinedOn = new Timestamp( new Date().getTime() );
 		ResultSet resultSet = makeResultSet(

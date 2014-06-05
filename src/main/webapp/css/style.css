@@ -102,6 +102,7 @@ button span {
   /* TODO: dynamize, set the background image to the avatar */
   width: 200px;
   height: 200px;
+  line-height:200px;
   border-radius: 30px;
   border-style: solid;
   border-bottom-left-radius: 0;
@@ -109,6 +110,7 @@ button span {
   border-color: #FFFFFF;
   border-width: 1px;
   margin-bottom:5px;
+  text-align:center;
 }
 
 /* Header styles */
@@ -211,8 +213,9 @@ header .searchWidget {
   margin: 120px auto 30px auto;
 }
 
-#inputBlock input[type="text"],#inputBlock input[type="password"],#inputBlock input[type="email"]
-  {
+#inputBlock input[type="text"],
+#inputBlock input[type="password"],
+#inputBlock input[type="email"] {
   display: block;
   width: 250px;
   border-style: none;
@@ -225,13 +228,13 @@ header .searchWidget {
   margin: 30px auto 0 auto;
 }
 
-#inputHolder {
+.inputHolder {
   display: table-cell;
   vertical-align: middle;
   padding-bottom: 30px;
 }
 
-#inputHolder label {
+.inputHolder label {
   display: block;
   margin-top: 30px;
   margin-left: 50px;
@@ -241,6 +244,17 @@ header .searchWidget {
   text-transform: uppercase;
 }
 
+.success {
+  text-align: center;
+  border-radius: 30px;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.39);
+  padding: 20px;
+  font-weight: bold;
+  color: rgb(186, 240, 91);
+}
 .alert {
   text-align: center;
   border-radius: 30px;
@@ -260,6 +274,30 @@ header .searchWidget {
 .form-group.has-error input {
   background-color: rgb(255, 105, 105);
   color: white;
+}
+
+/* UCP styles */
+.ucpInputs {
+	float: left;
+	margin: 0 150px;
+	width: 500px;
+	display: inline;
+	text-align: left;
+}
+.ucpInputs input {
+  display: block;
+  width: 500px;
+  border-style: none;
+  padding: 10px;
+  margin: 10px auto;
+}
+.ucpInputs label {
+	margin-left:0px;
+}
+.ucpInputs button {
+    margin-top: 50px;
+	margin-left:auto;
+	display:block;
 }
 
 /* Boards styles */
@@ -297,6 +335,41 @@ header .searchWidget {
 
 #content section>section div {
   margin-left: 50px;
+}
+
+blockquote {
+  border-left-style: solid;
+  border-left-width: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: rgba(248, 79, 67, 0.75);
+}
+
+label[for="subject"],
+label[for="editor"] {
+	display:block;
+	margin-top:20px;
+	margin-left:-50px;
+}
+
+input#subject {
+  display: block;
+  width: 100%;
+  border-style: none;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.newThread .inputHolder {
+	width:100%;
+	display:block;
+}
+
+.newThread .inputHolder > #cke_editor,
+.newThread .inputHolder > label[for="subject"],
+.newThread .inputHolder > #subject {
+	margin-top:10px;
 }
 
 /* Topic styles */
@@ -362,11 +435,24 @@ header .searchWidget {
   bottom: 20px;
 }
 
-.newTopic {
+button.newPost {
   margin-top: 25px;
 }
 
-/* user styles */
+div.newPost {
+  display:none;
+  margin-top:20px;
+}
+
+div.newPost button,
+div.newThread button {
+  display:block;
+  margin-left: auto;
+  margin-top: 15px;
+  background-color: rgba(248, 79, 67, 0.75);
+}
+
+/* User styles */
 #user>#userBlock {
   float: left;
   width: 230px;
