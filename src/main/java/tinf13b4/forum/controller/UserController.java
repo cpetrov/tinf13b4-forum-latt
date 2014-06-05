@@ -16,6 +16,10 @@ public class UserController {
 	private ResultSet rs;
 	private QueryExecutor executor;
 
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+	
 	public UserController() {
 		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
@@ -45,7 +49,7 @@ public class UserController {
 		return users;
 	}
 
-	private User buildUser() throws SQLException {
+	public User buildUser() throws SQLException {
 		UserBuilder userBuilder = new UserBuilder();
 		userBuilder.setId(rs.getInt("User_ID"));
 		userBuilder.setName(rs.getString("Name"));
@@ -75,5 +79,4 @@ public class UserController {
 		
 		return posts;
 	}
-
 }

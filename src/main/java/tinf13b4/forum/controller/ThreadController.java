@@ -17,6 +17,10 @@ public class ThreadController {
 	private ResultSet rs;
 	private QueryExecutor executor;
 
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+	
 	public ThreadController() {
 		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
@@ -47,7 +51,7 @@ public class ThreadController {
 		return threads;
 	}
 
-	private Thread buildThread() throws SQLException {
+	public Thread buildThread() throws SQLException {
 		ThreadBuilder threadBuilder = new ThreadBuilder();
 		threadBuilder.setId(rs.getInt("Thread_ID"));
 		threadBuilder.setCategoryId(rs.getInt("Category_ID"));

@@ -1,103 +1,118 @@
 package tinf13b4.forum.search;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import tinf13b4.forum.controller.CategoryController;
+import tinf13b4.forum.controller.ThreadController;
+import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
+import tinf13b4.forum.model.Category;
+import tinf13b4.forum.model.Thread;
+import tinf13b4.forum.model.User;
 
 public class SearchBean {
-	
+
 	private ResultSet rs;
 	private QueryExecutor executor;
 
 	private String searchObject;
-	private double destination;		
+	private double destination;
+	private ArrayList<Thread> threads;
+	private ArrayList<User> users;
+	private ArrayList<Category> categories;
 
 	public SearchBean() {
 		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
 	}
-		
+
 	public String getSearchObject() {
-	    return searchObject;
+		return searchObject;
 	}
-	
+
 	public void setSearchObject(String searchObject) {
-	    this.searchObject = searchObject;
+		this.searchObject = searchObject;
 	}
-	
+
 	public double getDestination() {
-	    return destination;
+		return destination;
 	}
-	
+
 	public void setDestination(double destination) {
 		this.destination = destination;
-	
-}
-	
-		 //TODO �berpr�fung der Eingabe auf G�ltigkeit. Keine SQL-Befehle
-	
-	public ArrayList<Object> getResult() throws SQLException {
-		 ArrayList<Object> objects;
-			
-		if(destination==1){
-			rs = executor.executeQuery("SELECT * FROM Threads "
-					+ "WHERE Content LIKE '%" + searchObject + "%' "
-					+ "OR Title LIKE '%" + searchObject + "%';");
 
-			if(rs == null)
-				return new ArrayList<Object>();
-			
-			objects = new ArrayList<Object>();
-			while(rs.next())
-			{
-				/*
-				 * TODO if other changes can be pulled.
-				 * Need build operations from Controller classes
-				 * threads.add(buildThread());
-				 */
-			}
-			return objects;
-		}
-		else if(destination==2){			
-			rs = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn FROM Users "
-			 		+ "WHERE Name LIKE '%" + searchObject + "%' "
-			 		+ "AND Confirmed = 1;");
+	}
 
-			if(rs == null)
-				return new ArrayList<Object>();
-			
-			objects = new ArrayList<Object>();
-			while(rs.next())
-			{
-				/*
-				 * TODO if other changes can be pulled.
-				 * Need build operations from Controller classes
-				 */
-			}
-			return objects;
+	// Set the list below to the searched objects
+	public void getResult() throws SQLException {
+		String[] blacklist = {"SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "USE", "SHOW", "ALTER", "LOAD"};
+		for(String item : blacklist)
+			if(searchObject.equals(item))
+				return;
+		
+		switch ((int) destination) {
+		case 1:
+			getThreads();
+			break;
+		case 2:
+			getUsers();
+			break;
+		case 3:
+			getCategories();
+			break;
 		}
-		else if(destination==3){
-		    rs = executor.executeQuery("SELECT * FROM Category "
-		    		+ "WHERE Title LIKE '%" + searchObject + "%' "
-		    		+ "OR Subtitle LIKE '%" + searchObject + "%';");
+	}
 
-			if(rs == null)
-				return new ArrayList<Object>();
-			
-			objects = new ArrayList<Object>();
-			while(rs.next())
-			{
-				/*
-				 * TODO if other changes can be pulled.
-				 * Need build operations from Controller classes
-				 */
-			}
-			return objects;
+	private void getThreads() throws SQLException {
+		rs = executor.executeQuery("SELECT * FROM Threads "
+				+ "WHERE Content LIKE '%" + searchObject + "%' "
+				+ "OR Title LIKE '%" + searchObject + "%';");
+
+		if(rs == null)
+			threads = new ArrayList<Thread>();
+		
+		threads = new ArrayList<Thread>();
+		while(rs.next())
+		{
+			ThreadController controller = new ThreadController();
+			controller.setRs(rs);
+			threads.add(controller.buildThread());
 		}
-		return new ArrayList<Object>();
+	}
+	
+	private void getUsers() throws SQLException {
+		rs = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn FROM Users "
+		 		+ "WHERE Name LIKE '%" + searchObject + "%' "
+		 		+ "AND Confirmed = 1;");
+		if(rs == null)
+			users = new ArrayList<User>();
+		
+		users = new ArrayList<User>();
+		while(rs.next())
+		{
+			UserController controller = new UserController();
+			controller.setRs(rs);
+			users.add(controller.buildUser());
+		}
+	}
+	
+	private void getCategories() throws SQLException {
+	    rs = executor.executeQuery("SELECT * FROM Category "
+	    		+ "WHERE Title LIKE '%" + searchObject + "%' "
+	    		+ "OR Subtitle LIKE '%" + searchObject + "%';");
+
+		if(rs == null)
+			categories = new ArrayList<Category>();
+		
+		categories = new ArrayList<Category>();
+		while(rs.next())
+		{
+			CategoryController controller = new CategoryController();
+			controller.setRs(rs);
+			categories.add(controller.buildCategory());
+		}
 	}
 }

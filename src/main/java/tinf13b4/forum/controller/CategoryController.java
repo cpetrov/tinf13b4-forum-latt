@@ -15,6 +15,10 @@ public class CategoryController {
 
 	private ResultSet rs;
 	private QueryExecutor executor;
+	
+	public void setRs(ResultSet rs) {
+		this.rs = rs;	
+	}
 
 	public CategoryController() {
 		ConnectionFactory factory = new ConnectionFactory();
@@ -42,7 +46,7 @@ public class CategoryController {
 		return categories;
 	}
 	
-	private Category buildCategory() throws SQLException {
+	public Category buildCategory() throws SQLException {
 		CategoryBuilder categoryBuilder = new CategoryBuilder();
 		categoryBuilder.setId(rs.getInt("Category_ID"));
 		categoryBuilder.setTitle(rs.getString("Title"));
