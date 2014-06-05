@@ -5,7 +5,9 @@ import static tinf13b4.forum.controller.ResultSetUtil.getPostsCount;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import tinf13b4.forum.database.ConnectionFactory;
@@ -29,6 +31,15 @@ public class PostController {
 		this.resultSet = resultSet;
 	}
 
+	public void addPostToThread(int threadId, int userId, String content) {
+		executor.executeUpdate("INSERT INTO Posts (Content, Date, Thread_ID, User_ID) "
+								+ "VALUES ('" +
+									content + "', '" +
+									new Timestamp(new Date().getTime()) +"', '"+
+									threadId + "', '" +
+									userId + "')");
+	}
+
 	public List<Post> getPostsForThread(int threadId) {
 		List<Post> posts = new ArrayList<Post>();
 		checkArgument(threadId>0, "ThreadID must be > 0, but was " + threadId);
@@ -37,7 +48,8 @@ public class PostController {
 											+ "WHERE P.Thread_ID = T.Thread_ID "
 											+ "AND T.Thread_ID = " + threadId + " "
 											+ "AND P.User_ID = U.User_ID "
-											+ "AND U.Confirmed = 1;");
+											+ "AND U.Confirmed = 1 "
+											+ "ORDER BY Date ASC;");
 		if (resultSet == null)
 			return posts;
 		else {
@@ -60,7 +72,8 @@ public class PostController {
 				+ "WHERE P.Thread_ID = T.Thread_ID "
 				+ "AND P.User_ID = U.User_ID "
 				+ "AND U.Confirmed = 1 "
-				+ "AND P.User_ID = " + userId + ";");
+				+ "AND P.User_ID = " + userId + " "
+				+ "ORDER BY Date DESC;");
 		if (resultSet == null)
 			return posts;
 		else {

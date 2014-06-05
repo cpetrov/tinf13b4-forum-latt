@@ -37,6 +37,13 @@ public class PostControllerTest {
 	}
 
 	@Test
+	public void testInsertsNewPost() {
+		Timestamp datePosted = new Timestamp(new Date().getTime());
+		new PostController(executor).addPostToThread(2, 1, "content");
+		Mockito.verify(executor).executeUpdate("INSERT INTO Posts (Content, Date, Thread_ID, User_ID) VALUES ('content', '"+ datePosted+"', '2', '1')");
+	}
+
+	@Test
 	public void testReturnsUsers() throws Exception {
 		Timestamp dateJoined = new Timestamp(new Date().getTime());
 		Timestamp timestamp = new Timestamp(new Date().getTime());

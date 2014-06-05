@@ -21,8 +21,7 @@ public class Post {
 		this.date = date;
 	}
 
-	private void validateArguments(int postId, User user, int threadId, String content,
-			Date date) {
+	private void validateArguments(int postId, User user, int threadId, String content, Date date) {
 		checkArgument(postId > 0, "PostId must be positive.");
 		checkArgument(user != null, "User must not be null.");
 		checkArgument(threadId >0, "ThreadId must be positive.");
