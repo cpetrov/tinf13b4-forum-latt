@@ -10,8 +10,11 @@
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
+<jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
+
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="thread" />
+<c:set target="${dummyProvider}" property="userId" value="${thread.userId}"></c:set>
 
 <t:genericPage>
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
@@ -28,10 +31,10 @@
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${users[0].id}">${users[0].name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${thread.userId}">${user.name}</a>
               </div>
                <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${users[0].posts.size()} posts
+                <img src="./img/bubbles16.png" alt="Posts" /> ${user.posts.size()} posts
               </div> 
             </div>
             <div class="answerBody">${thread.content} 
@@ -50,10 +53,10 @@
               <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-         		<a href="user.jsp?userId=${users[0].id}">${users[0].name}</a>
+         		<a href="user.jsp?userId=${user.id}">${user.name}</a>
               </div>
               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${users[0].posts.size()} posts
+                <img src="./img/bubbles16.png" alt="Answers" /> ${user.posts.size()} posts
               </div> 
             </div>
             <div class="answerBody">

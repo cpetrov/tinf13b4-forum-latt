@@ -74,7 +74,11 @@ public class DummyProviderBean {
 	private void createThreads() {
 		threads = new ArrayList<>();
 		ThreadController controller = new ThreadController();
-		threads = controller.getThreads(categoryId);
+		if (categoryId != 0) {
+			threads = controller.getThreadsWithCategory(categoryId);
+		} else if (threadId != 0) {
+			threads = controller.getThreadsWithId(threadId);
+		}
 	}
 
 	private void createCategories() {

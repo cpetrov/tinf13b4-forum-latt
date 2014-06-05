@@ -7,24 +7,24 @@ import java.util.Date;
 public class Post {
 
 	private int id;
-	private int userId;
+	private User user;
 	private int threadId;
 	private String content;
 	private Date date;
 
-	public Post(int id, int userId, int threadId, String content, Date date) {
-		validateArguments(id, userId, threadId, content, date);
+	public Post(int id, User user, int threadId, String content, Date date) {
+		validateArguments(id, user, threadId, content, date);
 		this.id = id;
-		this.setUserId(userId);
+		this.user = user;
 		this.threadId = threadId;
 		this.content = content;
 		this.date = date;
 	}
 
-	private void validateArguments(int postId, int userId, int threadId, String content,
+	private void validateArguments(int postId, User user, int threadId, String content,
 			Date date) {
 		checkArgument(postId > 0, "PostId must be positive.");
-		checkArgument(userId > 0, "UserId must be positive.");
+		checkArgument(user != null, "User must not be null.");
 		checkArgument(threadId >0, "ThreadId must be positive.");
 		checkArgument(content != null, "Content must not be null.");
 		checkArgument(!content.isEmpty(), "Content must not be empty.");
@@ -43,16 +43,16 @@ public class Post {
 		return date;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 	
 	public int getThreadId() {
 		return threadId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class Post {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		// TODO userID, threadId?
+		// TODO user, threadId?
 		return result;
 	}
 
@@ -87,7 +87,7 @@ public class Post {
 			return false;
 		if (id != other.id)
 			return false;
-		if (userId != other.userId)
+		if (user != other.user)
 			return false;
 		return true;
 	}
