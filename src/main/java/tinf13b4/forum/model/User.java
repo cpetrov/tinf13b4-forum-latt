@@ -51,7 +51,7 @@ public class User {
 		return email;
 	}
 
-	public void setMail(String email) {
+	public void setEmail(String email) {
 		checkArgument(email != null, "Email must not be null.");
 		checkArgument(!email.isEmpty(), "Email must not be empty.");
 		this.email = email;

@@ -8,6 +8,6 @@
 <t:threadPage category="${dummyProvider.category}" 
 			  users="${dummyProvider.users}" 
 			  posts="${dummyProvider.posts}"
-			  thread="${dummyProvider.threads[param.threadId]}">
+			  thread="${dummyProvider.thread}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:threadPage>

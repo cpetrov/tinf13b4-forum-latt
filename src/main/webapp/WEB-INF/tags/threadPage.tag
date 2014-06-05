@@ -12,6 +12,8 @@
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="thread" />
+<jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean"/>
+<c:set target="${dummyProvider}" property="userId" value="${thread.userId}"></c:set>
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
@@ -27,10 +29,10 @@
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${users.id}">${users.name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${thread.userId}">${user.name}</a>
               </div>
                <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${users.posts.size} posts
+                <img src="./img/bubbles16.png" alt="Posts" /> ${user.posts.size} posts
               </div> 
             </div>
             <div class="answerBody">${thread.content} 
@@ -44,15 +46,16 @@
           </div>
          
           <c:forEach var="post" items="${posts }">
+		  <c:set target="${dummyProvider}" property="userId" value="${post.userId}"></c:set>
           <div class="answer">
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-                <a href="user.jsp?userId=${users.id}">${users.name}</a>
+                <a href="user.jsp?userId=${user.id}">${user.name}</a>
               </div>
               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${users.posts} posts
+                <img src="./img/bubbles16.png" alt="Answers" /> ${user.posts} posts
               </div> 
             </div>
             <div class="answerBody">
