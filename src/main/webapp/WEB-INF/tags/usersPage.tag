@@ -13,6 +13,7 @@
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
       <div id="usersList">
         <h2>Users List</h2>
