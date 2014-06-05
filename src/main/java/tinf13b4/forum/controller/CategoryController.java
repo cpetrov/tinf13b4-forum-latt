@@ -26,7 +26,7 @@ public class CategoryController {
 	}
 
 	public List<Category> getCategories() {
-		rs = executor.executeQuery("SELECT Category_ID, Title, Subtitle" + " FROM Category" + " ORDER BY Title ASC;");
+		rs = executor.executeQuery("SELECT Category_ID, Title, Subtitle" + " FROM Categories" + " ORDER BY Title ASC;");
 		List<Category> categories = new ArrayList<Category>();
 		if (rs == null)
 			return new ArrayList<Category>();
