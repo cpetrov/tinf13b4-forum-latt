@@ -5,6 +5,7 @@ import static tinf13b4.forum.controller.ResultSetUtil.buildUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,16 @@ public class ThreadController {
 
 	public void setRs(ResultSet rs) {
 		this.resultSet = rs;
+	}
+
+	public void createThread(String title, String content, int userId, int categoryId, boolean readOnly) {
+		executor.executeUpdate("INSERT INTO Threads (Title, Content, Date, ReadOnly, User_ID, Category_ID) "
+							 + "VALUES ('" + title + "', " +
+							 		   "'" + content + "', " +
+							 		   "'" + new Timestamp(new Date().getTime()) + "', "
+							 		   	   + "0, " //TODO: implement readonly
+							 		       + userId + ", "
+							 		       + categoryId + ");");
 	}
 
 	public List<Thread> getThreadsWithCategory(int categoryId) {
