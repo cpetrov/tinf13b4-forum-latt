@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +11,8 @@
 	<jsp:useBean id="searchBean" class="tinf13b4.forum.search.SearchBean" />
 
 	<form method="get" action="Search.jsp">
-		<jsp:setProperty name="searchBean" property="what" param="what" />
-		<jsp:setProperty name="searchBean" property="where" param="where" />
+		<jsp:setProperty name="searchBean" property="searchObject" param="searchObject" />
+		<jsp:setProperty name="searchBean" property="destination" param="destination" />
 
 		<table>
 			<tr>
@@ -21,18 +22,20 @@
 			</tr>
 			<tr>
 				<td>
-					<Input type="text" name="what" value="${searchBean.what}" />
+					<Input type="text" name="searchObject" value="${searchBean.searchObject}" />
 				</td>
 				<td>
-					<label id="where" for="search_type">Search in:</label> 
-					<select id="search_type" class="primary" onchange="change_type()" name="where">
+					<label id="destination" for="search_type">Search in:</label> 
+					<select id="search_type" class="primary" onchange="change_type()" name="destination">
 						<option class="" value=1>Threads</option>
 						<option class="" value=2>User</option>
 						<option class="" value=3>Categories</option>
 					</select>
 				</td>
 				<td>
-					<jsp:getProperty name="searchBean" property="result" />
+					<c:forEach var="current" items="${searchBean.threads}">
+						<c:out value="${current.content }"></c:out>
+					</c:forEach>
 				</td>
 			</tr>
 			<tr>
