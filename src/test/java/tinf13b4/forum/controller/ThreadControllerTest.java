@@ -35,7 +35,7 @@ public class ThreadControllerTest {
 	public void testFailsWithNegativeCategoryId() {
 		ThreadController controller = new ThreadController(executor);
 
-		controller.getThreads(-1);
+		controller.getThreadsWithCategory(-1);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class ThreadControllerTest {
 		Mockito.when(executor.executeQuery("SELECT * FROM Thread WHERE Category_ID = 2;")).thenReturn(null);
 		ThreadController controller = new ThreadController(executor);
 
-		List<Thread> threads = controller.getThreads(2);
+		List<Thread> threads = controller.getThreadsWithCategory(2);
 
 		assertTrue(threads instanceof List);
 	}
@@ -60,7 +60,7 @@ public class ThreadControllerTest {
 		when(executor.executeQuery("SELECT * FROM Threads WHERE Category_ID = 2;")).thenReturn(resultSet);
 		ThreadController controller = new ThreadController(executor);
 
-		List<Thread> threads = controller.getThreads(2);
+		List<Thread> threads = controller.getThreadsWithCategory(2);
 
 		assertTrue(threads.size() == 2);
 		checkThread1(date1, threads);
@@ -74,7 +74,7 @@ public class ThreadControllerTest {
 		assertEquals("bar", threads.get(0).getContent());
 		assertEquals(date1, threads.get(0).getDate());
 		assertEquals(true, threads.get(0).isReadonly());
-		assertEquals(3, threads.get(0).getThreadStarterId());
+		assertEquals(3, threads.get(0).getUserId());
 	}
 
 	private void checkThread2(Date date2, List<Thread> threads) {
@@ -84,7 +84,7 @@ public class ThreadControllerTest {
 		assertEquals("bac", threads.get(1).getContent());
 		assertEquals(date2, threads.get(1).getDate());
 		assertEquals(false, threads.get(1).isReadonly());
-		assertEquals(6, threads.get(1).getThreadStarterId());
+		assertEquals(6, threads.get(1).getUserId());
 	}
 
 
