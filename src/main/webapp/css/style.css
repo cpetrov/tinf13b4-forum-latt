@@ -298,7 +298,14 @@ header .searchWidget {
 #content section>section div {
   margin-left: 50px;
 }
-
+blockquote {
+  border-left-style: solid;
+  border-left-width: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: rgba(248, 79, 67, 0.75);
+}
 /* Topic styles */
 #topic {
   padding: 0px 20px;
@@ -362,11 +369,23 @@ header .searchWidget {
   bottom: 20px;
 }
 
-.newTopic {
+button.newPost {
   margin-top: 25px;
 }
 
-/* user styles */
+div.newPost {
+  display:none;
+  margin-top:20px;
+}
+
+div.newPost button {
+  display:block;
+  margin-left: auto;
+  margin-top: 15px;
+  background-color: rgba(248, 79, 67, 0.75);
+}
+
+/* User styles */
 #user>#userBlock {
   float: left;
   width: 230px;

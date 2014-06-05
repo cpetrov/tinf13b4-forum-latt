@@ -2,6 +2,7 @@ package tinf13b4.forum.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static tinf13b4.forum.test.TestUtil.makeResultSet;
 import static tinf13b4.forum.test.TestUtil.stubPostsCount;
@@ -37,7 +38,16 @@ public class PostControllerTest {
 	}
 
 	@Test
-	public void testReturnsUsers() throws Exception {
+	public void testInsertsNewPost() {
+		Timestamp datePosted = new Timestamp(new Date().getTime());
+
+		new PostController(executor).addPostToThread(2, 1, "content");
+
+		verify(executor).executeUpdate("INSERT INTO Posts (Content, Date, Thread_ID, User_ID) VALUES ('content', '" + datePosted+ "', '2', '1')");
+	}
+
+	@Test
+	public void testReturnsPosts() throws Exception {
 		Timestamp dateJoined = new Timestamp(new Date().getTime());
 		Timestamp timestamp = new Timestamp(new Date().getTime());
 		ResultSet resultSet = makeResultSet(
@@ -49,7 +59,8 @@ public class PostControllerTest {
 				+ "WHERE P.Thread_ID = T.Thread_ID "
 				+ "AND T.Thread_ID = 1 "
 				+ "AND P.User_ID = U.User_ID "
-				+ "AND U.Confirmed = 1;")).thenReturn(resultSet);
+				+ "AND U.Confirmed = 1 "
+				+ "ORDER BY Date ASC;")).thenReturn(resultSet);
 		stubPostsCount(executor);
 
 		List<Post> posts = new PostController(executor).getPostsForThread(1);

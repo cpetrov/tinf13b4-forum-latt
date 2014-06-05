@@ -45,7 +45,7 @@
               <article>
                 <img src="./img/bubble.png" alt="Posts">
                 <div>
-                  <a href="thread.jsp?id=${posts[i].threadId}"><p>${posts[i].content}</p></a>
+                  <a href="thread.jsp?id=${posts[i].threadId}"><p>${fn:replace(posts[i].content.length() > 100 ? fn:substring(posts[i].content, 0, 100).concat('...') : posts[i].content, '<blockquote>', '') }</p></a>
                 </div>
               </article>
             </c:forEach>
