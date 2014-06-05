@@ -33,10 +33,9 @@ public class PostController {
 	public ArrayList<Post> getPosts(int threadId) {
 		posts = new ArrayList<Post>();
 		checkArgument(threadId>=0, "ThreadID must be >= 0, but was " + threadId);
-		rs = executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID"
-				+ " FROM Posts P, Threads T, ThreadPostRelationTable TP "
-				+ "WHERE P.Post_ID = TP.Post_ID "
-				+ "AND TP.Thread_ID = T.Thread_ID "
+		rs = executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID "
+				+ "FROM Posts P, Threads T "
+				+ "WHERE P.Thread_ID = T.Thread_ID "
 				+ "AND T.Thread_ID = " + threadId + ";");
 		if (rs == null)
 			return posts;
@@ -57,6 +56,7 @@ public class PostController {
 		PostBuilder postBuilder = new PostBuilder();
 		postBuilder.setPostId(rs.getInt("Post_ID"));
 		postBuilder.setUserId(rs.getInt("User_ID"));
+		postBuilder.setThreadId(rs.getInt("Thread_ID"));
 		postBuilder.setContent(rs.getString("Content"));
 		postBuilder.setDate(rs.getDate("Date"));
 		return postBuilder.build();
