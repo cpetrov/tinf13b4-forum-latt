@@ -6,7 +6,6 @@ version = '0.0.1-SNAPSHOT'
 apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 
-apply plugin: 'java'
 apply plugin: 'war'
 
 repositories {
@@ -22,11 +21,12 @@ dependencies {
 		"com.mysql:management:${versions.mysql}",
 		"com.sun.jdmk:jmxtools:${versions.jdmk}",
 		"javax.mail:mail:${versions.mail}",
-		"javax.servlet:javax.servlet-api:${versions.javaxs}",
 		"javax.servlet.jsp:jsp-api:${versions.jspapi}",
 		"jstl:jstl:${versions.jstl}",
 		"org.eclipse.rap:org.eclipse.rap.rwt:${versions.eclipserap}",
-		"org.mindrot:jbcrypt:${versions.mindrot}"
+		"org.mindrot:jbcrypt:${versions.mindrot}",
+		"com.ckeditor:ckeditor-java-core:${versions.ckeditor}"
+		
 	)
 
 	testCompile(
