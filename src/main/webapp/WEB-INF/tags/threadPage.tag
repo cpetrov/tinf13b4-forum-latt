@@ -2,6 +2,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 
 <%@attribute name="category" type="tinf13b4.forum.model.Category"%>
 <%@attribute name="thread" type="tinf13b4.forum.model.Thread"%>
@@ -69,10 +70,15 @@
         </div>
       </section>
       <div>
-        <button class="newTopic">
+        <button onclick="$('div.newPost').toggle()" class="newPost">
           <img src="./img/quill.png">
-          <span>New Topic</span>
+          <span>New Post</span>
         </button>
       </div>
+      <div class="newPost">
+        <textarea cols="80" id="editor1" name="editor1" rows="10"></textarea>
+        <button>Post</button>
+      </div>
+      <ckeditor:replace replace="editor1" basePath="/ckeditor/" />
     </jsp:body>
 </t:genericPage>
