@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -12,7 +14,7 @@
 		<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="js/script.js" type="text/javascript"></script>
 
-		<title>Allgemein</title>
+		<title>Page-Description</title>
 	</head>
 	<body>
 		<div class="container">
@@ -60,14 +62,17 @@
 					</ul>
 				</div>
 				<div class="admContent">
+				<form method="POST">
+				<c:if test="${!empty param.pageDescription}">
+					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
+				</c:if>
 					<h1>Seitenbeschreibung</h1>
 					<p>
 						Hier kann die Seitenbeschreibung verändert werden
 					</p>
-					<p><textarea cols="100" rows="10"></textarea></p>
-					<div class="navButton">
-						Speichern
-					</div>
+					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
+					<button type="submit" class="navButton">Speichern</button>
+				</form>
 				</div>
 			</div>
 		</div>
