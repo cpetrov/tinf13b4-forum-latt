@@ -6,6 +6,7 @@ public class PostBuilder {
 
 	private int postId;
 	private int userId;
+	private int threadId;
 	private String content;
 	private Date date;
 
@@ -41,7 +42,16 @@ public class PostBuilder {
 		this.date = date;
 	}
 
-	public Post build() {
-		return new Post(postId, userId, content, date);
+	public int getThreadId() {
+		return threadId;
 	}
+	
+	public void setThreadId(int threadId) {
+		this.threadId = threadId;
+	}
+	
+	public Post build() {
+		return new Post(postId, userId, threadId, content, date);
+	}
+
 }
