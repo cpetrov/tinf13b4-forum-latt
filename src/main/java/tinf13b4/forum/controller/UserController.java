@@ -2,7 +2,9 @@ package tinf13b4.forum.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import tinf13b4.forum.database.ConnectionFactory;
@@ -55,7 +57,7 @@ public class UserController {
 		userBuilder.setName(rs.getString("Name"));
 		userBuilder.setPicture(rs.getBlob("Picture"));
 		userBuilder.setEmail(rs.getString("Email"));
-		userBuilder.setJoinedOn(rs.getDate("JoinedOn"));
+		userBuilder.setJoinedOn(new Date(rs.getTimestamp("JoinedOn").getTime()));
 		userBuilder.setPosts(getPostsForUser(rs.getInt("User_ID")));
 		return userBuilder.build();
 	}

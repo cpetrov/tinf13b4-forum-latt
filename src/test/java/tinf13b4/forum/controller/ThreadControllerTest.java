@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.mockito.stubbing.Answer;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.model.Thread;
 
+import com.mysql.jdbc.Blob;
 import com.mysql.jdbc.ResultSet;
 
 public class ThreadControllerTest {
@@ -35,7 +37,7 @@ public class ThreadControllerTest {
 	public void testFailsWithNegativeCategoryId() {
 		ThreadController controller = new ThreadController(executor);
 
-		controller.getThreads(-1);
+		controller.getThreadsWithCategory(-1);
 	}
 
 	@Test
@@ -43,28 +45,27 @@ public class ThreadControllerTest {
 		Mockito.when(executor.executeQuery("SELECT * FROM Thread WHERE Category_ID = 2;")).thenReturn(null);
 		ThreadController controller = new ThreadController(executor);
 
-		List<Thread> threads = controller.getThreads(2);
+		List<Thread> threads = controller.getThreadsWithCategory(2);
 
 		assertTrue(threads instanceof List);
 	}
 
 	@Test
-	public void testReturnsThreadList() throws Exception {
-		Date date1 = new java.sql.Date( new Date().getTime() );
-		Date date2 = new java.sql.Date( new Date().getTime() );
+	public void testReturnsThreadList() throws Exception { //TODO broken
+		Date date1 = new Timestamp( new Date().getTime() );
+		Date date2 = new Timestamp( new Date().getTime() );
 		ResultSet resultSet = makeResultSet(
-				Arrays.asList("Thread_ID", "Title", "Category_ID", "Content", "Date", "ReadOnly", "User_ID"),
-				Arrays.asList(1, "foo", 2, "bar", date1, true, 3),
-				Arrays.asList(4, "baz", 5, "bac", date2, false, 6)
+				Arrays.asList("Thread_ID", "Title", "Content", "Date", "ReadOnly", "Category_ID", "User_ID", "Name", "Picture", "Email", "JoinedOn"),
+				Arrays.asList(1, "title", "content", date1, false, 2, 3, "user", Mockito.mock(Blob.class), "email", date2)
 				);
-		when(executor.executeQuery("SELECT * FROM Threads WHERE Category_ID = 2;")).thenReturn(resultSet);
+		String query="SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn FROM Threads T, Users U WHERE Category_ID = 2 AND T.User_ID = U.User_ID AND U.Confirmed = 1;";
+		when(executor.executeQuery(query)).thenReturn(resultSet);
 		ThreadController controller = new ThreadController(executor);
 
-		List<Thread> threads = controller.getThreads(2);
+		List<Thread> threads = controller.getThreadsWithCategory(2);
 
-		assertTrue(threads.size() == 2);
+		assertTrue(threads.size() == 1);
 		checkThread1(date1, threads);
-		checkThread2(date2, threads);
 	}
 
 	private void checkThread1(Date date1, List<Thread> threads) {
@@ -74,19 +75,8 @@ public class ThreadControllerTest {
 		assertEquals("bar", threads.get(0).getContent());
 		assertEquals(date1, threads.get(0).getDate());
 		assertEquals(true, threads.get(0).isReadonly());
-		assertEquals(3, threads.get(0).getThreadStarterId());
+		assertEquals(3, threads.get(0).getUser());
 	}
-
-	private void checkThread2(Date date2, List<Thread> threads) {
-		assertEquals(4, threads.get(1).getId());
-		assertEquals("baz", threads.get(1).getTitle());
-		assertEquals(5, threads.get(1).getCategoryId());
-		assertEquals("bac", threads.get(1).getContent());
-		assertEquals(date2, threads.get(1).getDate());
-		assertEquals(false, threads.get(1).isReadonly());
-		assertEquals(6, threads.get(1).getThreadStarterId());
-	}
-
 
 	private ResultSet makeResultSet(final List<String> aColumns, final List<?>... rows) throws Exception {
 		ResultSet result = Mockito.mock(ResultSet.class);
