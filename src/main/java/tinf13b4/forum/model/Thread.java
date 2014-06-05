@@ -10,7 +10,7 @@ import java.util.List;
 public class Thread {
 
 	private final int id;
-	private final int threadStarterId;
+	private final int userId;
 	private final int categoryId;
 	private final String title;
 	private final String content;
@@ -18,10 +18,10 @@ public class Thread {
 	private final boolean readonly;
 	private final List<Post> posts;
 
-	public Thread(int id, int threadStarterId, int categoryId, String title, String content, Date date, boolean readonly) {
-		validateArguments(id, threadStarterId, categoryId, title, content, date);
+	public Thread(int id, int userId, int categoryId, String title, String content, Date date, boolean readonly) {
+		validateArguments(id, userId, categoryId, title, content, date);
 		this.id = id;
-		this.threadStarterId = threadStarterId;
+		this.userId = userId;
 		this.categoryId = categoryId;
 		this.title = title;
 		this.content = content;
@@ -45,8 +45,8 @@ public class Thread {
 		return id;
 	}
 
-	public int getThreadStarterId() {
-		return threadStarterId;
+	public int getUserId() {
+		return userId;
 	}
 
 	public int getCategoryId() {
@@ -78,7 +78,7 @@ public class Thread {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + (readonly ? 1231 : 1237);
-		result = prime * result + threadStarterId;
+		result = prime * result + userId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -108,7 +108,7 @@ public class Thread {
 			return false;
 		if (readonly != other.readonly)
 			return false;
-		if (threadStarterId != other.threadStarterId)
+		if (userId != other.userId)
 			return false;
 		if (title == null) {
 			if (other.title != null)

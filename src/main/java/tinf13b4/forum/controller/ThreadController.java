@@ -30,12 +30,27 @@ public class ThreadController {
 		this.executor = executor;
 	}
 
-	public List<Thread> getThreads(int categoryId) {
-		checkArgument(categoryId >= 0, "CategoryId must be >= 0, but was "
-				+ categoryId);
-		rs = executor
-				.executeQuery("SELECT * FROM Threads WHERE Category_ID = "
-						+ categoryId + ";");
+	public List<Thread> getThreadsWithCategory(int categoryId) {
+		checkArgument(categoryId >= 0, "CategoryId must be >= 0, but was " + categoryId);
+		rs = executor.executeQuery("SELECT * FROM Threads WHERE Category_ID = " + categoryId + ";");
+		List<Thread> threads = new ArrayList<Thread>();
+		if (rs == null)
+			return new ArrayList<Thread>();
+		else {
+			try {
+				while (rs.next()) {
+					threads.add(buildThread());
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+		}
+		return threads;
+	}
+	
+	public List<Thread> getThreadsWithId(int id) {
+		checkArgument(id >= 0, "CategoryId must be >= 0, but was " + id);
+		rs = executor.executeQuery("SELECT * FROM Threads WHERE Thread_ID = " + id + ";");
 		List<Thread> threads = new ArrayList<Thread>();
 		if (rs == null)
 			return new ArrayList<Thread>();
