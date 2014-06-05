@@ -8,21 +8,24 @@ public class Post {
 
 	private int id;
 	private int userId;
+	private int threadId;
 	private String content;
 	private Date date;
 
-	public Post(int id, int userId, String content, Date date) {
-		validateArguments(id, userId, content, date);
+	public Post(int id, int userId, int threadId, String content, Date date) {
+		validateArguments(id, userId, threadId, content, date);
 		this.id = id;
 		this.setUserId(userId);
+		this.threadId = threadId;
 		this.content = content;
 		this.date = date;
 	}
 
-	private void validateArguments(int postId, int userId, String content,
+	private void validateArguments(int postId, int userId, int threadId, String content,
 			Date date) {
 		checkArgument(postId > 0, "PostId must be positive.");
 		checkArgument(userId > 0, "UserId must be positive.");
+		checkArgument(threadId >0, "ThreadId must be positive.");
 		checkArgument(content != null, "Content must not be null.");
 		checkArgument(!content.isEmpty(), "Content must not be empty.");
 		checkArgument(date != null, "Date must not be null.");
@@ -43,6 +46,10 @@ public class Post {
 	public int getUserId() {
 		return userId;
 	}
+	
+	public int getThreadId() {
+		return threadId;
+	}
 
 	public void setUserId(int userId) {
 		this.userId = userId;
@@ -55,7 +62,7 @@ public class Post {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		// TODO userID?
+		// TODO userID, threadId?
 		return result;
 	}
 
