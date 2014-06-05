@@ -128,11 +128,11 @@ public class ProviderBean {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	
+
 	public void setThreadId(int threadId) {
 		this.threadId = threadId;
 	}
-	
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
@@ -141,7 +141,7 @@ public class ProviderBean {
 		setCategory(category);
 		return category;
 	}
-	
+
 	public void setCategory(Category category) {
 		if(categories == null)
 			createCategories();
@@ -182,4 +182,5 @@ public class ProviderBean {
 				return;
 			}
 	}
+
 }

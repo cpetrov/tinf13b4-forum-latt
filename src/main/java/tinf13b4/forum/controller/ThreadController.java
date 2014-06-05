@@ -5,6 +5,7 @@ import static tinf13b4.forum.controller.ResultSetUtil.buildUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,12 +24,22 @@ public class ThreadController {
 		this(new QueryExecutor(new ConnectionFactory().createConnection()));
 	}
 
-	protected ThreadController(QueryExecutor executor) {
+	public ThreadController(QueryExecutor executor) {
 		this.executor = executor;
 	}
 
 	public void setRs(ResultSet rs) {
 		this.resultSet = rs;
+	}
+
+	public void createThread(String title, String content, int userId, int categoryId, boolean readOnly) {
+		executor.executeUpdate("INSERT INTO Threads (Title, Content, Date, ReadOnly, User_ID, Category_ID) "
+							 + "VALUES ('" + title + "', " +
+							 		   "'" + content + "', " +
+							 		   "'" + new Timestamp(new Date().getTime()) + "', "
+							 		   	   + "0, " //TODO: implement readonly
+							 		       + userId + ", "
+							 		       + categoryId + ");");
 	}
 
 	public List<Thread> getThreadsWithCategory(int categoryId) {
@@ -107,5 +118,15 @@ public class ThreadController {
 		threadBuilder.setReadOnly(resultSet.getBoolean("ReadOnly"));
 		threadBuilder.setUser(buildUser(resultSet, new PostController(executor)));
 		return threadBuilder.build();
+	}
+
+	public int getLastInsertId() {
+		ResultSet set = executor.executeQuery("SELECT LAST_INSERT_ID();");
+		try {
+			set.next();
+			return set.getInt("LAST_INSERT_ID()");
+		} catch (SQLException e) {
+			throw new IllegalStateException("SQL error while retrieving last insert id: " + e);
+		}
 	}
 }

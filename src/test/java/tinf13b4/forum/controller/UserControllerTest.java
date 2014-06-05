@@ -1,7 +1,8 @@
 
 package tinf13b4.forum.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static tinf13b4.forum.test.TestUtil.makeResultSet;
 import static tinf13b4.forum.test.TestUtil.stubPostsCount;
@@ -51,5 +52,47 @@ public class UserControllerTest {
 		assertEquals("email", users.get(0).getMail());
 		assertEquals(date, users.get(0).getJoinedOn());
 		assertEquals(1, users.get(0).getPostCount());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithNegativeUserId() {
+		new UserController(executor).updateUser(-1, "foo", "bar", "baz");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithNullName() {
+		new UserController(executor).updateUser(1, null, "bar", "baz");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithEmptyName() {
+		new UserController(executor).updateUser(1, "", "bar", "baz");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithNullPicturePath() {
+		new UserController(executor).updateUser(1, "foo", null, "baz");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithEmptyPicturePath() {
+		new UserController(executor).updateUser(1, "bar", "", "baz");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithNullMail() {
+		new UserController(executor).updateUser(1, "foo", "bar", null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithEmptyMail() {
+		new UserController(executor).updateUser(1, "bar", "bar", "");
+	}
+
+	@Test
+	public void testUpdatesUser() {
+		new UserController(executor).updateUser(2, "name", "picturePath", "mail");
+
+		verify(executor).executeUpdate("UPDATE Users SET Name = 'name', Picture = 'picturePath', Email = 'mail' WHERE User_ID = 2;");
 	}
 }
