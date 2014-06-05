@@ -33,6 +33,36 @@ public class SearchBean {
 		return searchObject;
 	}
 
+	public ArrayList<Thread> getThreads() {
+		try {
+			getResult();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return threads;
+	}
+	
+	public ArrayList<User> getUsers() {
+		try {
+			getResult();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public ArrayList<Category> getCategories() {
+		try {
+			getResult();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return categories;
+	}
+	
 	public void setSearchObject(String searchObject) {
 		this.searchObject = searchObject;
 	}
@@ -43,30 +73,32 @@ public class SearchBean {
 
 	public void setDestination(double destination) {
 		this.destination = destination;
-
 	}
+	
 
 	// Set the list below to the searched objects
 	public void getResult() throws SQLException {
 		String[] blacklist = {"SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "USE", "SHOW", "ALTER", "LOAD"};
+		if(searchObject == null)
+			return;
 		for(String item : blacklist)
 			if(searchObject.equals(item))
 				return;
 		
 		switch ((int) destination) {
 		case 1:
-			getThreads();
+			createThreads();
 			break;
 		case 2:
-			getUsers();
+			createUsers();
 			break;
 		case 3:
-			getCategories();
+			createCategories();
 			break;
 		}
 	}
 
-	private void getThreads() throws SQLException {
+	private void createThreads() throws SQLException {
 		rs = executor.executeQuery("SELECT * FROM Threads "
 				+ "WHERE Content LIKE '%" + searchObject + "%' "
 				+ "OR Title LIKE '%" + searchObject + "%';");
@@ -83,7 +115,7 @@ public class SearchBean {
 		}
 	}
 	
-	private void getUsers() throws SQLException {
+	private void createUsers() throws SQLException {
 		rs = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn FROM Users "
 		 		+ "WHERE Name LIKE '%" + searchObject + "%' "
 		 		+ "AND Confirmed = 1;");
@@ -99,7 +131,7 @@ public class SearchBean {
 		}
 	}
 	
-	private void getCategories() throws SQLException {
+	private void createCategories() throws SQLException {
 	    rs = executor.executeQuery("SELECT * FROM Category "
 	    		+ "WHERE Title LIKE '%" + searchObject + "%' "
 	    		+ "OR Subtitle LIKE '%" + searchObject + "%';");
