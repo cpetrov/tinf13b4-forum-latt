@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -59,15 +61,18 @@
 						</li>
 					</ul>
 				</div>
-				<div class="admContent">
+			<div class="admContent">
+				<form method="POST">
+				<c:if test="${!empty param.termsOfUse}"><	
+					<jsp:setProperty name="adminPanelSettingsBean" property="termsOfUse" value="${param.termsOfUse}" />
+				</c:if>
 					<h1>Nutzungsbestimmungen</h1>
 					<p>
 						Hier können die Nutzungsbestimmungen der Seite bearbeitet werden
 					</p>
-					<p><textarea cols="100" rows="10"></textarea></p>
-					<div class="navButton">
-						Speichern
-					</div>
+					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.termsOfUse}</textarea></p>
+					<button type="submit" class="navButton">Speichern</button>
+				</form>
 				</div>
 			</div>
 		</div>
