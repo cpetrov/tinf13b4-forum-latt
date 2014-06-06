@@ -39,7 +39,7 @@
 				<label for="passwordRepeat">Repeat password</label>
 				<input id="passwordRepeat" ng-model="confirm" type="password" placeholder="Repeat password" />
 			</div>
-			<button>Register</button>
+			<button type="submit">Register</button>
 		</form>
 		</div>
 		</div>

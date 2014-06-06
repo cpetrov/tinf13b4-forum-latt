@@ -11,19 +11,28 @@
 
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+	<jsp:attribute name="js">
+	   	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    	<script src="js/login.js"></script>
+	</jsp:attribute>
 	<jsp:attribute name="header">
 		<t:headerClean />
 	</jsp:attribute>
 	<jsp:body>
-		<div id="inputBlock">
+		<div id="inputBlock" ng-app="LoginApp" ng-controller="LoginController">
 		<div id="inputHolder">
-		<form method="post">
-			<label for="username">Username</label>
-			<input id="username" type="text" placeholder="Username" />
-			<label for="password">Password</label>
-			<input id="password" type="password" placeholder="Password" />
-			<button type="submit">Login</button>
-		</form>
+			<form ng-submit="login()">
+				<div class="alert"></div>
+				<div class="form-group" ng-class="hasError('name')">
+					<label for="name">Username</label>
+					<input id="name" ng-model="name" type="text" placeholder="Username" />
+				</div>
+				<div class="form-group" ng-class="hasError('password')">
+					<label for="password">Password</label>
+					<input id="password" ng-model="password" type="password" placeholder="Password" />
+				</div>
+				<button type="submit">Login</button>
+			</form>
 		</div>
 		</div>
 	</jsp:body>

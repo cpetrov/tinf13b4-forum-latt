@@ -1,491 +1,491 @@
 /* General Styles */
 html,body {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	background-image: url("../img/background.png");
-	background-color: black;
-	background-size: 100%;
-	background-position: 0 -50px;
-	background-repeat: no-repeat;
-	margin: 0;
-	font-family: Verdana;
-	color: white;
+  background-image: url("../img/background.png");
+  background-color: black;
+  background-size: 100%;
+  background-position: 0 -50px;
+  background-repeat: no-repeat;
+  margin: 0;
+  font-family: Verdana;
+  color: white;
 }
 
 .under300 {
-	background-attachment: fixed !important;
-	background-position: 0 -350px !important;
+  background-attachment: fixed !important;
+  background-position: 0 -350px !important;
 }
 
 .notUnder300 {
-	background-attachment: scroll !important;
-	background-position: 0 -50px !important;
+  background-attachment: scroll !important;
+  background-position: 0 -50px !important;
 }
 
 .clear {
-	clear: both;
+  clear: both;
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: "neon_lightsregular";
-	text-transform: uppercase;
+  font-family: "neon_lightsregular";
+  text-transform: uppercase;
 }
 
 h2 {
-	color: #fff298;
+  color: #fff298;
 }
 
 a:link,a:visited,a:active {
-	color: white;
-	font-weight: bold;
-	text-decoration: none;
-	text-shadow: 0 0 20px white;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0 0 20px white;
 }
 
 a:hover {
-	text-shadow: 0 0 5px white;
+  text-shadow: 0 0 5px white;
 }
 
 #wrapper {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -20px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -20px;
 }
 
 #content {
-	position: relative;
-	width: 1080px;
-	margin: 0 auto;
+  position: relative;
+  width: 1080px;
+  margin: 0 auto;
 }
 
 .searchWidget input[type="text"] {
-	width: 180px;
-	border-style: none;
-	padding: 10px;
-	margin-right: 10px;
+  width: 180px;
+  border-style: none;
+  padding: 10px;
+  margin-right: 10px;
 }
 
 input[type="submit"],button {
-	border: none;
-	background-color: rgba(0, 204, 255, 0.12);
-	font-family: "neon_lightsregular";
-	text-transform: uppercase;
-	font-size: 1.2em;
-	color: white;
-	height: 48px;
-	padding: 12px 20px;
-	font-weight: bold;
-	border-radius: 15px;
-	border-top-right-radius: 0px;
-	border-bottom-left-radius: 0px;
+  border: none;
+  background-color: rgba(0, 204, 255, 0.12);
+  font-family: "neon_lightsregular";
+  text-transform: uppercase;
+  font-size: 1.2em;
+  color: white;
+  height: 48px;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 input[type="submit"]:hover,button:hover {
-	box-shadow: 0 0 10px #28BEE3;
+  box-shadow: 0 0 10px #28BEE3;
 }
 
 button img {
-	float: left;
-	height: 24px;
+  float: left;
+  height: 24px;
 }
 
 button span {
-	margin-left: 10px;
-	vertical-align: middle;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
-.memberPictureHolder {
-	background-image: url("../img/member.gif");
-	/* TODO: dynamize, set the background image to the avatar */
-	width: 200px;
-	height: 200px;
-	border-radius: 30px;
-	border-style: solid;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #FFFFFF;
-	border-width: 1px;
+.userPictureHolder {
+  background-image: url("../img/user.gif");
+  /* TODO: dynamize, set the background image to the avatar */
+  width: 200px;
+  height: 200px;
+  border-radius: 30px;
+  border-style: solid;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #FFFFFF;
+  border-width: 1px;
 }
 
 /* Header styles */
 header .holder {
-	margin: 20px auto;
-	position: relative;
-	width: 1080px;
+  margin: 20px auto;
+  position: relative;
+  width: 1080px;
 }
 
 header .holder img {
-	margin-left: -95px;
+  margin-left: -95px;
 }
 
 header .holderClean img {
-	display: block;
-	margin: 0 auto;
-	padding-right: 95px;
+  display: block;
+  margin: 0 auto;
+  padding-right: 95px;
 }
 
 header h1 {
-	font-family: "neon_lightsregular";
+  font-family: "neon_lightsregular";
 }
 
 header>nav {
-	width: 100%;
-	color: black;
-	vertical-align: middle;
-	display: inline-block;
-	margin-top: 20px;
+  width: 100%;
+  color: black;
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 header>nav>ul {
-	width: 1080px;
-	margin: 0 auto;
-	border-radius: 30px;
-	border-color: white;
-	border-width: 1px;
-	border-style: solid;
-	padding: 15px 0px;
+  width: 1080px;
+  margin: 0 auto;
+  border-radius: 30px;
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+  padding: 15px 0px;
 }
 
 header>nav>ul>li {
-	padding: 15px 0px;
+  padding: 15px 0px;
 }
 
 header>nav>ul>li>a {
-	color: #FFFFFF;
-	text-transform: uppercase;
-	font-size: 1.2em;
-	font-family: "neon_lightsregular";
-	font-weight: bold;
-	padding: 15px 20px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-family: "neon_lightsregular";
+  font-weight: bold;
+  padding: 15px 20px;
 }
 
 header>nav>ul>li.active {
-	border-radius: 30px;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #28BEE3;
-	background-color: rgba(0, 204, 255, 0.12);
+  border-radius: 30px;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #28BEE3;
+  background-color: rgba(0, 204, 255, 0.12);
 }
 
 header>nav>ul>li.active:first-child {
-	border-bottom-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 header>nav>ul>li.active:hover {
-	box-shadow: 0 0 15px #28b0ed;
+  box-shadow: 0 0 15px #28b0ed;
 }
 
 header>nav>ul>li:hover {
-	text-shadow: 0 0 15px white;
+  text-shadow: 0 0 15px white;
 }
 
 header #login {
-	text-align: right;
-	margin-right: 20px;
+  text-align: right;
+  margin-right: 20px;
 }
 
 header #login li {
-	list-style-type: none;
-	display: inline;
+  list-style-type: none;
+  display: inline;
 }
 
 header .searchWidget {
-	margin-top: 50px;
-	float: right;
+  margin-top: 50px;
+  float: right;
 }
 
 /* Login/registration styles */
 #inputBlock {
-	display: table;
-	width: 450px;
-	border-radius: 30px;
-	border-style: solid;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #FFFFFF;
-	border-width: 1px;
-	margin: 120px auto 30px auto;
+  display: table;
+  width: 450px;
+  border-radius: 30px;
+  border-style: solid;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #FFFFFF;
+  border-width: 1px;
+  margin: 120px auto 30px auto;
 }
 
 #inputBlock input[type="text"],#inputBlock input[type="password"],#inputBlock input[type="email"]
-	{
-	display: block;
-	width: 250px;
-	border-style: none;
-	padding: 10px;
-	margin: 10px auto;
+  {
+  display: block;
+  width: 250px;
+  border-style: none;
+  padding: 10px;
+  margin: 10px auto;
 }
 
 #inputBlock button {
-	display: block;
-	margin: 30px auto 0 auto;
+  display: block;
+  margin: 30px auto 0 auto;
 }
 
 #inputHolder {
-	display: table-cell;
-	vertical-align: middle;
-	padding-bottom: 30px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-bottom: 30px;
 }
 
 #inputHolder label {
-	display: block;
-	margin-top: 30px;
-	margin-left: 50px;
-	font-family: "neon_lightsregular";
-	font-size: 1.3em;
-	font-weight: bold;
-	text-transform: uppercase;
+  display: block;
+  margin-top: 30px;
+  margin-left: 50px;
+  font-family: "neon_lightsregular";
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .alert {
-	text-align: center;
-	border-radius: 30px;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	margin: 20px;
-	background-color: rgba(0, 0, 0, 0.39);
-	padding: 20px;
-	font-weight: bold;
-	color: rgb(240, 91, 91);
+  text-align: center;
+  border-radius: 30px;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.39);
+  padding: 20px;
+  font-weight: bold;
+  color: rgb(240, 91, 91);
 }
 
 .alert:empty {
-	display: none;
+  display: none;
 }
 
 .form-group.has-error input {
-	background-color: rgb(255, 105, 105);
-	color: white;
+  background-color: rgb(255, 105, 105);
+  color: white;
 }
 
 /* Boards styles */
 #content>section:first-child {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 
 #content section>section {
-	border-radius: 30px;
-	border-style: solid;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #FFFFFF;
-	border-width: 1px;
-	padding: 0px 30px 15px;
-	margin-bottom: 30px;
+  border-radius: 30px;
+  border-style: solid;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #FFFFFF;
+  border-width: 1px;
+  padding: 0px 30px 15px;
+  margin-bottom: 30px;
 }
 
 #content section>section>article {
-	margin-top: 25px;
+  margin-top: 25px;
 }
 
 #content section>section img {
-	float: left;
-	width: 32px;
+  float: left;
+  width: 32px;
 }
 
 #content section>section h4 {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
 #content section>section p {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
 #content section>section div {
-	margin-left: 50px;
+  margin-left: 50px;
 }
 
 /* Topic styles */
 #topic {
-	padding: 0px 20px;
-	border-radius: 30px;
-	border-style: solid;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #FFFFFF;
-	border-width: 1px;
+  padding: 0px 20px;
+  border-radius: 30px;
+  border-style: solid;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #FFFFFF;
+  border-width: 1px;
 }
 
 #topic>.answer {
-	position: relative;
-	padding-top: 25px;
-	min-height: 280px;
+  position: relative;
+  padding-top: 25px;
+  min-height: 280px;
 }
 
 #topic>.answer:not(:first-child ) {
-	border-top-style: solid;
-	border-width: 1px;
-	border-color: white;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: white;
 }
 
-#topic>.answer>.member {
-	float: left;
+#topic>.answer>.user {
+  float: left;
 }
 
-#topic>.answer>.member div:not (:first-child ) {
-	margin-top: 10px;
+#topic>.answer>.user div:not (:first-child ) {
+  margin-top: 10px;
 }
 
 #topic>.answer>.answerBody {
-	margin-bottom: 25px;
-	width: 800px;
-	float: right;
+  margin-bottom: 25px;
+  width: 800px;
+  float: right;
 }
 
 #topic>.answer>.answerBody p {
-	margin-top: 0px;
-	line-height: 1.8em;
+  margin-top: 0px;
+  line-height: 1.8em;
 }
 
 #topic>.answer>.answerBody p:last-of-type {
-	margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 #topic>.answer>.answerBody .postedOn {
-	position: absolute;
-	bottom: 20px;
-	right: 0px;
-	font-weight: bold;
-	float: right;
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+  font-weight: bold;
+  float: right;
 }
 
 #topic>.answer>.answerBody button {
-	position: absolute;
-	bottom: 20px;
+  position: absolute;
+  bottom: 20px;
 }
 
 .newTopic {
-	margin-top: 25px;
+  margin-top: 25px;
 }
 
-/* Member styles */
-#member>#memberBlock {
-	float: left;
-	width: 230px;
+/* user styles */
+#user>#userBlock {
+  float: left;
+  width: 230px;
 }
 
-#member>#memberBlock div:not (:first-child ) {
-	margin-top: 10px;
+#user>#userBlock div:not (:first-child ) {
+  margin-top: 10px;
 }
 
-#member>#topicBlock {
-	margin-left: 50px;
-	width: 799px;
-	float: left;
+#user>#topicBlock {
+  margin-left: 50px;
+  width: 799px;
+  float: left;
 }
 
-/* Members List styles */
-#membersList>.searchWidget {
-	display: inline;
-	text-align: center;
-	width: 100%;
-	float: left;
+/* users List styles */
+#usersList>.searchWidget {
+  display: inline;
+  text-align: center;
+  width: 100%;
+  float: left;
 }
 
-#membersList>#membersTable {
-	float: left;
-	width: 100%;
-	margin-top: 25px;
-	padding: 20px auto;
-	border-radius: 30px;
-	border-style: solid;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 0;
-	border-color: #FFFFFF;
-	border-width: 1px;
+#usersList>#usersTable {
+  float: left;
+  width: 100%;
+  margin-top: 25px;
+  padding: 20px auto;
+  border-radius: 30px;
+  border-style: solid;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-color: #FFFFFF;
+  border-width: 1px;
 }
 
-#membersList>#membersTable header,#membersList>#membersTable .memberListEntry
-	{
-	box-sizing: border-box;
-	padding-left: 100px;
-	padding-right: 100px;
+#usersList>#usersTable header,#usersList>#usersTable .userListEntry
+  {
+  box-sizing: border-box;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
-#membersList>#membersTable h3 {
-	float: left;
+#usersList>#usersTable h3 {
+  float: left;
 }
 
-#membersList>#membersTable h3:last-child {
-	float: right;
+#usersList>#usersTable h3:last-child {
+  float: right;
 }
 
-#membersList>#membersTable .memberListEntry {
-	width: 100%;
-	float: left;
+#usersList>#usersTable .userListEntry {
+  width: 100%;
+  float: left;
 }
 
-#membersList>#membersTable a:nth-child(2n-1) div {
-	background-color: rgba(40, 176, 237, 0.18);
+#usersList>#usersTable a:nth-child(2n-1) div {
+  background-color: rgba(40, 176, 237, 0.18);
 }
 
-#membersList>#membersTable .memberListEntry p {
-	float: left;
+#usersList>#usersTable .userListEntry p {
+  float: left;
 }
 
-#membersList>#membersTable .memberListEntry p:last-child {
-	float: right;
+#usersList>#usersTable .userListEntry p:last-child {
+  float: right;
 }
 
 /* Footer styles */
 footer {
-	height: 20px;
-	padding: 10px;
-	text-align: center;
+  height: 20px;
+  padding: 10px;
+  text-align: center;
 }
 
 footer a:link,footer a:visited,footer a:active {
-	color: #28b0ed;
-	text-shadow: 0 0 20px #28b0ed;
+  color: #28b0ed;
+  text-shadow: 0 0 20px #28b0ed;
 }
 
 footer a:hover {
-	color: #28b0ed;
-	text-shadow: 0 0 5px #28b0ed;
+  color: #28b0ed;
+  text-shadow: 0 0 5px #28b0ed;
 }
 
 footer ul {
-	width: 100%;
-	margin: 0;
-	padding: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #push {
-	height: 50px;
+  height: 50px;
 }
 
 /* Navigation styles */
 nav li {
-	list-style-type: none;
-	display: inline;
+  list-style-type: none;
+  display: inline;
 }
 
 .pipeList li+li:before {
-	content: " | ";
+  content: " | ";
 }
 
 .breadcrumb {
-	margin: 25px;
-	text-align: center;
+  margin: 25px;
+  text-align: center;
 }
 
 .breadcrumb a {
-	color: white;
+  color: white;
 }
 
 .breadcrumb li+li:before {
-	content: " > ";
+  content: " > ";
 }
 
 /* Media Queries */
 @media ( max-width :1095px) {
-	body {
-		background-size: 1080px;
-	}
-	header {
-		width: 1080px;
-	}
+  body {
+    background-size: 1080px;
+  }
+  header {
+    width: 1080px;
+  }
 }
