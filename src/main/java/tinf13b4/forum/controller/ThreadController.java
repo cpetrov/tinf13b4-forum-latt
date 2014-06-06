@@ -32,7 +32,11 @@ public class ThreadController {
 
 	public List<Thread> getThreadsWithCategory(int categoryId) {
 		checkArgument(categoryId >= 0, "CategoryId must be >= 0, but was " + categoryId);
-		rs = executor.executeQuery("SELECT * FROM Threads WHERE Category_ID = " + categoryId + ";");
+		rs = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+				+ "FROM Threads T, Users U "
+				+ "WHERE Category_ID = " + categoryId
+				+ " AND T.User_ID = U.User_ID "
+				+ "AND U.Confirmed = 1;");
 		List<Thread> threads = new ArrayList<Thread>();
 		if (rs == null)
 			return new ArrayList<Thread>();
@@ -50,7 +54,11 @@ public class ThreadController {
 	
 	public List<Thread> getThreadsWithId(int id) {
 		checkArgument(id >= 0, "CategoryId must be >= 0, but was " + id);
-		rs = executor.executeQuery("SELECT * FROM Threads WHERE Thread_ID = " + id + ";");
+		rs = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+				+ "FROM Threads T, Users U "
+				+ "WHERE T.Thread_ID = " + id
+				+ " AND T.User_ID = U.User_ID "
+				+ "AND U.Confirmed = 1;");
 		List<Thread> threads = new ArrayList<Thread>();
 		if (rs == null)
 			return new ArrayList<Thread>();
@@ -74,7 +82,9 @@ public class ThreadController {
 		threadBuilder.setContent(rs.getString("Content"));
 		threadBuilder.setDate(rs.getDate("Date"));
 		threadBuilder.setReadOnly(rs.getBoolean("ReadOnly"));
-		threadBuilder.setUserId(rs.getInt("User_ID"));
+		UserController controller = new UserController();
+		controller.setRs(rs);
+		threadBuilder.setUser(controller.buildUser());
 		return threadBuilder.build();
 	}
 }
