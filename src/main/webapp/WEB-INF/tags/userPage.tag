@@ -11,7 +11,7 @@
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
 <jsp:setProperty name="navigation" property="category" value="users" />
-<jsp:setProperty name="navigation" property="page" value="users" />
+<jsp:setProperty name="navigation" property="page" value="user" />
 
 <t:genericPage>
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
@@ -25,7 +25,7 @@
             </header>
             <div class="userPictureHolder"></div>
             <div id="posts">
-                <img src="./img/quill16.png" alt=""> User has <b>${user.posts.size()}</b> posts
+                <img src="./img/quill16.png" alt=""> User has <b>${user.postCount}</b> posts
             </div>
             <div id="mailContact">
                 <img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
@@ -37,34 +37,45 @@
         </div>
         <div id="topicBlock">
           <section>
+          <c:choose>
+          <c:when test="${posts.size() != 0 }">
             <h3>Latest Posts</h3>
             <section>
-            <c:forEach var="post" items="${posts}">
+            <c:forEach step="1" begin="0" end="${posts.size() <= 5 ? posts.size()-1 : 4 }" var="i">
               <article>
-                <img src="./img/bubble.png" alt="Category">
+                <img src="./img/bubble.png" alt="Posts">
                 <div>
-                  <h4>
-                    <a href="thread.jsp?threadId=${post.threadId}">${post.title}</a>
-                  </h4>
-                  <p>${post.content}</p>
+                  <a href="thread.jsp?id=${posts[i].threadId}"><p>${posts[i].content}</p></a>
                 </div>
               </article>
             </c:forEach>
             </section>
-            <h3>Last Topics</h3>
+          </c:when>
+          <c:when test="${posts.size() == 0 }">
+            <h3>${user.name } has no posts :(</h3>
+          </c:when>
+          </c:choose>
+          <c:choose>
+          <c:when test="${threads.size() != 0 }">
+            <h3>Last Threads</h3>
             <section>
-              <c:forEach var="thread" items="${threads}">
+             <c:forEach step="1" begin="0" end="${threads.size() <= 5 ? threads.size()-1 : 4 }" var="i">
               <article>
-                <img src="./img/bubble.png" alt="Category">
+                <img src="./img/bubbles.png" alt="Topics">
                 <div>
                   <h4>
-                    <a href="#">${thread.title}</a>
+                    <a href="thread.jsp?id=${threads[i].id }">${threads[i].title}</a>
                   </h4>
-                  <p>${thread.content.length() > 100 ? fn:substring(thread.content, 0, 100).concat('...') : thread.content }</p>
+                  <p>${threads[i].content.length() > 100 ? fn:substring(threads[i].content, 0, 100).concat('...') : threads[i].content }</p>
                 </div>
               </article>
             </c:forEach>
             </section>
+          </c:when>
+          <c:when test="${threads.size() == 0 }">
+            <h3>${user.name } has no threads :(</h3>
+          </c:when>
+          </c:choose>
           </section>
         </div>
         <div style="clear: both"></div>

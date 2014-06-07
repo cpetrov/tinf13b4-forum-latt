@@ -15,11 +15,13 @@
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
-	    <article>
+	<section>
       <header>
         <h2>${heading}</h2>
       </header>
+	<article>
       <p>${text}</p>
     </article>
+	</section>
     </jsp:body>
 </t:genericPage>

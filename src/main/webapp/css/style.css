@@ -108,6 +108,7 @@ button span {
   border-top-right-radius: 0;
   border-color: #FFFFFF;
   border-width: 1px;
+  margin-bottom:5px;
 }
 
 /* Header styles */
@@ -326,13 +327,17 @@ header .searchWidget {
 }
 
 #topic>.answer>.user div:not (:first-child ) {
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 #topic>.answer>.answerBody {
   margin-bottom: 25px;
   width: 800px;
   float: right;
+}
+
+#topic>.answer>.answerBody p:first-child {
+  margin-top:0px;
 }
 
 #topic>.answer>.answerBody p {
@@ -375,6 +380,19 @@ header .searchWidget {
   margin-left: 50px;
   width: 799px;
   float: left;
+}
+
+#user>#topicBlock article:not(:first-child) {
+	margin-top:35px;
+}
+
+#user>#topicBlock article:last-child {
+	margin-bottom:10px;
+}
+
+#user>#topicBlock article>div {
+	display:table;
+	vertical-align:middle;
 }
 
 /* users List styles */
