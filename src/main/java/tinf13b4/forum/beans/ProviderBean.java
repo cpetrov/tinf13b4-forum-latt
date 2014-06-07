@@ -12,7 +12,7 @@ import tinf13b4.forum.model.Post;
 import tinf13b4.forum.model.Thread;
 import tinf13b4.forum.model.User;
 
-public class DummyProviderBean {
+public class ProviderBean {
 
 	private List<Category> categories;
 	private List<Thread> threads;
@@ -27,7 +27,7 @@ public class DummyProviderBean {
 	private Thread thread;
 	private User user;
 
-	public DummyProviderBean() {
+	public ProviderBean() {
 		createLongText();
 		heading = "Just a heading for static pages";
 	}
@@ -62,7 +62,11 @@ public class DummyProviderBean {
 	private void createPosts() {
 		posts = new ArrayList<Post>();
 		PostController controller = new PostController();
-		posts = controller.getPosts(threadId);
+		if ( threadId != 0 ) {
+			posts = controller.getPostsForThread(threadId);
+		} else if ( userId != 0 ) {
+			posts = controller.getPostsForUser(userId);
+		}
 	}
 
 	private void createUsers() {
@@ -78,13 +82,19 @@ public class DummyProviderBean {
 			threads = controller.getThreadsWithCategory(categoryId);
 		} else if (threadId != 0) {
 			threads = controller.getThreadsWithId(threadId);
+		} else if (userId != 0) {
+			threads = controller.getThreadsWithUser(userId);
 		}
 	}
 
 	private void createCategories() {
 		categories = new ArrayList<>();
 		CategoryController controller = new CategoryController();
-		categories = controller.getCategories();
+		if ( threadId != 0 ) {
+			categories = controller.getCategoryForThread(threadId);
+		} else {
+			categories = controller.getCategories();
+		}
 	}
 
 	public List<Category> getCategories() {
