@@ -15,8 +15,9 @@
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:attribute name="header"><t:header /></jsp:attribute>
 	<jsp:body>
+	<section>
+	<header><h2>Users List</h2></header>
       <div id="usersList">
-        <h2>Users List</h2>
         <span class="searchWidget">
           <input type="text" name="q">
           <input type="submit" id="submit" name="btnsub" value="User Search">
@@ -28,7 +29,7 @@
           </header>
           <div class="clear"></div>
           <c:forEach var="user" items="${users}">
-          <a href="user.jsp?userId=${user.id}">
+          <a href="user.jsp?id=${user.id}">
 	          <div class="userListEntry">
 	            <p>${user.name}</p>
 	            <p><fmt:formatDate value="${user.joinedOn}" pattern="dd.MM.yyyy" /></p>
@@ -38,6 +39,6 @@
         </div>
         <div class="clear"></div>
       </div>
-
+    </section>
 	</jsp:body>
 </t:genericPage>

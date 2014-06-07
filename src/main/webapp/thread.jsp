@@ -3,11 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
-<c:set target="${dummyProvider}" property="threadId" value="${param.threadId}" ></c:set>
-<t:threadPage category="${dummyProvider.category}" 
-              users="${dummyProvider.users}" 
-              posts="${dummyProvider.posts}"
-              thread="${dummyProvider.thread}">
+<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" scope="request" />
+<c:set target="${provider}" property="threadId" value="${param.id}" ></c:set>
+<c:set target="${provider}" property="categoryId" value="${provider.thread.categoryId}" ></c:set>
+<t:threadPage category="${provider.category}" 
+              posts="${provider.posts}"
+              thread="${provider.thread}">
     <jsp:attribute name="title">Page Title</jsp:attribute>
 </t:threadPage>
