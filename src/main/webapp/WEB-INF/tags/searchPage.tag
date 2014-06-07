@@ -32,7 +32,7 @@
         <img src="./img/bubbles.png" alt="Category">
             <div>
                 <h4>
-                    <a href="category.jsp?categoryId=${category.id}">${category.title}</a>
+                    <a href="category.jsp?id=${category.id}">${category.title}</a>
                 </h4>
                 <p>${category.subtitle}</p>
             </div>
@@ -46,7 +46,7 @@
             <img src="./img/bubble.png" alt="Topic">
             <div>
                 <h4>
-                    <a href="thread.jsp?threadId=${thread.id}">${thread.title}</a> 
+                    <a href="thread.jsp?id=${thread.id}">${thread.title}</a> 
                 </h4>
                 <p>
                     <b>Author:</b> ${authors[i].name}
@@ -64,7 +64,7 @@
           </header>
           <div class="clear"></div>
           <c:forEach var="user" items="${users}">
-          <a href="user.jsp?userId=${user.id}">
+          <a href="user.jsp?id=${user.id}">
               <div class="userListEntry">
                 <p>${user.name}</p>
                 <p> <fmt:formatDate value="${user.joinedOn}" pattern="dd.MM.yyyy" /> </p>

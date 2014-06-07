@@ -14,13 +14,13 @@
 
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="thread" />
-<c:set target="${dummyProvider}" property="userId" value="${thread.userId}"></c:set>
+<c:set target="${dummyProvider}" property="userId" value="${thread.user.id}"></c:set>
 
 <t:genericPage>
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
     <jsp:attribute name="header"><t:header /></jsp:attribute>
     <jsp:body>
-    <t:breadcrumbNav category="${category}" />
+    <t:breadcrumbNav category="${category}" thread="${thread}"/>
           <section>
           
         <header>
@@ -31,18 +31,19 @@
             <div class="user">
               <div class="userPictureHolder"></div>
               <div class="name">
-                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?userId=${thread.userId}">${user.name}</a>
+                <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${thread.user.id}">${thread.user.name}</a>
               </div>
                <div class="posts">
-                <img src="./img/bubbles16.png" alt="Posts" /> ${user.posts.size()} posts
+                <img src="./img/bubbles16.png" alt="Posts" /> ${thread.user.postCount} posts
               </div> 
             </div>
-            <div class="answerBody">${thread.content} 
+            <div class="answerBody">
+            <p>${thread.content }</p>
               <button>
                 <img src="./img/quill.png" alt="Quote">
                 <span>Quote</span>
               </button>
-              <div class="postedOn">Posted on ${post.date }</div>
+              <div class="postedOn">Posted on ${thread.date }</div>
             </div>
             <div class="clear"></div>
           </div>
@@ -53,14 +54,14 @@
               <div class="userPictureHolder"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
-         		<a href="user.jsp?userId=${user.id}">${user.name}</a>
+         		<a href="user.jsp?id=${post.user.id}">${post.user.name}</a>
               </div>
               <div class="posts">
-                <img src="./img/bubbles16.png" alt="Answers" /> ${user.posts.size()} posts
+                <img src="./img/bubbles16.png" alt="Answers" /> ${post.user.postCount} posts
               </div> 
             </div>
             <div class="answerBody">
-                ${post.content }
+              <p>${post.content }</p>
               <button>
                 <img src="./img/quill.png">
                 <span>Quote</span>
