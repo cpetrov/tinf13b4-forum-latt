@@ -10,8 +10,8 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Exportiere Struktur von Tabelle pmforum.Category
-CREATE TABLE IF NOT EXISTS `Category` (
+-- Exportiere Struktur von Tabelle pmforum.Categories
+CREATE TABLE IF NOT EXISTS `Categories` (
   `Category_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Title` text NOT NULL,
   `Subtitle` text NOT NULL,
@@ -26,10 +26,13 @@ CREATE TABLE IF NOT EXISTS `Posts` (
   `Post_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Content` text NOT NULL,
   `Date` datetime NOT NULL,
-  `User_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `Thread_ID` int(10) unsigned NOT NULL,
+  `User_ID` int(11) unsigned NOT NULL,
   PRIMARY KEY (`Post_ID`),
   UNIQUE KEY `Post_ID` (`Post_ID`),
   KEY `FK_Posts_Users` (`User_ID`),
+  KEY `FK_Posts_Threads` (`Thread_ID`),
+  CONSTRAINT `FK_Posts_Threads` FOREIGN KEY (`Thread_ID`) REFERENCES `Threads` (`Thread_ID`),
   CONSTRAINT `FK_Posts_Users` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Posts';
 
@@ -49,21 +52,6 @@ CREATE TABLE IF NOT EXISTS `Settings` (
 -- Daten Export vom Benutzer nicht ausgewählt
 
 
--- Exportiere Struktur von Tabelle pmforum.ThreadPostRelationTable
-CREATE TABLE IF NOT EXISTS `ThreadPostRelationTable` (
-  `ThreadPost_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `Thread_ID` int(10) unsigned NOT NULL,
-  `Post_ID` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`ThreadPost_ID`),
-  KEY `FK_ThreadPostRelationTable_Threads` (`Thread_ID`),
-  KEY `FK_ThreadPostRelationTable_Posts` (`Post_ID`),
-  CONSTRAINT `Post_ID` FOREIGN KEY (`Post_ID`) REFERENCES `Posts` (`Post_ID`),
-  CONSTRAINT `Thread_ID` FOREIGN KEY (`Thread_ID`) REFERENCES `Threads` (`Thread_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Relational Table';
-
--- Daten Export vom Benutzer nicht ausgewählt
-
-
 -- Exportiere Struktur von Tabelle pmforum.Threads
 CREATE TABLE IF NOT EXISTS `Threads` (
   `Thread_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -77,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `Threads` (
   UNIQUE KEY `Thread_ID` (`Thread_ID`),
   KEY `FK_Threads_Category` (`Category_ID`),
   KEY `User_ID` (`User_ID`),
-  CONSTRAINT `Category_ID` FOREIGN KEY (`Category_ID`) REFERENCES `Category` (`Category_ID`),
+  CONSTRAINT `Category_ID` FOREIGN KEY (`Category_ID`) REFERENCES `Categories` (`Category_ID`),
   CONSTRAINT `User_ID` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Threads';
 
@@ -88,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `Threads` (
 CREATE TABLE IF NOT EXISTS `Users` (
   `User_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL DEFAULT '0',
-  `Picture` blob,
+  `Picture` text,
   `Email` varchar(254) NOT NULL DEFAULT '0',
   `Password` varchar(61) NOT NULL DEFAULT '0',
   `JoinedOn` date NOT NULL,
