@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
+<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
-<t:indexPage categories="${dummyProvider.categories}">
+<t:indexPage categories="${provider.categories}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:indexPage>

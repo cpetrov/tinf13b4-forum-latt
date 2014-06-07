@@ -28,10 +28,10 @@
 			<img src="./img/bubble.png" alt="Topic">
 			<div>
 				<h4>
-					<a href="thread.jsp?threadId=${thread.id}">${thread.title}</a> 
+					<a href="thread.jsp?id=${thread.id}">${thread.title}</a> 
 				</h4>
 				<p>
-					<b>Author:</b> ${authors[i].name}
+					<b>Author:</b> ${thread.user.name}
 				</p>
 			</div>
 		</article>

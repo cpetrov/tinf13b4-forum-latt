@@ -2,8 +2,8 @@
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<jsp:useBean id="dummyProvider" class="tinf13b4.forum.beans.DummyProviderBean" />
+<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
-<t:usersPage users="${dummyProvider.users}" >
+<t:usersPage users="${provider.users}" >
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:usersPage>

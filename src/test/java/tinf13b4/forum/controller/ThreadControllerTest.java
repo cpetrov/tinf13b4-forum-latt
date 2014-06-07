@@ -4,24 +4,22 @@ package tinf13b4.forum.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static tinf13b4.forum.test.TestUtil.makeResultSet;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.model.Thread;
+import tinf13b4.forum.model.User;
+import tinf13b4.forum.test.TestUtil;
 
-import com.mysql.jdbc.Blob;
 import com.mysql.jdbc.ResultSet;
 
 public class ThreadControllerTest {
@@ -52,57 +50,34 @@ public class ThreadControllerTest {
 
 	@Test
 	public void testReturnsThreadList() throws Exception { //TODO broken
-		Date date1 = new Timestamp( new Date().getTime() );
-		Date date2 = new Timestamp( new Date().getTime() );
+		Date date = new Timestamp( new Date().getTime() );
+		Date joinedOn = new Timestamp( new Date().getTime() );
 		ResultSet resultSet = makeResultSet(
 				Arrays.asList("Thread_ID", "Title", "Content", "Date", "ReadOnly", "Category_ID", "User_ID", "Name", "Picture", "Email", "JoinedOn"),
-				Arrays.asList(1, "title", "content", date1, false, 2, 3, "user", Mockito.mock(Blob.class), "email", date2)
+				Arrays.asList(1, "title", "content", date, false, 2, 1, "user", null, "email", joinedOn)
 				);
-		String query="SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn FROM Threads T, Users U WHERE Category_ID = 2 AND T.User_ID = U.User_ID AND U.Confirmed = 1;";
+		String query="SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+					+ "FROM Threads T, Users U "
+					+ "WHERE Category_ID = 2 AND T.User_ID = U.User_ID AND U.Confirmed = 1;";
 		when(executor.executeQuery(query)).thenReturn(resultSet);
+		TestUtil.stubPostsCount(executor);
 		ThreadController controller = new ThreadController(executor);
 
 		List<Thread> threads = controller.getThreadsWithCategory(2);
 
 		assertTrue(threads.size() == 1);
-		checkThread1(date1, threads);
+		checkThread1(date, threads, joinedOn);
 	}
 
-	private void checkThread1(Date date1, List<Thread> threads) {
+	private void checkThread1(Date date, List<Thread> threads, Date joinedOn) {
 		assertEquals(1, threads.get(0).getId());
-		assertEquals("foo", threads.get(0).getTitle());
+		assertEquals("title", threads.get(0).getTitle());
 		assertEquals(2, threads.get(0).getCategoryId());
-		assertEquals("bar", threads.get(0).getContent());
-		assertEquals(date1, threads.get(0).getDate());
-		assertEquals(true, threads.get(0).isReadonly());
-		assertEquals(3, threads.get(0).getUser());
+		assertEquals("content", threads.get(0).getContent());
+		assertEquals(new Date(date.getTime()), threads.get(0).getDate());
+		assertEquals(false, threads.get(0).isReadonly());
+		User user = new User(1, "user", 1, null, "email", new Date(joinedOn.getTime()));
+		assertEquals(user, threads.get(0).getUser());
 	}
 
-	private ResultSet makeResultSet(final List<String> aColumns, final List<?>... rows) throws Exception {
-		ResultSet result = Mockito.mock(ResultSet.class);
-		final AtomicInteger currentIndex = new AtomicInteger(-1);
-		when(result.next()).thenAnswer(new Answer<Object>() {
-
-			@Override
-			public Object answer(InvocationOnMock aInvocation) throws Throwable {
-				return currentIndex.incrementAndGet() < rows.length;
-			}
-		});
-		final ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
-		Answer<Object> rowLookupAnswer = new Answer<Object>() {
-
-			@Override
-			public Object answer(InvocationOnMock aInvocation) throws Throwable {
-				int columnIndex = aColumns.indexOf(argument.getValue());
-				return rows[currentIndex.get()].get(columnIndex);
-			}
-		};
-		when(result.getString(argument.capture())).thenAnswer(rowLookupAnswer);
-		when(result.getShort(argument.capture())).thenAnswer(rowLookupAnswer);
-		when(result.getDate(argument.capture())).thenAnswer(rowLookupAnswer);
-		when(result.getInt(argument.capture())).thenAnswer(rowLookupAnswer);
-		when(result.getTimestamp(argument.capture())).thenAnswer(rowLookupAnswer);
-		when(result.getBoolean(argument.capture())).thenAnswer(rowLookupAnswer);
-		return result;
-	}
 }
