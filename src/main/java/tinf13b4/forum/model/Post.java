@@ -46,7 +46,7 @@ public class Post {
 	public User getUser() {
 		return user;
 	}
-	
+
 	public int getThreadId() {
 		return threadId;
 	}
@@ -62,7 +62,8 @@ public class Post {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		// TODO user, threadId?
+		result = prime * result + threadId;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -87,8 +88,14 @@ public class Post {
 			return false;
 		if (id != other.id)
 			return false;
-		if (user != other.user)
+		if (threadId != other.threadId)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
+
 }
