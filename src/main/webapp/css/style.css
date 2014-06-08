@@ -298,7 +298,14 @@ header .searchWidget {
 #content section>section div {
   margin-left: 50px;
 }
-
+blockquote {
+  border-left-style: solid;
+  border-left-width: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: rgba(248, 79, 67, 0.75);
+}
 /* Topic styles */
 #topic {
   padding: 0px 20px;

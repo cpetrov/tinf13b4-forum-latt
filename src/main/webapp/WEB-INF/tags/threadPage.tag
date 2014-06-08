@@ -12,6 +12,7 @@
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
+<jsp:useBean id="consumer" class="tinf13b4.forum.beans.ConsumerBean" scope="request" />
 
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="thread" />
@@ -19,11 +20,16 @@
 
 <t:genericPage>
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
+    <jsp:attribute name="js"><script src="./js/ckUtil.js"></script></jsp:attribute>
     <jsp:attribute name="header"><t:header /></jsp:attribute>
     <jsp:body>
+    <c:if test="${not empty param.content and not empty param.threadId and not empty param.userId }">
+    <script>
+        window.forum.posted = true;
+    </script>
+    </c:if>
     <t:breadcrumbNav category="${category}" thread="${thread}"/>
           <section>
-          
         <header>
           <h2>${thread.title}</h2>
         </header>
@@ -39,8 +45,8 @@
               </div> 
             </div>
             <div class="answerBody">
-            <p>${thread.content }</p>
-              <button>
+            <div class="content"><p>${thread.content }</p></div>
+              <button onclick="addTextToEditor(this)">
                 <img src="./img/quill.png" alt="Quote">
                 <span>Quote</span>
               </button>
@@ -62,7 +68,7 @@
               </div> 
             </div>
             <div class="answerBody">
-              <p>${post.content }</p>
+              <div class="content"><p>${post.content }</p></div>
               <button>
                 <img src="./img/quill.png">
                 <span>Quote</span>
@@ -75,15 +81,19 @@
         </div>
       </section>
       <div>
-        <button onclick="$('div.newPost').toggle()" class="newPost">
+        <button class="newPost">
           <img src="./img/quill.png">
           <span>New Post</span>
         </button>
       </div>
-      <div class="newPost">
-        <textarea cols="80" id="editor1" name="editor1" rows="10"></textarea>
-        <button>Post</button>
-      </div>
-      <ckeditor:replace replace="editor1" basePath="/ckeditor/" />
+      <form method="POST">
+	      <div class="newPost">
+	        <textarea cols="80" id="editor" name="content" rows="10"></textarea>
+	        <input type="hidden" name="userId" value="${thread.user.id}">
+	        <input type="hidden" name="threadId" value="${thread.id}">
+	        <button type="submit">Post</button>
+	      </div>
+      </form>
+      <ckeditor:replace replace="editor" basePath="/ckeditor/" />
     </jsp:body>
 </t:genericPage>
