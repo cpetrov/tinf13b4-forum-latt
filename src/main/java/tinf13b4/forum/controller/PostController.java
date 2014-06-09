@@ -37,7 +37,8 @@ public class PostController {
 											+ "WHERE P.Thread_ID = T.Thread_ID "
 											+ "AND T.Thread_ID = " + threadId + " "
 											+ "AND P.User_ID = U.User_ID "
-											+ "AND U.Confirmed = 1;");
+											+ "AND U.Confirmed = 1 "
+											+ "ORDER BY P.Date ASC;");
 		if (resultSet == null)
 			return posts;
 		else {
