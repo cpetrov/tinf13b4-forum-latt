@@ -3,59 +3,94 @@ package tinf13b4.forum.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class UserTest {
 
+	private Date date;
+
+	@Before
+	public void setUp() {
+		date = new Date();
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNonPositiveId() throws Exception {
-		new User(0, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		new User(0, "foo", 1, "bar", "baz", date);
 	}
 
 	@Test
 	public void testStoresId() throws Exception {
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		assertEquals(1, user.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new User(1, null, null, "foo", new Date(), new ArrayList<Post>());
+		new User(1, null, 1, "bar", "foo", date);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new User(1, "", null, "foo", new Date(), new ArrayList<Post>());
+		new User(1, "", 1, "bar", "foo", date);
 	}
 
 	@Test
 	public void testStoresName() {
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		assertEquals("foo", user.getName());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullMail() {
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		user.setMail(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		user.setMail("");
 	}
 
 	@Test
+	public void testDoesntFailWithNullPicture() {
+		new User(1, "foo", 1, null, "foo", date);
+	}
+
+	@Test
+	public void testStoresPicture() {
+		User user = new User(1, "foo", 1, "bar", "bar", date);
+
+		String userPicture = user.getPicture();
+
+		assertEquals("bar", userPicture);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithNullJoinedOn() {
+		new User(1, "foo", 1, "bar", "bar", null);
+	}
+
+	@Test
+	public void testStoresJoinedOn() {
+		User user = new User(1, "foo", 1, "bar", "bar", date);
+
+		Date joinedOn = user.getJoinedOn();
+
+		assertEquals(date, joinedOn);
+	}
+
+	@Test
 	public void testStoresMail() {
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		user.setMail("bar");
 
@@ -64,14 +99,22 @@ public class UserTest {
 
 	@Test
 	public void testStoresDate() {
-		Date joinedOn = new Date();
-		User user = new User(1, "foo", null, "foo", new Date(), new ArrayList<Post>());
+		Date joinedOn = date;
+		User user = new User(1, "foo", 1, "bar", "foo", date);
 
 		assertEquals(joinedOn, user.getJoinedOn());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNullPosts() {
-		new User(1, "foo", null, "foo", new Date(), null);
+	public void testFailsWithNegativePostCount() {
+		new User(1, "foo", -1, null, "bar", date);
 	}
+
+	@Test
+	public void testStoresPostsCount() {
+		User user = new User(1, "foo", 1, null, "bar", date);
+
+		assertEquals(1, user.getPostCount());
+	}
+
 }

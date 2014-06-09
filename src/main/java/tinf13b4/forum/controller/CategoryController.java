@@ -1,6 +1,8 @@
 
 package tinf13b4.forum.controller;
 
+import static tinf13b4.forum.controller.ResultSetUtil.buildCategory;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,35 +11,37 @@ import java.util.List;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.model.Category;
-import tinf13b4.forum.model.CategoryBuilder;
 
 public class CategoryController {
 
-	private ResultSet rs;
+	private ResultSet resultSet;
 	private QueryExecutor executor;
-	
-	public void setRs(ResultSet rs) {
-		this.rs = rs;	
-	}
 
 	public CategoryController() {
-		ConnectionFactory factory = new ConnectionFactory();
-		executor = new QueryExecutor(factory.createConnection());
+		this(new QueryExecutor(new ConnectionFactory().createConnection()));
 	}
 
 	protected CategoryController(QueryExecutor executor) {
 		this.executor = executor;
 	}
 
-	public List<Category> getCategories() {
-		rs = executor.executeQuery("SELECT Category_ID, Title, Subtitle" + " FROM Categories" + " ORDER BY Title ASC;");
+	public void setRs(ResultSet rs) {
+		this.resultSet = rs;
+	}
+
+	public List<Category> getCategoryForThread(int threadId) {
+		resultSet = executor.executeQuery("SELECT C.Category_ID, C.Title, C.Subtitle "
+										+ "FROM Categories C, Threads T "
+										+ "WHERE T.Thread_ID = " + threadId + " "
+										+ "AND C.Category_ID = T.Category_ID "
+										+ "ORDER BY C.Title ASC;");
 		List<Category> categories = new ArrayList<Category>();
-		if (rs == null)
+		if (resultSet == null)
 			return new ArrayList<Category>();
 		else {
 			try {
-				while (rs.next()) {
-					categories.add(buildCategory());
+				while (resultSet.next()) {
+					categories.add(buildCategory(resultSet));
 				}
 			} catch (SQLException e) {
 				new IllegalStateException("SQL Error: " + e);
@@ -45,12 +49,21 @@ public class CategoryController {
 		}
 		return categories;
 	}
-	
-	public Category buildCategory() throws SQLException {
-		CategoryBuilder categoryBuilder = new CategoryBuilder();
-		categoryBuilder.setId(rs.getInt("Category_ID"));
-		categoryBuilder.setTitle(rs.getString("Title"));
-		categoryBuilder.setSubtitle(rs.getString("Subtitle"));
-		return categoryBuilder.build();
+
+	public List<Category> getCategories() {
+		resultSet = executor.executeQuery("SELECT Category_ID, Title, Subtitle FROM Categories ORDER BY Title ASC;");
+		List<Category> categories = new ArrayList<Category>();
+		if (resultSet == null)
+			return new ArrayList<Category>();
+		else {
+			try {
+				while (resultSet.next()) {
+					categories.add(buildCategory(resultSet));
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+		}
+		return categories;
 	}
 }

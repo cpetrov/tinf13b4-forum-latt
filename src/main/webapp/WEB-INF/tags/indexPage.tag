@@ -19,13 +19,12 @@
 		<h2>Categories</h2>
 	</header>
 	<section>
-		<h3>First Category Group</h3> <%-- TODO implement category groups --%>
 		<c:forEach var="category" items="${categories}">
 		<article>
 			<img src="./img/bubbles.png" alt="Category">
 			<div>
 				<h4>
-					<a href="category.jsp?categoryId=${category.id}">${category.title}</a>
+					<a href="category.jsp?id=${category.id}">${category.title}</a>
 				</h4>
 				<p>${category.subtitle}</p>
 			</div>

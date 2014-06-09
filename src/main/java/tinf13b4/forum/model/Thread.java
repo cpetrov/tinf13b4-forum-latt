@@ -69,6 +69,14 @@ public class Thread {
 		return readonly;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void addPost(Post post) {
+		posts.add(post);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,9 +85,10 @@ public class Thread {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + (readonly ? 1231 : 1237);
-//		result = prime * result + userId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -106,23 +115,24 @@ public class Thread {
 			return false;
 		if (id != other.id)
 			return false;
-		if (readonly != other.readonly)
+		if (posts == null) {
+			if (other.posts != null)
+				return false;
+		} else if (!posts.equals(other.posts))
 			return false;
-		if (user != other.user)
+		if (readonly != other.readonly)
 			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void addPost(Post post) {
-		posts.add(post);
-	}
 }
