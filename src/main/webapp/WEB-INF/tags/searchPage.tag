@@ -13,7 +13,10 @@
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="search" />
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
+
 <c:set target="${provider }" property="threadId" value="${param.threadId }"></c:set>
+<c:set target="${provider }" property="searchObject" value="${param.searchValue}"></c:set>
+
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:attribute name="header">

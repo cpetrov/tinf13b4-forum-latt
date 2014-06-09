@@ -5,6 +5,7 @@ import java.util.List;
 
 import tinf13b4.forum.controller.CategoryController;
 import tinf13b4.forum.controller.PostController;
+import tinf13b4.forum.controller.SearchController;
 import tinf13b4.forum.controller.ThreadController;
 import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.Category;
@@ -26,6 +27,7 @@ public class ProviderBean {
 	private Category category;
 	private Thread thread;
 	private User user;
+	private String searchObject;
 
 	public ProviderBean() {
 		createLongText();
@@ -181,5 +183,14 @@ public class ProviderBean {
 				this.user = a;
 				return;
 			}
+	}
+	
+	public void setSearchObject(String searchObject) {
+		this.searchObject = searchObject;
+		SearchController search = new SearchController();
+		search.setSearchObject(searchObject);
+		this.categories = search.getCategories();
+		this.threads = search.getThreads();
+		this.users = search.getUsers();
 	}
 }

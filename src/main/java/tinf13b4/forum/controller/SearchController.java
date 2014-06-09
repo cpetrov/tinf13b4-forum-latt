@@ -1,4 +1,4 @@
-package tinf13b4.forum.search;
+package tinf13b4.forum.controller;
 
 import static tinf13b4.forum.controller.ResultSetUtil.buildCategory;
 import static tinf13b4.forum.controller.ResultSetUtil.buildUser;
@@ -7,16 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import tinf13b4.forum.controller.CategoryController;
-import tinf13b4.forum.controller.PostController;
-import tinf13b4.forum.controller.ThreadController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.model.Category;
 import tinf13b4.forum.model.Thread;
 import tinf13b4.forum.model.User;
 
-public class SearchBean {
+public class SearchController {
 
 	private ResultSet resultSet;
 	private QueryExecutor executor;
@@ -27,21 +24,16 @@ public class SearchBean {
 	private ArrayList<User> users;
 	private ArrayList<Category> categories;
 
-	public SearchBean() {
+	public SearchController() {
 		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
-	}
-
-	public String getSearchObject() {
-		return searchObject;
 	}
 
 	public ArrayList<Thread> getThreads() {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new IllegalStateException("SQL Error: " + e);
 		}
 		return threads;
 	}
@@ -50,8 +42,7 @@ public class SearchBean {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new IllegalStateException("SQL Error: " + e);
 		}
 		return users;
 	}
@@ -60,18 +51,18 @@ public class SearchBean {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new IllegalStateException("SQL Error: " + e);
 		}
 		return categories;
 	}
 
 	public void setSearchObject(String searchObject) {
 		this.searchObject = searchObject;
-	}
-
-	public double getDestination() {
-		return destination;
+		try {
+			getResult();
+		} catch (SQLException e) {
+			new IllegalStateException("SQL Error: " + e);
+		}
 	}
 
 	public void setDestination(double destination) {
@@ -80,7 +71,7 @@ public class SearchBean {
 
 
 	// Set the list below to the searched objects
-	public void getResult() throws SQLException {
+	private void getResult() throws SQLException {
 		String[] blacklist = {"SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "USE", "SHOW", "ALTER", "LOAD"};
 		if(searchObject == null)
 			return;
@@ -101,6 +92,10 @@ public class SearchBean {
 		}
 	}
 
+	/*
+	 * TODO Search in Posts
+	 */
+	
 	private void createThreads() throws SQLException {
 		resultSet = executor.executeQuery("SELECT * FROM Threads "
 				+ "WHERE Content LIKE '%" + searchObject + "%' "
