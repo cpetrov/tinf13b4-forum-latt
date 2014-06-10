@@ -3,6 +3,7 @@ package tinf13b4.forum.servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -72,10 +73,11 @@ public class RegisterServlet extends JsonServlet {
 
 
 				// Send Data To Database
-				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, Confirmation_Key) Values ('"
+				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, JoinedOn, Confirmation_Key) Values ('"
 						+ name.asString() +"', '"
 						+ email.asString() + "', '"
 						+ hashedPassword +"', '"
+						+ new Date(new java.util.Date().getTime()) + "', '"
 						+ confirmationKey + "');");
 				
 				// Send email to User
