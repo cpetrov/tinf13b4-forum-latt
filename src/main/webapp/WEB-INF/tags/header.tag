@@ -4,10 +4,12 @@
 
 <header>
 	<div id="login" class="pipeList">
+	<%--
 		<ul>
 			<li><a href="login.jsp">Login</a></li>
 			<li><a href="register.jsp">Register</a></li>
 		</ul>
+	 --%>
 		<ul>
             <li><a href="UCP.jsp">User Control Panel</a></li>
         </ul>
