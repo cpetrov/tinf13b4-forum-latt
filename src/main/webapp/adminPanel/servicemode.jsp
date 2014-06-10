@@ -15,7 +15,7 @@
 		<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="js/script.js" type="text/javascript"></script>
 
-		<title>Forenverwaltung</title>
+		<title>Einstellungen</title>
 	</head>
 	<body>
 		<div class="container">
@@ -39,15 +39,6 @@
 							<i class="fa fa-codepen"></i>
 							<span class="navPt">Allgemein</span>
 						</li>
-						<li class="subNav navDescription">
-							<span class="navPt">Seitenbeschreibung</span>
-						</li>
-						<li class="subNav navImpressum">
-							<span class="navPt">Impressum</span>
-						</li>
-						<li class="subNav navTermsofuse">
-							<span class="navPt">Nutzungsbestimmungen</span>
-						</li>
 						<li class="navUser">
 							<i class="fa fa-user"></i>
 							<span class="navPt">Benutzerverwaltung</span>
@@ -60,20 +51,35 @@
 							<i class="fa fa-cog"></i>
 							<span class="navPt">Einstellungen</span>
 						</li>
+						<li class="subNav navServiceMode">
+							<span class="navPt">Wartungsmodus</span>
+						</li>
 					</ul>
 				</div>
 				<div class="admContent">
+					
 				<form method="POST">
-				<c:if test="${!empty param.pageInprint}"><	
-					<jsp:setProperty name="adminPanelSettingsBean" property="pageInprint" value="${param.pageInprint}" />
+				<c:if test="${!empty param.pageDescription}">
+					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
 				</c:if>
-					<h1>Impressum</h1>
+					<h1>Wartungsmodus</h1>
 					<p>
-						Hier können die Impressum der Seite bearbeitet werdenn
+						Wartungsmodus bearbeiten:
 					</p>
-					<p><textarea name="pageInprint" cols="100" rows="10">${adminPanelSettingsBean.pageInprint}</textarea></p>
+					
+						<div class="onoffswitch">
+			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="">
+			    					<label class="onoffswitch-label" for="myonoffswitch">
+									    <span class="onoffswitch-inner"></span>
+									    <span class="onoffswitch-switch"></span>
+			    					</label>
+							    </div> 
+							    
+					
+					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
 				</form>
+					</p>
 				</div>
 			</div>
 		</div>

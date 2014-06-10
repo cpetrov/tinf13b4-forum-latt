@@ -17,12 +17,12 @@ public class AdminPanelSettingsBean {
 		return adminPanelSettingsController.getExistingPageDescription();
 	}
 
-	public void setPageImprint(String pageImprint) {
-		adminPanelSettingsController.setExistingImprint(pageImprint);
+	public void setPageInprint(String pageInprint) {
+		adminPanelSettingsController.setExistingInprint(pageInprint);
 	}
 
-	public String getPageImprint() {
-		return adminPanelSettingsController.getExistingImprint();
+	public String getPageInprint() {
+		return adminPanelSettingsController.getExistingInprint();
 	}
 
 	public void setTermsOfUse(String termsOfUse) {

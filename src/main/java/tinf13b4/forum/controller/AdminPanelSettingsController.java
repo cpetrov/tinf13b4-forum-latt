@@ -9,8 +9,9 @@ import tinf13b4.forum.database.QueryExecutor;
 
 public class AdminPanelSettingsController {
 	private String existingPageDescription;
-	private String existingPageImprint;
+	private String existingPageInprint;
 	private String existingTermsOfUse;
+	private int orderNumber;
 
 	QueryExecutor queryExecutor;
 	public AdminPanelSettingsController() {
@@ -36,22 +37,22 @@ public class AdminPanelSettingsController {
 		return existingPageDescription;
 	}
 
-	public void setExistingImprint(String pageImprint) {
-		queryExecutor.executeUpdate("UPDATE Settings SET Imprint='"+pageImprint+"';");
+	public void setExistingInprint(String pageInprint) {
+		queryExecutor.executeUpdate("UPDATE Settings SET Inprint='"+pageInprint+"';");
 	}
 
-	public String getExistingImprint() {
-		ResultSet rs = queryExecutor.executeQuery("SELECT Imprint FROM Settings;"); // Marius darauf aufmerksam machen, in der Settings Table in der DB steht "Inprint", nicht "Imprint", momentan würd es hier noch krachen!
+	public String getExistingInprint() {
+		ResultSet rs = queryExecutor.executeQuery("SELECT Inprint FROM Settings;"); // Marius darauf aufmerksam machen, in der Settings Table in der DB steht "Inprint", nicht "Imprint", momentan würd es hier noch krachen!
 		if (rs == null)
 			return "";
 		try {
 			while (rs.next()) {
-				existingPageImprint = rs.getString("Imprint");
+				existingPageInprint = rs.getString("Inprint");
 			}
 		} catch (SQLException e) {
 			throw new IllegalStateException(e);
 		}
-		return existingPageImprint;
+		return existingPageInprint;
 	}
 	public void setExistingTermsOfUse(String termsOfUse) {
 		queryExecutor.executeUpdate("UPDATE Settings SET TermsOfUse='"+termsOfUse+"';");
@@ -70,4 +71,10 @@ public class AdminPanelSettingsController {
 		}
 		return existingTermsOfUse;
 	}	
+	
+//	public void setOrderNumber(int orderNumber, int categoryID) {
+//		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber='" + orderNumber + "' WHERE categoryID LIKE '" + categoryID + "';");
+//	}
+	
+	
 }

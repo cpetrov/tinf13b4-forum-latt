@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -43,12 +45,6 @@
 						<li class="subNav navUserManage">
 							<span class="navPt">Benutzer</span>
 						</li>
-						<li class="subNav">
-							<span class="navPt">Registration</span>
-						</li>
-						<li class="subNav">
-							<span class="navPt">Benutzer sperren</span>
-						</li>
 						<li class="navManage">
 							<i class="fa fa-lock"></i>
 							<span class="navPt">Forenverwaltung</span>
@@ -59,6 +55,9 @@
 						</li>
 					</ul>
 				</div>
+				
+				<p>Problem mit UserTabelle!!</p>
+				
 				<div class="admContent">
 					<h1>Willkommen</h1> Benutzerverwaltung
 				</div>

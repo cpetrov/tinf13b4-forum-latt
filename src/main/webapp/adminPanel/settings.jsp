@@ -49,11 +49,8 @@
 							<i class="fa fa-cog"></i>
 							<span class="navPt">Einstellungen</span>
 						</li>
-						<li class="subNav">
-							<span class="navPt">Zeitzonen</span>
-						</li>
-						<li class="subNav">
-							<span class="navPt">Benachrichtigungen</span>
+						<li class="subNav navServiceMode">
+							<span class="navPt">Wartungsmodus</span>
 						</li>
 					</ul>
 				</div>

@@ -62,6 +62,14 @@ $(document).ready(function(){
 		window.location.href = "usermanage.jsp";
 	});
 
+	$('.navEditCategories').click(function() {
+		window.location.href = "editCategories.jsp";
+	});
+	
+	$('.navServiceMode').click(function() {
+		window.location.href = "servicemode.jsp";
+	});
+	
 	$('.dashobj').hover(function(){
 		$(this).children('p').animate({'background-color':'RGBA(0, 0, 0, 0.25)', 'color':'RGBA(255, 255, 255, 0.8)'}, 250);
 	}, function() {

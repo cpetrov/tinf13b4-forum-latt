@@ -68,9 +68,9 @@
 				</c:if>
 					<h1>Nutzungsbestimmungen</h1>
 					<p>
-						Hier können die Nutzungsbestimmungen der Seite bearbeitet werden
+						Hier können die Nutzungsbestimmungen der Seite bearbeitet werdenn
 					</p>
-					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.termsOfUse}</textarea></p>
+					<p><textarea name="termsOfUse" cols="100" rows="10">${adminPanelSettingsBean.termsOfUse}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
 				</form>
 				</div>
