@@ -44,7 +44,7 @@
 							<i class="fa fa-lock"></i>
 							<span class="navPt">Forenverwaltung</span>
 						</li>
-						<li class="subNav">
+						<li class="subNav navEditCategories">
 							<span class="navPt">Foren bearbeiten</span>
 						</li>
 						<li class="navSettings">

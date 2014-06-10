@@ -70,6 +70,7 @@
 					<p>
 						Hier kann die Seitenbeschreibung verändert werden
 					</p>
+					
 					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
 				</form>

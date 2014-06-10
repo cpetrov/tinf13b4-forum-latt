@@ -43,12 +43,6 @@
 						<li class="subNav">
 							<span class="navPt">Benutzer</span>
 						</li>
-						<li class="subNav">
-							<span class="navPt">Registration</span>
-						</li>
-						<li class="subNav">
-							<span class="navPt">Benutzer sperren</span>
-						</li>
 						<li class="navManage">
 							<i class="fa fa-lock"></i>
 							<span class="navPt">Forenverwaltung</span>
