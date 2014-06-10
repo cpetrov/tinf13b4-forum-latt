@@ -21,7 +21,7 @@ public class CategoryController {
 		this(new QueryExecutor(new ConnectionFactory().createConnection()));
 	}
 
-	protected CategoryController(QueryExecutor executor) {
+	public CategoryController(QueryExecutor executor) {
 		this.executor = executor;
 	}
 

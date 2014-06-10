@@ -452,6 +452,11 @@ div.newThread button {
   background-color: rgba(248, 79, 67, 0.75);
 }
 
+/* Search styles */
+.search #usersTable {
+  margin-top:0px !important;
+}
+
 /* User styles */
 #user>#userBlock {
   float: left;
