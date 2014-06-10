@@ -57,6 +57,13 @@
 			}).success(function(data){
 				$scope.isLoading = false;
 				
+				if(data.errors){
+					for(var i = 0; i < data.errors.length; i++){
+						var error = data.errors[i];
+						
+						showAlert("danger", error);
+					}
+				}
 			}).error(function(){
 				$scope.isLoading = false;
 				

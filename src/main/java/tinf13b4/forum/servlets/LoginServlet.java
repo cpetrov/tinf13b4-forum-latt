@@ -33,39 +33,50 @@ public class LoginServlet extends JsonServlet {
 		
 		List<String> errors = new ArrayList<String>();
 		
-		JsonValue logonCredential = postData.get("logonCredential");
+		JsonValue logonCredential = postData.get("name");
 		JsonValue password = postData.get("password");
 		
 		// 
-		if(logonCredential != null){
+		if(logonCredential == null){
 			errors.add("Name can not be empty");
-		} else {
-			response.sendError(HttpStatusCodes.BAD_REQUEST, "Bad Request");
 		}
 		
 		// If Password is empty return error message
-		if(password != null){			
+		if(password == null){			
 			errors.add("Password can not be empty");
-		} else {
-			response.sendError(HttpStatusCodes.BAD_REQUEST, "Bad Request");
 		}
 		
 		// Check error size
 		if(errors.size() > 0){
-			JsonArray json = new JsonArray();
-
-			for(String error:errors){
-				json.add(error);
-			}
-
-			JsonObject jsonObject = new JsonObject();
-
-			jsonObject.add("errors", json);
-			jsonObject.writeTo(response.getWriter());
+			JsonObject json = errorListToJson(errors);
+			
+			json.writeTo(response.getWriter());
 		} else {
 
 			// Validate with Database
-			loginController.loginDataValidator(logonCredential.asString(), password.asString());
+			errors = loginController.loginDataValidator(logonCredential.asString(), password.asString());
+			
+			if(errors.size() > 0){
+				JsonObject json = errorListToJson(errors);
+				
+				json.writeTo(response.getWriter());
+			}else{
+				
+			}
 		}
+	}
+	
+	private JsonObject errorListToJson(List<String> errors){
+		JsonArray json = new JsonArray();
+
+		for(String error:errors){
+			json.add(error);
+		}
+
+		JsonObject jsonObject = new JsonObject();
+
+		jsonObject.add("errors", json);
+		
+		return jsonObject;
 	}
 }

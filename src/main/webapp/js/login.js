@@ -10,7 +10,7 @@
 			return $scope.errors[key] ? "has-error" : "";
 		};
 		
-		$scope.register = function(){
+		$scope.login = function(){
 			$("form").prev("div.alert").remove();
 			
 			var name = $scope.name;
@@ -26,7 +26,7 @@
 			$scope.errors.password = !password || password.length < 8;
 			
 			if($scope.errors.password){
-				showAlert("danger", "The password must be atleast 8 characters long!");
+				showAlert("danger", "The password must be at least 8 characters long!");
 				return;
 			}
 			
@@ -38,6 +38,13 @@
 			}).success(function(data){
 				$scope.isLoading = false;
 				
+				if(data.errors){
+					for(var i = 0; i < data.errors.length; i++){
+						var error = data.errors[i];
+						
+						showAlert("danger", error);
+					}
+				}
 			}).error(function(){
 				$scope.isLoading = false;
 				
