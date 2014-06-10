@@ -15,8 +15,9 @@
 	<div class="holder">
 		<a href="index.jsp"><img src="img/logo.png" alt="Forum" /></a>
 		<span class="searchWidget">
-			<input type="text" name="q"> <input type="submit" id="submit"
-			name="btnsub" value="Search">
+		<form action="search.jsp" method="GET">
+			<input type="text" name="q"> <input type="submit" id="submit" name="btnsub" value="Search">
+		</form>
 		</span>
 	</div>
 	<nav>
