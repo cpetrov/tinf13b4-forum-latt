@@ -68,7 +68,7 @@
 					</p>
 					
 						<div class="onoffswitch">
-			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="">
+			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="${adminPanelSettingsBean.serviceMode}">
 			    					<label class="onoffswitch-label" for="myonoffswitch">
 									    <span class="onoffswitch-inner"></span>
 									    <span class="onoffswitch-switch"></span>
@@ -83,5 +83,18 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			"use strict";
+			
+			(function(){
+				$("#myonoffswitch").on("click", function(){
+					var serviceMode = this.val();
+					
+					$.post("/api/servicemode", {
+						serviceMode: serviceMode
+					});
+				});
+			}());
+		</script>
 	</body>
 </html>

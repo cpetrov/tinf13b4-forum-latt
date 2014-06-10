@@ -8,12 +8,14 @@ import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 
 public class AdminPanelSettingsController {
+	private QueryExecutor queryExecutor;;
+	private ResultSet rs;
 	private String existingPageDescription;
 	private String existingPageInprint;
 	private String existingTermsOfUse;
-	private int orderNumber;
-
-	QueryExecutor queryExecutor;
+//	private int orderNumber;
+	private boolean serviceMode;
+	
 	public AdminPanelSettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
@@ -70,6 +72,28 @@ public class AdminPanelSettingsController {
 			throw new IllegalStateException(e);
 		}
 		return existingTermsOfUse;
+	}
+
+	public boolean isServiceMode() {
+		rs = queryExecutor.executeQuery("SELECT ServiceMode FROM Settings;");
+		try {
+			while (rs.next())
+			{
+				serviceMode = rs.getBoolean("ServiceMode");
+			}
+		} catch (SQLException e) {
+			new IllegalStateException("SQL Error: " + e);
+		}
+		return serviceMode;
+	}
+
+	public void setServiceMode(boolean serviceMode) {
+		this.serviceMode = serviceMode;
+		if(serviceMode)
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'1' WHERE  `Settings_ID`=1;");
+		else
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'0' WHERE  `Settings_ID`=1;");
+
 	}	
 	
 //	public void setOrderNumber(int orderNumber, int categoryID) {
