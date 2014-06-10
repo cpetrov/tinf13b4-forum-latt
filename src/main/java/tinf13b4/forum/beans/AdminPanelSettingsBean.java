@@ -32,4 +32,13 @@ public class AdminPanelSettingsBean {
 	public String getTermsOfUse() {
 		return adminPanelSettingsController.getExistingTermsOfUse();
 	}
+	
+	public void setServiceMode(boolean serviceMode) {
+		adminPanelSettingsController.setServiceMode(serviceMode);
+	}
+	
+	public boolean getServiceMode() {
+		return adminPanelSettingsController.isServiceMode();
+	}
+	
 }
