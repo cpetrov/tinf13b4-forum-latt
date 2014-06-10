@@ -18,10 +18,6 @@
 	<section>
 	<header><h2>Users List</h2></header>
       <div id="usersList">
-        <span class="searchWidget">
-          <input type="text" name="q">
-          <input type="submit" id="submit" name="btnsub" value="User Search">
-        </span>
         <div id="usersTable">
           <header>
             <h3>Name</h3>

@@ -6,6 +6,7 @@ import static tinf13b4.forum.controller.ResultSetUtil.buildUser;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import tinf13b4.forum.controller.CategoryController;
 import tinf13b4.forum.controller.PostController;
@@ -23,20 +24,29 @@ public class SearchBean {
 
 	private String searchObject;
 	private double destination;
-	private ArrayList<Thread> threads;
-	private ArrayList<User> users;
-	private ArrayList<Category> categories;
+	private List<Thread> threads;
+	private List<User> users;
+	private List<Category> categories;
+	private PostController postController;
+	private CategoryController categoryController;
+	private ThreadController threadController;
 
 	public SearchBean() {
 		ConnectionFactory factory = new ConnectionFactory();
 		executor = new QueryExecutor(factory.createConnection());
+		postController = new PostController(executor);
+		categoryController = new CategoryController(executor);
+		threadController = new ThreadController(executor);
+		threads = new ArrayList<>();
+		users = new ArrayList<>();
+		categories = new ArrayList<>();
 	}
 
 	public String getSearchObject() {
 		return searchObject;
 	}
 
-	public ArrayList<Thread> getThreads() {
+	public List<Thread> getThreads() {
 		try {
 			getResult();
 		} catch (SQLException e) {
@@ -46,7 +56,7 @@ public class SearchBean {
 		return threads;
 	}
 
-	public ArrayList<User> getUsers() {
+	public List<User> getUsers() {
 		try {
 			getResult();
 		} catch (SQLException e) {
@@ -56,7 +66,7 @@ public class SearchBean {
 		return users;
 	}
 
-	public ArrayList<Category> getCategories() {
+	public List<Category> getCategories() {
 		try {
 			getResult();
 		} catch (SQLException e) {
@@ -102,18 +112,16 @@ public class SearchBean {
 	}
 
 	private void createThreads() throws SQLException {
-		resultSet = executor.executeQuery("SELECT * FROM Threads "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn FROM Threads T, Users U "
 				+ "WHERE Content LIKE '%" + searchObject + "%' "
 				+ "OR Title LIKE '%" + searchObject + "%';");
 
 		if(resultSet == null)
-			threads = new ArrayList<Thread>();
+			return;
 
-		threads = new ArrayList<Thread>();
 		while(resultSet.next()) {
-			ThreadController controller = new ThreadController();
-			controller.setRs(resultSet);
-			threads.add(controller.buildThread());
+			threadController.setRs(resultSet);
+			threads.add(threadController.buildThread());
 		}
 	}
 
@@ -122,27 +130,24 @@ public class SearchBean {
 		 		+ "WHERE Name LIKE '%" + searchObject + "%' "
 		 		+ "AND Confirmed = 1;");
 		if(resultSet == null)
-			users = new ArrayList<User>();
+			return;
 
-		users = new ArrayList<User>();
 		while(resultSet.next()) {
-			users.add(buildUser(resultSet, new PostController(executor)));
+			users.add(buildUser(resultSet, postController));
 		}
 	}
 
 	private void createCategories() throws SQLException {
-	    resultSet = executor.executeQuery("SELECT * FROM Category "
+	    resultSet = executor.executeQuery("SELECT * FROM Categories "
 	    		+ "WHERE Title LIKE '%" + searchObject + "%' "
 	    		+ "OR Subtitle LIKE '%" + searchObject + "%';");
 
 		if(resultSet == null)
-			categories = new ArrayList<Category>();
+			return;
 
-		categories = new ArrayList<Category>();
 		while(resultSet.next())
 		{
-			CategoryController controller = new CategoryController();
-			controller.setRs(resultSet);
+			categoryController.setRs(resultSet);
 			categories.add(buildCategory(resultSet));
 		}
 	}
