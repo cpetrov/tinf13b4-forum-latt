@@ -15,6 +15,7 @@ public class AdminPanelSettingsController {
 	private String existingTermsOfUse;
 //	private int orderNumber;
 	private boolean serviceMode;
+	private String serviceReason;
 	
 	public AdminPanelSettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
@@ -90,11 +91,29 @@ public class AdminPanelSettingsController {
 	public void setServiceMode(boolean serviceMode) {
 		this.serviceMode = serviceMode;
 		if(serviceMode)
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'1' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=1 WHERE  `Settings_ID`=1;");
 		else
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'0' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=0 WHERE  `Settings_ID`=1;");
 
-	}	
+	}
+	
+	public String getServiceReason() {
+		rs = queryExecutor.executeQuery("SELECT ServiceReason FROM Settings;");
+		try {
+			while (rs.next())
+			{
+				serviceReason = rs.getString("ServiceReason");
+			}
+		} catch (SQLException e) {
+			new IllegalStateException("SQL Error: " + e);
+		}
+		return serviceReason;
+	}
+	
+	public void setServiceReason(String serviceReason) {
+		this.serviceReason = serviceReason;
+		queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceReason`='" + serviceReason +"' WHERE  `Settings_ID`=1;");
+	}
 	
 //	public void setOrderNumber(int orderNumber, int categoryID) {
 //		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber='" + orderNumber + "' WHERE categoryID LIKE '" + categoryID + "';");

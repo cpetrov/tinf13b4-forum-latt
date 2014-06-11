@@ -41,4 +41,12 @@ public class AdminPanelSettingsBean {
 		return adminPanelSettingsController.isServiceMode();
 	}
 	
+	public String getServiceReason() {
+		return adminPanelSettingsController.getServiceReason();
+	}
+	
+	public void setServiceReason(String serviceReason) {
+		adminPanelSettingsController.setServiceReason(serviceReason);
+	}
+	
 }
