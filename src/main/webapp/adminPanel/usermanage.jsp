@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -12,6 +13,8 @@
 		<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="js/script.js" type="text/javascript"></script>
 
+		<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"></jsp:useBean>
+		
 		<title>Benutzerverwaltung</title>
 	</head>
 	<body>
@@ -60,43 +63,21 @@
 						<thead><tr>
 							<td>UserID</td>
 							<td>Nutzername</td>
-							<td>Vorname</td>
-							<td>Nachname</td>
 							<td>E-Mailadresse</td>
+							<td>Bild</td>
+							<td>Aktiviert</td>
 							<td>Aktionen</td>
 						</tr></thead>
-						<tr>
-							<td>1</td>
-							<td>Schempil</td>
-							<td>Philipp</td>
-							<td>Schemel</td>
-							<td>PhilippSchemel@live.com</td>
-							<td><i class="editButton fa fa-pencil-square-o"></i></td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Schempil</td>
-							<td>Philipp</td>
-							<td>Schemel</td>
-							<td>PhilippSchemel@live.com</td>
-							<td><i class="editButton fa fa-pencil-square-o"></i></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Schempil</td>
-							<td>Philipp</td>
-							<td>Schemel</td>
-							<td>PhilippSchemel@live.com</td>
-							<td><i class="editButton fa fa-pencil-square-o"></i></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Schempil</td>
-							<td>Philipp</td>
-							<td>Schemel</td>
-							<td>PhilippSchemel@live.com</td>
-							<td><i class="editButton fa fa-pencil-square-o"></i></td>
-						</tr>
+						<c:forEach var="user" items="${adminPanelSettingsBean.users }">
+							<tr>
+								<td>${user.id }</td>
+								<td>${user.name }</td>
+								<td>${user.mail }</td>
+								<td>${user.picture }</td>
+								<td>${user.confirmed }</td>
+								<td><i class="editButton fa fa-pencil-square-o"></i></td>
+							</tr>
+						</c:forEach>
 					</table>
 					</p>
 				</div>
