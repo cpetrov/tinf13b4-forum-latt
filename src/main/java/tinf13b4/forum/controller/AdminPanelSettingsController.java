@@ -90,9 +90,9 @@ public class AdminPanelSettingsController {
 	public void setServiceMode(boolean serviceMode) {
 		this.serviceMode = serviceMode;
 		if(serviceMode)
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'1' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=1 WHERE  `Settings_ID`=1;");
 		else
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'0' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=0 WHERE  `Settings_ID`=1;");
 
 	}	
 	
