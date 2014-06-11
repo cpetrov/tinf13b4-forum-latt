@@ -57,18 +57,23 @@
 					</ul>
 				</div>
 				<div class="admContent">
-					
+
 				<form method="POST">
-				<c:if test="${!empty param.pageDescription}">
+ 				<c:if test="${!empty param.pageDescription}">
 					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
 				</c:if>
 					<h1>Wartungsmodus</h1>
 					<p>
 						Wartungsmodus bearbeiten:
 					</p>
-					
 						<div class="onoffswitch">
-			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="${adminPanelSettingsBean.serviceMode}">
+						
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+						<% 
+   						 if (adminPanelSettingsBean.getServiceMode()) {
+        				 out.print("checked=\"checked\"");
+    						} 
+    					%>/>
 			    					<label class="onoffswitch-label" for="myonoffswitch">
 									    <span class="onoffswitch-inner"></span>
 									    <span class="onoffswitch-switch"></span>
@@ -78,23 +83,10 @@
 					
 					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
-				</form>
+				</form>			
 					</p>
 				</div>
 			</div>
 		</div>
-		<script>
-			"use strict";
-			
-			(function(){
-				$("#myonoffswitch").on("click", function(){
-					var serviceMode = this.val();
-					
-					$.post("/api/servicemode", {
-						serviceMode: serviceMode
-					});
-				});
-			}());
-		</script>
 	</body>
 </html>
