@@ -64,14 +64,14 @@
 				</div>
 				<div class="admContent">
 				<form method="POST">
-				<c:if test="${!empty param.pageInprint}"><	
-					<jsp:setProperty name="adminPanelSettingsBean" property="pageInprint" value="${param.pageInprint}" />
+				<c:if test="${!empty param.pageImprint}"><	
+					<jsp:setProperty name="adminPanelSettingsBean" property="pageImprint" value="${param.pageImprint}" />
 				</c:if>
 					<h1>Impressum</h1>
 					<p>
 						Hier können die Impressum der Seite bearbeitet werdenn
 					</p>
-					<p><textarea name="pageInprint" cols="100" rows="10">${adminPanelSettingsBean.pageInprint}</textarea></p>
+					<p><textarea name="pageImprint" cols="100" rows="10">${adminPanelSettingsBean.pageImprint}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
 				</form>
 				</div>
