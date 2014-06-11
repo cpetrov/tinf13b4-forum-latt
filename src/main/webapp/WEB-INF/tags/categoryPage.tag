@@ -39,7 +39,7 @@
 	</section>
 	<div>
 		<button>
-			<a href="newTopic.jsp?categoryId=${category.id}"><img src="./img/quill.png"><span>New Topic</span></a>
+			<a href="newThread.jsp?categoryId=${category.id}"><img src="./img/quill.png"><span>New Topic</span></a>
 		</button>
 	</div>
 </section>

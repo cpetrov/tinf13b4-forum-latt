@@ -355,6 +355,7 @@ label[for="editor"] {
 
 input#subject {
   display: block;
+  box-sizing: border-box;
   width: 100%;
   border-style: none;
   padding: 10px;
