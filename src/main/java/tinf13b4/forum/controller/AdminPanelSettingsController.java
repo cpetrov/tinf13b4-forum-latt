@@ -11,10 +11,11 @@ public class AdminPanelSettingsController {
 	private QueryExecutor queryExecutor;;
 	private ResultSet rs;
 	private String existingPageDescription;
-	private String existingPageInprint;
+	private String existingPageImprint;
 	private String existingTermsOfUse;
 //	private int orderNumber;
 	private boolean serviceMode;
+	private String serviceReason;
 	
 	public AdminPanelSettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
@@ -39,22 +40,22 @@ public class AdminPanelSettingsController {
 		return existingPageDescription;
 	}
 
-	public void setExistingInprint(String pageInprint) {
-		queryExecutor.executeUpdate("UPDATE Settings SET Inprint='"+pageInprint+"';");
+	public void setExistingImprint(String pageInprint) {
+		queryExecutor.executeUpdate("UPDATE Settings SET Imprint='"+pageInprint+"';");
 	}
 
-	public String getExistingInprint() {
-		ResultSet rs = queryExecutor.executeQuery("SELECT Inprint FROM Settings;"); // Marius darauf aufmerksam machen, in der Settings Table in der DB steht "Inprint", nicht "Imprint", momentan würd es hier noch krachen!
+	public String getExistingImprint() {
+		ResultSet rs = queryExecutor.executeQuery("SELECT Imprint FROM Settings;");
 		if (rs == null)
 			return "";
 		try {
 			while (rs.next()) {
-				existingPageInprint = rs.getString("Inprint");
+				existingPageImprint = rs.getString("Imprint");
 			}
 		} catch (SQLException e) {
 			throw new IllegalStateException(e);
 		}
-		return existingPageInprint;
+		return existingPageImprint;
 	}
 	public void setExistingTermsOfUse(String termsOfUse) {
 		queryExecutor.executeUpdate("UPDATE Settings SET TermsOfUse='"+termsOfUse+"';");
@@ -90,11 +91,29 @@ public class AdminPanelSettingsController {
 	public void setServiceMode(boolean serviceMode) {
 		this.serviceMode = serviceMode;
 		if(serviceMode)
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'1' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=1 WHERE  `Settings_ID`=1;");
 		else
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=b'0' WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=0 WHERE  `Settings_ID`=1;");
 
-	}	
+	}
+	
+	public String getServiceReason() {
+		rs = queryExecutor.executeQuery("SELECT ServiceReason FROM Settings;");
+		try {
+			while (rs.next())
+			{
+				serviceReason = rs.getString("ServiceReason");
+			}
+		} catch (SQLException e) {
+			new IllegalStateException("SQL Error: " + e);
+		}
+		return serviceReason;
+	}
+	
+	public void setServiceReason(String serviceReason) {
+		this.serviceReason = serviceReason;
+		queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceReason`='" + serviceReason +"' WHERE  `Settings_ID`=1;");
+	}
 	
 //	public void setOrderNumber(int orderNumber, int categoryID) {
 //		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber='" + orderNumber + "' WHERE categoryID LIKE '" + categoryID + "';");
