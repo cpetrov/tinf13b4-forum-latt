@@ -29,25 +29,6 @@ public class UserController {
 		this.resultSet = resultSet;
 	}
 
-	public List<User> getAllUsers() {
-		PostController postController = new PostController(executor);
-		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed "
-											+ "FROM Users;");
-		ArrayList<User> users = new ArrayList<User>();
-		if (resultSet == null)
-			return new ArrayList<>();
-		else {
-			try {
-				while (resultSet.next()) {
-					users.add(buildUser(resultSet, postController));
-				}
-			} catch (SQLException e) {
-				new IllegalStateException("SQL Error: " + e);
-			}
-		}
-		return users;
-	}
-	
 	public List<User> getUsers() {
 		PostController postController = new PostController(executor);
 		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn "
@@ -68,15 +49,14 @@ public class UserController {
 		return users;
 	}
 
-	public void updateUser(int userId, String name, String picturePath, String mail, boolean confirmed) {
-		checkUserArguments(userId, name, picturePath, mail, confirmed);
-		String command = "UPDATE Users SET Name = '" + name + "', Picture = '" + picturePath + "', Email = '" + mail +"', Confirmed = " + confirmed + ", ";
-		if(confirmed)
-			command += "Confirmation_Key = 0 ";
-		executor.executeUpdate(command + "WHERE User_Id = " + userId + ";");
+	public void updateUser(int userId, String name, String picturePath, String mail) {
+		checkUserArguments(userId, name, picturePath, mail);
+		executor.executeUpdate("UPDATE Users "
+								+ "SET Name = '" + name + "', Picture = '" + picturePath + "', Email = '" + mail + "' "
+								+ "WHERE User_ID = " + userId + ";");
 	}
 
-	private void checkUserArguments(int userId, String name, String picturePath, String mail, boolean confirmed) {
+	private void checkUserArguments(int userId, String name, String picturePath, String mail) {
 		checkArgument(userId>0, "UserId must be > 0, but was: " + userId);
 		checkArgument(name!=null, "Name must not be null.");
 		checkArgument(!name.isEmpty(), "Name must not be empty.");
@@ -84,7 +64,6 @@ public class UserController {
 		checkArgument(!picturePath.isEmpty(), "PicturePath must not be empty.");
 		checkArgument(mail!=null, "Mail must not be null.");
 		checkArgument(!mail.isEmpty(), "Mail must not be empty.");
-		checkArgument(confirmed == true | confirmed == false, "Confirmed must be true or false.");
 	}
 
 }

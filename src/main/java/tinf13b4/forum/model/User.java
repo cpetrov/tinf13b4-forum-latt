@@ -13,20 +13,18 @@ public class User {
 	private String mail;
 	private Date joinedOn;
 	private int postCount;
-	private boolean confirmed;
 
-	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn, boolean confirmed) {
-		checkArguments(id, name, postsCount, picture, email, joinedOn, confirmed);
+	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn) {
+		checkArguments(id, name, postsCount, picture, email, joinedOn);
 		this.id = id;
 		this.name = name;
 		this.postCount = postsCount;
 		this.setPicture(picture);
 		this.mail = email;
 		this.joinedOn = joinedOn;
-		this.confirmed = confirmed;
 	}
 
-	private void checkArguments(int id, String name, int postsCount, String picture, String email, Date joinedOn, boolean confirmed) {
+	private void checkArguments(int id, String name, int postsCount, String picture, String email, Date joinedOn) {
 		checkArgument(id > 0, "Id must be positive.");
 		checkArgument(name != null, "Name must not be null.");
 		checkArgument(postsCount >= 0, "PostsCount must be >= 0, but was " + postsCount);
@@ -34,7 +32,6 @@ public class User {
 		checkArgument(email != null, "Email must not be null.");
 		checkArgument(!email.isEmpty(), "Email must not be empty.");
 		checkArgument(joinedOn!=null, "JoinedOn must not be null.");
-		checkArgument(confirmed == false | confirmed == true, "Confirmed must be true or false.");
 	}
 
 	public int getId() {
@@ -74,14 +71,6 @@ public class User {
 	public int getPostCount() {
 		return postCount;
 	}
-	
-	public boolean getConfirmed() {
-		return confirmed;
-	}
-	
-	public void setConfirmed(boolean confirmed) {
-		this.confirmed = confirmed;
-	}
 
 	@Override
 	public int hashCode() {
@@ -93,7 +82,6 @@ public class User {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + postCount;
-		// TODO confirmed
 		return result;
 	}
 
@@ -131,7 +119,6 @@ public class User {
 		if (postCount != other.postCount)
 			return false;
 		return true;
-		// TODO confirmed
 	}
 
 }

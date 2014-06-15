@@ -43,11 +43,9 @@ CREATE TABLE IF NOT EXISTS `Posts` (
 CREATE TABLE IF NOT EXISTS `Settings` (
   `Settings_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Pagedescription` text NOT NULL,
-  `Imprint` text NOT NULL,
+  `Inprint` text NOT NULL,
   `TermsOfUse` text NOT NULL,
   `Notification` text NOT NULL,
-  `ServiceMode` tinyint(1) NOT NULL DEFAULT '0',
-  `ServiceReason` text NOT NULL,
   PRIMARY KEY (`Settings_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Settings for Adminsettings';
 

@@ -16,7 +16,6 @@ public class ConsumerBean {
 	private String userName;
 	private String userPicturePath;
 	private String userMail;
-	private boolean userConfirmed;
 	private ThreadController threadController;
 	private String threadTitle;
 	private int threadUserId;
@@ -82,7 +81,7 @@ public class ConsumerBean {
 
 	public void setUser(int userId) {
 		checkUserArguments(userId);
-		userController.updateUser(userId, userName, userPicturePath, userMail, userConfirmed);
+		userController.updateUser(userId, userName, userPicturePath, userMail);
 	}
 
 	private void checkUserArguments(int userId) {
@@ -90,7 +89,6 @@ public class ConsumerBean {
 		checkArgument(userMail != null, "UserMail must not be null when setting user.");
 		checkArgument(userName != null, "UserName must not be null when setting user.");
 		checkArgument(userPicturePath != null, "UserPicturePath must not be null when setting user.");
-		checkArgument(userConfirmed == true | userConfirmed == false, "UserConfirmed must be true or false.");
 	}
 
 	public void setPostThreadId(int threadId) {
