@@ -13,10 +13,10 @@ public class AdminPanelSettingsController {
 	private String existingPageDescription;
 	private String existingPageImprint;
 	private String existingTermsOfUse;
-//	private int orderNumber;
+	private int orderNumber;
 	private boolean serviceMode;
 	private String serviceReason;
-	
+
 	public AdminPanelSettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
@@ -96,7 +96,7 @@ public class AdminPanelSettingsController {
 			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=0 WHERE  `Settings_ID`=1;");
 
 	}
-	
+
 	public String getServiceReason() {
 		rs = queryExecutor.executeQuery("SELECT ServiceReason FROM Settings;");
 		try {
@@ -109,15 +109,14 @@ public class AdminPanelSettingsController {
 		}
 		return serviceReason;
 	}
-	
+
 	public void setServiceReason(String serviceReason) {
 		this.serviceReason = serviceReason;
 		queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceReason`='" + serviceReason +"' WHERE  `Settings_ID`=1;");
 	}
-	
-//	public void setOrderNumber(int orderNumber, int categoryID) {
-//		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber='" + orderNumber + "' WHERE categoryID LIKE '" + categoryID + "';");
-//	}
-	
-	
+
+	public void setOrderNumber(int orderNumber, int categoryID) {
+		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber = " + orderNumber
+				+ " WHERE Category_ID = " + categoryID + ";");
+	}
 }

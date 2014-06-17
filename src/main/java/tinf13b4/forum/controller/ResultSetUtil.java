@@ -65,6 +65,7 @@ public class ResultSetUtil {
 		categoryBuilder.setId(resultSet.getInt("Category_ID"));
 		categoryBuilder.setTitle(resultSet.getString("Title"));
 		categoryBuilder.setSubtitle(resultSet.getString("Subtitle"));
+		categoryBuilder.setOrderNumber(resultSet.getInt("OrderNumber"));
 		} catch (SQLException e) {
 			throw new IllegalStateException("SQL error while building Category: " + e);
 		}

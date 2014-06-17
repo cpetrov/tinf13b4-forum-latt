@@ -12,12 +12,12 @@ public class CategoryTest {
 
 	@Before
 	public void setUp() {
-		category = new Category(1, "foo", "foo");
+		category = new Category(1, "foo", "foo", 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNegativeId() {
-		new Category(-1, "foo", "foo");
+		new Category(-1, "foo", "foo", 0);
 	}
 
 	@Test
@@ -27,12 +27,12 @@ public class CategoryTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new Category(2, null, null);
+		new Category(2, null, null, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new Category(2, "", "");
+		new Category(2, "", "", 0);
 	}
 
 	@Test
