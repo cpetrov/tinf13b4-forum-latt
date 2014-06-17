@@ -60,8 +60,6 @@ public class LoginServlet extends JsonServlet {
 				JsonObject json = errorListToJson(errors);
 				
 				json.writeTo(response.getWriter());
-			}else{
-				
 			}
 		}
 	}

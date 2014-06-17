@@ -44,11 +44,11 @@
 						
 						showAlert("danger", error);
 					}
+				} else {
+					window.location.href = "/index.jsp";
 				}
 			}).error(function(){
 				$scope.isLoading = false;
-				
-				//TODO - Errors response
 			});
 		};
 	});

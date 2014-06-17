@@ -90,15 +90,15 @@ public class RegisterDataValidator {
 
 		// Validate With Regular Expressions
 		if (!username.matches(USERNAME_PATTERN)) {
-			errors.add("Wï¿½hlen Sie einen neuen Namen");
+			errors.add("The username is invalid, it´s only allowed to use letters and numbers");
 		}
 
 		if (!emailAddress.matches(EMAIL_PATTERN)) {
-			errors.add("Email Adresse nicht gï¿½ltig");
+			errors.add("The email address is not valid");
 		}
 
 		if (!password.matches(PASSWORD_PATTERN)) {
-			errors.add("Passwort entspricht nicht den Anforderungen");
+			errors.add("The password is invalid please use a big letter, small letter, @, #, $, %");
 		}
 
 
