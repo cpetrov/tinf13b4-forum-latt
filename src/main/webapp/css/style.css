@@ -248,6 +248,21 @@ header .searchWidget {
   text-transform: uppercase;
 }
 
+.inputHolder a {
+  display: block;
+  margin-left: 90px;
+}
+
+.inputHolder .placeholder {
+  display: block;
+  margin-top: 50px;
+  text-align: center;
+  font-family: "neon_lightsregular";
+  font-size: 1.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .success {
   text-align: center;
   border-radius: 30px;

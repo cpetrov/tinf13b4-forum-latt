@@ -30,6 +30,7 @@
 				<div class="form-group" ng-class="hasError('password')">
 					<label for="password">Password</label>
 					<input id="password" ng-model="password" type="password" placeholder="Password" />
+					<a href="forgotten.jsp">Forgot Password?</a>
 				</div>
 				<button type="submit">Login</button>
 			</form>

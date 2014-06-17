@@ -82,8 +82,7 @@ public class RegisterServlet extends JsonServlet {
 				
 				// Send email to User
 				sendMail.emailBuilder(email.asString(), name.asString(), confirmationKey);
-				
-				response.sendRedirect("index.jsp");
+
 			}
 		} else {
 			response.sendError(HttpStatusCodes.BAD_REQUEST, "Bad Request");
