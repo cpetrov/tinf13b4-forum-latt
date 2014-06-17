@@ -23,6 +23,7 @@ public class ResultSetUtil {
 			userBuilder.setPicture(resultSet.getString("Picture"));
 			userBuilder.setEmail(resultSet.getString("Email"));
 			userBuilder.setJoinedOn(new Date(resultSet.getTimestamp("JoinedOn").getTime()));
+			userBuilder.setConfirmed(resultSet.getBoolean("Confirmed"));
 			userBuilder.setPostsCount(posts);
 		} catch(SQLException e) {
 			throw new IllegalStateException("SQL error while building User: " + e);
