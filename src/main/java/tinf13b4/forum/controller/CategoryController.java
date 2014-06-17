@@ -30,7 +30,7 @@ public class CategoryController {
 	}
 
 	public List<Category> getCategoryForThread(int threadId) {
-		resultSet = executor.executeQuery("SELECT C.Category_ID, C.Title, C.Subtitle "
+		resultSet = executor.executeQuery("SELECT C.Category_ID, C.Title, C.Subtitle, C.OrderNumber "
 										+ "FROM Categories C, Threads T "
 										+ "WHERE T.Thread_ID = " + threadId + " "
 										+ "AND C.Category_ID = T.Category_ID "
@@ -51,7 +51,7 @@ public class CategoryController {
 	}
 
 	public List<Category> getCategories() {
-		resultSet = executor.executeQuery("SELECT Category_ID, Title, Subtitle FROM Categories ORDER BY Title ASC;");
+		resultSet = executor.executeQuery("SELECT Category_ID, Title, Subtitle, OrderNumber FROM Categories ORDER BY OrderNumber ASC;");
 		List<Category> categories = new ArrayList<Category>();
 		if (resultSet == null)
 			return new ArrayList<Category>();

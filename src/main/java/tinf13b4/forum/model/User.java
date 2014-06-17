@@ -13,8 +13,9 @@ public class User {
 	private String mail;
 	private Date joinedOn;
 	private int postCount;
+	private boolean confirmed;
 
-	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn) {
+	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn, boolean confirmed) {
 		checkArguments(id, name, postsCount, picture, email, joinedOn);
 		this.id = id;
 		this.name = name;
@@ -22,6 +23,7 @@ public class User {
 		this.setPicture(picture);
 		this.mail = email;
 		this.joinedOn = joinedOn;
+		this.confirmed = confirmed;
 	}
 
 	private void checkArguments(int id, String name, int postsCount, String picture, String email, Date joinedOn) {
@@ -71,6 +73,14 @@ public class User {
 	public int getPostCount() {
 		return postCount;
 	}
+	
+	public boolean getConfirmed() {
+		return confirmed;
+	}
+	
+	public void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+	}
 
 	@Override
 	public int hashCode() {
@@ -82,6 +92,7 @@ public class User {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + postCount;
+		// TODO confirmed
 		return result;
 	}
 
@@ -119,6 +130,7 @@ public class User {
 		if (postCount != other.postCount)
 			return false;
 		return true;
+		// TODO confirmed
 	}
 
 }

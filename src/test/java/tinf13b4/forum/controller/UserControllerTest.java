@@ -56,42 +56,42 @@ public class UserControllerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNegativeUserId() {
-		new UserController(executor).updateUser(-1, "foo", "bar", "baz");
+		new UserController(executor).updateUser(-1, "foo", "bar", "baz", true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new UserController(executor).updateUser(1, null, "bar", "baz");
+		new UserController(executor).updateUser(1, null, "bar", "baz", true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new UserController(executor).updateUser(1, "", "bar", "baz");
+		new UserController(executor).updateUser(1, "", "bar", "baz", true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullPicturePath() {
-		new UserController(executor).updateUser(1, "foo", null, "baz");
+		new UserController(executor).updateUser(1, "foo", null, "baz", true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyPicturePath() {
-		new UserController(executor).updateUser(1, "bar", "", "baz");
+		new UserController(executor).updateUser(1, "bar", "", "baz", true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullMail() {
-		new UserController(executor).updateUser(1, "foo", "bar", null);
+		new UserController(executor).updateUser(1, "foo", "bar", null, true);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
-		new UserController(executor).updateUser(1, "bar", "bar", "");
+		new UserController(executor).updateUser(1, "bar", "bar", "", true);
 	}
 
 	@Test
 	public void testUpdatesUser() {
-		new UserController(executor).updateUser(2, "name", "picturePath", "mail");
+		new UserController(executor).updateUser(2, "name", "picturePath", "mail", true);
 
 		verify(executor).executeUpdate("UPDATE Users SET Name = 'name', Picture = 'picturePath', Email = 'mail' WHERE User_ID = 2;");
 	}
