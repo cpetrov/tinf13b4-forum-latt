@@ -11,6 +11,7 @@ public class UserBuilder {
 	private String email;
 	private Date joinedOn;
 	private int postsCount;
+	private boolean confirmed;
 
 	public UserBuilder setId(int id) {
 		this.id = id;
@@ -41,8 +42,13 @@ public class UserBuilder {
 		this.postsCount = postsCount;
 		return this;
 	}
+	
+	public UserBuilder setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+		return this;
+	}
 
 	public User build() {
-		return new User(id, name, postsCount, picture, email, joinedOn);
+		return new User(id, name, postsCount, picture, email, joinedOn, confirmed);
 	}
 }

@@ -57,44 +57,38 @@
 					</ul>
 				</div>
 				<div class="admContent">
-					
+								
 				<form method="POST">
-				<c:if test="${!empty param.pageDescription}">
-					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
+ 				<c:if test="${!empty param.serviceReason}">
+					<jsp:setProperty name="adminPanelSettingsBean" property="serviceReason" value="${param.serviceReason}" />
 				</c:if>
 					<h1>Wartungsmodus</h1>
 					<p>
 						Wartungsmodus bearbeiten:
 					</p>
-					
 						<div class="onoffswitch">
-			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="${adminPanelSettingsBean.serviceMode}">
+						
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+						${not empty param.onoffswitch ? 'checked' : ''}/>
+						
+    					<c:choose>
+			     	 		<c:when test="${param.onoffswitch != null }">
+			      				<c:set target="${adminPanelSettingsBean }" property="serviceMode" value="true"></c:set>
+			      			</c:when>
+			      			<c:otherwise>
+			      				<c:set target="${adminPanelSettingsBean }" property="serviceMode" value="false"></c:set>
+			      			</c:otherwise>
+						</c:choose>
 			    					<label class="onoffswitch-label" for="myonoffswitch">
 									    <span class="onoffswitch-inner"></span>
 									    <span class="onoffswitch-switch"></span>
 			    					</label>
 							    </div> 
-							    
-					
-					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
+					<p><textarea name="serviceReason" cols="100" rows="10">${adminPanelSettingsBean.serviceReason}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
-				</form>
-					</p>
+				</form>			
 				</div>
 			</div>
 		</div>
-		<script>
-			"use strict";
-			
-			(function(){
-				$("#myonoffswitch").on("click", function(){
-					var serviceMode = this.val();
-					
-					$.post("/api/servicemode", {
-						serviceMode: serviceMode
-					});
-				});
-			}());
-		</script>
 	</body>
 </html>
