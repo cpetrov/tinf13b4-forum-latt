@@ -86,7 +86,7 @@ public class ThreadControllerTest {
 		assertEquals("content", threads.get(0).getContent());
 		assertEquals(new Date(date.getTime()), threads.get(0).getDate());
 		assertEquals(false, threads.get(0).isReadonly());
-		User user = new User(1, "user", 1, "pathToPicture", "email", new Date(joinedOn.getTime()));
+		User user = new User(1, "user", 1, "pathToPicture", "email", new Date(joinedOn.getTime()), true);
 		assertEquals(user, threads.get(0).getUser());
 	}
 
