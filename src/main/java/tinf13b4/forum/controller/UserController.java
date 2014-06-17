@@ -50,7 +50,7 @@ public class UserController {
 	
 	public List<User> getUsers() {
 		PostController postController = new PostController(executor);
-		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn "
+		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed "
 											+ "FROM Users "
 											+ "WHERE Confirmed='1';");
 		ArrayList<User> users = new ArrayList<User>();
