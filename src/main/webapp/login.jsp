@@ -4,5 +4,5 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:loginPage>
-	<jsp:attribute name="title">Page Title</jsp:attribute>
+	<jsp:attribute name="title">Login</jsp:attribute>
 </t:loginPage>

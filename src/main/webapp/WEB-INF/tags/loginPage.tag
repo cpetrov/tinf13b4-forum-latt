@@ -21,7 +21,7 @@
 	<jsp:body>
 		<div id="inputBlock" ng-app="LoginApp" ng-controller="LoginController">
 		<div class="inputHolder">
-			<form ng-submit="login()">
+			<form ng-submit="login()" action="index.jsp">
 				<div class="alert"></div>
 				<div class="form-group" ng-class="hasError('name')">
 					<label for="name">Username</label>
@@ -30,6 +30,7 @@
 				<div class="form-group" ng-class="hasError('password')">
 					<label for="password">Password</label>
 					<input id="password" ng-model="password" type="password" placeholder="Password" />
+					<a href="forgotten.jsp">Forgot Password?</a>
 				</div>
 				<button type="submit">Login</button>
 			</form>
