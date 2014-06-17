@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
@@ -57,44 +58,48 @@
 					</ul>
 				</div>
 				<div class="admContent">
-					
+
+				<c:if test="${not empty param.serviceReason }">
+					<c:set target="${adminPanelSettingsBean}" property="serviceReason" value="${param.serviceReason}"></c:set>
+					<c:set target="${adminPanelSettingsBean}" property="serviceMode" value="${not empty param.onoffswitch? true : false}"></c:set>
+				</c:if>		
 				<form method="POST">
-				<c:if test="${!empty param.pageDescription}">
-					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
-				</c:if>
 					<h1>Wartungsmodus</h1>
+						<p>
+							Wartungsmodus bearbeiten:
+						</p>
+					<div class="onoffswitch">
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+							${adminPanelSettingsBean.serviceMode ? 'checked' : ''} />
+						<label class="onoffswitch-label" for="myonoffswitch"> 
+							<span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
+						</label>
+					</div>
 					<p>
-						Wartungsmodus bearbeiten:
+						<textarea id="service_reason" name="serviceReason" cols="100" rows="10" disabled="${!adminPanelSettingsBean.serviceMode}">
+						${adminPanelSettingsBean.serviceReason}
+						</textarea>
 					</p>
-					
-						<div class="onoffswitch">
-			    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" value="${adminPanelSettingsBean.serviceMode}">
-			    					<label class="onoffswitch-label" for="myonoffswitch">
-									    <span class="onoffswitch-inner"></span>
-									    <span class="onoffswitch-switch"></span>
-			    					</label>
-							    </div> 
-							    
-					
-					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
-					<button type="submit" class="navButton">Speichern</button>
-				</form>
-					</p>
+	
+					<button id="save" type="submit" class="navButton">Speichern</button>
+				</form>			
 				</div>
 			</div>
 		</div>
-		<script>
-			"use strict";
-			
-			(function(){
-				$("#myonoffswitch").on("click", function(){
-					var serviceMode = this.val();
-					
-					$.post("/api/servicemode", {
-						serviceMode: serviceMode
-					});
-				});
-			}());
-		</script>
+	<script>
+		$(function(){
+			$("#myonoffswitch").on("click", function(){
+				 var checked = $(this).prop("checked");
+				 
+				 $("#service_reason").prop("disabled", !checked);
+			});
+		});
+		
+		$(function(){
+			$("#save").on("click", function(){
+				$("#service_reason").prop("disabled", false);
+			});
+		});
+	</script>
 	</body>
 </html>

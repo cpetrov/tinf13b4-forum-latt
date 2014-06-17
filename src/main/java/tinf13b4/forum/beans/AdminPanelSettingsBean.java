@@ -1,9 +1,14 @@
 package tinf13b4.forum.beans;
 
+import java.util.List;
+
 import tinf13b4.forum.controller.AdminPanelSettingsController;
+import tinf13b4.forum.controller.UserController;
+import tinf13b4.forum.model.User;
 
 public class AdminPanelSettingsBean {
 	private AdminPanelSettingsController adminPanelSettingsController;
+	private List<User> users;
 
 	public AdminPanelSettingsBean() {
 		adminPanelSettingsController = new AdminPanelSettingsController();
@@ -17,12 +22,12 @@ public class AdminPanelSettingsBean {
 		return adminPanelSettingsController.getExistingPageDescription();
 	}
 
-	public void setPageInprint(String pageInprint) {
-		adminPanelSettingsController.setExistingInprint(pageInprint);
+	public void setPageImprint(String pageImprint) {
+		adminPanelSettingsController.setExistingImprint(pageImprint);
 	}
 
-	public String getPageInprint() {
-		return adminPanelSettingsController.getExistingInprint();
+	public String getPageImprint() {
+		return adminPanelSettingsController.getExistingImprint();
 	}
 
 	public void setTermsOfUse(String termsOfUse) {
@@ -41,4 +46,20 @@ public class AdminPanelSettingsBean {
 		return adminPanelSettingsController.isServiceMode();
 	}
 	
+	public String getServiceReason() {
+		return adminPanelSettingsController.getServiceReason();
+	}
+	
+	public void setServiceReason(String serviceReason) {
+		adminPanelSettingsController.setServiceReason(serviceReason);
+	}
+	
+	public List<User> getUsers() {
+		UserController controller = new UserController();
+		return controller.getAllUsers();
+	}
+	
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}	
 }
