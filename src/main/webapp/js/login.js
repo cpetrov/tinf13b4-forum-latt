@@ -44,6 +44,8 @@
 						
 						showAlert("danger", error);
 					}
+				} else {
+					
 				}
 			}).error(function(){
 				$scope.isLoading = false;
