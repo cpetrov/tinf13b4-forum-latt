@@ -14,6 +14,7 @@
 		</c:when>
 		<c:otherwise>
 			<ul>
+				<li><a href="logout.jsp">Logout</a></li>
 	            <li><a href="UCP.jsp">User Control Panel</a></li>
 	        </ul>
 		</c:otherwise>

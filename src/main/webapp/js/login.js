@@ -45,6 +45,7 @@
 						showAlert("danger", error);
 					}
 				} else {
+					setTimeout(redirect, 2000);
 					window.location.href = "/index.jsp";
 				}
 			}).error(function(){
@@ -52,6 +53,10 @@
 			});
 		};
 	});
+	
+	function redirect() {
+		window.location.href = "/index.jsp";
+	}
 	
 	function showAlert(type, message){
 		var html = '<div class="alert alert-{type} alert-dismissable">{message}</div>';

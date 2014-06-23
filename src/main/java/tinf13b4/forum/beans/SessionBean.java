@@ -2,8 +2,11 @@ package tinf13b4.forum.beans;
 
 import java.util.Date;
 
-public class SessionBean {
+import javax.servlet.http.HttpSession;
 
+public class SessionBean {
+	
+	private HttpSession session;
 	private String id;
 	private String userName;
 	private Date createTime;
@@ -28,6 +31,11 @@ public class SessionBean {
 
 	public void logout(){
 		this.isLoggedIn = false;
+		this.id = null;
+		this.userName = null;
+		this.createTime = null;
+		this.session.setAttribute("id", null);
+		this.session.invalidate();
 	}
 
 	public String getUserName() {
@@ -36,5 +44,8 @@ public class SessionBean {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public void setSession(HttpSession session) {
+		this.session = session;
 	}
 }

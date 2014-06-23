@@ -68,7 +68,7 @@ public class LoginServlet extends JsonServlet {
 				userSession.setId(session.getId());
 				userSession.setUserName(postData.get("name").asString());
 				userSession.setCreateTime(session.getCreationTime());
-
+				userSession.setSession(session);
 				userSession.login();
 			}
 		}
