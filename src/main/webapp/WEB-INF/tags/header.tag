@@ -1,16 +1,23 @@
 <%@tag language="java" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
 
 <header>
 	<div id="login" class="pipeList">
-		<ul>
-			<li><a href="login.jsp">Login</a></li>
-			<li><a href="register.jsp">Register</a></li>
-		</ul>
-		<ul>
-            <li><a href="UCP.jsp">User Control Panel</a></li>
-        </ul>
+	<c:choose>
+		<c:when test="${empty userSession.userName }">
+			<ul>
+				<li><a href="login.jsp">Login</a></li>
+				<li><a href="register.jsp">Register</a></li>
+			</ul>
+		</c:when>
+		<c:otherwise>
+			<ul>
+	            <li><a href="UCP.jsp">User Control Panel</a></li>
+	        </ul>
+		</c:otherwise>
+	</c:choose>
 	</div>
 	<div class="holder">
 		<a href="index.jsp"><img src="img/logo.png" alt="Forum" /></a>

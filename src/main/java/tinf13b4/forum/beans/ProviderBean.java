@@ -26,6 +26,7 @@ public class ProviderBean {
 	private Category category;
 	private Thread thread;
 	private User user;
+	private String userName;
 
 	public ProviderBean() {
 		createLongText();
@@ -62,9 +63,9 @@ public class ProviderBean {
 	private void createPosts() {
 		posts = new ArrayList<Post>();
 		PostController controller = new PostController();
-		if ( threadId != 0 ) {
+		if (threadId != 0) {
 			posts = controller.getPostsForThread(threadId);
-		} else if ( userId != 0 ) {
+		} else if (userId != 0) {
 			posts = controller.getPostsForUser(userId);
 		}
 	}
@@ -90,7 +91,7 @@ public class ProviderBean {
 	private void createCategories() {
 		categories = new ArrayList<>();
 		CategoryController controller = new CategoryController();
-		if ( threadId != 0 ) {
+		if (threadId != 0) {
 			categories = controller.getCategoryForThread(threadId);
 		} else {
 			categories = controller.getCategories();
@@ -137,13 +138,18 @@ public class ProviderBean {
 		this.userId = userId;
 	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+		setUser(user);
+	}
+
 	public Category getCategory() {
 		setCategory(category);
 		return category;
 	}
 
 	public void setCategory(Category category) {
-		if(categories == null)
+		if (categories == null)
 			createCategories();
 
 		for (Category a : categories)
@@ -159,10 +165,10 @@ public class ProviderBean {
 	}
 
 	public void setThread(Thread thread) {
-		if(thread == null)
+		if (thread == null)
 			createThreads();
-		for(Thread a : threads)
-			if(a.getId() == threadId) {
+		for (Thread a : threads)
+			if (a.getId() == threadId) {
 				this.thread = a;
 				return;
 			}
@@ -174,13 +180,23 @@ public class ProviderBean {
 	}
 
 	public void setUser(User user) {
-		if(users == null)
+		if (users == null)
 			createUsers();
-		for(User a : users)
-			if(a.getId() == userId) {
-				this.user = a;
-				return;
+		if (userName != null && !userName.isEmpty()) {
+			for(User a : users) {
+				if(a.getName().equals(userName)) {
+					this.user = a;
+					return;
+				}
 			}
+		}
+		else {
+			for(User a: users) {
+				if(a.getId() == userId) {
+					this.user = a;
+					return;
+				}
+			}
+		}
 	}
-
 }

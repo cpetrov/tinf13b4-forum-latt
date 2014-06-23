@@ -10,7 +10,7 @@
             <c:set target="${consumer}" property="user" value="1"></c:set> <%-- TODO get active user from session --%>
         </c:if>
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
-<c:set target="${provider}" property="userId" value="1"></c:set> <%-- TODO get active user from session --%>
+<c:set target="${provider}" property="userName" value="${userSession.userName }"></c:set>
 <t:UCPPage user="${provider.user}" >
     <jsp:attribute name="title">Page Title</jsp:attribute>
 </t:UCPPage>
