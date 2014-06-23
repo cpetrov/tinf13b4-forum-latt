@@ -8,11 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.eclipse.rap.json.JsonArray;
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
 
+import tinf13b4.forum.beans.SessionBean;
 import tinf13b4.forum.controller.LoginController;
 
 @WebServlet("/api/login")
@@ -61,7 +63,13 @@ public class LoginServlet extends JsonServlet {
 				
 				json.writeTo(response.getWriter());
 			}else{
-				
+				HttpSession session = request.getSession();
+				SessionBean userSession = (SessionBean)session.getAttribute("userSession");
+				userSession.setId(session.getId());
+				userSession.setUserName(postData.get("name").asString());
+				userSession.setCreateTime(session.getCreationTime());
+
+				userSession.login();
 			}
 		}
 	}
