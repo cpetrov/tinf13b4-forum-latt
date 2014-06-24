@@ -37,11 +37,13 @@
 		</article>
 	</c:forEach>
 	</section>
-	<div>
-		<button>
-			<a href="newThread.jsp?categoryId=${category.id}"><img src="./img/quill.png"><span>New Topic</span></a>
-		</button>
-	</div>
+	<c:if test="${not empty userSession.userName }">
+		<div>
+			<button>
+				<a href="newThread.jsp?categoryId=${category.id}"><img src="./img/quill.png"><span>New Topic</span></a>
+			</button>
+		</div>
+	</c:if>
 </section>
 </jsp:body>
 </t:genericPage>

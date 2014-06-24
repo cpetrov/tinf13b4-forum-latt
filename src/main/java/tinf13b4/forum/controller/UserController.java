@@ -67,6 +67,22 @@ public class UserController {
 		}
 		return users;
 	}
+	
+	public int getUserId(String userName) {
+		resultSet = executor.executeQuery("SELECT User_ID FROM Users WHERE Name LIKE '" + userName + "';");
+		if(resultSet == null)
+			return -1;
+		else {
+			try {
+				while(resultSet.next()) {
+					return resultSet.getInt("User_ID");
+				}
+			} catch (SQLException e) {
+				throw new IllegalStateException("SQL Error: " + e);
+			}
+		}
+		return -1;
+	}
 
 	public void updateUser(int userId, String name, String picturePath, String mail, boolean confirmed) {
 		checkUserArguments(userId, name, picturePath, mail, confirmed);
