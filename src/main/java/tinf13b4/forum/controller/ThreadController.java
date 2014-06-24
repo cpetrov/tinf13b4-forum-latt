@@ -88,7 +88,7 @@ public class ThreadController {
 
 	public List<Thread> getThreadsWithUser(int userId) {
 		checkArgument(userId >= 0, "UserId must be >= 0, but was " + userId);
-		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed "
 											+ "FROM Threads T, Users U "
 											+ "WHERE T.User_ID = U.User_ID "
 											+ "AND U.Confirmed = 1 "

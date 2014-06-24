@@ -67,7 +67,7 @@ public class PostController {
 	public List<Post> getPostsForUser(int userId) {
 		List<Post> posts = new ArrayList<Post>();
 		checkArgument(userId>0, "UserId must be > 0, but was " + userId);
-		resultSet = executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+		resultSet = executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed "
 				+ "FROM Posts P, Threads T, Users U "
 				+ "WHERE P.Thread_ID = T.Thread_ID "
 				+ "AND P.User_ID = U.User_ID "
