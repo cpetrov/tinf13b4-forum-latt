@@ -32,6 +32,11 @@ public class SessionBean {
 		this.isLoggedIn = true;
 	}
 
+	public void setIsLoggedIn(boolean isLoggedIn) {
+		if(!isLoggedIn)
+			logout();
+	}
+	
 	public void logout(){
 		this.isLoggedIn = false;
 		this.id = null;

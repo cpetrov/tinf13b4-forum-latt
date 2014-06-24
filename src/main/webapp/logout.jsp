@@ -9,10 +9,7 @@
 </head>
 <body>
 	<c:if test="${not empty userSession.userName }">
-		<%
-			session.setAttribute("id", null);
-			session.invalidate();
-		%>
+		<c:set target="${userSession }" property="isLoggedIn" value="false"></c:set>
 	</c:if>
 	<c:redirect url="index.jsp"></c:redirect>
 </body>
