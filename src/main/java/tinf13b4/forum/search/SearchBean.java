@@ -50,8 +50,7 @@ public class SearchBean {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("SQL Error: " + e);
 		}
 		return threads;
 	}
@@ -60,8 +59,7 @@ public class SearchBean {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("SQL Error: " + e);
 		}
 		return users;
 	}
@@ -70,8 +68,7 @@ public class SearchBean {
 		try {
 			getResult();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("SQL Error: " + e);
 		}
 		return categories;
 	}
