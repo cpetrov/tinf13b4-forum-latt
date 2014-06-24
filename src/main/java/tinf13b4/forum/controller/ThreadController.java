@@ -37,7 +37,7 @@ public class ThreadController {
 							 + "VALUES ('" + title + "', " +
 							 		   "'" + content + "', " +
 							 		   "'" + new Timestamp(new Date().getTime()) + "', "
-							 		   	   + "0, " //TODO: implement readonly
+							 		   	   + readOnly + ", "
 							 		       + userId + ", "
 							 		       + categoryId + ");");
 	}

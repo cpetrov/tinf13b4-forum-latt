@@ -92,7 +92,7 @@ public class User {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + postCount;
-		// TODO confirmed
+		result = prime * result + (confirmed ? 1231 : 1237);
 		return result;
 	}
 
@@ -129,8 +129,8 @@ public class User {
 			return false;
 		if (postCount != other.postCount)
 			return false;
+		if (confirmed != other.confirmed)
+			return false;
 		return true;
-		// TODO confirmed
 	}
-
 }
