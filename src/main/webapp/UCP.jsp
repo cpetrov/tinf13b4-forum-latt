@@ -7,7 +7,7 @@
             <c:set target="${consumer}" property="userName" value="${param.name}"></c:set>
             <c:set target="${consumer}" property="userPicturePath" value="picturePath"></c:set>
             <c:set target="${consumer}" property="userMail" value="${param.mail}"></c:set>
-            <c:set target="${consumer}" property="user" value="1"></c:set> <%-- TODO get active user from session --%>
+            <c:set target="${consumer}" property="user" value="${userSession.userId }"></c:set>
         </c:if>
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 <c:set target="${provider}" property="userName" value="${userSession.userName }"></c:set>

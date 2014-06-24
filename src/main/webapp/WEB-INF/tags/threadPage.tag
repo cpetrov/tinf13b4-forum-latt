@@ -69,10 +69,12 @@
             </div>
             <div class="answerBody">
               <div class="content"><p>${post.content }</p></div>
-              <button>
-                <img src="./img/quill.png">
-                <span>Quote</span>
-              </button>
+              <c:if test="${not empty userSession.userName }">
+	              <button>
+	                <img src="./img/quill.png">
+	                <span>Quote</span>
+	              </button>
+              </c:if>
               <div class="postedOn">Posted on ${post.date }</div>
             </div>
             <div class="clear"></div>
@@ -80,16 +82,18 @@
         </c:forEach>
         </div>
       </section>
-      <div>
-        <button class="newPost">
-          <img src="./img/quill.png">
-          <span>New Post</span>
-        </button>
-      </div>
+	<c:if test="${not empty userSession.userName }">
+	      <div>
+	        <button class="newPost">
+	          <img src="./img/quill.png">
+	          <span>New Post</span>
+	        </button>
+	      </div>
+	</c:if>
       <form method="POST">
 	      <div class="newPost">
 	        <textarea cols="80" id="editor" name="content" rows="10"></textarea>
-	        <input type="hidden" name="userId" value="${thread.user.id}"> <%-- TODO change to userId from session --%>
+	        <input type="hidden" name="userId" value="${userSession.userId}">	
 	        <input type="hidden" name="threadId" value="${thread.id}">
 	        <button type="submit">Post</button>
 	      </div>
