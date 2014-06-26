@@ -32,6 +32,10 @@ public class SessionBean {
 		this.isLoggedIn = true;
 	}
 
+	// Get and Set for boolean, because of use in JSP!
+	public boolean getIsLoggedIn() {
+		return isLoggedIn;
+	}
 	public void setIsLoggedIn(boolean isLoggedIn) {
 		if(!isLoggedIn)
 			logout();

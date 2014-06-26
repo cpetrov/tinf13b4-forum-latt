@@ -12,7 +12,6 @@ import tinf13b4.forum.model.User;
 public class AdminPanelSettingsBean {
 
 	private AdminPanelSettingsController adminPanelSettingsController;
-	private List<User> users;
 	private List<Category> categories;
 
 	public AdminPanelSettingsBean() {
@@ -65,7 +64,6 @@ public class AdminPanelSettingsBean {
 	}
 
 	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	public List<Category> getCategories() {
