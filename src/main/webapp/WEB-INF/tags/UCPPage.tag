@@ -20,27 +20,38 @@
     <jsp:attribute name="header"><t:header /></jsp:attribute>
     <jsp:body>
     <c:if test="${not empty param.name and not empty param.mail}">
-    <div class="success">User successfully updated.</div>
+   		<div class="success">User successfully updated.</div>
     </c:if>
     <div id="user" class="ucp">
         <div id="userBlock">
             <header>
                 <h2>${user.name}</h2>
             </header>
-            <div class="userPictureHolder"></div>
-            <input type="file" style="display:none" name="localPicturePath"/>
-            <div id="posts">
-                <img src="./img/quill16.png" alt=""> You have <b>${user.postCount}</b> posts
-            </div>
+            <form method="POST" enctype="multipart/form-data">
+	            <div class="userPictureHolder"></div>
+	            <input type="file" accept="image/*" style="display:none" name="localPicturePath"/>
+	            <input type="text" name="name" hidden="true" value="${userSession.userName }"/>
+	            <div id="posts">
+	                <img src="./img/quill16.png" alt=""> You have <b>${user.postCount}</b> posts
+	            </div>
+	            <input type="submit" name="test" value="test"/>
+            </form>
         </div>
         <div class="ucpInputs">
         <form method="POST">
             <div class="inputHolder">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="name" value="${user.name}"/>
+                <div id="username"><br> ${user.name }</div>
                 <label for="mail">Email</label>
-                <input type="text" id="mail" name="mail" value="${user.mail}"/>
+                <input type="text" id="mail" name="mail" onchange="mailChange(this.value)" value="${user.mail}"/>
+                <label for="confirmMail">Confirm Email</label>
+                <input type="text" id="confirmMail" name="confirmMail" hidden="true"/>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"/>
+                <label for="confirmPassword">Password Confirmation</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" hidden="true"/>
                 <button type="submit">Update</button>
+                <!-- TODO Code behind for mail and password -->
             </div>
         </form>
         </div>
