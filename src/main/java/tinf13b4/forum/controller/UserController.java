@@ -86,9 +86,11 @@ public class UserController {
 
 	public void updateUser(int userId, String name, String picturePath, String mail, boolean confirmed) {
 		checkUserArguments(userId, name, picturePath, mail, confirmed);
-		String command = "UPDATE Users SET Name = '" + name + "', Picture = '" + picturePath + "', Email = '" + mail +"', Confirmed = " + confirmed + ", ";
+		String command = "UPDATE Users SET Name = '" + name + "', Picture = '" + picturePath + "', Email = '" + mail +"', Confirmed = " + confirmed;
 		if(confirmed)
-			command += "Confirmation_Key = 0 ";
+			command += ", Confirmation_Key = 0 ";
+		else
+			command += " ";
 		executor.executeUpdate(command + "WHERE User_Id = " + userId + ";");
 	}
 
