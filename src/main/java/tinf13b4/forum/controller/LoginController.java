@@ -24,6 +24,7 @@ public class LoginController {
 		ResultSet result = queryExecutor.executeQuery("SELECT Name, Email, Password, Confirmed "
 				+ "FROM Users WHERE "
 				+ "Name='" + logonCredential + "' "
+				+ "AND Confirmed='1' "
 				+ "OR Email='" + logonCredential + "'"
 				+ "AND Confirmed='1' LIMIT 1;");
 		
