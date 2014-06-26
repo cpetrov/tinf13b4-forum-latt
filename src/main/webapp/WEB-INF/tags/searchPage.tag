@@ -55,7 +55,7 @@
                     <a href="thread.jsp?id=${thread.id}">${thread.title}</a> 
                 </h4>
                 <p>
-                    <b>Author:</b> ${authors[i].name}
+                    <b>Author:</b> ${thread.user.name}
                 </p>
             </div>
         </article>
