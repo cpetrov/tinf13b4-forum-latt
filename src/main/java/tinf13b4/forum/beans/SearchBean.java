@@ -1,4 +1,4 @@
-package tinf13b4.forum.search;
+package tinf13b4.forum.beans;
 
 import static tinf13b4.forum.controller.ResultSetUtil.buildCategory;
 import static tinf13b4.forum.controller.ResultSetUtil.buildUser;
