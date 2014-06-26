@@ -21,7 +21,7 @@
 	<jsp:body>
 		<div id="inputBlock" ng-app="LoginApp" ng-controller="LoginController">
 		<div class="inputHolder">
-			<form ng-submit="login()" action="index.jsp">
+			<form ng-submit="login()">
 				<div class="alert"></div>
 				<div class="form-group" ng-class="hasError('name')">
 					<label for="name">Username</label>

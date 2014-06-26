@@ -45,8 +45,7 @@
 						showAlert("danger", error);
 					}
 				} else {
-					setTimeout(redirect, 2000);
-					window.location.href = "/index.jsp";
+					setTimeout(redirect, 100);
 				}
 			}).error(function(){
 				$scope.isLoading = false;
