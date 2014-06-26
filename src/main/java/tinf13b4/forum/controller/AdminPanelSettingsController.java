@@ -13,7 +13,6 @@ public class AdminPanelSettingsController {
 	private String existingPageDescription;
 	private String existingPageImprint;
 	private String existingTermsOfUse;
-	private int orderNumber;
 	private boolean serviceMode;
 	private String serviceReason;
 
