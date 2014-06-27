@@ -13,11 +13,19 @@ public class AdminPanelSettingsBean {
 
 	private AdminPanelSettingsController adminPanelSettingsController;
 	private List<Category> categories;
+	private String forumName;
 
 	public AdminPanelSettingsBean() {
 		adminPanelSettingsController = new AdminPanelSettingsController();
 	}
 
+	public String getForumName() {
+		return forumName;
+	}
+	public void setForumName(String forumName) {
+		this.forumName = forumName;
+	}
+	
 	public void setPageDescription(String pageDescription) {
 		adminPanelSettingsController.setExistingPageDescription(pageDescription);
 	}

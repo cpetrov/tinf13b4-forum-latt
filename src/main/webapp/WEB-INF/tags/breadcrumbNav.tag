@@ -7,7 +7,7 @@
 <%@attribute name="thread" type="tinf13b4.forum.model.Thread"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
-<jsp:useBean id="settings" class="tinf13b4.forum.beans.ForumSettingsBean" scope="request" />
+<jsp:useBean id="settings" class="tinf13b4.forum.beans.AdminPanelSettingsBean" scope="request" />
 
 <nav class="breadcrumb">
 	<ul>
