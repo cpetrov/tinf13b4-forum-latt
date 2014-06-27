@@ -605,6 +605,14 @@ nav li {
   content: " > ";
 }
 
+/* Maintenance */
+p.maintenanceText {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;	
+  margin-top: 20%;
+}
+
 /* Media Queries */
 @media ( max-width :1095px) {
   body {
