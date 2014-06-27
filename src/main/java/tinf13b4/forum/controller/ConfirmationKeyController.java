@@ -13,7 +13,6 @@ import tinf13b4.forum.database.QueryExecutor;
 public class ConfirmationKeyController {
 
 	private final QueryExecutor queryExecutor;
-	private String confirmationKey;
 	private final Connection connection;
 	
 	private static final int CONFIRMATION_KEY_LENGHT = 36;
@@ -27,7 +26,6 @@ public class ConfirmationKeyController {
 	}
 
 	public void setConfirmationKey(String confirmationKey) {
-		this.confirmationKey = confirmationKey;
 		confirmUserRegistration(confirmationKey);
 	}
 
