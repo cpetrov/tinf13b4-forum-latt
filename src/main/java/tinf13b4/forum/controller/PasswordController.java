@@ -2,8 +2,18 @@ package tinf13b4.forum.controller;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import tinf13b4.forum.util.AlphaNumericStringGeneratorUtil;
+
 
 public class PasswordController {
+	
+	private final AlphaNumericStringGeneratorUtil alphaNumericString;
+	
+	private static final int PASSWORD_LENGTH = 12;
+	
+	public PasswordController() {
+		alphaNumericString = new AlphaNumericStringGeneratorUtil();
+	}	
 
 	// Decrypt Password For Database Insert
 	public String encryptPassword(String password) {
@@ -24,5 +34,13 @@ public class PasswordController {
 		} else {
 			return false;
 		}
+	}
+	
+	public String generateNewPassword() {
+		
+		// Generate Alpha-Numeric Random String
+		String generatedPassword = alphaNumericString.generateAlphaNumericString(PASSWORD_LENGTH);
+				
+		return generatedPassword;
 	}
 }

@@ -38,7 +38,7 @@ public class LoginServlet extends JsonServlet {
 		JsonValue logonCredential = postData.get("name");
 		JsonValue password = postData.get("password");
 
-		//
+		// If Username is emtpy return error message
 		if(logonCredential == null){
 			errors.add("Name can not be empty");
 		}

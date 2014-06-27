@@ -1,4 +1,4 @@
-package tinf13b4.forum.register;
+package tinf13b4.forum.util;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,12 +9,12 @@ import java.util.List;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 
-public class RegisterDataValidator {
+public class UserDataValidatorUtil {
 
 
 	private final QueryExecutor queryExecutor;
 
-	public RegisterDataValidator() {
+	public UserDataValidatorUtil() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
 	}
@@ -67,22 +67,37 @@ public class RegisterDataValidator {
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+	
 	public List<String> registerDataValidator(String username, String emailAddress, String password) {
 
 		// Validate Form Data
-		if(regexDataValidator(username, emailAddress, password).size() > 0){
+		if(registerRegexDataValidator(username, emailAddress, password).size() > 0){
 
 			// Return Regular Expression Errors
-			return regexDataValidator(username, emailAddress, password);
+			return registerRegexDataValidator(username, emailAddress, password);
 		} else {
 
 			// Return Database Errors
-			return databaseDataValidator(username, emailAddress, password);
+			return registerDatabaseDataValidator(username, emailAddress);
 		}
+	}
+	
+	
+	public List<String> forgottenDataValidator(String username, String emailAddress) {
+		// Validate Form Data
+		if(forgottenRegexDataValidator(username, emailAddress).size() > 0){
+
+			// Return Regular Expression Errors
+			return forgottenRegexDataValidator(username, emailAddress);
+		} else {
+
+			// Return Database Errors
+			return forgottenDatabaseDataValidator(username, emailAddress);
+		}		
 	}
 
 
-	public List<String> regexDataValidator(String username, String emailAddress, String password) {
+	public List<String> registerRegexDataValidator(String username, String emailAddress, String password) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
@@ -106,9 +121,30 @@ public class RegisterDataValidator {
 		return errors;
 
 	}
+	
+	
+	public List<String> forgottenRegexDataValidator(String username, String emailAddress) {
+
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
 
 
-	public List<String>  databaseDataValidator(String username, String emailAddress, String password) {
+		// Validate With Regular Expressions
+		if (!username.matches(USERNAME_PATTERN)) {
+			errors.add("The username is invalid, it´s only allowed to use letters and numbers");
+		}
+
+		if (!emailAddress.matches(EMAIL_PATTERN)) {
+			errors.add("The email address is not valid");
+		}
+
+		// Return Error List
+		return errors;
+
+	}
+
+
+	public List<String>  registerDatabaseDataValidator(String username, String emailAddress) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
@@ -134,11 +170,52 @@ public class RegisterDataValidator {
 					String email = querystring.getString(2);
 
 					if (name.equals(username)) {
-						errors.add("Name bereits vergeben");
+						errors.add("Usernmae already taken");
 					}
 
 					if (email.equals(emailAddress)) {
-						errors.add("E-Mail Adresse bereits vergeben");
+						errors.add("E-Mail address already taken");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		// Return List Of Errors
+		return errors;
+
+	}
+	
+	
+	public List<String>  forgottenDatabaseDataValidator(String username, String emailAddress) {
+
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+
+
+		// Validate With Database
+		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
+				+ "FROM Users WHERE "
+				+ "Name='" + username + "' "
+				+ "OR Email='" + emailAddress + "';");
+
+
+		// Check Query Result
+		try {
+			if (querystring.next()) {
+
+				// Move Cursor To The Beginning Of The Line
+				querystring.previous();
+
+				while (querystring.next()) {
+
+					String name = querystring.getString(1);
+					String email = querystring.getString(2);
+
+					if (!name.equals(username) && !email.equals(emailAddress)) {
+						errors.add("Username or E-Mail address doe´s not exist");
 					}
 				}
 			}

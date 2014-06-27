@@ -1,5 +1,5 @@
 
-package tinf13b4.forum.register;
+package tinf13b4.forum.controller;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,23 +11,15 @@ import javax.mail.Session;
 
 import tinf13b4.forum.util.EmailUtil;
 
-public class SendMail {
+public class SendMailController {
 
 	private static final String SEND_ADRESS = "noreply@gruppelatt.de";
 	private static final String PUBLIC_ADRESS = "forumnoreplytinf13b4@gmail.com";
 	private static final String PUBLIC_PASSWORD = "ForumNoreplyTinf14B412";
 
 	// Build Email and send it to recipient
-	public void emailBuilder(final String recipient, String username, String confirmationKey) {
-		String message = "";
-		try {
-			message = "Hello " + username
-					+ "\n \n Welcome to our Forum! To complete the registration process, "
-					+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		final String subject = "Complete your registration";
+	public void emailBuilder(final String recipient, String username, String subject, String message) {
+		
 		// Send email with Gmail
 		Properties props = new Properties();
 		// SMTP Host
