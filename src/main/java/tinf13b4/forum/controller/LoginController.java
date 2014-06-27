@@ -23,6 +23,7 @@ public class LoginController {
 		// Validate With Database
 		ResultSet result = queryExecutor.executeQuery("SELECT Name, Email, Password, Confirmed "
 				+ "FROM Users WHERE "
+				+ "AND Confirmed='1' "
 				+ "Name='" + logonCredential + "' "
 				+ "AND Confirmed='1' "
 				+ "OR Email='" + logonCredential + "'"
@@ -34,10 +35,10 @@ public class LoginController {
 				String hashedPassword = result.getString(3);
 				
 				if (!passwordController.decryptPassword(password, hashedPassword)) {
-					errors.add("Der eingegebene Benutzername oder das Passwort ist falsch");
+					errors.add("The Username or Password is wrong");
 				}
 			}else {
-				errors.add("Der eingebene Benutzer existiert nicht oder die Registrierung ist nicht abgeschlossen");
+				errors.add("User does not exist or registration is not finished");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

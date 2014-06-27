@@ -1,6 +1,7 @@
 package tinf13b4.forum.servlets;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,32 +16,31 @@ import org.eclipse.rap.json.JsonArray;
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
 
+import tinf13b4.forum.controller.ConfirmationKeyController;
 import tinf13b4.forum.controller.PasswordController;
+import tinf13b4.forum.controller.SendMailController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
-import tinf13b4.forum.controller.ConfirmationKeyController;
-import tinf13b4.forum.register.RegisterDataValidator;
-import tinf13b4.forum.register.SendMail;
+import tinf13b4.forum.util.UserDataValidatorUtil;
 
 @WebServlet("/api/register")
 public class RegisterServlet extends JsonServlet {
-
-	private final QueryExecutor queryExecutor;
 
 	public RegisterServlet() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
 		confirmationKeyController = new ConfirmationKeyController();
 		passwordController = new PasswordController();
-		registerDataValidator = new RegisterDataValidator();
-		sendMail = new SendMail();
+		userDataValidator = new UserDataValidatorUtil();
+		sendMail = new SendMailController();
 	}
 
 	private static final long serialVersionUID = 1L;
 	private final ConfirmationKeyController confirmationKeyController;
 	private final PasswordController passwordController;
-	private final RegisterDataValidator registerDataValidator;
-	private final SendMail sendMail;
+	private final UserDataValidatorUtil userDataValidator;
+	private final QueryExecutor queryExecutor;
+	private final SendMailController sendMail;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class RegisterServlet extends JsonServlet {
 
 		if(name != null && email != null && password != null){
 
-			List<String> errors = new ArrayList<String>(registerDataValidator.registerDataValidator(name.asString(), email.asString(), password.asString()));
+			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(name.asString(), email.asString(), password.asString()));
 
 			if(errors.size() > 0){
 				JsonArray json = new JsonArray();
@@ -68,9 +68,8 @@ public class RegisterServlet extends JsonServlet {
 				// Get A Hashed Password
 				String hashedPassword = passwordController.encryptPassword(password.asString());
 
-				// Get A Unique Confirmation Key With Alphabet
-				String confirmationKey = confirmationKeyController.getUniqueConfirmationKey("0123456789AaBbCcDdEeFfGgHhIiJjKkLlMm0123456789NnOoPpQqRrSsTtUuVvWwXxYyZz0123456789");
-
+				// Get A Unique Confirmation Key
+				String confirmationKey = confirmationKeyController.getUniqueConfirmationKey();
 
 				// Send Data To Database
 				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, JoinedOn, Confirmation_Key) Values ('"
@@ -80,8 +79,15 @@ public class RegisterServlet extends JsonServlet {
 						+ new Date(new java.util.Date().getTime()) + "', '"
 						+ confirmationKey + "');");
 				
+				// Email Message & Subject
+				String subject = "Complete your registration";				
+				
+				String message = "Hello " + name.asString()
+						+ "\n \n Welcome to our Forum! To complete the registration process, "
+						+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
+				
 				// Send email to User
-				sendMail.emailBuilder(email.asString(), name.asString(), confirmationKey);
+				sendMail.emailBuilder(email.asString(), subject, message);
 
 			}
 		} else {
