@@ -5,52 +5,55 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
+import tinf13b4.forum.util.AlphaNumericStringGeneratorUtil;
 
 public class ConfirmationKeyController {
 
 	private final QueryExecutor queryExecutor;
-	private String confirmationKey;
 	private final Connection connection;
+	private final AlphaNumericStringGeneratorUtil alphaNumericString;
+	private String confirmationKey;
 	
-	private static final int CONFIRMATION_KEY_LENGHT = 36;
-	private static final int CONFIRMATION_KEY_BEGIN = 1;
-	private static final boolean CONFIRMATION_KEY_ALLOW_NUMBERS = true;
-	private static final boolean CONFIRMATION_KEY_ALLOW_LETTERS = true;
-
+	private static final int CONFIRMATION_KEY_LENGTH = 36;
+	
 	public ConfirmationKeyController() {
 		connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
+		alphaNumericString = new AlphaNumericStringGeneratorUtil();
 	}
 
+	
 	public void setConfirmationKey(String confirmationKey) {
 		this.confirmationKey = confirmationKey;
 		confirmUserRegistration(confirmationKey);
 	}
+	
 
 	// Get A Unique ConfirmationKey
-	public String getUniqueConfirmationKey(String keyAlphabet) {
+	public String getUniqueConfirmationKey() {
 		// Generate Confirmation Key with given Alphabet
-		String confirmationKey = generateConfirmationKey(keyAlphabet);
+		String confirmationKey = generateConfirmationKey();
 		// If Confirmation Key Is Unique Return confirmationkey
 		if (!findExistingKeys(confirmationKey)) {
 			// Call Method Again
-			return getUniqueConfirmationKey(keyAlphabet);
+			return getUniqueConfirmationKey();
 		} else {
 			return confirmationKey;
 		}
 	}
 
+	
 	// Generate Confirmation Key Return confirmationkey
-	public String generateConfirmationKey(String keyAlphabet) {
+	public String generateConfirmationKey() {
 		// Generate Alpha-Numeric Random String
-		String confirmationKey = RandomStringUtils.random(CONFIRMATION_KEY_LENGHT, CONFIRMATION_KEY_BEGIN, CONFIRMATION_KEY_LENGHT, CONFIRMATION_KEY_ALLOW_LETTERS, CONFIRMATION_KEY_ALLOW_NUMBERS, keyAlphabet.toCharArray());
+		String confirmationKey = alphaNumericString.generateAlphaNumericString(CONFIRMATION_KEY_LENGTH);
+		
 		return confirmationKey;
 	}
 
+	
 	// Check Existing Keys In Database
 	public boolean findExistingKeys(String confirmationKey) {
 		// Query Result
@@ -66,6 +69,7 @@ public class ConfirmationKeyController {
 			return false;
 		}
 	}
+	
 
 	// Confirm User Registration And Clean Database
 	private void confirmUserRegistration(String confirmationKey) {
@@ -82,6 +86,7 @@ public class ConfirmationKeyController {
 		}
 	}
 
+	
 	// Get The Result Set From Database
 	public ResultSet query(String confirmationKey) {
 		// Query String
