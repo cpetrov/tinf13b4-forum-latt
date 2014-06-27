@@ -45,7 +45,7 @@
 						showAlert("danger", error);
 					}
 				} else {
-					setTimeout(redirect, 100);
+					window.location.href = "/index.jsp";
 				}
 			}).error(function(){
 				$scope.isLoading = false;
@@ -53,9 +53,6 @@
 		};
 	});
 	
-	function redirect() {
-		window.location.href = "/index.jsp";
-	}
 	
 	function showAlert(type, message){
 		var html = '<div class="alert alert-{type} alert-dismissable">{message}</div>';
