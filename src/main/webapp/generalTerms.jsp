@@ -5,6 +5,6 @@
 
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
-<t:staticPage text="${provider.longText}" heading="${provider.heading}">
+<t:staticPage text="${settings.termsOfUse}" heading="${provider.heading}">
 	<jsp:attribute name="title">Page Title</jsp:attribute>
 </t:staticPage>
