@@ -14,7 +14,7 @@
 	<jsp:attribute name="header"><t:headerClean /></jsp:attribute>
 	<jsp:body>
 	<section>
-	<p class="maintenanceText">Our forum is down for maintenance. We'll be back on soon though!</p>
+	<p class="maintenanceText">${settings.serviceReason }</p>
 	</section>
     </jsp:body>
 </t:genericPage>
