@@ -17,6 +17,11 @@
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
     <jsp:attribute name="header"><t:header /></jsp:attribute>
     <jsp:body>
+    <style type="text/css">
+    .userPictureHolder {
+        ${not empty user.picture ? 'background-image: url(\"/uploads/'.concat(user.picture).concat('\");') : '' }
+    }
+    </style>
     <t:breadcrumbNav user="${user}" />
       <div id="user">
         <div id="userBlock">
@@ -30,10 +35,6 @@
             <div id="mailContact">
                 <img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
             </div>
-<%--            <div id="facebook">
-                <img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
-            </div> 
---%>
         </div>
         <div id="topicBlock">
           <section>
