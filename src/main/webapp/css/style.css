@@ -48,6 +48,10 @@ a:hover {
   text-shadow: 0 0 5px white;
 }
 
+p:empty {
+  display: none;
+}
+
 #wrapper {
   min-height: 100%;
   height: auto !important;
@@ -427,10 +431,6 @@ input#subject {
   margin-bottom: 25px;
   width: 800px;
   float: right;
-}
-
-#topic>.answer>.answerBody p:first-child {
-  margin-top:0px;
 }
 
 #topic>.answer>.answerBody p {
