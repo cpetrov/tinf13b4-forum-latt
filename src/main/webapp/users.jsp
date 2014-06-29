@@ -5,5 +5,5 @@
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
 <t:usersPage users="${provider.users}" >
-	<jsp:attribute name="title">Page Title</jsp:attribute>
+	<jsp:attribute name="title">Users</jsp:attribute>
 </t:usersPage>

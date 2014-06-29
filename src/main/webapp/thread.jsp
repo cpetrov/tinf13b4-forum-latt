@@ -14,5 +14,5 @@
 <t:threadPage category="${provider.category}" 
               posts="${provider.posts}"
               thread="${provider.thread}">
-    <jsp:attribute name="title">Page Title</jsp:attribute>
+    <jsp:attribute name="title">${provider.thread.title }</jsp:attribute>
 </t:threadPage>

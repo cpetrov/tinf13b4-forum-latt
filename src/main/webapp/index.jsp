@@ -6,5 +6,5 @@
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
 <t:indexPage categories="${provider.categories}">
-	<jsp:attribute name="title">Page Title</jsp:attribute>
+	<jsp:attribute name="title">Categories</jsp:attribute>
 </t:indexPage>

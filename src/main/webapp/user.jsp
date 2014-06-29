@@ -8,5 +8,5 @@
 <t:userPage user="${provider.user}" 
               threads="${provider.threads}" 
 			  posts="${provider.posts}">
-	<jsp:attribute name="title">Page Title</jsp:attribute>
+	<jsp:attribute name="title">${provider.user.name}</jsp:attribute>
 </t:userPage>
