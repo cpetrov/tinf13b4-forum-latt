@@ -6,6 +6,7 @@
 <%@attribute name="header" fragment="true"%>
 <%@attribute name="js" fragment="true"%>
 <%@attribute name="title" fragment="true"%>
+<%@attribute name="page" fragment="true"%>
 
 <jsp:useBean id="userSession" class="tinf13b4.forum.beans.SessionBean" scope="session" />
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.AdminPanelSettingsBean" scope="request"/>
