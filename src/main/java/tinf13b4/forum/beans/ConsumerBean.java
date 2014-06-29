@@ -13,10 +13,8 @@ public class ConsumerBean {
 	private UserController userController;
 	private int postThreadId;
 	private int postUserId;
-	private String userName;
 	private String userPicturePath;
 	private String userMail;
-	private boolean userConfirmed;
 	private ThreadController threadController;
 	private String threadTitle;
 	private int threadUserId;
@@ -81,15 +79,13 @@ public class ConsumerBean {
 	}
 
 	public void setUser(int userId) {
-		checkUserArguments(userId);
-		userController.updateUser(userId, userName, userPicturePath, userMail, userConfirmed);
-	}
-
-	private void checkUserArguments(int userId) {
 		checkArgument(userId > 0, "UserId must be > 0, but was " + userId);
-		checkArgument(userMail != null, "UserMail must not be null when setting user.");
-		checkArgument(userName != null, "UserName must not be null when setting user.");
-		checkArgument(userPicturePath != null, "UserPicturePath must not be null when setting user.");
+		if( userMail != null ) {
+			userController.updateUser(userId, userMail, true);
+		}
+		if( userPicturePath != null ) {
+			userController.updateUser(userId, userPicturePath);
+		}
 	}
 
 	public void setPostThreadId(int threadId) {
@@ -100,12 +96,6 @@ public class ConsumerBean {
 	public void setPostUserId(int userId) {
 		checkArgument(userId > 0, "UserId must be > 0, but was " + userId);
 		this.postUserId = userId;
-	}
-
-	public void setUserName(String userName) {
-		checkArgument(userName != null, "UserName must not be null.");
-		checkArgument(!userName.isEmpty(), "UserName must not be empty.");
-		this.userName = userName;
 	}
 
 	public void setUserPicturePath(String userPicturePath) {
