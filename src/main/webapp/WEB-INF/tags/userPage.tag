@@ -23,17 +23,13 @@
             <header>
                 <h2>${user.name}</h2>
             </header>
-            <div class="userPictureHolder"></div>
+            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
             <div id="posts">
                 <img src="./img/quill16.png" alt=""> User has <b>${user.postCount}</b> posts
             </div>
             <div id="mailContact">
                 <img src="./img/mail16.png" alt=""> <a href="mailto:${user.mail}">Mail</a>
             </div>
-<%--            <div id="facebook">
-                <img src="./img/facebook16.png" alt=""> <a href="http://www.facebook.com/${user.facebook}">Facebook</a>
-            </div> 
---%>
         </div>
         <div id="topicBlock">
           <section>
