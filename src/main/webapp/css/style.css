@@ -102,6 +102,7 @@ button span {
 }
 
 .userPictureHolder {
+  background-size: cover;
   background-image: url("../img/user.gif");
   /* TODO: dynamize, set the background image to the avatar */
   width: 200px;
