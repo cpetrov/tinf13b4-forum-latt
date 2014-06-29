@@ -13,27 +13,26 @@ public class LoginController {
 
 	static Connection connection = new ConnectionFactory().createConnection();
 	static QueryExecutor queryExecutor = new QueryExecutor(connection);
-	static PasswordController passwordController = new PasswordController();	
-	
+	static PasswordController passwordController = new PasswordController();
+
 	public List<String> loginDataValidator(String logonCredential, String password) {
-		
+
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
-		
+
 		// Validate With Database
 		ResultSet result = queryExecutor.executeQuery("SELECT Name, Email, Password, Confirmed "
 				+ "FROM Users WHERE "
-				+ "AND Confirmed='1' "
 				+ "Name='" + logonCredential + "' "
 				+ "AND Confirmed='1' "
-				+ "OR Email='" + logonCredential + "'"
-				+ "AND Confirmed='1' LIMIT 1;");
-		
+				+ "OR Email='" + logonCredential + "' "
+				+ "LIMIT 1;");
+
 		// Get query result into strings
 		try {
 			if (result.next()){
 				String hashedPassword = result.getString(3);
-				
+
 				if (!passwordController.decryptPassword(password, hashedPassword)) {
 					errors.add("The Username or Password is wrong");
 				}
