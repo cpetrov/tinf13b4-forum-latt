@@ -52,16 +52,6 @@ public class ConsumerBeanTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNullUserName() {
-		consumerBean.setUserName(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithEmptyUserName() {
-		consumerBean.setUserName("");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullUserPicturePath() {
 		consumerBean.setUserPicturePath(null);
 	}
@@ -84,28 +74,18 @@ public class ConsumerBeanTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetUserFailsWithNegativeUserId() {
 		consumerBean.setUserMail("foo");
-		consumerBean.setUserName("bar");
 		consumerBean.setUserPicturePath("baz");
 		consumerBean.setUser(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetUserFailsWithNonSetUserMail() throws Exception {
-		consumerBean.setUserName("bar");
+	@Test
+	public void testSetUserDoesntFailWithNonSetUserMail() throws Exception {
 		consumerBean.setUserPicturePath("baz");
 		consumerBean.setUser(2);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetUserFailsWithNonSetUserName() throws Exception {
-		consumerBean.setUserMail("foo");
-		consumerBean.setUserPicturePath("baz");
-		consumerBean.setUser(2);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetUserFailsWithNonSetUserPicturePath() throws Exception {
-		consumerBean.setUserName("bar");
+	@Test
+	public void testSetUserDoesntFailWithNonSetUserPicturePath() throws Exception {
 		consumerBean.setUserMail("foo");
 		consumerBean.setUser(2);
 	}

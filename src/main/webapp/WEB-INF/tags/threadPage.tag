@@ -36,7 +36,7 @@
         <div id="topic">
           <div class="answer">
             <div class="user">
-              <div class="userPictureHolder"></div>
+              <div class="userPictureHolder" style="${not empty thread.user.picture ? 'background-image: url(\'/uploads/'.concat(thread.user.picture).concat('\');') : '' }"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> <a href="user.jsp?id=${thread.user.id}">${thread.user.name}</a>
               </div>
@@ -58,7 +58,7 @@
           <c:forEach var="post" items="${posts }">
           <div class="answer">
             <div class="user">
-              <div class="userPictureHolder"></div>
+              <div class="userPictureHolder" style="${not empty post.user.picture ? 'background-image: url(\'/uploads/'.concat(post.user.picture).concat('\');') : '' }"></div>
               <div class="name">
                 <img src="./img/user16.png" alt="Username" /> 
          		<a href="user.jsp?id=${post.user.id}">${post.user.name}</a>
