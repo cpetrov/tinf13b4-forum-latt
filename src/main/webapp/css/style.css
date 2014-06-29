@@ -102,8 +102,8 @@ button span {
 }
 
 .userPictureHolder {
-  background-image: url("../img/user.gif");
-  /* TODO: dynamize, set the background image to the avatar */
+  background-size: cover;
+  cursor:pointer;
   width: 200px;
   height: 200px;
   line-height:200px;
@@ -115,6 +115,11 @@ button span {
   border-width: 1px;
   margin-bottom:5px;
   text-align:center;
+}
+
+.userPictureAnnotation {
+  background-color: rgba(248, 79, 67, 0.75);
+  background-image: none !important;
 }
 
 /* Header styles */

@@ -51,18 +51,15 @@
 			});
 			$("input[type='file']").change(function() {
 				var holder=$(".ucp .userPictureHolder");
-				holder.css('background-color', 'rgba(248, 79, 67, 0.75)');
-				holder.css('background-image', 'none');
-				holder.text("Picture will be changed.");
+				$(this).addClass('userPictureAnnotation');
+				holder.text("Changing picture...");
 				holder.unbind('mouseenter mouseleave');
 			});
 			$(".ucp .userPictureHolder").hover(function() {
-				$(this).css('background-color', 'rgba(248, 79, 67, 0.75)');
-				$(this).css('background-image', 'none');
+				$(this).addClass('userPictureAnnotation');
 				$(this).text("Change picture");
 			}, function() {
-				$(this).css('background-color', '');
-				$(this).css('background-image', '');
+				$(this).removeClass('userPictureAnnotation');
 				$(this).text("");
 			});
 		},
