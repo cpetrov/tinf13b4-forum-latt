@@ -6,5 +6,5 @@
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
 <t:staticPage text="${settings.notification}" heading="${provider.heading}">
-	<jsp:attribute name="title">Page Title</jsp:attribute>
+	<jsp:attribute name="title">Legal</jsp:attribute>
 </t:staticPage>

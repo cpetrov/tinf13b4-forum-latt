@@ -5,5 +5,5 @@
 <jsp:useBean id="consumer" class="tinf13b4.forum.beans.ConsumerBean" />
 
 <t:newThread>
-    <jsp:attribute name="title">Page Title</jsp:attribute>
+    <jsp:attribute name="title">New Thread</jsp:attribute>
 </t:newThread>

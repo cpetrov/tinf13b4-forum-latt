@@ -8,6 +8,6 @@
 <t:searchPage categories="${provider.categories}" 
              users="${provider.users }"
              threads="${provider.threads }">
-    <jsp:attribute name="title">Search</jsp:attribute>
+    <jsp:attribute name="title">Search Results</jsp:attribute>
 </t:searchPage>
 

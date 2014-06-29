@@ -8,5 +8,5 @@
 <t:categoryPage category="${provider.category}" 
                 threads="${provider.threads}" 
                 authors="${provider.users}">
-    <jsp:attribute name="title">Page Title</jsp:attribute>
+    <jsp:attribute name="title">${provider.category.title}</jsp:attribute>
 </t:categoryPage>

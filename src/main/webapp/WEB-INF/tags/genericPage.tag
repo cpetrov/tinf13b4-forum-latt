@@ -19,7 +19,7 @@
 <html>
 <t:head>
 	<jsp:attribute name="title">
-		<jsp:invoke fragment="title" />
+		${settings.forumName} - <jsp:invoke fragment="title" />
 	</jsp:attribute>
 	<jsp:attribute name="js">
 		<jsp:invoke fragment="js" />
