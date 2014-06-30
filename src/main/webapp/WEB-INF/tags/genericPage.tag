@@ -11,9 +11,15 @@
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.AdminPanelSettingsBean" scope="request"/>
 <jsp:setProperty name="settings" property="forumName" value="Forum Name" />
 
-<c:if test="${settings.serviceMode }">
-	<c:redirect url="/maintance.jsp"></c:redirect>
-</c:if>
+	<c:if test="${settings.serviceMode }">
+		<%
+			if(!request.getRequestURI().equals("/maintenance.jsp")) {
+		%>
+		<c:redirect url="/maintenance.jsp"></c:redirect>
+		<%
+			}
+		%>
+	</c:if>
 
 <!DOCTYPE html>
 <html>
