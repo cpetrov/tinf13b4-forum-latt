@@ -10,50 +10,51 @@
 			return $scope.errors[key] ? "has-error" : "";
 		};
 		
-		$scope.forgotten = function(){
-			$("form").prev("div.alert").remove();
+		$scope.submit = function(){
+			$("div.alert").remove();
 			
-			var name = $scope.name;
-			var email = $scope.email;
+			var username = $scope.username;
+			var emailAddress = $scope.emailAddress;
 			
-			//$scope.errors.name = !name || name.length < 1;
-			//$scope.errors.email = !email || email.indexOf("@") === -1;
-			// TODO - Email Validation Like Validator Bean
-			
-			if(name || email){
+			if($scope.forgotten.$valid){
 				
-				if(!name){
-					name = "none";
-				}
-				
-				if(!email){
-					email = "none";
-				}
-			} else {
-				showAlert("danger", "Insert username OR Mail Address");
-				return;
-			}
-			
-			$scope.isLoading = true;
-			
-			$http.post("api/forgotten", {
-				name: name,
-				email: email,
-			}).success(function(data){
-				$scope.isLoading = false;
-				
-				if(data.errors){
-					for(var i = 0; i < data.errors.length; i++){
-						var error = data.errors[i];
-						
-						showAlert("danger", error);
-					}
+				if(username && emailAddress) {
+					showAlert("danger", "Insert username OR E-Mail address!");
+					return;
 				} else {
-					window.location.href = "/index.jsp";
+					
+					// Catch Nullpointer Exception
+					if(!username){
+						username = "none";
+					}
+					
+					// Catch Nullpointer Exception
+					if(!emailAddress){
+						emailAddress = "none";
+					}
 				}
-			}).error(function(){
-				$scope.isLoading = false;
-			});
+				
+				$scope.isLoading = true;
+				
+				$http.post("api/forgotten", {
+					username: username,
+					emailAddress: emailAddress,
+				}).success(function(data){
+					$scope.isLoading = false;
+					
+					if(data.errors){
+						for(var i = 0; i < data.errors.length; i++){
+							var error = data.errors[i];
+							
+							showAlert("danger", error);
+						}
+					} else {
+						window.location.href = "/index.jsp";
+					}
+				}).error(function(){
+					$scope.isLoading = false;
+				});
+			}
 		};
 	});
 	
