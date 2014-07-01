@@ -11,6 +11,10 @@
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean" scope="request"/>
 <jsp:setProperty name="settings" property="forumName" value="Forum Name" />
 
+<c:if test="${pageContext.session['new']}">  
+	<c:set target="${settings }" property="hitCount" value="1"></c:set>
+</c:if>
+
 <c:if test="${settings.serviceMode }">
 	<c:redirect url="/maintance.jsp"></c:redirect>
 </c:if>
