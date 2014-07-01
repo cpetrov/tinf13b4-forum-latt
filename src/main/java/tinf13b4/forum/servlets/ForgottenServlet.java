@@ -41,13 +41,13 @@ public class ForgottenServlet extends JsonServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
-		JsonValue email = postData.get("email");
+		JsonValue username = postData.get("username");
+		JsonValue emailAddress = postData.get("emailAddress");
 		
 		
-		if(name != null || email != null){
+		if(username != null || emailAddress != null){
 			
-			OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(name.asString(), email.asString());
+			OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(username.asString(), emailAddress.asString());
 			List<String> errors = new ArrayList<String>(result.errors);
 
 			if(errors.size() > 0){
@@ -73,7 +73,7 @@ public class ForgottenServlet extends JsonServlet {
 				queryExecutor.executeUpdate("UPDATE Users SET "
 						+ "Password='" + hashedPassword + "' WHERE "
 						+ "Name='" + result.username + "' "
-						+ "OR Email='" + result.email + "';");
+						+ "OR Email='" + result.emailAddress + "';");
 				
 				// Email Message & Subject
 				String subject = "Your new Password";				
@@ -82,7 +82,7 @@ public class ForgottenServlet extends JsonServlet {
 						+ "\n \n Your new Password is: " + password;
 				
 				// Send email to User
-				sendMail.emailBuilder(result.email, subject, message);
+				sendMail.emailBuilder(result.emailAddress, subject, message);
 
 			}
 		} else {
