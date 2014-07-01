@@ -3,20 +3,20 @@ package tinf13b4.forum.beans;
 
 import java.util.List;
 
-import tinf13b4.forum.controller.AdminPanelSettingsController;
+import tinf13b4.forum.controller.SettingsController;
 import tinf13b4.forum.controller.CategoryController;
 import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.Category;
 import tinf13b4.forum.model.User;
 
-public class AdminPanelSettingsBean {
+public class SettingsBean {
 
-	private AdminPanelSettingsController adminPanelSettingsController;
+	private SettingsController settingsController;
 	private List<Category> categories;
 	private String forumName;
 
-	public AdminPanelSettingsBean() {
-		adminPanelSettingsController = new AdminPanelSettingsController();
+	public SettingsBean() {
+		settingsController = new SettingsController();
 	}
 
 	public String getForumName() {
@@ -27,43 +27,43 @@ public class AdminPanelSettingsBean {
 	}
 	
 	public void setPageDescription(String pageDescription) {
-		adminPanelSettingsController.setExistingPageDescription(pageDescription);
+		settingsController.setExistingPageDescription(pageDescription);
 	}
 
 	public String getPageDescription() {
-		return adminPanelSettingsController.getExistingPageDescription();
+		return settingsController.getExistingPageDescription();
 	}
 
 	public void setPageImprint(String pageImprint) {
-		adminPanelSettingsController.setExistingImprint(pageImprint);
+		settingsController.setExistingImprint(pageImprint);
 	}
 
 	public String getPageImprint() {
-		return adminPanelSettingsController.getExistingImprint();
+		return settingsController.getExistingImprint();
 	}
 
 	public void setTermsOfUse(String termsOfUse) {
-		adminPanelSettingsController.setExistingTermsOfUse(termsOfUse);
+		settingsController.setExistingTermsOfUse(termsOfUse);
 	}
 
 	public String getTermsOfUse() {
-		return adminPanelSettingsController.getExistingTermsOfUse();
+		return settingsController.getExistingTermsOfUse();
 	}
 
 	public void setServiceMode(boolean serviceMode) {
-		adminPanelSettingsController.setServiceMode(serviceMode);
+		settingsController.setServiceMode(serviceMode);
 	}
 
 	public boolean getServiceMode() {
-		return adminPanelSettingsController.isServiceMode();
+		return settingsController.isServiceMode();
 	}
 
 	public String getServiceReason() {
-		return adminPanelSettingsController.getServiceReason();
+		return settingsController.getServiceReason();
 	}
 
 	public void setServiceReason(String serviceReason) {
-		adminPanelSettingsController.setServiceReason(serviceReason);
+		settingsController.setServiceReason(serviceReason);
 	}
 
 	public List<User> getUsers() {

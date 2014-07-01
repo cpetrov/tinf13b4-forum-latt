@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 
-public class AdminPanelSettingsController {
+public class SettingsController {
 	private QueryExecutor queryExecutor;;
 	private ResultSet rs;
 	private String existingPageDescription;
@@ -16,7 +16,7 @@ public class AdminPanelSettingsController {
 	private boolean serviceMode;
 	private String serviceReason;
 
-	public AdminPanelSettingsController() {
+	public SettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
 	}

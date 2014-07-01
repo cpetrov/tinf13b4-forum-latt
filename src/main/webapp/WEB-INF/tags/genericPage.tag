@@ -8,11 +8,13 @@
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="userSession" class="tinf13b4.forum.beans.SessionBean" scope="session" />
-<jsp:useBean id="settings" class="tinf13b4.forum.beans.AdminPanelSettingsBean" scope="request" />
+<jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean" scope="request"/>
 <jsp:setProperty name="settings" property="forumName" value="Forum Name" />
 
 <c:if test="${settings.serviceMode and pageContext.request.requestURI ne '/maintenance.jsp' }">
-	<c:redirect url="/maintenance.jsp"></c:redirect>
+	<c:if test="${pageContext.request.requestURI ne '/login.jsp' }">
+		<jsp:forward page="/maintenance.jsp" />
+	</c:if>
 </c:if>
 
 <!DOCTYPE html>

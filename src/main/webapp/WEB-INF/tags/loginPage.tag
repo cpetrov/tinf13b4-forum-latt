@@ -20,21 +20,34 @@
 	</jsp:attribute>
 	<jsp:body>
 		<div id="inputBlock" ng-app="LoginApp" ng-controller="LoginController">
-		<div class="inputHolder">
-			<form ng-submit="login()">
-				<div class="alert"></div>
-				<div class="form-group" ng-class="hasError('name')">
-					<label for="name">Username</label>
-					<input id="name" ng-model="name" type="text" placeholder="Username" />
-				</div>
-				<div class="form-group" ng-class="hasError('password')">
-					<label for="password">Password</label>
-					<input id="password" ng-model="password" type="password" placeholder="Password" />
-					<a href="forgotten.jsp">Forgot Password?</a>
-				</div>
-				<button type="submit">Login</button>
-			</form>
-		</div>
+			<div class="inputHolder">
+				<form name="login" ng-submit="login()">
+				
+					<!-- Username -->
+					<div class="alert alert-danger" ng-show="!login.username.$valid && login.username.$dirty">
+						<span ng-show="login.username.$error.required">Tell us your Username.</span>
+					</div>
+					<div class="form-group" ng-class="{'has-error': !login.username.$valid && login.username.$dirty}">
+						<label for="username">Username</label>
+						<input id="username" name="username" ng-model="username" type="text" placeholder="Username" required="required" />
+					</div>
+					<!-- Username -->
+					
+					<!-- Password -->
+					<div class="alert alert-danger" ng-show="!login.password.$valid && login.password.$dirty">
+						<span ng-show="login.password.$error.required">Tell us your password.</span>
+					</div>
+					<div class="form-group" ng-class="{'has-error': !login.password.$valid && login.password.$dirty}">
+						<label for="password">Password</label>
+						<input id="password" name="password" ng-model="password" type="password" placeholder="Password" required="required" />
+					</div>
+					<!-- Password -->
+					
+					<a href="forgotten.jsp">Forgot Password</a>
+						
+					<button type="submit">Login</button>
+				</form>
+			</div>
 		</div>
 	</jsp:body>
 </t:genericPage>
