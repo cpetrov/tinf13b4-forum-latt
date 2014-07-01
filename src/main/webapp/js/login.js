@@ -2,7 +2,6 @@
 
 (function(){
 	var app = angular.module("LoginApp", []);
-	
 	app.controller("LoginController", function($scope, $http){
 		$scope.errors = {};
 		
@@ -10,45 +9,32 @@
 			return $scope.errors[key] ? "has-error" : "";
 		};
 		
-		$scope.login = function(){
+		$scope.submit = function(){
 			$("div.alert").remove();
 			$scope.errors = {};
 			
-			var name = $scope.name;
-			var password = $scope.password;
-			
-			$scope.errors.name = !name || name.length < 1;
-			
-			if($scope.errors.name){
-				showAlert("danger", "The Username should not be empty!");
-			}
-			
-			$scope.errors.password = !password || password.length < 8;
-			
-			if($scope.errors.password){
-				showAlert("danger", "The password must be at least 8 characters long!");
-			}
-			
-			$scope.isLoading = true;
-			
-			$http.post("api/login", {
-				name: name,
-				password: password,
-			}).success(function(data){
-				$scope.isLoading = false;
+			if($scope.login.$valid){
+				$scope.isLoading = true;
 				
-				if(data.errors){
-					for(var i = 0; i < data.errors.length; i++){
-						var error = data.errors[i];
-						
-						showAlert("danger", error);
+				$http.post("api/login", {
+					username: $scope.username,
+					password: $scope.password,
+				}).success(function(data){
+					$scope.isLoading = false;
+			
+					if(data.errors){
+						for(var i = 0; i < data.errors.length; i++){
+							var error = data.errors[i];
+							
+							showAlert("danger", error);
+						}
+					} else {
+						window.location.href = "/index.jsp";
 					}
-				} else {
-					window.location.href = "/index.jsp";
-				}
-			}).error(function(){
-				$scope.isLoading = false;
-			});
+				}).error(function(){
+					$scope.isLoading = false;
+				});
+			}
 		};
 	});
 	

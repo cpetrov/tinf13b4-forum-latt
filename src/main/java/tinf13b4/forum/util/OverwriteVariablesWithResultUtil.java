@@ -6,12 +6,12 @@ public class OverwriteVariablesWithResultUtil {
 
 	public List<String> errors;
 	public String username;
-	public String email;
+	public String emailAddress;
 	
-	public OverwriteVariablesWithResultUtil(List<String> errors, String username, String email){
+	public OverwriteVariablesWithResultUtil(List<String> errors, String username, String emailAddress){
 		this.errors = errors;
 		this.username = username;
-		this.email = email;
+		this.emailAddress = emailAddress;
 	}
 	
 }

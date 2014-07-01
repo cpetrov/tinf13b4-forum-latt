@@ -41,6 +41,6 @@ public class PasswordController {
 		// Generate Alpha-Numeric Random String
 		String generatedPassword = alphaNumericString.generateAlphaNumericString(PASSWORD_LENGTH);
 				
-		return generatedPassword;
+		return "@" + generatedPassword;
 	}
 }
