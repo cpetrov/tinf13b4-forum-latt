@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `Settings` (
   `Notification` text NOT NULL,
   `ServiceMode` tinyint(1) NOT NULL DEFAULT '0',
   `ServiceReason` text NOT NULL,
+  `Hits` int(11) unsigned NOT NULL,
   PRIMARY KEY (`Settings_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Settings for Adminsettings';
 
