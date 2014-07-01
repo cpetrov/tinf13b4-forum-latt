@@ -11,7 +11,8 @@
 		};
 		
 		$scope.login = function(){
-			$("form").prev("div.alert").remove();
+			$("div.alert").remove();
+			$scope.errors = {};
 			
 			var name = $scope.name;
 			var password = $scope.password;
@@ -20,14 +21,12 @@
 			
 			if($scope.errors.name){
 				showAlert("danger", "The Username should not be empty!");
-				return;
 			}
 			
 			$scope.errors.password = !password || password.length < 8;
 			
 			if($scope.errors.password){
 				showAlert("danger", "The password must be at least 8 characters long!");
-				return;
 			}
 			
 			$scope.isLoading = true;
