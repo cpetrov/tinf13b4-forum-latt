@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
+<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.SettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />

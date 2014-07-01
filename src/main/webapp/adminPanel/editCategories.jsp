@@ -13,7 +13,7 @@
 		<script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="js/script.js" type="text/javascript"></script>
 
-			<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"></jsp:useBean>
+			<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.SettingsBean"></jsp:useBean>
 
 		<title>Forenverwaltung</title>
 	</head>
