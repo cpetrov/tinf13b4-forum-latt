@@ -1,11 +1,14 @@
 package tinf13b4.forum.servlets;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,16 +44,17 @@ public class RegisterServlet extends JsonServlet {
 	private final UserDataValidatorUtil userDataValidator;
 	private final QueryExecutor queryExecutor;
 	private final SendMailController sendMail;
+	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
+		final JsonValue username = postData.get("username");
 		JsonValue password = postData.get("password");
-		JsonValue email = postData.get("email");
+		final JsonValue emailAddress = postData.get("emailAddress");
 
-		if(name != null && email != null && password != null){
+		if(username != null && emailAddress != null && password != null){
 
-			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(name.asString(), email.asString(), password.asString()));
+			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(username.asString(), emailAddress.asString(), password.asString()));
 
 			if(errors.size() > 0){
 				JsonArray json = new JsonArray();
@@ -69,26 +73,35 @@ public class RegisterServlet extends JsonServlet {
 				String hashedPassword = passwordController.encryptPassword(password.asString());
 
 				// Get A Unique Confirmation Key
-				String confirmationKey = confirmationKeyController.getUniqueConfirmationKey();
+				final String confirmationKey = confirmationKeyController.getUniqueConfirmationKey();
 
 				// Send Data To Database
 				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, JoinedOn, Confirmation_Key) Values ('"
-						+ name.asString() +"', '"
-						+ email.asString() + "', '"
+						+ username.asString() +"', '"
+						+ emailAddress.asString() + "', '"
 						+ hashedPassword +"', '"
 						+ new Date(new java.util.Date().getTime()) + "', '"
 						+ confirmationKey + "');");
-				
-				// Email Message & Subject
-				String subject = "Complete your registration";				
-				
-				String message = "Hello " + name.asString()
-						+ "\n \n Welcome to our Forum! To complete the registration process, "
-						+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
-				
-				// Send email to User
-				sendMail.emailBuilder(email.asString(), subject, message);
 
+				// send email async
+				executorService.execute(new Runnable(){
+					@Override
+					public void run(){
+						// Email Message & Subject
+						String subject = "Complete your registration";
+						String message = null;
+						try {
+							message = "Hello " + username.asString()
+									+ "\n \n Welcome to our Forum! To complete the registration process, "
+									+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+						}
+						
+						// Send email to User
+						sendMail.emailBuilder(emailAddress.asString(), subject, message);
+					}
+				});
 			}
 		} else {
 			response.sendError(HttpStatusCodes.BAD_REQUEST, "Bad Request");
