@@ -15,6 +15,9 @@
 <c:if test="${settings.serviceMode and pageContext.request.requestURI ne '/maintenance.jsp' }">
 	<c:redirect url="/maintenance.jsp"></c:redirect>
 </c:if>
+<c:if test="${pageContext.session['new']}">  
+	<c:set target="${settings }" property="hitCount" value="1"></c:set>
+</c:if>
 
 <!DOCTYPE html>
 <html>

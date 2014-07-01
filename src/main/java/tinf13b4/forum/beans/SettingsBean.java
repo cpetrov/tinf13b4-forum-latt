@@ -14,7 +14,8 @@ public class SettingsBean {
 	private SettingsController settingsController;
 	private List<Category> categories;
 	private String forumName;
-	
+	private int hitCount;
+
 	public SettingsBean() {
 		settingsController = new SettingsController();
 	}
@@ -78,5 +79,15 @@ public class SettingsBean {
 		CategoryController controller = new CategoryController();
 		categories = controller.getCategories();
 		return categories;
+	}
+
+	public int getHitCount() {
+		hitCount = settingsController.getHitCount();
+		return hitCount;
+	}
+
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+		settingsController.setHitCount();
 	}
 }
