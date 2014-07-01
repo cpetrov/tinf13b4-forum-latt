@@ -123,7 +123,7 @@ public class SearchBean {
 	}
 
 	private void createUsers() throws SQLException {
-		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed FROM Users "
+		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission FROM Users "
 		 		+ "WHERE Name LIKE '%" + searchObject + "%' "
 		 		+ "AND Confirmed = 1;");
 		if(resultSet == null)

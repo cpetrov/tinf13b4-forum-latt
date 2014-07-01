@@ -25,7 +25,7 @@ public class UserBuilderTest {
 
 		User builtUser = userBuilder.build();
 
-		User user = new User(1, "name", 2, "picturePath", "email", date, true);
+		User user = new User(1, "name", 2, "picturePath", "email", date, true, 0);
 		assertEquals( user, builtUser );
 	}
 }

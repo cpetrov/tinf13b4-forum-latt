@@ -44,7 +44,7 @@ public class ThreadController {
 
 	public List<Thread> getThreadsWithCategory(int categoryId) {
 		checkArgument(categoryId >= 0, "CategoryId must be >= 0, but was " + categoryId);
-		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission "
 											+ "FROM Threads T, Users U "
 											+ "WHERE Category_ID = " + categoryId
 											+ " AND T.User_ID = U.User_ID "
@@ -66,7 +66,7 @@ public class ThreadController {
 
 	public List<Thread> getThreadsWithId(int id) {
 		checkArgument(id >= 0, "CategoryId must be >= 0, but was " + id);
-		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission "
 											+ "FROM Threads T, Users U "
 											+ "WHERE T.Thread_ID = " + id
 											+ " AND T.User_ID = U.User_ID "
@@ -88,7 +88,7 @@ public class ThreadController {
 
 	public List<Thread> getThreadsWithUser(int userId) {
 		checkArgument(userId >= 0, "UserId must be >= 0, but was " + userId);
-		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission "
 											+ "FROM Threads T, Users U "
 											+ "WHERE T.User_ID = U.User_ID "
 											+ "AND U.Confirmed = 1 "
