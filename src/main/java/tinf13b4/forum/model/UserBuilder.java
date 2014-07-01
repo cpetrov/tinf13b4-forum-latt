@@ -12,6 +12,7 @@ public class UserBuilder {
 	private Date joinedOn;
 	private int postsCount;
 	private boolean confirmed;
+	private int permission;
 
 	public UserBuilder setId(int id) {
 		this.id = id;
@@ -47,8 +48,13 @@ public class UserBuilder {
 		this.confirmed = confirmed;
 		return this;
 	}
+	
+	public UserBuilder setPermission(int permission) {
+		this.permission = permission;
+		return this;
+	}
 
 	public User build() {
-		return new User(id, name, postsCount, picture, email, joinedOn, confirmed);
+		return new User(id, name, postsCount, picture, email, joinedOn, confirmed, permission);
 	}
 }

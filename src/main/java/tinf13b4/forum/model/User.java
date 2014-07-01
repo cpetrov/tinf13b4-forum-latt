@@ -14,9 +14,10 @@ public class User {
 	private Date joinedOn;
 	private int postCount;
 	private boolean confirmed;
+	private int permission;
 
-	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn, boolean confirmed) {
-		checkArguments(id, name, postsCount, picture, email, joinedOn);
+	public User(int id, String name, int postsCount, String picture, String email, Date joinedOn, boolean confirmed, int permission) {
+		checkArguments(id, name, postsCount, picture, email, joinedOn, permission);
 		this.id = id;
 		this.name = name;
 		this.postCount = postsCount;
@@ -24,9 +25,10 @@ public class User {
 		this.mail = email;
 		this.joinedOn = joinedOn;
 		this.confirmed = confirmed;
+		this.permission = permission;
 	}
 
-	private void checkArguments(int id, String name, int postsCount, String picture, String email, Date joinedOn) {
+	private void checkArguments(int id, String name, int postsCount, String picture, String email, Date joinedOn, int permission) {
 		checkArgument(id > 0, "Id must be positive.");
 		checkArgument(name != null, "Name must not be null.");
 		checkArgument(postsCount >= 0, "PostsCount must be >= 0, but was " + postsCount);
@@ -34,6 +36,7 @@ public class User {
 		checkArgument(email != null, "Email must not be null.");
 		checkArgument(!email.isEmpty(), "Email must not be empty.");
 		checkArgument(joinedOn!=null, "JoinedOn must not be null.");
+		checkArgument(permission >= 0 & permission <= 2, "Permission must be between 0 and 2, but was " + permission);
 	}
 
 	public int getId() {
@@ -82,6 +85,14 @@ public class User {
 		this.confirmed = confirmed;
 	}
 
+	public int getPermission() {
+		return permission;
+	}
+	
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,6 +104,7 @@ public class User {
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + postCount;
 		result = prime * result + (confirmed ? 1231 : 1237);
+		result = prime * result + permission;
 		return result;
 	}
 
@@ -130,6 +142,8 @@ public class User {
 		if (postCount != other.postCount)
 			return false;
 		if (confirmed != other.confirmed)
+			return false;
+		if (permission != other.id)
 			return false;
 		return true;
 	}
