@@ -11,7 +11,8 @@
 		};
 		
 		$scope.register = function(){
-			$("form").prev("div.alert").remove();
+			$("div.alert").remove();
+			$scope.errors = {};
 			
 			var name = $scope.name;
 			var email = $scope.email;
@@ -21,7 +22,6 @@
 			
 			if($scope.errors.name){
 				showAlert("danger", "The username must be atleast 3 characters long!");
-				return;
 			}
 			
 			$scope.errors.email = !email || email.indexOf("@") === -1;
@@ -29,7 +29,6 @@
 			
 			if($scope.errors.email){
 				showAlert("danger", "The email adress must be valid.");
-				return;
 			}
 			
 			$scope.errors.password = !password || password.length < 8;
@@ -37,14 +36,12 @@
 			
 			if($scope.errors.password){
 				showAlert("danger", "The password must be atleast 8 characters long!");
-				return;
 			}
 			
 			$scope.errors.confirm = !confirm || password !== confirm;
 			
 			if($scope.errors.confirm){
 				showAlert("danger", "The passwords do not match.");
-				return;
 			}
 						 
 			$scope.isLoading = true;
