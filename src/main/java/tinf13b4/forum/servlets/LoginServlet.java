@@ -35,11 +35,11 @@ public class LoginServlet extends JsonServlet {
 
 		List<String> errors = new ArrayList<String>();
 
-		JsonValue logonCredential = postData.get("name");
+		JsonValue username = postData.get("username");
 		JsonValue password = postData.get("password");
 
 		// If Username is emtpy return error message
-		if(logonCredential == null){
+		if(username == null){
 			errors.add("Name can not be empty");
 		}
 
@@ -56,7 +56,7 @@ public class LoginServlet extends JsonServlet {
 		} else {
 
 			// Validate with Database
-			errors = loginController.loginDataValidator(logonCredential.asString(), password.asString());
+			errors = loginController.loginDataValidator(username.asString(), password.asString());
 
 			if(errors.size() > 0){
 				JsonObject json = errorListToJson(errors);
@@ -66,7 +66,7 @@ public class LoginServlet extends JsonServlet {
 				HttpSession session = request.getSession();
 				SessionBean userSession = (SessionBean)session.getAttribute("userSession");
 				userSession.setId(session.getId());
-				userSession.setUser(postData.get("name").asString());
+				userSession.setUserName(postData.get("username").asString());
 				userSession.setCreateTime(session.getCreationTime());
 				userSession.setSession(session);
 				userSession.login();
