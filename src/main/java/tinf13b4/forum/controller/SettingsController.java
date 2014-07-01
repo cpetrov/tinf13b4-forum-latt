@@ -15,6 +15,7 @@ public class SettingsController {
 	private String existingTermsOfUse;
 	private boolean serviceMode;
 	private String serviceReason;
+	private int hitCount;
 
 	public SettingsController() {
 		Connection connection = new ConnectionFactory().createConnection();
@@ -117,5 +118,22 @@ public class SettingsController {
 	public void setOrderNumber(int orderNumber, int categoryID) {
 		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber = " + orderNumber
 				+ " WHERE Category_ID = " + categoryID + ";");
+	}
+
+	public int getHitCount() {
+			rs = queryExecutor.executeQuery("SELECT Hits FROM Settings;");
+			try {
+				while (rs.next())
+				{
+					hitCount = rs.getInt("Hits");
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+			return hitCount;	
+		}
+
+	public void setHitCount(int hitCount) {
+		queryExecutor.executeUpdate("UPDATE Settings SET Hits = Hits + 1 WHERE Settings_ID = 1;");
 	}
 }
