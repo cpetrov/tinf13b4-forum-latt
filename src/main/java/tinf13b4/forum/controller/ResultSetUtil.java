@@ -25,6 +25,7 @@ public class ResultSetUtil {
 			userBuilder.setJoinedOn(new Date(resultSet.getTimestamp("JoinedOn").getTime()));
 			userBuilder.setConfirmed(resultSet.getBoolean("Confirmed"));
 			userBuilder.setPostsCount(posts);
+			userBuilder.setPermission(resultSet.getInt("Permission"));
 		} catch(SQLException e) {
 			throw new IllegalStateException("SQL error while building User: " + e);
 		}

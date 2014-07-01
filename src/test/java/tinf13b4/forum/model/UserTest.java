@@ -19,55 +19,55 @@ public class UserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNonPositiveId() throws Exception {
-		new User(0, "foo", 1, "bar", "baz", date, true);
+		new User(0, "foo", 1, "bar", "baz", date, true, 0);
 	}
 
 	@Test
 	public void testStoresId() throws Exception {
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		assertEquals(1, user.getId());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullName() {
-		new User(1, null, 1, "bar", "foo", date, true);
+		new User(1, null, 1, "bar", "foo", date, true, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyName() {
-		new User(1, "", 1, "bar", "foo", date, true);
+		new User(1, "", 1, "bar", "foo", date, true, 0);
 	}
 
 	@Test
 	public void testStoresName() {
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		assertEquals("foo", user.getName());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullMail() {
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		user.setMail(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithEmptyMail() {
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		user.setMail("");
 	}
 
 	@Test
 	public void testDoesntFailWithNullPicture() {
-		new User(1, "foo", 1, null, "foo", date, true);
+		new User(1, "foo", 1, null, "foo", date, true, 0);
 	}
 
 	@Test
 	public void testStoresPicture() {
-		User user = new User(1, "foo", 1, "bar", "bar", date, true);
+		User user = new User(1, "foo", 1, "bar", "bar", date, true, 0);
 
 		String userPicture = user.getPicture();
 
@@ -76,12 +76,12 @@ public class UserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNullJoinedOn() {
-		new User(1, "foo", 1, "bar", "bar", null, true);
+		new User(1, "foo", 1, "bar", "bar", null, true, 0);
 	}
 
 	@Test
 	public void testStoresJoinedOn() {
-		User user = new User(1, "foo", 1, "bar", "bar", date, true);
+		User user = new User(1, "foo", 1, "bar", "bar", date, true, 0);
 
 		Date joinedOn = user.getJoinedOn();
 
@@ -90,7 +90,7 @@ public class UserTest {
 
 	@Test
 	public void testStoresMail() {
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		user.setMail("bar");
 
@@ -100,21 +100,33 @@ public class UserTest {
 	@Test
 	public void testStoresDate() {
 		Date joinedOn = date;
-		User user = new User(1, "foo", 1, "bar", "foo", date, true);
+		User user = new User(1, "foo", 1, "bar", "foo", date, true, 0);
 
 		assertEquals(joinedOn, user.getJoinedOn());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNegativePostCount() {
-		new User(1, "foo", -1, null, "bar", date, true);
+		new User(1, "foo", -1, null, "bar", date, true, 0);
 	}
 
 	@Test
 	public void testStoresPostsCount() {
-		User user = new User(1, "foo", 1, null, "bar", date, true);
+		User user = new User(1, "foo", 1, null, "bar", date, true, 0);
 
 		assertEquals(1, user.getPostCount());
+	}
+	
+	@Test
+	public void testStoresPermission() {
+		User user = new User(1, "foo", 1, null, "bar", date, true, 1);
+		
+		assertEquals(1, user.getPermission());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testFailsWithPermissionBigger2() {
+		new User(1, "foo", -1, null, "bar", date, true, 3);
 	}
 
 }
