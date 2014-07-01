@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,17 +39,18 @@ public class ForgottenServlet extends JsonServlet {
 	private final PasswordController passwordController;
 	private final QueryExecutor queryExecutor;
 	private final SendMailController sendMail;
+	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
-		JsonValue email = postData.get("email");
+		JsonValue username = postData.get("username");
+		JsonValue emailAddress = postData.get("emailAddress");
 		
 		
-		if(name != null || email != null){
+		if(username != null || emailAddress != null){
 			
-			OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(name.asString(), email.asString());
+			final OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(username.asString(), emailAddress.asString());
 			List<String> errors = new ArrayList<String>(result.errors);
 
 			if(errors.size() > 0){
@@ -64,7 +67,7 @@ public class ForgottenServlet extends JsonServlet {
 			} else {
 				
 				// Get A Random Password
-				String password = passwordController.generateNewPassword();
+				final String password = passwordController.generateNewPassword();
 
 				// Get A Hashed Password
 				String hashedPassword = passwordController.encryptPassword(password);
@@ -73,17 +76,21 @@ public class ForgottenServlet extends JsonServlet {
 				queryExecutor.executeUpdate("UPDATE Users SET "
 						+ "Password='" + hashedPassword + "' WHERE "
 						+ "Name='" + result.username + "' "
-						+ "OR Email='" + result.email + "';");
-				
-				// Email Message & Subject
-				String subject = "Your new Password";				
-				
-				String message = "Hello " + result.username
-						+ "\n \n Your new Password is: " + password;
-				
-				// Send email to User
-				sendMail.emailBuilder(result.email, subject, message);
-
+						+ "OR Email='" + result.emailAddress + "';");
+				// send email async
+				executorService.execute(new Runnable(){
+					@Override
+					public void run(){
+						// Email Message & Subject
+						String subject = "Your new Password";				
+						
+						String message = "Hello " + result.username
+								+ "\n \n Your new Password is: " + password;
+						
+						// Send email to User
+						sendMail.emailBuilder(result.emailAddress, subject, message);
+					}
+				});
 			}
 		} else {
 			response.sendError(HttpStatusCodes.BAD_REQUEST, "Bad Request");

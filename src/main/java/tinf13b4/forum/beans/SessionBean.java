@@ -54,7 +54,7 @@ public class SessionBean {
 		return user;
 	}
 	
-	public void setUser(String userName) {
+	public void setUserName(String userName) {
 		UserController controller = new UserController();
 		this.user = controller.getUser(userName);
 	}
