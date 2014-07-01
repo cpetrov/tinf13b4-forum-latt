@@ -20,7 +20,6 @@ public class UserDataValidatorUtil {
 	}
 
 	// Description
-	// TODO - JS musst be the same
 	//
 	// ^                    		# 	Start of the line
 	// 		[A-Za-z0-9_-]			# 	Match characters and symbols in the list, a-z, 0-9, underscore, hyphen
@@ -31,7 +30,6 @@ public class UserDataValidatorUtil {
 
 
 	// Description
-	// TODO - JS musst be the same
 	//
 	// (							# 	Start of group
 	//		(?=.*\d)				#   must contains one digit from 0-9
@@ -135,7 +133,7 @@ public class UserDataValidatorUtil {
 					String email = querystring.getString(2);
 
 					if (name.equals(username)) {
-						errors.add("Usernmae already taken");
+						errors.add("Username already taken");
 					}
 
 					if (email.equals(emailAddress)) {
