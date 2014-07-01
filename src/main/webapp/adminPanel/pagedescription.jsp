@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
+<jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -64,14 +64,14 @@
 				<div class="admContent">
 				<form method="POST">
 				<c:if test="${!empty param.pageDescription}">
-					<jsp:setProperty name="adminPanelSettingsBean" property="pageDescription" value="${param.pageDescription}" />
+					<jsp:setProperty name="settings" property="pageDescription" value="${param.pageDescription}" />
 				</c:if>
 					<h1>Seitenbeschreibung</h1>
 					<p>
 						Hier kann die Seitenbeschreibung verändert werden
 					</p>
 					
-					<p><textarea name="pageDescription" cols="100" rows="10">${adminPanelSettingsBean.pageDescription}</textarea></p>
+					<p><textarea name="pageDescription" cols="100" rows="10">${settings.pageDescription}</textarea></p>
 					<button type="submit" class="navButton">Speichern</button>
 				</form>
 				</div>

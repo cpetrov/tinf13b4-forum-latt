@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="adminPanelSettingsBean" class="tinf13b4.forum.beans.AdminPanelSettingsBean"/>
+<jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean"/>
 <html>
 	<head>
 	<link rel="icon" type="/image/png" href="favicon.png" />
@@ -60,8 +60,8 @@
 				<div class="admContent">
 
 				<c:if test="${not empty param.serviceReason }">
-					<c:set target="${adminPanelSettingsBean}" property="serviceReason" value="${param.serviceReason}"></c:set>
-					<c:set target="${adminPanelSettingsBean}" property="serviceMode" value="${not empty param.onoffswitch? true : false}"></c:set>
+					<c:set target="${settings}" property="serviceReason" value="${param.serviceReason}"></c:set>
+					<c:set target="${settings}" property="serviceMode" value="${not empty param.onoffswitch? true : false}"></c:set>
 				</c:if>		
 				<form method="POST">
 					<h1>Wartungsmodus</h1>
@@ -70,14 +70,14 @@
 						</p>
 					<div class="onoffswitch">
 						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
-							${adminPanelSettingsBean.serviceMode ? 'checked' : ''} />
+							${settings.serviceMode ? 'checked' : ''} />
 						<label class="onoffswitch-label" for="myonoffswitch"> 
 							<span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span>
 						</label>
 					</div>
 					<p>
-						<textarea id="service_reason" name="serviceReason" cols="100" rows="10" disabled="${!adminPanelSettingsBean.serviceMode}">
-						${adminPanelSettingsBean.serviceReason}
+						<textarea id="service_reason" name="serviceReason" cols="100" rows="10" disabled="${!settings.serviceMode}">
+						${settings.serviceReason}
 						</textarea>
 					</p>
 	
