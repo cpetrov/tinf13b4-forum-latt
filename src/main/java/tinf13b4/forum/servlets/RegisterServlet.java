@@ -44,13 +44,13 @@ public class RegisterServlet extends JsonServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
+		JsonValue username = postData.get("username");
 		JsonValue password = postData.get("password");
-		JsonValue email = postData.get("email");
+		JsonValue emailAddress = postData.get("emailAddress");
 
-		if(name != null && email != null && password != null){
+		if(username != null && emailAddress != null && password != null){
 
-			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(name.asString(), email.asString(), password.asString()));
+			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(username.asString(), emailAddress.asString(), password.asString()));
 
 			if(errors.size() > 0){
 				JsonArray json = new JsonArray();
@@ -73,8 +73,8 @@ public class RegisterServlet extends JsonServlet {
 
 				// Send Data To Database
 				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, JoinedOn, Confirmation_Key) Values ('"
-						+ name.asString() +"', '"
-						+ email.asString() + "', '"
+						+ username.asString() +"', '"
+						+ emailAddress.asString() + "', '"
 						+ hashedPassword +"', '"
 						+ new Date(new java.util.Date().getTime()) + "', '"
 						+ confirmationKey + "');");
@@ -82,12 +82,12 @@ public class RegisterServlet extends JsonServlet {
 				// Email Message & Subject
 				String subject = "Complete your registration";				
 				
-				String message = "Hello " + name.asString()
+				String message = "Hello " + username.asString()
 						+ "\n \n Welcome to our Forum! To complete the registration process, "
 						+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
 				
 				// Send email to User
-				sendMail.emailBuilder(email.asString(), subject, message);
+				sendMail.emailBuilder(emailAddress.asString(), subject, message);
 
 			}
 		} else {

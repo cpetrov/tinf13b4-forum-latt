@@ -8,7 +8,7 @@
 <%@attribute name="threads" type="java.util.List"%>
 <%@attribute name="title" fragment="true"%>
 
-<jsp:useBean id="settings" class="tinf13b4.forum.beans.AdminPanelSettingsBean" scope="request" />
+<jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean" scope="request" />
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
 <jsp:setProperty name="navigation" property="category" value="boards" />
 <jsp:setProperty name="navigation" property="page" value="category" />
