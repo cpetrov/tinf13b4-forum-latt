@@ -8,6 +8,7 @@
 <%@attribute name="posts" type="java.util.List"%>
 <%@attribute name="user" type="tinf13b4.forum.model.User"%>
 <%@attribute name="success" type="String"%>
+<%@attribute name="error" type="String"%>
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="consumer" class="tinf13b4.forum.beans.ConsumerBean" scope="request" />
@@ -21,7 +22,7 @@
     <jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
     <jsp:attribute name="header"><t:header /></jsp:attribute>
     <jsp:body>
-    <c:if test="${success eq true}">
+    <c:if test="${success eq true and empty error}">
    		<div class="success">User successfully updated.</div>
     </c:if>
     <c:if test="${not empty error}">

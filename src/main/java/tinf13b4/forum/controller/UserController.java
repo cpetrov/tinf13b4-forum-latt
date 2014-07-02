@@ -1,3 +1,4 @@
+
 package tinf13b4.forum.controller;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -32,7 +33,7 @@ public class UserController {
 	public List<User> getAllUsers() {
 		PostController postController = new PostController(executor);
 		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission "
-											+ "FROM Users;");
+				+ "FROM Users;");
 		ArrayList<User> users = new ArrayList<User>();
 		if (resultSet == null)
 			return new ArrayList<>();
@@ -51,8 +52,7 @@ public class UserController {
 	public List<User> getUsers() {
 		PostController postController = new PostController(executor);
 		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission "
-											+ "FROM Users "
-											+ "WHERE Confirmed='1';");
+				+ "FROM Users " + "WHERE Confirmed='1';");
 		ArrayList<User> users = new ArrayList<User>();
 		if (resultSet == null)
 			return new ArrayList<>();
@@ -70,11 +70,11 @@ public class UserController {
 
 	public int getUserId(String userName) {
 		resultSet = executor.executeQuery("SELECT User_ID FROM Users WHERE Name LIKE '" + userName + "';");
-		if(resultSet == null)
+		if (resultSet == null)
 			return -1;
 		else {
 			try {
-				while(resultSet.next()) {
+				while (resultSet.next()) {
 					return resultSet.getInt("User_ID");
 				}
 			} catch (SQLException e) {
@@ -86,31 +86,37 @@ public class UserController {
 
 	public void updateUser(int userId, String picturePath) {
 		checkUserId(userId);
-		checkArgument(picturePath!=null, "PicturePath must not be null.");
+		checkArgument(picturePath != null, "PicturePath must not be null.");
 		checkArgument(!picturePath.isEmpty(), "PicturePath must not be empty.");
 		executor.executeUpdate("UPDATE Users SET Picture = '" + picturePath + "' WHERE User_Id = " + userId + ";");
 	}
 
-	public void updateUser(int userId, String mail, boolean confirmed) {
+	public void updateUser(int userId, String mail, String password, boolean confirmed) {
 		checkUserArguments(userId, mail, confirmed);
-		String command = "UPDATE Users SET Email = '" + mail +"', Confirmed = " + confirmed;
-		if(confirmed)
+		String command = "UPDATE Users SET Email = '" + mail + "', Confirmed = " + confirmed;
+		if (confirmed)
 			command += ", Confirmation_Key = 0 ";
-		else
-			command += " ";
+		if (password != null) {
+			String encryptedPassword = getEncryptedPassword(password);
+			command += ", Password = '" + encryptedPassword + "' ";
+		}
 		command += "WHERE User_Id = " + userId + ";";
 		executor.executeUpdate(command);
 	}
 
+	private String getEncryptedPassword(String password) {
+		PasswordController passwordController = new PasswordController();
+		return passwordController.encryptPassword(password);
+	}
+
 	private void checkUserArguments(int userId, String mail, boolean confirmed) {
 		checkUserId(userId);
-		checkArgument(mail!=null, "Mail must not be null.");
+		checkArgument(mail != null, "Mail must not be null.");
 		checkArgument(!mail.isEmpty(), "Mail must not be empty.");
 		checkArgument(confirmed == true | confirmed == false, "Confirmed must be true or false.");
 	}
 
 	private void checkUserId(int userId) {
-		checkArgument(userId>0, "UserId must be > 0, but was: " + userId);
+		checkArgument(userId > 0, "UserId must be > 0, but was: " + userId);
 	}
-
 }

@@ -15,6 +15,7 @@ public class ConsumerBean {
 	private int postUserId;
 	private String userPicturePath;
 	private String userMail;
+	private String userPassword;
 	private ThreadController threadController;
 	private String threadTitle;
 	private int threadUserId;
@@ -39,7 +40,7 @@ public class ConsumerBean {
 	}
 
 	private void checkThreadArguments(String content) {
-		checkArgument(content!=null, "ThreadContent must not be null.");
+		checkArgument(content != null, "ThreadContent must not be null.");
 		checkArgument(!content.isEmpty(), "ThreadContent must not be empty.");
 		checkArgument(threadTitle != null, "ThreadTitle must not be null when setting thread.");
 		checkArgument(threadUserId != 0, "ThreadUserId must not be 0 when setting thread.");
@@ -80,10 +81,10 @@ public class ConsumerBean {
 
 	public void setUser(int userId) {
 		checkArgument(userId > 0, "UserId must be > 0, but was " + userId);
-		if( userMail != null ) {
-			userController.updateUser(userId, userMail, true);
+		if (userMail != null) {
+			userController.updateUser(userId, userMail, userPassword, true);
 		}
-		if( userPicturePath != null ) {
+		if (userPicturePath != null) {
 			userController.updateUser(userId, userPicturePath);
 		}
 	}
@@ -112,5 +113,15 @@ public class ConsumerBean {
 
 	public int getLastInsertId() {
 		return threadController.getLastInsertId();
+	}
+
+	public void setUserPassword(String userPassword) {
+		checkArgument(userPassword != null, "UserPassword must not be null.");
+		checkArgument(!userPassword.isEmpty(), "UserPassword must not be empty.");
+		this.userPassword = userPassword;
+	}
+
+	public String getUserPassword() {
+		return userPassword;
 	}
 }
