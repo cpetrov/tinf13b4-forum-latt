@@ -56,24 +56,14 @@ public class UserControllerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailsWithNegativeUserId() {
-		new UserController(executor).updateUser(-1, "baz", true);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithNullMail() {
-		new UserController(executor).updateUser(1,null, true);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFailsWithEmptyMail() {
-		new UserController(executor).updateUser(1, "", true);
+		new UserController(executor).updateUser(-1, "baz", "foo", true);
 	}
 
 	@Test
 	public void testUpdatesUser() {
-		new UserController(executor).updateUser(2, "mail", true);
+		new UserController(executor).updateUser(2, "mail", null,  true);
 
-		verify(executor).executeUpdate("UPDATE Users SET Email = 'mail', Confirmed = true, Confirmation_Key = 0 WHERE User_Id = 2;");
+		verify(executor).executeUpdate("UPDATE Users SET Confirmed = true, Email = 'mail', Confirmation_Key = 0 WHERE User_Id = 2;");
 	}
 
 }
