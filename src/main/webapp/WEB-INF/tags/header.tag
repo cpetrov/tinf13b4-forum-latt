@@ -6,7 +6,7 @@
 <header>
 	<div id="login" class="pipeList">
 	<c:choose>
-		<c:when test="${empty userSession.userName }">
+		<c:when test="${empty userSession.user.name }">
 			<ul>
 				<li><a href="login.jsp">Login</a></li>
 				<li><a href="register.jsp">Register</a></li>
@@ -16,6 +16,9 @@
 			<ul>
 				<li><a href="logout.jsp">Logout</a></li>
 	            <li><a href="UCP.jsp">User Control Panel</a></li>
+	            <c:if test="${userSession.user.permission == 2}">
+	            	<li><a href="adminPanel\index.jsp">Admin Panel</a></li>
+	            </c:if>
 	        </ul>
 		</c:otherwise>
 	</c:choose>

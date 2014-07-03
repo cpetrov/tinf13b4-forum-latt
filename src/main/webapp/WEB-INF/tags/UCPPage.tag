@@ -33,10 +33,10 @@
             <header>
                 <h2>${user.name}</h2>
             </header>
-            <form method="POST" enctype="multipart/form-data" action="/api/ucp-upload">
+			<form method="POST" enctype="multipart/form-data" action="/api/ucp-upload">
 	            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
 	            <input type="file" onchange="this.form.submit();" accept="image/*" style="display:none" name="localPicturePath"/>
-	            <input type="text" name="userId" style="display:none" value="${userSession.userId }" />
+	            <input type="text" name="userId" style="display:none" value="${userSession.user.name }" />
 	            <div id="posts">
 	                <img src="./img/quill16.png" alt=""> You have <b>${user.postCount}</b> posts
 	            </div>

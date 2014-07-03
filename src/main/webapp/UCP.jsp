@@ -4,7 +4,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <c:choose>
-	<c:when test="${not empty userSession.userName }">
+	<c:when test="${not empty userSession.user.name }">
 		<jsp:useBean id="consumer" class="tinf13b4.forum.beans.ConsumerBean" scope="request" />
 		<c:set var="passwordsNotEmpty" value="${not empty param.password and not empty param.confirmPassword }" />
 		<c:set var="passwordsEqual" value="${param.password eq param.confirmPassword}" />
@@ -19,14 +19,14 @@
             <c:set target="${consumer}" property="userPassword" value="${param.password}"></c:set>
         </c:if>
 		<c:if test="${validPassword or ( empty param.password and not empty param.mail ) }">
-			<c:set target="${consumer}" property="user" value="${userSession.userId}"></c:set>
+			<c:set target="${consumer}" property="user" value="${userSession.user.id}"></c:set>
 			<c:set var="success" value="true"></c:set>
 		</c:if>
 		<c:if test="${not empty param.password and ( param.password ne param.confirmPassword ) }">
 		    <c:set var="error" value="Confirmation password doesn't match."></c:set>
 		</c:if>
 		<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
-		<c:set target="${provider}" property="userName" value="${userSession.userName }"></c:set>
+		<c:set target="${provider}" property="userName" value="${userSession.user.name }"></c:set>
 		<t:UCPPage user="${provider.user}" success="${success}" error="${error}">
 		    <jsp:attribute name="title">User Control Panel</jsp:attribute>
 		</t:UCPPage>

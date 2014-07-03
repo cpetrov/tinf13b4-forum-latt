@@ -21,7 +21,7 @@
     <c:choose>
 	    <c:when test="${not empty param.content and not empty param.title and not empty param.categoryId}">
 	        <c:set target="${consumer}" property="threadTitle" value="${param.title}"></c:set>
-		    <c:set target="${consumer}" property="threadUserId" value="${userSession.userId }"></c:set>
+		    <c:set target="${consumer}" property="threadUserId" value="${userSession.user.id }"></c:set>
 		    <c:set target="${consumer}" property="threadCategoryId" value="${param.categoryId}"></c:set>
 		    <c:set target="${consumer}" property="threadReadOnly" value="false" /> <%--TODO implement readOnly --%>
 		    <c:set target="${consumer}" property="thread" value="${param.content}"></c:set>
