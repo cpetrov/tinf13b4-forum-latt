@@ -25,9 +25,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import tinf13b4.forum.beans.ConsumerBean;
 
-@WebServlet("/api/ucp-upload")
+@WebServlet("/api/ucp")
 @MultipartConfig
-public class UCPUploadServlet extends HttpServlet {
+public class UCPServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOADS_DIRECTORY = "uploads";
@@ -35,8 +35,12 @@ public class UCPUploadServlet extends HttpServlet {
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024;
 	private static final String[] ALLOWED_EXTENSIONS = {"png", "jpg"};
 	private ConsumerBean consumerBean;
+	private String mail;
+	private String password;
+	private String passwordConfirmation;
+	private int userId;
 
-	public UCPUploadServlet() {
+	public UCPServlet() {
 		consumerBean = new ConsumerBean();
 	}
 
@@ -59,24 +63,43 @@ public class UCPUploadServlet extends HttpServlet {
 		try {
 			List<?> items = upload.parseRequest(request);
 			Iterator<?> iter = items.iterator();
-			int userId = 0;
 			FileItem fileItemFile = null;
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
 					fileItemFile = item;
 				} else {
-					userId = getUserId(item);
+					String fieldname = item.getFieldName();
+					String fieldvalue = item.getString();
+					if (fieldname.equals("userId")) {
+						userId = Integer.parseInt(fieldvalue);
+					} else if (fieldname.equals("mail")) {
+						mail = fieldvalue;
+					} else if (fieldname.equals("password")) {
+						password = fieldvalue;
+					} else if (fieldname.equals("passwordConfirmation")) {
+						passwordConfirmation = fieldvalue;
+					}
 				}
 			}
 			if (fileItemFile != null) {
-				String extension = getFileExtension(fileItemFile, request, response);
-				if (request.getAttribute("error") == null) {
-					uploadFile(uploadFolder, userId, fileItemFile, extension);
-				}
-			} else {
-				handleError("The file was empty.", request, response);
+				handleFileUpload(request, response, uploadFolder, userId, fileItemFile);
 			}
+			if (notNullAndEmpty(password)) {
+				handlePassword(request, response);
+			}
+			if (notNullAndEmpty(mail)) {
+				consumerBean.setUserMail(mail);
+			}
+			boolean mailOrPasswordNotEmptyAndNull = notNullAndEmpty(consumerBean.getUserMail())
+					|| notNullAndEmpty(consumerBean.getUserPassword());
+			if (mailOrPasswordNotEmptyAndNull) {
+				consumerBean.setUser(userId);
+			}
+			if (!(notNullAndEmpty(consumerBean.getUserPicturePath()) || mailOrPasswordNotEmptyAndNull)) {
+				handleError("Nothing to change.", request, response);
+			}
+			consumerBean.resetUserData();
 			if (request.getAttribute("error") == null) {
 				request.setAttribute("success", true);
 				request.getRequestDispatcher("/UCP.jsp").forward(request, response);
@@ -90,12 +113,39 @@ public class UCPUploadServlet extends HttpServlet {
 		}
 	}
 
-	private void uploadFile(String uploadFolder, int userId, FileItem fileItemFile, String extension) throws Exception {
+	private void handleFileUpload(HttpServletRequest request, HttpServletResponse response, String uploadFolder,
+			int userId, FileItem fileItemFile) throws Exception {
+		String extension = getFileExtension(fileItemFile, request, response);
+		if (request.getAttribute("error") == null) {
+			uploadFile(uploadFolder, userId, fileItemFile, extension, request, response);
+		}
+	}
+
+	private void handlePassword(HttpServletRequest request, HttpServletResponse response) {
+		if (notNullAndEmpty(passwordConfirmation)) {
+			checkConfirmation(request, response);
+		} else {
+			handleError("Please, repeat your new password in the 'Password confirmation' field.", request, response);
+		}
+	}
+
+	private void checkConfirmation(HttpServletRequest request, HttpServletResponse response) {
+		if (password.equals(passwordConfirmation)) {
+			consumerBean.setUserPassword(password);
+		} else {
+			handleError("Password confirmation wrong.", request, response);
+		}
+	}
+
+	private void uploadFile(String uploadFolder, int userId, FileItem fileItemFile, String extension,
+			HttpServletRequest request, HttpServletResponse response) {
 		String fileName;
 		fileName = createFileName(userId, extension);
-		writeFile(uploadFolder, fileName, fileItemFile);
-		consumerBean.setUserPicturePath(fileName);
-		consumerBean.setUser(userId);
+		writeFile(uploadFolder, fileName, fileItemFile, request, response);
+		if (request.getAttribute("error") == null) {
+			consumerBean.setUserPicturePath(fileName);
+			consumerBean.setUser(userId);
+		}
 	}
 
 	private void handleError(String error, HttpServletRequest request, HttpServletResponse response) {
@@ -107,19 +157,15 @@ public class UCPUploadServlet extends HttpServlet {
 		}
 	}
 
-	private int getUserId(FileItem item) {
-		String fieldname = item.getFieldName();
-		String fieldvalue = item.getString();
-		if (fieldname.equals("userId")) {
-			return Integer.parseInt(fieldvalue);
-		}
-		return 0;
-	}
-
-	private void writeFile(String uploadFolder, String fileName, FileItem item) throws Exception {
+	private void writeFile(String uploadFolder, String fileName, FileItem item, HttpServletRequest request,
+			HttpServletResponse response) {
 		String filePath = uploadFolder + File.separator + fileName;
-		File uploadedFile = new File(filePath);
-		item.write(uploadedFile);
+		try {
+			File uploadedFile = new File(filePath);
+			item.write(uploadedFile);
+		} catch (Exception e) {
+			handleError("Something went wrong while uploading the picture.", request, response);
+		}
 	}
 
 	private String getFileExtension(FileItem item, HttpServletRequest request, HttpServletResponse response) {
@@ -150,5 +196,9 @@ public class UCPUploadServlet extends HttpServlet {
 		factory.setSizeThreshold(MAX_MEMORY_SIZE);
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 		return factory;
+	}
+
+	private boolean notNullAndEmpty(String string) {
+		return string != null && !string.isEmpty();
 	}
 }
