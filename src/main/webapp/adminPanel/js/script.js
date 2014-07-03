@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+//	Javascript Code for Servicemode.jsp
+	$(function(){
+		$("#myonoffswitch").on("click", function(){
+		 var checked = $(this).prop("checked");
+		 
+		 $("#service_reason").prop("disabled", !checked);
+		});
+	});
+	$(function(){
+		$("#save").on("click", function(){
+		$("#service_reason").prop("disabled", false);
+		});
+	});
+	
+	
 	var expandedNav = true;
 
 	$('.expander').children('i').click(function() {
@@ -68,6 +83,10 @@ $(document).ready(function(){
 	
 	$('.navServiceMode').click(function() {
 		window.location.href = "servicemode.jsp";
+	});
+	
+	$('.navBack').click(function() {
+		window.location.href = "../index.jsp";
 	});
 	
 	$('.dashobj').hover(function(){
