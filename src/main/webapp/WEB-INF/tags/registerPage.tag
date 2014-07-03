@@ -23,21 +23,21 @@
 		<div class="inputHolder">
 		<form ng-submit="register()">
 			<div class="alert"></div>
-			<div class="form-group" ng-class="hasError('name')">
-				<label for="name">Username</label>
-				<input id="name" ng-model="name" type="text" placeholder="Username" />
+			<div class="form-group" ng-class="hasError('username')">
+				<label for="username">Username</label>
+				<input id="username" ng-model="username" type="text" ng-pattern="^[A-Za-z0-9_-]" ng-minlength="3" ng-maxlength="15" placeholder="Username" />
 			</div>
-			<div class="form-group" ng-class="hasError('email')">
-				<label for="email">Email</label>
-				<input id="email" ng-model="email" type="email" placeholder="E-mail" />
+			<div class="form-group" ng-class="hasError('emailAddress')">
+				<label for="emailAddress">EmailAddress</label>
+				<input id="emailAddress" ng-model="emailAddress" type="emailAddress" ng-pattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,}" placeholder="E-mail" />
 			</div>
 			<div class="form-group" ng-class="hasError('password')">
 				<label for="password">Password</label>
-				<input id="password" ng-model="password" type="password" placeholder="Password" />
+				<input id="password" ng-model="password" type="password" ng-pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%])." ng-minlength="8" ng-maxlength="20" placeholder="Password" />
 			</div>
 			<div class="form-group" ng-class="hasError('confirm')">
 				<label for="passwordRepeat">Repeat password</label>
-				<input id="passwordRepeat" ng-model="confirm" type="password" placeholder="Repeat password" />
+				<input id="passwordRepeat" ng-model="confirm" type="password" ng-pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%])." ng-minlength="8" ng-maxlength="20" placeholder="Repeat password" />
 			</div>
 			<button type="submit">Register</button>
 		</form>

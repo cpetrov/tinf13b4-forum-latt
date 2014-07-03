@@ -13,32 +13,32 @@
 		$scope.forgotten = function(){
 			$("form").prev("div.alert").remove();
 			
-			var name = $scope.name;
-			var email = $scope.email;
+			var username = $scope.username;
+			var emailAddress = $scope.emailAddress;
 			
-			//$scope.errors.name = !name || name.length < 1;
-			//$scope.errors.email = !email || email.indexOf("@") === -1;
-			// TODO - Email Validation Like Validator Bean
+			//$scope.errors.username = !username || username.length < 1;
+			//$scope.errors.emailAddress = !emailAddress || emailAddress.indexOf("@") === -1;
+			// TODO - emailAddress Validation Like Validator Bean
 			
-			if(name || email){
+			if(username || emailAddress){
 				
-				if(!name){
-					name = "none";
+				if(!username){
+					username = "none";
 				}
 				
-				if(!email){
-					email = "none";
+				if(!emailAddress){
+					emailAddress = "none";
 				}
 			} else {
-				showAlert("danger", "Insert username OR Mail Address");
+				showAlert("danger", "Insert userusername OR Mail Address");
 				return;
 			}
 			
 			$scope.isLoading = true;
 			
 			$http.post("api/forgotten", {
-				name: name,
-				email: email,
+				username: username,
+				emailAddress: emailAddress,
 			}).success(function(data){
 				$scope.isLoading = false;
 				

@@ -14,21 +14,21 @@
 			$("div.alert").remove();
 			$scope.errors = {};
 			
-			var name = $scope.name;
-			var email = $scope.email;
+			var username = $scope.username;
+			var emailAddress = $scope.emailAddress;
 			var password = $scope.password;
 			var confirm = $scope.confirm;
-			$scope.errors.name = !name || name.length < 3;
+			$scope.errors.username = !username || username.length < 3;
 			
-			if($scope.errors.name){
-				showAlert("danger", "The username must be atleast 3 characters long!");
+			if($scope.errors.username){
+				showAlert("danger", "The userusername must be atleast 3 characters long!");
 			}
 			
-			$scope.errors.email = !email || email.indexOf("@") === -1;
-			// TODO - Email Validation Like Validator Bean
+			$scope.errors.emailAddress = !emailAddress || emailAddress.indexOf("@") === -1;
+			// TODO - emailAddress Validation Like Validator Bean
 			
-			if($scope.errors.email){
-				showAlert("danger", "The email adress must be valid.");
+			if($scope.errors.emailAddress){
+				showAlert("danger", "The emailAddress adress must be valid.");
 			}
 			
 			$scope.errors.password = !password || password.length < 8;
@@ -47,8 +47,8 @@
 			$scope.isLoading = true;
 			
 			$http.post("api/register", {
-				name: name,
-				email: email,
+				username: username,
+				emailAddress: emailAddress,
 				password: password,
 				confirm: confirm
 			}).success(function(data){

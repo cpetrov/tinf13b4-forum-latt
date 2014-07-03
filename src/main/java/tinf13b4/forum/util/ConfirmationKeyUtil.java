@@ -1,5 +1,5 @@
 
-package tinf13b4.forum.controller;
+package tinf13b4.forum.util;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,18 +7,16 @@ import java.sql.SQLException;
 
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
-import tinf13b4.forum.util.AlphaNumericStringGeneratorUtil;
 
-public class ConfirmationKeyController {
+public class ConfirmationKeyUtil {
 
 	private final QueryExecutor queryExecutor;
 	private final Connection connection;
 	private final AlphaNumericStringGeneratorUtil alphaNumericString;
-	private String confirmationKey;
 	
 	private static final int CONFIRMATION_KEY_LENGTH = 36;
 	
-	public ConfirmationKeyController() {
+	public ConfirmationKeyUtil() {
 		connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
 		alphaNumericString = new AlphaNumericStringGeneratorUtil();

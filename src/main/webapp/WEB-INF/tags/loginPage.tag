@@ -21,15 +21,15 @@
 	<jsp:body>
 		<div id="inputBlock" ng-app="LoginApp" ng-controller="LoginController">
 		<div class="inputHolder">
-			<form ng-submit="login()">
-				<div class="alert"></div>
-				<div class="form-group" ng-class="hasError('name')">
-					<label for="name">Username</label>
-					<input id="name" ng-model="name" type="text" placeholder="Username" />
+			<form name="login" ng-submit="login()">
+				<div class="alert">{{login.input.$error}}</div>
+				<div class="form-group" ng-class="hasError('username')">
+					<label for="username">Username</label>
+					<input id="username" ng-model="username" type="text" ng-pattern="^[A-Za-z0-9_-]" ng-minlength="3" ng-maxlength="15" placeholder="Username" />
 				</div>
 				<div class="form-group" ng-class="hasError('password')">
 					<label for="password">Password</label>
-					<input id="password" ng-model="password" type="password" placeholder="Password" />
+					<input id="password" ng-model="password" type="password" ng-pattern="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%])." ng-minlength="8" ng-maxlength="20" placeholder="Password" />
 					<a href="forgotten.jsp">Forgot Password?</a>
 				</div>
 				<button type="submit">Login</button>

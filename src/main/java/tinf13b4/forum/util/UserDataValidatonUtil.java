@@ -9,18 +9,17 @@ import java.util.List;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 
-public class UserDataValidatorUtil {
+public class UserDataValidatonUtil {
 
 
 	private final QueryExecutor queryExecutor;
 
-	public UserDataValidatorUtil() {
+	public UserDataValidatonUtil() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
 	}
 
 	// Description
-	// TODO - JS musst be the same
 	//
 	// ^                    		# 	Start of the line
 	// 		[A-Za-z0-9_-]			# 	Match characters and symbols in the list, a-z, 0-9, underscore, hyphen
@@ -31,7 +30,6 @@ public class UserDataValidatorUtil {
 
 
 	// Description
-	// TODO - JS musst be the same
 	//
 	// (							# 	Start of group
 	//		(?=.*\d)				#   must contains one digit from 0-9
@@ -68,71 +66,105 @@ public class UserDataValidatorUtil {
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	
-	public List<String> registerDataValidator(String username, String emailAddress, String password) {
-
-		// Validate Form Data
-		if(registerRegexDataValidator(username, emailAddress, password).size() > 0){
-
-			// Return Regular Expression Errors
-			return registerRegexDataValidator(username, emailAddress, password);
-		} else {
-
-			// Return Database Errors
-			return registerDatabaseDataValidator(username, emailAddress);
-		}
-	}
-	
-
-	public List<String> registerRegexDataValidator(String username, String emailAddress, String password) {
-
+	public List<String> regexUsernameValidation(String username) {
+		
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
-
-
+		
 		// Validate With Regular Expressions
 		if (!username.matches(USERNAME_PATTERN)) {
 			errors.add("The username is invalid, it´s only allowed to use letters and numbers");
 		}
-
-		if (!emailAddress.matches(EMAIL_PATTERN)) {
-			errors.add("The email address is not valid");
-		}
-
-		if (!password.matches(PASSWORD_PATTERN)) {
-			errors.add("The password is invalid please use a big letter, small letter, @, #, $, %");
-		}
-
-
-		// Return Error List
+		
 		return errors;
-
 	}
 	
 	
-	public List<String>  registerDatabaseDataValidator(String username, String emailAddress) {
+	public List<String> regexEmailAddressValidation(String emailAddress) {
+		
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+		
+		// Validate With Regular Expressions
+		if (!emailAddress.matches(EMAIL_PATTERN)) {
+			errors.add("The email address is not valid");
+		}
+		
+		return errors;
+	}
+	
+	
+	public List<String> regexPasswordValidation(String password) {
+		
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+		
+		// Validate With Regular Expressions
+		if (!password.matches(PASSWORD_PATTERN)) {
+			errors.add("The password is invalid please use a big letter, small letter, and one of these @, #, $, %");
+		}
+		
+		return errors;
+	}
+		
+		
+	private ResultSet userdataQuery(String username, String emailAddress) {
+		
+		// Validate With Database
+		ResultSet rs = queryExecutor.executeQuery("SELECT Name, Email "
+				+ "FROM Users WHERE "
+				+ "Name='" + username + "' "
+				+ "OR Email='" + emailAddress + "';");
+		
+		return rs;
+	}
+	
+	
+	public List<String> registerDataValidation(String username, String emailAddress, String password) {
+		
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+		
+		// Get Errors from Regex Validations
+		List<String> regexUsernameValidation = regexUsernameValidation(username);
+		List<String> regexEmailaddressValidation = regexEmailAddressValidation(emailAddress);
+		List<String> regexPasswordValidation = regexPasswordValidation(password);
+		
+		errors.addAll(regexUsernameValidation);
+		errors.addAll(regexEmailaddressValidation);
+		errors.addAll(regexPasswordValidation);
+		
+		// Validate Form Data
+		if(errors.size() > 0){
+			
+			// Return Regular Expression Errors
+			return errors;
+			
+		} else {
+			
+			// Return Database Errors
+			return userdataDatabaseValidaton(username, emailAddress);
+		}
+	}
+	
+	public List<String>  userdataDatabaseValidaton(String username, String emailAddress) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
 
-
-		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
-				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
-
+		ResultSet rs = userdataQuery(username, emailAddress);
 
 		// Check Query Result
 		try {
-			if (querystring.next()) {
+			if (rs.next()) {
 
 				// Move Cursor To The Beginning Of The Line
-				querystring.previous();
+				rs.previous();
 
-				while (querystring.next()) {
+				while (rs.next()) {
 
-					String name = querystring.getString(1);
-					String email = querystring.getString(2);
+					String name = rs.getString(1);
+					String email = rs.getString(2);
 
 					if (name.equals(username)) {
 						errors.add("Usernmae already taken");
@@ -159,25 +191,20 @@ public class UserDataValidatorUtil {
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
 
+		ResultSet rs = userdataQuery(username, emailAddress);
 
-		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
-				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
-
-
+		
 		// Check Query Result
 		try {
-			if (querystring.next()) {
+			if (rs.next()) {
 
 				// Move Cursor To The Beginning Of The Line
-				querystring.previous();
+				rs.previous();
 
-				while (querystring.next()) {
+				while (rs.next()) {
 
-					String name = querystring.getString(1);
-					String email = querystring.getString(2);
+					String name = rs.getString(1);
+					String email = rs.getString(2);
 
 					if (!name.equals(username) && !email.equals(emailAddress)) {
 						errors.add("Username or E-Mail address doe´s not exist");

@@ -16,12 +16,12 @@ import org.eclipse.rap.json.JsonArray;
 import org.eclipse.rap.json.JsonObject;
 import org.eclipse.rap.json.JsonValue;
 
-import tinf13b4.forum.controller.ConfirmationKeyController;
 import tinf13b4.forum.controller.PasswordController;
 import tinf13b4.forum.controller.SendMailController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
-import tinf13b4.forum.util.UserDataValidatorUtil;
+import tinf13b4.forum.util.ConfirmationKeyUtil;
+import tinf13b4.forum.util.UserDataValidatonUtil;
 
 @WebServlet("/api/register")
 public class RegisterServlet extends JsonServlet {
@@ -29,28 +29,28 @@ public class RegisterServlet extends JsonServlet {
 	public RegisterServlet() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
-		confirmationKeyController = new ConfirmationKeyController();
+		confirmationKeyController = new ConfirmationKeyUtil();
 		passwordController = new PasswordController();
-		userDataValidator = new UserDataValidatorUtil();
+		userDataValidator = new UserDataValidatonUtil();
 		sendMail = new SendMailController();
 	}
 
 	private static final long serialVersionUID = 1L;
-	private final ConfirmationKeyController confirmationKeyController;
+	private final ConfirmationKeyUtil confirmationKeyController;
 	private final PasswordController passwordController;
-	private final UserDataValidatorUtil userDataValidator;
+	private final UserDataValidatonUtil userDataValidator;
 	private final QueryExecutor queryExecutor;
 	private final SendMailController sendMail;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
-		JsonValue password = postData.get("password");
-		JsonValue email = postData.get("email");
+		JsonValue jsonUsername = postData.get("userjsonUsername");
+		JsonValue jsonPassword = postData.get("password");
+		JsonValue jsonEmailAddress = postData.get("emailAddress");
 
-		if(name != null && email != null && password != null){
+		if(jsonUsername != null && jsonEmailAddress != null && jsonPassword != null){
 
-			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidator(name.asString(), email.asString(), password.asString()));
+			List<String> errors = new ArrayList<String>(userDataValidator.registerDataValidation(jsonUsername.asString(), jsonEmailAddress.asString(), jsonPassword.asString()));
 
 			if(errors.size() > 0){
 				JsonArray json = new JsonArray();
@@ -65,29 +65,29 @@ public class RegisterServlet extends JsonServlet {
 				jsonObject.writeTo(response.getWriter());
 			} else {
 
-				// Get A Hashed Password
-				String hashedPassword = passwordController.encryptPassword(password.asString());
+				// Get A Hashed jsonPassword
+				String hashedjsonPassword = passwordController.encryptPassword(jsonPassword.asString());
 
 				// Get A Unique Confirmation Key
 				String confirmationKey = confirmationKeyController.getUniqueConfirmationKey();
 
 				// Send Data To Database
 				queryExecutor.executeUpdate("INSERT INTO Users (Name, Email, Password, JoinedOn, Confirmation_Key) Values ('"
-						+ name.asString() +"', '"
-						+ email.asString() + "', '"
-						+ hashedPassword +"', '"
+						+ jsonUsername.asString() +"', '"
+						+ jsonEmailAddress.asString() + "', '"
+						+ hashedjsonPassword +"', '"
 						+ new Date(new java.util.Date().getTime()) + "', '"
 						+ confirmationKey + "');");
 				
-				// Email Message & Subject
+				// jsonEmailAddress Message & Subject
 				String subject = "Complete your registration";				
 				
-				String message = "Hello " + name.asString()
+				String message = "Hello " + jsonUsername.asString()
 						+ "\n \n Welcome to our Forum! To complete the registration process, "
 						+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
 				
-				// Send email to User
-				sendMail.emailBuilder(email.asString(), subject, message);
+				// Send jsonEmailAddress to User
+				sendMail.emailBuilder(jsonEmailAddress.asString(), subject, message);
 
 			}
 		} else {

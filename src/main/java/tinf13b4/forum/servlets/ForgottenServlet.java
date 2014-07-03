@@ -19,7 +19,7 @@ import tinf13b4.forum.controller.SendMailController;
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
 import tinf13b4.forum.util.OverwriteVariablesWithResultUtil;
-import tinf13b4.forum.util.UserDataValidatorUtil;
+import tinf13b4.forum.util.UserDataValidatonUtil;
 
 @WebServlet("/api/forgotten")
 public class ForgottenServlet extends JsonServlet {
@@ -27,13 +27,13 @@ public class ForgottenServlet extends JsonServlet {
 	public ForgottenServlet() {
 		Connection connection = new ConnectionFactory().createConnection();
 		queryExecutor = new QueryExecutor(connection);
-		userDataValidator = new UserDataValidatorUtil();
+		userDataValidator = new UserDataValidatonUtil();
 		passwordController = new PasswordController();
 		sendMail = new SendMailController();
 	}
 
 	private static final long serialVersionUID = 1L;
-	private final UserDataValidatorUtil userDataValidator;
+	private final UserDataValidatonUtil userDataValidator;
 	private final PasswordController passwordController;
 	private final QueryExecutor queryExecutor;
 	private final SendMailController sendMail;
@@ -41,13 +41,13 @@ public class ForgottenServlet extends JsonServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, JsonObject postData) throws ServletException, IOException {
-		JsonValue name = postData.get("name");
-		JsonValue email = postData.get("email");
+		JsonValue jsonUsername = postData.get("username");
+		JsonValue jsonEmailAddress = postData.get("emailAddress");
 		
 		
-		if(name != null || email != null){
+		if(jsonUsername != null || jsonEmailAddress != null){
 			
-			OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(name.asString(), email.asString());
+			OverwriteVariablesWithResultUtil result = userDataValidator.forgottenDatabaseDataValidator(jsonUsername.asString(), jsonEmailAddress.asString());
 			List<String> errors = new ArrayList<String>(result.errors);
 
 			if(errors.size() > 0){
@@ -61,6 +61,7 @@ public class ForgottenServlet extends JsonServlet {
 
 				jsonObject.add("errors", json);
 				jsonObject.writeTo(response.getWriter());
+				
 			} else {
 				
 				// Get A Random Password
@@ -72,17 +73,17 @@ public class ForgottenServlet extends JsonServlet {
 				// Send Data To Database
 				queryExecutor.executeUpdate("UPDATE Users SET "
 						+ "Password='" + hashedPassword + "' WHERE "
-						+ "Name='" + result.username + "' "
-						+ "OR Email='" + result.email + "';");
+						+ "username='" + result.username + "' "
+						+ "OR emailAddress='" + result.emailAddress + "';");
 				
-				// Email Message & Subject
+				// emailAddress Message & Subject
 				String subject = "Your new Password";				
 				
 				String message = "Hello " + result.username
-						+ "\n \n Your new Password is: " + password;
+						+ "\n \n Your new Password is: @" + password;
 				
-				// Send email to User
-				sendMail.emailBuilder(result.email, subject, message);
+				// Send emailAddress to User
+				sendMail.emailBuilder(result.emailAddress, subject, message);
 
 			}
 		} else {

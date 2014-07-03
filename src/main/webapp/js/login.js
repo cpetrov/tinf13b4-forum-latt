@@ -14,25 +14,25 @@
 			$("div.alert").remove();
 			$scope.errors = {};
 			
-			var name = $scope.name;
+			var username = $scope.username;
 			var password = $scope.password;
 			
-			$scope.errors.name = !name || name.length < 1;
-			
-			if($scope.errors.name){
-				showAlert("danger", "The Username should not be empty!");
-			}
-			
-			$scope.errors.password = !password || password.length < 8;
-			
-			if($scope.errors.password){
-				showAlert("danger", "The password must be at least 8 characters long!");
-			}
+//			$scope.errors.username = !username || username.length < 1;
+//			
+//			if($scope.errors.username){
+//				showAlert("danger", "The Userusername should not be empty!");
+//			}
+//			
+//			$scope.errors.password = !password || password.length < 8;
+//			
+//			if($scope.errors.password){
+//				showAlert("danger", "The password must be at least 8 characters long!");
+//			}
 			
 			$scope.isLoading = true;
 			
 			$http.post("api/login", {
-				name: name,
+				username: username,
 				password: password,
 			}).success(function(data){
 				$scope.isLoading = false;

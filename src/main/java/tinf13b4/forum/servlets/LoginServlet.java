@@ -35,17 +35,17 @@ public class LoginServlet extends JsonServlet {
 
 		List<String> errors = new ArrayList<String>();
 
-		JsonValue logonCredential = postData.get("name");
-		JsonValue password = postData.get("password");
+		JsonValue jsonLogonData = postData.get("jsonLogonData");
+		JsonValue jsonPassword = postData.get("password");
 
 		// If Username is emtpy return error message
-		if(logonCredential == null){
-			errors.add("Name can not be empty");
+		if(jsonLogonData == null){
+			errors.add("The Username should not be empty!");
 		}
 
 		// If Password is empty return error message
-		if(password == null){
-			errors.add("Password can not be empty");
+		if(jsonPassword == null){
+			errors.add("The password must be at least 8 characters long!");
 		}
 
 		// Check error size
@@ -53,10 +53,11 @@ public class LoginServlet extends JsonServlet {
 			JsonObject json = errorListToJson(errors);
 
 			json.writeTo(response.getWriter());
+			
 		} else {
 
 			// Validate with Database
-			errors = loginController.loginDataValidator(logonCredential.asString(), password.asString());
+			errors = loginController.loginDataValidator(jsonLogonData.asString(), jsonPassword.asString());
 
 			if(errors.size() > 0){
 				JsonObject json = errorListToJson(errors);
