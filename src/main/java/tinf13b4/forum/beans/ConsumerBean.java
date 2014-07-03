@@ -111,6 +111,10 @@ public class ConsumerBean {
 		this.userMail = userMail;
 	}
 
+	public String getUserMail() {
+		return userMail;
+	}
+
 	public int getLastInsertId() {
 		return threadController.getLastInsertId();
 	}
