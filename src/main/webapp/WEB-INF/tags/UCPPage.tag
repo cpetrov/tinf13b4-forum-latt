@@ -33,7 +33,7 @@
             <header>
                 <h2>${user.name}</h2>
             </header>
-            <form method="POST" enctype="multipart/form-data" action="/api/ucp-upload">
+            <form method="POST" enctype="multipart/form-data" action="/api/ucp">
 	            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
 	            <input type="file" onchange="this.form.submit();" accept="image/*" style="display:none" name="localPicturePath"/>
 	            <input type="text" name="userId" style="display:none" value="${userSession.userId }" />
@@ -43,7 +43,8 @@
             </form>
         </div>
         <div class="ucpInputs">
-        <form method="POST" action="/UCP.jsp">
+        <form method="POST" enctype="multipart/form-data" action="/api/ucp">
+            <input type="text" name="userId" style="display:none" value="${userSession.userId }" />
             <div class="inputHolder">
                 <label for="mail">Current Email</label>
                 <p>${user.mail}</p>
@@ -52,7 +53,7 @@
                 <label for="password">New Password</label>
                 <input type="password" id="password" name="password"/>
                 <label for="confirmPassword">Password Confirmation</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" hidden="true"/>
+                <input type="password" id="confirmPassword" name="passwordConfirmation" hidden="true"/>
                 <button type="submit">Update</button>
             </div>
         </form>

@@ -105,10 +105,24 @@ public class ConsumerBean {
 		this.userPicturePath = userPicturePath;
 	}
 
+	public String getUserPicturePath() {
+		return userPicturePath;
+	}
+
+	public void resetUserData() {
+		this.userMail = null;
+		this.userPassword = null;
+		this.userPicturePath = null;
+	}
+
 	public void setUserMail(String userMail) {
 		checkArgument(userMail != null, "UserMail must not be null.");
 		checkArgument(!userMail.isEmpty(), "UserMail must not be empty.");
 		this.userMail = userMail;
+	}
+
+	public String getUserMail() {
+		return userMail;
 	}
 
 	public int getLastInsertId() {
