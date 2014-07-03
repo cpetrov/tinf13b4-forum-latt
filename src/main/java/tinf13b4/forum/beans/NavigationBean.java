@@ -4,10 +4,12 @@ package tinf13b4.forum.beans;
 public class NavigationBean {
 
 	public NavigationBean() {
+		acpNavigation = "";
 	}
 
 	private String category;
 	private String page;
+	private String acpNavigation;
 
 	public String getCategory() {
 		return category;
@@ -23,5 +25,13 @@ public class NavigationBean {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public String getAcpNavigation() {
+		return acpNavigation;
+	}
+
+	public void setAcpNavigation(String acpNavigation) {
+		this.acpNavigation = acpNavigation;
 	}
 }
