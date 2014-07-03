@@ -68,20 +68,22 @@ public class UserController {
 		return users;
 	}
 	
-	public int getUserId(String userName) {
-		resultSet = executor.executeQuery("SELECT User_ID FROM Users WHERE Name LIKE '" + userName + "';");
+	public User getUser(String userName) 
+	{
+		PostController postController = new PostController(executor);
+		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission FROM Users WHERE Name LIKE '" + userName + "';");
 		if(resultSet == null)
-			return -1;
+			return null;
 		else {
 			try {
 				while(resultSet.next()) {
-					return resultSet.getInt("User_ID");
+					return buildUser(resultSet, postController);
 				}
 			} catch (SQLException e) {
 				throw new IllegalStateException("SQL Error: " + e);
 			}
 		}
-		return -1;
+		return null;
 	}
 
 	public void updateUser(int userId, String name, String picturePath, String mail, boolean confirmed) {

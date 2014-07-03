@@ -30,7 +30,7 @@
             <form method="POST" enctype="multipart/form-data">
 	            <div class="userPictureHolder"></div>
 	            <input type="file" accept="image/*" style="display:none" name="localPicturePath"/>
-	            <input type="text" name="name" hidden="true" value="${userSession.userName }"/>
+	            <input type="text" name="name" hidden="true" value="${userSession.user.name }"/>
 	            <div id="posts">
 	                <img src="./img/quill16.png" alt=""> You have <b>${user.postCount}</b> posts
 	            </div>
