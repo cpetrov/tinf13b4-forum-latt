@@ -6,7 +6,7 @@
 <c:choose>
 	<c:when test="${not empty userSession.userName }">
 		<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
-		<c:set target="${provider}" property="userName" value="${userSession.userName }"></c:set>
+		<c:set target="${provider}" property="userName" value="${userSession.user.name }"></c:set>
 		<t:UCPPage user="${provider.user}">
 		    <jsp:attribute name="title">User Control Panel</jsp:attribute>
 		</t:UCPPage>

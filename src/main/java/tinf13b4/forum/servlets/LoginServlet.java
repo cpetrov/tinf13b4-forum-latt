@@ -66,7 +66,7 @@ public class LoginServlet extends JsonServlet {
 				HttpSession session = request.getSession();
 				SessionBean userSession = (SessionBean)session.getAttribute("userSession");
 				userSession.setId(session.getId());
-				userSession.setUserName(postData.get("name").asString());
+				userSession.setUser(postData.get("name").asString());
 				userSession.setCreateTime(session.getCreationTime());
 				userSession.setSession(session);
 				userSession.login();

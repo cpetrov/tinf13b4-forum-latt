@@ -36,7 +36,7 @@
             <form method="POST" enctype="multipart/form-data" action="/api/ucp">
 	            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
 	            <input type="file" onchange="this.form.submit();" accept="image/*" style="display:none" name="localPicturePath"/>
-	            <input type="text" name="userId" style="display:none" value="${userSession.userId }" />
+	            <input type="text" name="userId" style="display:none" value="${userSession.user.id }" />
 	            <div id="posts">
 	                <img src="./img/quill16.png" alt=""> You have <b>${user.postCount}</b> posts
 	            </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="ucpInputs">
         <form method="POST" enctype="multipart/form-data" action="/api/ucp">
-            <input type="text" name="userId" style="display:none" value="${userSession.userId }" />
+            <input type="text" name="userId" style="display:none" value="${userSession.user.id }" />
             <div class="inputHolder">
                 <label for="mail">Current Email</label>
                 <p>${user.mail}</p>
