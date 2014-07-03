@@ -37,7 +37,7 @@
 		</article>
 	</c:forEach>
 	</section>
-	<c:if test="${not empty userSession.userName }">
+	<c:if test="${not empty userSession.user.name }">
 		<div>
 			<button>
 				<a href="newThread.jsp?categoryId=${category.id}"><img src="./img/quill.png"><span>New Topic</span></a>
