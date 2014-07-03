@@ -67,9 +67,8 @@ public class UserController {
 		}
 		return users;
 	}
-	
-	public User getUser(String userName) 
-	{
+
+	public User getUser(String userName) {
 		PostController postController = new PostController(executor);
 		resultSet = executor.executeQuery("SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission FROM Users WHERE Name LIKE '" + userName + "';");
 		if(resultSet == null)
