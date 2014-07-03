@@ -8,7 +8,7 @@ import tinf13b4.forum.controller.UserController;
 import tinf13b4.forum.model.User;
 
 public class SessionBean {
-	
+
 	private HttpSession session;
 	private String id;
 	private User user;
@@ -40,7 +40,7 @@ public class SessionBean {
 		if(!isLoggedIn)
 			logout();
 	}
-	
+
 	public void logout(){
 		this.isLoggedIn = false;
 		this.id = null;
@@ -53,12 +53,12 @@ public class SessionBean {
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUserName(String userName) {
 		UserController controller = new UserController();
 		this.user = controller.getUser(userName);
 	}
-	
+
 	public void setSession(HttpSession session) {
 		this.session = session;
 	}
