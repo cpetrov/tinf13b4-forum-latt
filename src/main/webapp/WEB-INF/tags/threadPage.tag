@@ -69,7 +69,7 @@
             </div>
             <div class="answerBody">
               <div class="content"><p>${post.content }</p></div>
-              <c:if test="${not empty userSession.userName }">
+              <c:if test="${not empty userSession.user.name }">
 	              <button>
 	                <img src="./img/quill.png">
 	                <span>Quote</span>
@@ -82,7 +82,7 @@
         </c:forEach>
         </div>
       </section>
-	<c:if test="${not empty userSession.userName }">
+	<c:if test="${not empty userSession.user.name }">
 	      <div>
 	        <button class="newPost">
 	          <img src="./img/quill.png">
@@ -93,7 +93,7 @@
       <form method="POST">
 	      <div class="newPost">
 	        <textarea cols="80" id="editor" name="content" rows="10"></textarea>
-	        <input type="hidden" name="userId" value="${userSession.userId}">	
+	        <input type="hidden" name="userId" value="${userSession.user.id}">	
 	        <input type="hidden" name="threadId" value="${thread.id}">
 	        <button type="submit">Post</button>
 	      </div>
