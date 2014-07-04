@@ -15,6 +15,9 @@
 			<span class="navPt">Allgemein</span>
 		</li>
 		<c:if test="${navigation.acpNavigation eq 'general'}">
+			<li class="subNav navPagename">
+				<span class="navPt">Pagename</span>
+			</li>
 			<li class="subNav navDescription">
 				<span class="navPt">Seitenbeschreibung</span>
 			</li>

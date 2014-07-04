@@ -85,6 +85,10 @@ $(document).ready(function(){
 		window.location.href = "servicemode.jsp";
 	});
 	
+	$('.navPagename').click(function() {
+		window.location.href = "pagename.jsp"
+	});
+	
 	$('.dashobj').hover(function(){
 		$(this).children('p').animate({'background-color':'RGBA(0, 0, 0, 0.25)', 'color':'RGBA(255, 255, 255, 0.8)'}, 250);
 	}, function() {
