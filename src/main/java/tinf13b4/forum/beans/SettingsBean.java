@@ -13,17 +13,17 @@ public class SettingsBean {
 
 	private SettingsController settingsController;
 	private List<Category> categories;
-	private String forumName;
+	private String pageName;
 
 	public SettingsBean() {
 		settingsController = new SettingsController();
 	}
 
-	public String getForumName() {
-		return forumName;
+	public String getPageName() {
+		return settingsController.getPageName();
 	}
-	public void setForumName(String forumName) {
-		this.forumName = forumName;
+	public void setPageName(String pageName) {
+		settingsController.setPageName(pageName);
 	}
 	
 	public void setPageDescription(String pageDescription) {
