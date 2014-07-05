@@ -85,18 +85,7 @@ $(document).ready(function(){
 		window.location.href = "servicemode.jsp";
 	});
 	
-	$('.dashobj').hover(function(){
-		$(this).children('p').animate({'background-color':'RGBA(0, 0, 0, 0.25)', 'color':'RGBA(255, 255, 255, 0.8)'}, 250);
-	}, function() {
-		$(this).children('p').animate({'background-color':'RGBA(0, 0, 0, 0)', 'color':'RGBA(255, 255, 255, 0)'}, 250);
-	});
-
-	$('.userList').children('tbody').children('tr').children('td').click(function() {
-
-		var tdText = $(this).text();
-
-		$(this).html('<input value="' + tdText + '"></input>');
-
-		$(this).parent('tr').children('td').children('.editButton').parent('td').html('<i class="saveChanges fa fa-floppy-o"></i>');
+	$('.navForumname').click(function() {
+		window.location.href = "forumname.jsp";
 	});
 });
