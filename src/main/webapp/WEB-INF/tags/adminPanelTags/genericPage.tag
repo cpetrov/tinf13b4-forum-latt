@@ -15,7 +15,7 @@
 <html>
 <t:head>
 	<jsp:attribute name="title">
-		Admin Panel - <jsp:invoke fragment="title" />
+		${settings.forumName } - ACP - <jsp:invoke fragment="title" />
 	</jsp:attribute>
 	<jsp:attribute name="js">
 		<jsp:invoke fragment="js" />

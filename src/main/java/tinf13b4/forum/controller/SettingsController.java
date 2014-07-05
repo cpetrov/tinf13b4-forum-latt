@@ -13,6 +13,7 @@ public class SettingsController {
 	private String existingPageDescription;
 	private String existingPageImprint;
 	private String existingTermsOfUse;
+	private String forumName;
 	private boolean serviceMode;
 	private String serviceReason;
 
@@ -23,6 +24,24 @@ public class SettingsController {
 
 	public void setExistingPageDescription(String pageDescription) {
 		queryExecutor.executeUpdate("UPDATE Settings SET Pagedescription='"+pageDescription+"';");
+	}
+	
+	public String getForumName() {
+		ResultSet rs = queryExecutor.executeQuery("SELECT Forumname FROM Settings;");
+		if (rs == null)
+			return "Forumname";
+		try {
+			while (rs.next()) {
+				forumName = rs.getString("Forumname");
+			}
+		} catch (SQLException e) {
+			throw new IllegalStateException(e);
+		}
+		return forumName;
+	}
+	
+	public void setForumName(String forumName) {
+		queryExecutor.executeUpdate("UPDATE Settings SET Forumname='"+forumName+"';");
 	}
 
 	public String getExistingPageDescription() {
