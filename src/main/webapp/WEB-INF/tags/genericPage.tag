@@ -9,7 +9,6 @@
 
 <jsp:useBean id="userSession" class="tinf13b4.forum.beans.SessionBean" scope="session" />
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean" scope="request"/>
-<jsp:setProperty name="settings" property="forumName" value="Forum Name" />
 
 <c:if test="${settings.serviceMode and pageContext.request.requestURI ne '/maintenance.jsp' }">
 	<c:redirect url="/maintenance.jsp"></c:redirect>
@@ -19,7 +18,7 @@
 <html>
 <t:head>
 	<jsp:attribute name="title">
-		${settings.forumName} - <jsp:invoke fragment="title" />
+		${settings.pageName} - <jsp:invoke fragment="title" />
 	</jsp:attribute>
 	<jsp:attribute name="js">
 		<jsp:invoke fragment="js" />

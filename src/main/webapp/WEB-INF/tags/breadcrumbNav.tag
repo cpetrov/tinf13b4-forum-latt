@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb">
 	<ul>
-		<li><a href="index.jsp">${settings.forumName}</a></li>
+		<li><a href="index.jsp">${settings.pageName}</a></li>
 		<c:choose>
 			<c:when test="${navigation.category eq 'boards'}">
 				<li><a href="category.jsp?id=${category.id}">${category.title}</a></li>

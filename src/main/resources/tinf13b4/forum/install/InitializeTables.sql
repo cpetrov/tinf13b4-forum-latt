@@ -10,6 +10,21 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+-- Exportiere Struktur von Tabelle pmforum.Blacklist
+CREATE TABLE IF NOT EXISTS `Blacklist` (
+  `Blacklist_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `IP` text NOT NULL,
+  `Banreason` text NOT NULL,
+  `User_ID` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`Blacklist_ID`),
+  UNIQUE KEY `Blacklist_ID` (`Blacklist_ID`),
+  KEY `FK_Blacklist_Users` (`User_ID`),
+  CONSTRAINT `FK_Blacklist_Users` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Blacklisted IP-Adresses';
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
 -- Exportiere Struktur von Tabelle pmforum.Categories
 CREATE TABLE IF NOT EXISTS `Categories` (
   `Category_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -43,12 +58,14 @@ CREATE TABLE IF NOT EXISTS `Posts` (
 -- Exportiere Struktur von Tabelle pmforum.Settings
 CREATE TABLE IF NOT EXISTS `Settings` (
   `Settings_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Pagename` text NOT NULL,
   `Pagedescription` text NOT NULL,
   `Imprint` text NOT NULL,
   `TermsOfUse` text NOT NULL,
   `Notification` text NOT NULL,
   `ServiceMode` tinyint(1) NOT NULL DEFAULT '0',
   `ServiceReason` text NOT NULL,
+  `Hits` int(11) unsigned NOT NULL,
   PRIMARY KEY (`Settings_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for Settings for Adminsettings';
 
