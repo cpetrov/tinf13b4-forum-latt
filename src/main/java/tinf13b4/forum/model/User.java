@@ -76,11 +76,11 @@ public class User {
 	public int getPostCount() {
 		return postCount;
 	}
-	
+
 	public boolean getConfirmed() {
 		return confirmed;
 	}
-	
+
 	public void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
 	}
@@ -88,23 +88,23 @@ public class User {
 	public int getPermission() {
 		return permission;
 	}
-	
+
 	public void setPermission(int permission) {
 		this.permission = permission;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (confirmed ? 1231 : 1237);
 		result = prime * result + id;
 		result = prime * result + ((joinedOn == null) ? 0 : joinedOn.hashCode());
 		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + permission;
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + postCount;
-		result = prime * result + (confirmed ? 1231 : 1237);
-		result = prime * result + permission;
 		return result;
 	}
 
@@ -117,6 +117,8 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (confirmed != other.confirmed)
+			return false;
 		if (id != other.id)
 			return false;
 		if (joinedOn == null) {
@@ -134,6 +136,8 @@ public class User {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (permission != other.permission)
+			return false;
 		if (picture == null) {
 			if (other.picture != null)
 				return false;
@@ -141,10 +145,7 @@ public class User {
 			return false;
 		if (postCount != other.postCount)
 			return false;
-		if (confirmed != other.confirmed)
-			return false;
-		if (permission != other.id)
-			return false;
 		return true;
 	}
+
 }
