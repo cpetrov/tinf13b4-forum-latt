@@ -43,7 +43,7 @@
 					</div>
 					<div class="form-group" ng-class="{'has-error': !register.emailAddress.$valid && register.emailAddress.$dirty}">
 						<label for="emailAddress">Email Address</label>
-						<input id="emailAddress" name="emailAddress" ng-model="emailAddress" type="email" ng-pattern="/[\w|\d|.|_|%|+|-]+@[\w|\d|.|-]+.[\w]{2,}/g" placeholder="E-mail" required="required" />
+						<input id="emailAddress" name="emailAddress" ng-model="emailAddress" type="email" ng-pattern="/[\w|\d|.|_|%|+|-]+@[\w|\d|.|-]+.[\w]/" placeholder="E-mail" required="required" />
 					</div>
 					<!-- Email Address -->
 					
