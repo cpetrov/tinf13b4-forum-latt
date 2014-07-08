@@ -2,9 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <header>
-	<c:if test="${pageContext.request.requestURI ne '/login.jsp'}">
-		<c:if test="${pageContext.request.requestURI ne '/register.jsp'}">
-			<c:if test="${pageContext.request.requestURI ne '/forgotten.jsp'}">
+	<c:if test="${pageContext.request.requestURI != '/login.jsp'}">
+		<c:if test="${pageContext.request.requestURI != '/register.jsp'}">
+			<c:if test="${pageContext.request.requestURI != '/forgotten.jsp'}">
 				<div id="login" class="pipeList">
 					<c:choose>
 						<c:when test="${empty userSession.userName }">
