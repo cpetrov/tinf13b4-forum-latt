@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<%@attribute name="heading" type="java.lang.String"%>
-<%@attribute name="text" type="java.lang.String"%>
+<%@attribute name="heading" fragment="true"%>
+<%@attribute name="content" fragment="true"%>
 <%@attribute name="title" fragment="true"%>
 
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
@@ -17,10 +17,10 @@
 	<jsp:body>
 	<section>
       <header>
-        <h2>${heading}</h2>
+        <h2><jsp:invoke fragment="heading" /></h2>
       </header>
 	<article>
-      <p>${text}</p>
+      <jsp:invoke fragment="content" />
     </article>
 	</section>
     </jsp:body>

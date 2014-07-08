@@ -5,6 +5,8 @@
 
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
-<t:staticPage text="${settings.notification}" heading="${provider.heading}">
-	<jsp:attribute name="title">Legal</jsp:attribute>
+<t:staticPage>
+		<jsp:attribute name="title">Legal</jsp:attribute>
+		<jsp:attribute name="heading">Imprint</jsp:attribute>
+		<jsp:attribute name="content">${settings.pageImprint}</jsp:attribute>
 </t:staticPage>

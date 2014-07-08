@@ -14,7 +14,7 @@ public class SettingsBean {
 	private SettingsController settingsController;
 	private List<Category> categories;
 	private String forumName;
-
+	
 	public SettingsBean() {
 		settingsController = new SettingsController();
 	}
