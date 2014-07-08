@@ -109,7 +109,7 @@ public class SearchBean {
 	}
 
 	private void createThreads() throws SQLException {
-		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed FROM Threads T, Users U "
+		resultSet = executor.executeQuery("SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission FROM Threads T, Users U "
 				+ "WHERE Content LIKE '%" + searchObject + "%' "
 				+ "OR Title LIKE '%" + searchObject + "%';");
 
