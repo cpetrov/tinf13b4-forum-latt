@@ -34,7 +34,7 @@
                 <h2>${user.name}</h2>
             </header>
             <form method="POST" enctype="multipart/form-data" action="/api/ucp">
-	            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
+	            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\')') : 'background-image: url(\'/img/user.gif\')' }"></div>
 	            <input type="file" onchange="this.form.submit();" accept="image/*" style="display:none" name="localPicturePath"/>
 	            <input type="text" name="userId" style="display:none" value="${userSession.user.id }" />
 	            <div id="posts">

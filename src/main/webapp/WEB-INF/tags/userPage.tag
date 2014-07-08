@@ -23,7 +23,7 @@
             <header>
                 <h2>${user.name}</h2>
             </header>
-            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\');') : '' }"></div>
+            <div class="userPictureHolder" style="${not empty user.picture ? 'background-image: url(\'/uploads/'.concat(user.picture).concat('\')') : 'background-image: url(\'/img/user.gif\')' }"></div>
             <div id="posts">
                 <img src="./img/quill16.png" alt=""> User has <b>${user.postCount}</b> posts
             </div>
