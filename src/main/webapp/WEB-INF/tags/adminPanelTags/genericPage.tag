@@ -7,9 +7,12 @@
 <%@attribute name="js" fragment="true"%>
 <%@attribute name="title" fragment="true"%>
 
-<jsp:useBean id="userSession" class="tinf13b4.forum.beans.SessionBean" scope="session" />
 <jsp:useBean id="settings" class="tinf13b4.forum.beans.SettingsBean" scope="request"/>
 <jsp:useBean id="navigation" class="tinf13b4.forum.beans.NavigationBean" scope="request" />
+
+<c:if test="${empty userSession or userSession.user.permission != 2 }">
+	<c:redirect url="../index.jsp"></c:redirect>
+</c:if>
 
 <!DOCTYPE html>
 <html>
