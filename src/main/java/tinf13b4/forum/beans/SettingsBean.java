@@ -1,4 +1,3 @@
-
 package tinf13b4.forum.beans;
 
 import java.util.List;
@@ -20,7 +19,13 @@ public class SettingsBean {
 	private String categorySubtitle;
 	private int categorySortNumber;
 	private boolean updateCategory;
-
+	// update User
+	private int userId;
+	private String userName;
+	private String userMail;
+	private String userPicture;
+	private boolean userConfirmed;
+	
 	public SettingsBean() {
 		settingsController = new SettingsController();
 	}
@@ -31,7 +36,7 @@ public class SettingsBean {
 	public void setForumName(String forumName) {
 		this.forumName = forumName;
 	}
-
+	
 	public void setPageDescription(String pageDescription) {
 		settingsController.setExistingPageDescription(pageDescription);
 	}
@@ -86,39 +91,47 @@ public class SettingsBean {
 		return categories;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
-	}
-
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
-	}
-
-	public String getCategoryTitle() {
-		return categoryTitle;
 	}
 
 	public void setCategoryTitle(String categoryTitle) {
 		this.categoryTitle = categoryTitle;
 	}
 
-	public String getCategorySubtitle() {
-		return categorySubtitle;
-	}
-
 	public void setCategorySubtitle(String categorySubtitle) {
 		this.categorySubtitle = categorySubtitle;
-	}
-
-	public int getCategorySortNumber() {
-		return categorySortNumber;
 	}
 
 	public void setCategorySortNumber(int categorySortNumber) {
 		this.categorySortNumber = categorySortNumber;
 	}
-
+	
 	public void setUpdateCategory(boolean updateCategory) {
 		settingsController.updateCategory(categoryId, categoryTitle, categorySubtitle, categorySortNumber);
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+	public void setUserPicture(String userPicture) {
+		this.userPicture = userPicture;
+	}
+
+	public void setUserConfirmed(boolean userConfirmed) {
+		this.userConfirmed = userConfirmed;
+	}
+	
+	public void setUpdateUser(boolean updateUser) {
+		settingsController.updateUser(userId, userName, userMail, userPicture, userConfirmed);
 	}
 }

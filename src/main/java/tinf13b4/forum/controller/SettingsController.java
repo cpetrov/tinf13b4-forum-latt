@@ -164,4 +164,35 @@ public class SettingsController {
 		}
 		queryExecutor.executeUpdate("UPDATE Categories SET OrderNumber = "+orderNumber+" WHERE OrderNumber = 2;");
 	}
+
+	public void updateUser(int userId, String userName, String userMail,
+			String userPicture, boolean userConfirmed) {
+		
+		String query = "UPDATE Users SET ";
+		boolean comma = false;
+		
+		if(userName != null && !userName.isEmpty()) {
+			query += "Name = '" + userName + "' ";
+			comma = true;
+		}
+		if(userMail != null && !userMail.isEmpty()) {
+			if(comma)
+				query += ", ";
+			query += "Mail = '" + userMail + "' ";
+			comma = true;
+		}
+		if(userPicture != null && !userPicture.isEmpty()) {
+			if(comma)
+				query += ", ";
+			query += "Picture = '" + userPicture + "' ";
+			comma = true;
+		}
+		
+		if(comma)
+			query += ", ";
+			query += "Confirmed = '" + (userConfirmed ? 1 : 0) + "' ";
+		
+			query += " WHERE User_ID = "+ userId +";";
+			queryExecutor.executeUpdate(query);
+	}
 }
