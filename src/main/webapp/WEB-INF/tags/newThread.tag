@@ -33,6 +33,9 @@
 	    <c:when test="${not empty param.content and empty param.title and not empty param.categoryId}">
 	       <div class="alert">Title must not be empty.</div>
 	    </c:when>
+	    <c:when test="${empty param.content and empty param.title and not empty param.categoryId}">
+           <div class="alert">Title and content must not be empty.</div>
+        </c:when>
 	    <c:when test="${empty param.content and not empty param.title and not empty param.categoryId}">
 	       <div class="alert">Content must not be empty.</div>
 	    </c:when>
