@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
+import tinf13b4.forum.model.Category;
 
 public class SettingsController {
 	private QueryExecutor queryExecutor;;
@@ -117,5 +118,50 @@ public class SettingsController {
 	public void setOrderNumber(int orderNumber, int categoryID) {
 		queryExecutor.executeUpdate("UPDATE Categories SET orderNumber = " + orderNumber
 				+ " WHERE Category_ID = " + categoryID + ";");
+	}
+
+	public void updateCategory(int categoryId, String categoryTitle,
+			String categorySubtitle, int categoryOrderNumber) {
+		
+		String query = "UPDATE Categories SET ";
+		boolean comma = false;
+		
+		if(categoryTitle != null && !categoryTitle.isEmpty()) {
+			query += "Title = '" + categoryTitle + "' ";
+			comma = true;
+		}
+		if(categorySubtitle != null && !categorySubtitle.isEmpty()) {
+			if(comma)
+				query += ", ";
+			query += "Subtitle = '" + categorySubtitle + "' ";
+		}
+		if(categoryOrderNumber > 0) {
+			if(comma)
+				query += ", ";
+			query += "OrderNumber = " + categoryOrderNumber + " ";
+		}
+		
+		testAndUpdateSortNumber(categoryId, categoryOrderNumber);
+		
+		query += " WHERE Category_ID = "+ categoryId +";";
+		
+		queryExecutor.executeUpdate(query);
+	}
+
+	private void testAndUpdateSortNumber(int categoryId, int categoryOrderNumber) {
+		rs = queryExecutor.executeQuery("SELECT OrderNumber FROM Categories WHERE Category_ID = "+categoryId+";");
+		int orderNumber = 0;
+		if(rs == null)
+			return;
+		else{
+			try {
+				while(rs.next()){
+					orderNumber = rs.getInt("OrderNumber");
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+		}
+		queryExecutor.executeUpdate("UPDATE Categories SET OrderNumber = "+orderNumber+" WHERE OrderNumber = 2;");
 	}
 }
