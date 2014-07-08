@@ -12,9 +12,50 @@
 <t:genericPage>
 	<jsp:attribute name="title"><jsp:invoke fragment="title" /></jsp:attribute>
 	<jsp:body>
+		<c:if test="${not empty param.id }">
+			<c:set target="${settings}" property="userId" value="${param.id}"></c:set>
+			<c:if test="${not empty param.username }">
+				<c:set target="${settings}" property="name" value="${param.name}"></c:set>
+			</c:if>
+			<c:if test="${not empty param.mail }">
+				<c:set target="${settings}" property="userId" value="${param.mail}"></c:set>
+			</c:if>
+			<c:if test="${not empty param.picture }">
+				<c:set target="${settings}" property="userId" value="${param.picture}"></c:set>
+			</c:if>
+			<c:set target="${settings}" property="userConfirmed" value="${param.confirmed eq 'on' ? true : false}"></c:set>
+			<c:set target="${settings}" property="updateUser" value="true"></c:set>
+		</c:if>
 		<div class="admContent">
 			<h1>Welcome</h1> User Management
 			<p>
+			<div>
+				<form method="POST">
+					<table>
+						<thead><tr>
+							<td>User ID</td>
+							<td>Username</td>
+							<td>E-mail Address</td>
+							<td>Picture</td>
+							<td>Activation</td>
+						</tr></thead>
+						<tr>
+							<td><select name="id">
+								<c:forEach var="user" items="${settings.users }">
+									<option label="${user.id}" value="${user.id}">
+								</c:forEach>
+								</select>
+							</td>
+							<td><input style="margin: 5px" name="name"></td>
+							<td><input style="margin: 5px" name="mail"></td>
+							<td><input style="margin: 5px" name="picture"></td>
+							<td><input type="checkbox" style="margin: 5px" name="confirmed" checked="checked"></td>
+						</tr>
+					</table>
+					<input type="submit">
+				</form>
+			</div>
+			
 			<table class="table userList">
 				<thead><tr>
 					<td>User ID</td>
@@ -22,7 +63,6 @@
 					<td>E-mail Address</td>
 					<td>Picture</td>
 					<td>Activation</td>
-					<td>Action</td>
 				</tr></thead>
 				<c:forEach var="user" items="${settings.users }">
 					<tr>
@@ -31,7 +71,6 @@
 						<td>${user.mail }</td>
 						<td>${user.picture }</td>
 						<td>${user.confirmed }</td>
-						<td><i class="editButton fa fa-pencil-square-o"></i></td>
 					</tr>
 				</c:forEach>
 			</table>

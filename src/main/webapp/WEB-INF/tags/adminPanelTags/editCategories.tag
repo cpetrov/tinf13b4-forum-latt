@@ -31,7 +31,7 @@
 			<h1>Welcome</h1> Edit Categories
 			<p>
 			<div>
-				<form method="GET">
+				<form method="POST">
 					<table>
 						<thead><tr>
 							<td>ID</td>
