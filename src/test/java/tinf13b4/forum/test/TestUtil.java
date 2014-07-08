@@ -23,6 +23,7 @@ public class TestUtil {
 		final AtomicInteger currentIndex = new AtomicInteger(-1);
 		Mockito.when(result.next()).thenAnswer(new Answer<Object>() {
 
+			@Override
 			public Object answer(InvocationOnMock aInvocation) throws Throwable {
 				return currentIndex.incrementAndGet() < rows.length;
 			}
@@ -30,6 +31,7 @@ public class TestUtil {
 		final ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
 		Answer<?> rowLookupAnswer = new Answer<Object>() {
 
+			@Override
 			public Object answer(InvocationOnMock aInvocation) throws Throwable {
 				int columnIndex = aColumns.indexOf(argument.getValue());
 				return rows[currentIndex.get()].get(columnIndex);
@@ -40,6 +42,7 @@ public class TestUtil {
 		Mockito.when(result.getDate(argument.capture())).thenAnswer(rowLookupAnswer);
 		Mockito.when(result.getInt(argument.capture())).thenAnswer(rowLookupAnswer);
 		Mockito.when(result.getTimestamp(argument.capture())).thenAnswer(rowLookupAnswer);
+		Mockito.when(result.getBoolean(argument.capture())).thenAnswer(rowLookupAnswer);
 		return result;
 	}
 

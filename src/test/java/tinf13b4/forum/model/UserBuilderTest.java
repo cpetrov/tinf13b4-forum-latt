@@ -22,6 +22,8 @@ public class UserBuilderTest {
 		userBuilder.setName("name");
 		userBuilder.setPicture("picturePath");
 		userBuilder.setPostsCount(2);
+		userBuilder.setConfirmed(true);
+		userBuilder.setPermission(0);
 
 		User builtUser = userBuilder.build();
 

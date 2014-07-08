@@ -32,13 +32,12 @@ public class UserControllerTest {
 		date = new Date();
 		timestamp = new Timestamp(date.getTime());
 		ResultSet resultSet = makeResultSet(
-				Arrays.asList("User_ID", "Name", "Picture", "Email", "JoinedOn"),
-				Arrays.asList(1, "username", "pathToPicture", "email", timestamp)
+				Arrays.asList("User_ID", "Name", "Picture", "Email", "JoinedOn", "Confirmed", "Permission"),
+				Arrays.asList(1, "username", "pathToPicture", "email", timestamp, true, 1)
 				);
 		executor = Mockito.mock(QueryExecutor.class);
-		String query = "SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed "
-									+ "FROM Users "
-									+ "WHERE Confirmed='1';";
+		String query = "SELECT User_ID, Name, Picture, Email, JoinedOn, Confirmed, Permission "
+				+ "FROM Users " + "WHERE Confirmed='1';";
 		when(executor.executeQuery(query)).thenReturn(resultSet);
 		stubPostsCount(executor);
 	}
@@ -51,6 +50,8 @@ public class UserControllerTest {
 		assertEquals("pathToPicture", users.get(0).getPicture());
 		assertEquals("email", users.get(0).getMail());
 		assertEquals(date, users.get(0).getJoinedOn());
+		assertEquals(true, users.get(0).getConfirmed());
+		assertEquals(1, users.get(0).getPermission());
 		assertEquals(1, users.get(0).getPostCount());
 	}
 
