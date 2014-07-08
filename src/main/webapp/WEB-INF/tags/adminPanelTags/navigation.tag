@@ -6,6 +6,12 @@
 		<li class="expander">
 			<i class="fa fa-bars"></i>
 		</li>
+		<c:if test="${settings.serviceMode eq 'true'}">
+		<li class="navWarning">
+			<i class="fa fa-warning"></i>
+			<span class="navPt">Warning</span>
+		</li>		
+		</c:if>
 		<li class="navIndex">
 			<i class="fa fa-tachometer"></i>
 			<span class="navPt">AdminPanel</span>

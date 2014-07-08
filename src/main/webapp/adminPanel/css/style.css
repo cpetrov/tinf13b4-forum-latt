@@ -6,6 +6,16 @@ body {
 	font-weight: lighter !important;
 }
 
+.navWarning {
+	box-shadow: 0 0 10px 2px #F8CA00;
+	margin-bottom: 30px;
+}
+
+.navWarning:hover {
+	box-shadow: 0 0 10px 2px #F8CA00;
+	background-color: #3d3d3d !important;
+}
+
 .admPanel {
 	background-color: red;
 }
@@ -31,7 +41,7 @@ body {
 	position: fixed;
 	right: 30px;
 	top: 11px;
-	color: RGBA(255, 255, 255, 0.3);
+	color: RGBA(255, 255, 255, 0.7);
 }
 
 .admNav {
