@@ -14,6 +14,12 @@ public class SettingsBean {
 	private SettingsController settingsController;
 	private List<Category> categories;
 	private String forumName;
+	// update Category
+	private int categoryId;
+	private String categoryTitle;
+	private String categorySubtitle;
+	private int categorySortNumber;
+	private boolean updateCategory;
 
 	public SettingsBean() {
 		settingsController = new SettingsController();
@@ -25,7 +31,7 @@ public class SettingsBean {
 	public void setForumName(String forumName) {
 		this.forumName = forumName;
 	}
-	
+
 	public void setPageDescription(String pageDescription) {
 		settingsController.setExistingPageDescription(pageDescription);
 	}
@@ -78,5 +84,41 @@ public class SettingsBean {
 		CategoryController controller = new CategoryController();
 		categories = controller.getCategories();
 		return categories;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryTitle() {
+		return categoryTitle;
+	}
+
+	public void setCategoryTitle(String categoryTitle) {
+		this.categoryTitle = categoryTitle;
+	}
+
+	public String getCategorySubtitle() {
+		return categorySubtitle;
+	}
+
+	public void setCategorySubtitle(String categorySubtitle) {
+		this.categorySubtitle = categorySubtitle;
+	}
+
+	public int getCategorySortNumber() {
+		return categorySortNumber;
+	}
+
+	public void setCategorySortNumber(int categorySortNumber) {
+		this.categorySortNumber = categorySortNumber;
+	}
+
+	public void setUpdateCategory(boolean updateCategory) {
+		settingsController.updateCategory(categoryId, categoryTitle, categorySubtitle, categorySortNumber);
 	}
 }

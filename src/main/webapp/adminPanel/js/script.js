@@ -107,4 +107,5 @@ $(document).ready(function(){
 
 		$(this).parent('tr').children('td').children('.editButton').parent('td').html('<i class="saveChanges fa fa-floppy-o"></i>');
 	});
+
 });
