@@ -17,7 +17,7 @@
 				<li><a href="logout.jsp">Logout</a></li>
 	            <li><a href="UCP.jsp">User Control Panel</a></li>
 	            <c:if test="${userSession.user.permission == 2}">
-	            	<li><a href="adminPanel\index.jsp">Admin Panel</a></li>
+	            	<li><a href="adminPanel/index.jsp">Admin Panel</a></li>
 	            </c:if>
 	        </ul>
 		</c:otherwise>
