@@ -5,6 +5,8 @@
 
 <jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 
-<t:staticPage text="${settings.termsOfUse}" heading="${provider.heading}">
+<t:staticPage>
 	<jsp:attribute name="title">Usage Agreement</jsp:attribute>
+	<jsp:attribute name="heading">Usage Agreement</jsp:attribute>
+	<jsp:attribute name="content">${settings.termsOfUse}</jsp:attribute>
 </t:staticPage>
