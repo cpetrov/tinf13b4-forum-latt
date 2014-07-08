@@ -1,8 +1,6 @@
 package tinf13b4.forum.servlets;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -89,14 +87,9 @@ public class RegisterServlet extends JsonServlet {
 					public void run(){
 						// Email Message & Subject
 						String subject = "Complete your registration";
-						String message = null;
-						try {
-							message = "Hello " + username.asString()
+						String message = "Hello " + username.asString()
 									+ "\n \n Welcome to our Forum! To complete the registration process, "
-									+ "please visit the following link: \n" + new URL("http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey).toString();
-						} catch (MalformedURLException e) {
-							e.printStackTrace();
-						}
+									+ "please visit the following link: \n http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey;
 						
 						// Send email to User
 						sendMail.emailBuilder(emailAddress.asString(), subject, message);

@@ -4,7 +4,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <c:choose>
-	<c:when test="${not empty userSession.userName }">
+	<c:when test="${not empty userSession.user.name }">
 		<jsp:useBean id="provider" class="tinf13b4.forum.beans.ProviderBean" />
 		<c:set target="${provider}" property="userName" value="${userSession.user.name }"></c:set>
 		<t:UCPPage user="${provider.user}">
