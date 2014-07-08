@@ -257,7 +257,7 @@ header .searchWidget {
   text-transform: uppercase;
 }
 
-.inputHolder a {
+.inputHolder > form > a {
   display: block;
   margin-left: 90px;
 }
