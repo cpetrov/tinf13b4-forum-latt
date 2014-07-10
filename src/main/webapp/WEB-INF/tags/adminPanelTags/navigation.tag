@@ -21,6 +21,9 @@
 			<span class="navPt">General</span>
 		</li>
 		<c:if test="${navigation.acpNavigation eq 'general'}">
+			<li class="subNav navForumname">
+				<span class="navPt">Forum name</span>
+			</li>
 			<li class="subNav navDescription">
 				<span class="navPt"> Description</span>
 			</li>

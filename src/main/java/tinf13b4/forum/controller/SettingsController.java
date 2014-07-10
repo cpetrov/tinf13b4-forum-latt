@@ -195,4 +195,24 @@ public class SettingsController {
 			query += " WHERE User_ID = "+ userId +";";
 			queryExecutor.executeUpdate(query);
 	}
+
+	public String getForumName() {
+		rs = queryExecutor.executeQuery("SELECT Forumname FROM Settings;");
+		if(rs == null)
+			return "Forum name";
+		else{
+			try {
+				while(rs.next()){
+					return rs.getString("Forumname");
+				}
+			} catch (SQLException e) {
+				new IllegalStateException("SQL Error: " + e);
+			}
+		}
+		return "Forum name";
+	}
+
+	public void setForumName(String forumName) {
+		queryExecutor.executeUpdate("UPDATE Settings SET Forumname = '" + forumName +"';");
+	}
 }
