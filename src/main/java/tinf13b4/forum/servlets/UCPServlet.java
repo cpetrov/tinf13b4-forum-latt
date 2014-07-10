@@ -144,7 +144,7 @@ public class UCPServlet extends HttpServlet {
 					request, response);
 			return false;
 		} else {
-			if ((notNullAndEmpty(passwordConfirmation)) & !(checkConfirmation(request, response))) {
+			if (!(notNullAndEmpty(passwordConfirmation)) && !(checkConfirmation(request, response))) {
 				handleError("Please, repeat your new password in the 'Password confirmation' field.", request, response);
 				return false;
 			}
