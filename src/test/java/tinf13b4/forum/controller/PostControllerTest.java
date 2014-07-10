@@ -51,10 +51,10 @@ public class PostControllerTest {
 		Timestamp dateJoined = new Timestamp(new Date().getTime());
 		Timestamp timestamp = new Timestamp(new Date().getTime());
 		ResultSet resultSet = makeResultSet(
-				Arrays.asList("Post_ID", "Content", "Date", "User_ID", "Name", "Picture", "Email", "JoinedOn"),
-				Arrays.asList(1, "content", timestamp, 1, "username", "pathToPicture", "email", dateJoined)
+				Arrays.asList("Post_ID", "Content", "Date", "User_ID", "Name", "Picture", "Email", "JoinedOn", "Confirmed", "Permission"),
+				Arrays.asList(1, "content", timestamp, 1, "username", "pathToPicture", "email", dateJoined, true, 1)
 				);
-		when(executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+		when(executor.executeQuery("SELECT P.Post_ID, P.Content, P.Date, P.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission "
 				+ "FROM Posts P, Threads T, Users U "
 				+ "WHERE P.Thread_ID = T.Thread_ID "
 				+ "AND T.Thread_ID = 1 "

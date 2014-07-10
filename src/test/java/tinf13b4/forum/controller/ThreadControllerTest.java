@@ -45,7 +45,7 @@ public class ThreadControllerTest {
 
 		new ThreadController(executor).createThread("title", "content", 1, 2, false);
 
-		verify(executor).executeUpdate("INSERT INTO Threads (Title, Content, Date, ReadOnly, User_ID, Category_ID) VALUES ('title', 'content', '" + datePosted + "', 0, 1, 2);");
+		verify(executor).executeUpdate("INSERT INTO Threads (Title, Content, Date, ReadOnly, User_ID, Category_ID) VALUES ('title', 'content', '" + datePosted + "', false, 1, 2);");
 	}
 
 	@Test
@@ -63,12 +63,14 @@ public class ThreadControllerTest {
 		Date date = new Timestamp( new Date().getTime() );
 		Date joinedOn = new Timestamp( new Date().getTime() );
 		ResultSet resultSet = makeResultSet(
-				Arrays.asList("Thread_ID", "Title", "Content", "Date", "ReadOnly", "Category_ID", "User_ID", "Name", "Picture", "Email", "JoinedOn"),
-				Arrays.asList(1, "title", "content", date, false, 2, 1, "user", "pathToPicture", "email", joinedOn)
+				Arrays.asList("Thread_ID", "Title", "Content", "Date", "ReadOnly", "Category_ID", "User_ID", "Name", "Picture", "Email", "JoinedOn", "Confirmed", "Permission"),
+				Arrays.asList(1, "title", "content", date, false, 2, 1, "user", "pathToPicture", "email", joinedOn, true, 1)
 				);
-		String query="SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn "
+		String query="SELECT Thread_ID, Title, Content, Date, ReadOnly, Category_ID, U.User_ID, U.Name, U.Picture, U.Email, U.JoinedOn, U.Confirmed, U.Permission "
 					+ "FROM Threads T, Users U "
-					+ "WHERE Category_ID = 2 AND T.User_ID = U.User_ID AND U.Confirmed = 1;";
+					+ "WHERE Category_ID = 2"
+					+ " AND T.User_ID = U.User_ID "
+					+ "AND U.Confirmed = 1;";
 		when(executor.executeQuery(query)).thenReturn(resultSet);
 		TestUtil.stubPostsCount(executor);
 		ThreadController controller = new ThreadController(executor);
@@ -86,7 +88,7 @@ public class ThreadControllerTest {
 		assertEquals("content", threads.get(0).getContent());
 		assertEquals(new Date(date.getTime()), threads.get(0).getDate());
 		assertEquals(false, threads.get(0).isReadonly());
-		User user = new User(1, "user", 1, "pathToPicture", "email", new Date(joinedOn.getTime()), true, 0);
+		User user = new User(1, "user", 1, "pathToPicture", "email", new Date(joinedOn.getTime()), true, 1);
 		assertEquals(user, threads.get(0).getUser());
 	}
 
