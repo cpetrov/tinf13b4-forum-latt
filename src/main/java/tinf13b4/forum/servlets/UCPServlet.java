@@ -3,6 +3,8 @@ package tinf13b4.forum.servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -24,6 +26,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import tinf13b4.forum.beans.ConsumerBean;
+import tinf13b4.forum.util.UserDataValidatorUtil;
 
 @WebServlet("/api/ucp")
 @MultipartConfig
@@ -86,10 +89,12 @@ public class UCPServlet extends HttpServlet {
 				handleFileUpload(request, response, uploadFolder, userId, fileItemFile);
 			}
 			if (notNullAndEmpty(password)) {
-				handlePassword(request, response);
+				if(handlePassword(request, response))
+					consumerBean.setUserPassword(password);
 			}
 			if (notNullAndEmpty(mail)) {
-				consumerBean.setUserMail(mail);
+				if(handleMail(request, response))
+					consumerBean.setUserMail(mail);
 			}
 			boolean mailOrPasswordNotEmptyAndNull = notNullAndEmpty(consumerBean.getUserMail())
 					|| notNullAndEmpty(consumerBean.getUserPassword());
@@ -121,20 +126,45 @@ public class UCPServlet extends HttpServlet {
 		}
 	}
 
-	private void handlePassword(HttpServletRequest request, HttpServletResponse response) {
-		if (notNullAndEmpty(passwordConfirmation)) {
-			checkConfirmation(request, response);
+	private boolean handlePassword(HttpServletRequest request, HttpServletResponse response) {
+		UserDataValidatorUtil userDataValidator = new UserDataValidatorUtil();
+		if(!userDataValidator.checkPassword(password)) {
+			handleError("The password is invalid please use a big letter, small letter, @, #, $, %", request, response);
+			return false;
 		} else {
-			handleError("Please, repeat your new password in the 'Password confirmation' field.", request, response);
+			if ((notNullAndEmpty(passwordConfirmation)) & !(checkConfirmation(request, response))) {
+				handleError("Please, repeat your new password in the 'Password confirmation' field.", request, response);
+				return false;
+			}
 		}
+		return true;	
+	}
+	
+	private boolean handleMail(HttpServletRequest request, HttpServletResponse response) {
+		UserDataValidatorUtil userDataValidator = new UserDataValidatorUtil();
+		if(!userDataValidator.checkMail(mail)) {
+			handleError("The email address is not valid", request, response);
+			return false;
+		} else {
+			ResultSet rs = userDataValidator.validateData("", mail);
+			try {
+				while(rs.next()) {
+					handleError("Sorry, this Mail-Address is in use!", request, response);
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
-	private void checkConfirmation(HttpServletRequest request, HttpServletResponse response) {
-		if (password.equals(passwordConfirmation)) {
-			consumerBean.setUserPassword(password);
-		} else {
+	private boolean checkConfirmation(HttpServletRequest request, HttpServletResponse response) {
+		if (!password.equals(passwordConfirmation)) {
 			handleError("Password confirmation wrong.", request, response);
+			return false;
 		}
+		return true;
 	}
 
 	private void uploadFile(String uploadFolder, int userId, FileItem fileItemFile, String extension,
