@@ -94,7 +94,8 @@ public class UCPServlet extends HttpServlet {
 			if (notNullAndEmpty(mail)) {
 				handleMail(request, response);
 			}
-			boolean mailOrPasswordNotEmptyAndNull = notNullAndEmpty(consumerBean.getUserMail()) || notNullAndEmpty(consumerBean.getUserPassword());
+			boolean mailOrPasswordNotEmptyAndNull = notNullAndEmpty(consumerBean.getUserMail())
+					|| notNullAndEmpty(consumerBean.getUserPassword());
 			if (mailOrPasswordNotEmptyAndNull) {
 				consumerBean.setUser(userId);
 			}
@@ -116,13 +117,13 @@ public class UCPServlet extends HttpServlet {
 	}
 
 	private void handlePassword(HttpServletRequest request, HttpServletResponse response) {
-		if(checkPasswordValid(request, response)) {
+		if (checkPasswordValid(request, response)) {
 			consumerBean.setUserPassword(password);
 		}
 	}
 
 	private void handleMail(HttpServletRequest request, HttpServletResponse response) {
-		if(checkMailValid(request, response)) {
+		if (checkMailValid(request, response)) {
 			consumerBean.setUserMail(mail);
 		}
 	}
@@ -137,8 +138,10 @@ public class UCPServlet extends HttpServlet {
 
 	private boolean checkPasswordValid(HttpServletRequest request, HttpServletResponse response) {
 		UserDataValidatorUtil userDataValidator = new UserDataValidatorUtil();
-		if(!userDataValidator.checkPassword(password)) {
-			handleError("Please use a big letter, a small letter, a number and one of the special characters @, #, $, %", request, response);
+		if (!userDataValidator.checkPassword(password)) {
+			handleError(
+					"Please use a big letter, a small letter, a number and one of the special characters @, #, $, %",
+					request, response);
 			return false;
 		} else {
 			if ((notNullAndEmpty(passwordConfirmation)) & !(checkConfirmation(request, response))) {
@@ -151,13 +154,13 @@ public class UCPServlet extends HttpServlet {
 
 	private boolean checkMailValid(HttpServletRequest request, HttpServletResponse response) {
 		UserDataValidatorUtil userDataValidator = new UserDataValidatorUtil();
-		if(!userDataValidator.checkMail(mail)) {
+		if (!userDataValidator.checkMail(mail)) {
 			handleError("The email address is not valid", request, response);
 			return false;
 		} else {
 			ResultSet rs = userDataValidator.validateData("", mail);
 			try {
-				while(rs.next()) {
+				while (rs.next()) {
 					handleError("Sorry, this mail address is already in use.", request, response);
 					return false;
 				}
@@ -188,11 +191,13 @@ public class UCPServlet extends HttpServlet {
 	}
 
 	private void handleError(String error, HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("error", error);
-		try {
-			request.getRequestDispatcher("/UCP.jsp").forward(request, response);
-		} catch (ServletException | IOException e) {
-			throw new IllegalStateException(e);
+		if (request.getAttribute("error") == null) {
+			request.setAttribute("error", error);
+			try {
+				request.getRequestDispatcher("/UCP.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				throw new IllegalStateException(e);
+			}
 		}
 	}
 
