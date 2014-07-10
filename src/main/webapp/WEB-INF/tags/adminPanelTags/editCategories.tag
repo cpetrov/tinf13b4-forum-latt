@@ -42,7 +42,7 @@
 						<tr>
 							<td><select name="id">
 								<c:forEach var="category" items="${settings.categories }">
-									<option label="${category.id}" value="${category.id}">
+									<option label="${category.id}" value="${category.id}">${category.id}</option>
 								</c:forEach>
 								</select>
 							</td>
