@@ -15,7 +15,7 @@
 	<jsp:body>
 		<div class="admContent">
 			<form method="POST">
-				<c:if test="${!empty param.pageInprint}"><	
+				<c:if test="${!empty param.pageImprint}">	
 					<jsp:setProperty name="settings" property="pageImprint" value="${param.pageImprint}" />
 				</c:if>
 				<h1>Imprint</h1>
