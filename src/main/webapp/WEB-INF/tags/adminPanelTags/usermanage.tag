@@ -14,14 +14,14 @@
 	<jsp:body>
 		<c:if test="${not empty param.id }">
 			<c:set target="${settings}" property="userId" value="${param.id}"></c:set>
-			<c:if test="${not empty param.username }">
-				<c:set target="${settings}" property="name" value="${param.name}"></c:set>
+			<c:if test="${not empty param.name }">
+				<c:set target="${settings}" property="userName" value="${param.name}"></c:set>
 			</c:if>
 			<c:if test="${not empty param.mail }">
-				<c:set target="${settings}" property="userId" value="${param.mail}"></c:set>
+				<c:set target="${settings}" property="userMail" value="${param.mail}"></c:set>
 			</c:if>
 			<c:if test="${not empty param.picture }">
-				<c:set target="${settings}" property="userId" value="${param.picture}"></c:set>
+				<c:set target="${settings}" property="userPicture" value="${param.picture}"></c:set>
 			</c:if>
 			<c:set target="${settings}" property="userConfirmed" value="${param.confirmed eq 'on' ? true : false}"></c:set>
 			<c:set target="${settings}" property="updateUser" value="true"></c:set>
