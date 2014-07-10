@@ -144,12 +144,13 @@ public class UCPServlet extends HttpServlet {
 					request, response);
 			return false;
 		} else {
-			if (!(notNullAndEmpty(passwordConfirmation)) && !(checkConfirmation(request, response))) {
+			if (!notNullAndEmpty(passwordConfirmation)) {
 				handleError("Please, repeat your new password in the 'Password confirmation' field.", request, response);
 				return false;
+			} else {
+				return checkConfirmation(request, response);
 			}
 		}
-		return true;
 	}
 
 	private boolean checkMailValid(HttpServletRequest request, HttpServletResponse response) {
