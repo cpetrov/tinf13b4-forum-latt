@@ -433,7 +433,7 @@ input#subject {
 }
 
 #topic>.answer>.answerBody {
-  margin-bottom: 25px;
+  margin-bottom: 60px;
   width: 800px;
   float: right;
 }
@@ -441,10 +441,6 @@ input#subject {
 #topic>.answer>.answerBody p {
   margin-top: 0px;
   line-height: 1.8em;
-}
-
-#topic>.answer>.answerBody p:last-of-type {
-  margin-bottom: 60px;
 }
 
 #topic>.answer>.answerBody .postedOn {
