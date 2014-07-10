@@ -92,4 +92,8 @@ $(document).ready(function(){
 	$('.navWarning').click(function() {
 		window.location.href = "warning.jsp";
 	});
+	
+	$('.navForumname').click(function() {
+		window.location.href = "forumname.jsp";
+	});
 });

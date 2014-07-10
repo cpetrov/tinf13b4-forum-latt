@@ -31,10 +31,10 @@ public class SettingsBean {
 	}
 
 	public String getForumName() {
-		return forumName;
+		return settingsController.getForumName();
 	}
 	public void setForumName(String forumName) {
-		this.forumName = forumName;
+		settingsController.setForumName(forumName);
 	}
 	
 	public void setPageDescription(String pageDescription) {
