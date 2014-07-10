@@ -103,7 +103,6 @@ button span {
 
 .userPictureHolder {
   background-size: cover;
-  cursor:pointer;
   width: 200px;
   height: 200px;
   line-height:200px;
@@ -115,6 +114,10 @@ button span {
   border-width: 1px;
   margin-bottom:5px;
   text-align:center;
+}
+
+.ucp .userPictureHolder {
+  cursor: pointer;
 }
 
 .userPictureAnnotation {
