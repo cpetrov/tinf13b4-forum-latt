@@ -58,6 +58,7 @@ public class SettingsController {
 		return existingPageImprint;
 	}
 	public void setExistingTermsOfUse(String termsOfUse) {
+		String query = "UPDATE Settings SET TermsOfUse='"+termsOfUse+"';";
 		queryExecutor.executeUpdate("UPDATE Settings SET TermsOfUse='"+termsOfUse+"';");
 	}
 
@@ -91,9 +92,9 @@ public class SettingsController {
 	public void setServiceMode(boolean serviceMode) {
 		this.serviceMode = serviceMode;
 		if(serviceMode)
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=1 WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE Settings SET ServiceMode = 1;");
 		else
-			queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceMode`=0 WHERE  `Settings_ID`=1;");
+			queryExecutor.executeUpdate("UPDATE Settings SET ServiceMode = 0;");
 
 	}
 
@@ -112,7 +113,7 @@ public class SettingsController {
 
 	public void setServiceReason(String serviceReason) {
 		this.serviceReason = serviceReason;
-		queryExecutor.executeUpdate("UPDATE `pmforum`.`Settings` SET `ServiceReason`='" + serviceReason +"' WHERE  `Settings_ID`=1;");
+		queryExecutor.executeUpdate("UPDATE Settings SET ServiceReason='" + serviceReason +"';");
 	}
 
 	public void setOrderNumber(int orderNumber, int categoryID) {
