@@ -88,36 +88,54 @@ public class UserDataValidatorUtil {
 
 
 		// Validate With Regular Expressions
-		if (!username.matches(USERNAME_PATTERN)) {
+		if (!checkUsername(username)) {
 			errors.add("The username is invalid, it´s only allowed to use letters and numbers");
 		}
 
-		if (!emailAddress.matches(EMAIL_PATTERN)) {
+		if (!checkMail(emailAddress)) {
 			errors.add("The email address is not valid");
 		}
 
-		if (!password.matches(PASSWORD_PATTERN)) {
+		if (!checkPassword(password)) {
 			errors.add("The password is invalid please use a big letter, small letter, @, #, $, %");
 		}
-
 
 		// Return Error List
 		return errors;
 
 	}
 	
+	public boolean checkUsername(String username) {
+		if (!username.matches(USERNAME_PATTERN)) {
+			return false;
+		}
+		return true;
+	}
 	
-	public List<String>  registerDatabaseDataValidator(String username, String emailAddress) {
+	public boolean checkMail(String emailAddress) {
+		if (!emailAddress.matches(EMAIL_PATTERN)) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean checkPassword(String password) {
+		if (!password.matches(PASSWORD_PATTERN)) {
+			return false;
+		}
+		return true;
+	}
+	
+	public List<String>  checkExistingEmailAdress(String emailAddress) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
 
 
 		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
+		ResultSet querystring = queryExecutor.executeQuery("SELECT UPPER(Email) "
 				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
+				+ "OR Email='" + emailAddress.toUpperCase() + "';");
 
 
 		// Check Query Result
@@ -129,14 +147,9 @@ public class UserDataValidatorUtil {
 
 				while (querystring.next()) {
 
-					String name = querystring.getString(1);
-					String email = querystring.getString(2);
+					String email = querystring.getString(1);
 
-					if (name.equals(username)) {
-						errors.add("Username already taken");
-					}
-
-					if (email.equals(emailAddress)) {
+					if (email.equalsIgnoreCase(emailAddress)) {
 						errors.add("E-Mail address already taken");
 					}
 				}
@@ -152,18 +165,12 @@ public class UserDataValidatorUtil {
 	}
 	
 	
-	public OverwriteVariablesWithResultUtil  forgottenDatabaseDataValidator(String username, String emailAddress) {
+	public List<String>  registerDatabaseDataValidator(String username, String emailAddress) {
 
 		// Create Error Array
 		List<String> errors = new ArrayList<String>();
 
-
-		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
-				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
-
+		ResultSet querystring = validateData(username, emailAddress);
 
 		// Check Query Result
 		try {
@@ -177,8 +184,56 @@ public class UserDataValidatorUtil {
 					String name = querystring.getString(1);
 					String email = querystring.getString(2);
 
-					if (!name.equals(username) && !email.equals(emailAddress)) {
-						errors.add("Username or E-Mail address doe´s not exist");
+					if (name.equalsIgnoreCase(username)) {
+						errors.add("Username already taken");
+					}
+
+					if (email.equalsIgnoreCase(emailAddress)) {
+						errors.add("E-Mail address already taken");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		// Return List Of Errors
+		return errors;
+
+	}
+	
+	public ResultSet validateData(String username, String emailAddress) {
+		// Validate With Database
+		ResultSet querystring = queryExecutor.executeQuery("SELECT UPPER(Name), UPPER(Email) "
+				+ "FROM Users WHERE "
+				+ "Name='" + username.toUpperCase() + "' "
+				+ "OR Email='" + emailAddress.toUpperCase() + "';");
+		return querystring;
+				
+	}
+	
+	public OverwriteVariablesWithResultUtil  forgottenDatabaseDataValidator(String username, String emailAddress) {
+
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+
+		ResultSet querystring = validateData(username, emailAddress);
+
+		// Check Query Result
+		try {
+			if (querystring.next()) {
+
+				// Move Cursor To The Beginning Of The Line
+				querystring.previous();
+
+				while (querystring.next()) {
+
+					String name = querystring.getString(1);
+					String email = querystring.getString(2);
+
+					if (!name.equalsIgnoreCase(username) && !email.equalsIgnoreCase(emailAddress)) {
+						errors.add("Username or E-Mail address does not exist");
 					} else {
 						emailAddress = email;
 						username = name;
