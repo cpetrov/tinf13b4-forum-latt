@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import tinf13b4.forum.database.ConnectionFactory;
 import tinf13b4.forum.database.QueryExecutor;
-import tinf13b4.forum.model.Category;
 
 public class SettingsController {
 	private QueryExecutor queryExecutor;;
@@ -112,7 +113,6 @@ public class SettingsController {
 	}
 
 	public void setServiceReason(String serviceReason) {
-		this.serviceReason = serviceReason;
 		queryExecutor.executeUpdate("UPDATE Settings SET ServiceReason='" + serviceReason +"';");
 	}
 
