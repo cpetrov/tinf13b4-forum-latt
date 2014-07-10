@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 import com.ibatis.common.jdbc.ScriptRunner;
 
@@ -26,7 +27,8 @@ public class QueryExecutor {
 		checkArgument(query != null, "Query must not be null.");
 		checkArgument(!query.isEmpty(), "Query must not be empty.");
 		try {
-			return connection.createStatement().executeQuery(query);
+			PreparedStatement statement = connection.prepareStatement(query);
+			return statement.executeQuery();
 		} catch (SQLException e) {
 			throw new IllegalStateException(e);
 		}
@@ -36,7 +38,8 @@ public class QueryExecutor {
 		checkArgument(update != null, "Update must not be null.");
 		checkArgument(!update.isEmpty(), "Update must not be empty.");
 		try {
-			connection.createStatement().executeUpdate(update);
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new IllegalStateException(e);
 		}
