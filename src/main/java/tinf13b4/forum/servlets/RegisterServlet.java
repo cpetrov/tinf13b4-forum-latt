@@ -89,7 +89,7 @@ public class RegisterServlet extends JsonServlet {
 						String subject = "Complete your registration";
 						String message = "Hello " + username.asString()
 									+ "\n \n Welcome to our Forum! To complete the registration process, "
-									+ "please visit the following link: \n http://localhost:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey;
+									+ "please visit the following link: \n http://5.45.110.9:8080/tinf13b4-forum-latt/confirmation.jsp?confirmationkey=" + confirmationKey;
 						
 						// Send email to User
 						sendMail.emailBuilder(emailAddress.asString(), subject, message);
