@@ -106,6 +106,44 @@ public class UserDataValidatorUtil {
 
 	}
 	
+	public List<String>  checkExistingEmailAdress(String emailAddress) {
+
+		// Create Error Array
+		List<String> errors = new ArrayList<String>();
+
+
+		// Validate With Database
+		ResultSet querystring = queryExecutor.executeQuery("SELECT UPPER(Email) "
+				+ "FROM Users WHERE "
+				+ "OR Email='" + emailAddress.toUpperCase() + "';");
+
+
+		// Check Query Result
+		try {
+			if (querystring.next()) {
+
+				// Move Cursor To The Beginning Of The Line
+				querystring.previous();
+
+				while (querystring.next()) {
+
+					String email = querystring.getString(1);
+
+					if (email.equalsIgnoreCase(emailAddress)) {
+						errors.add("E-Mail address already taken");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		// Return List Of Errors
+		return errors;
+
+	}
+	
 	
 	public List<String>  registerDatabaseDataValidator(String username, String emailAddress) {
 
@@ -114,10 +152,10 @@ public class UserDataValidatorUtil {
 
 
 		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
+		ResultSet querystring = queryExecutor.executeQuery("SELECT UPPER(Name), UPPER(Email) "
 				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
+				+ "Name='" + username.toUpperCase() + "' "
+				+ "OR Email='" + emailAddress.toUpperCase() + "';");
 
 
 		// Check Query Result
@@ -132,11 +170,11 @@ public class UserDataValidatorUtil {
 					String name = querystring.getString(1);
 					String email = querystring.getString(2);
 
-					if (name.equals(username)) {
+					if (name.equalsIgnoreCase(username)) {
 						errors.add("Username already taken");
 					}
 
-					if (email.equals(emailAddress)) {
+					if (email.equalsIgnoreCase(emailAddress)) {
 						errors.add("E-Mail address already taken");
 					}
 				}
@@ -159,10 +197,10 @@ public class UserDataValidatorUtil {
 
 
 		// Validate With Database
-		ResultSet querystring = queryExecutor.executeQuery("SELECT Name, Email "
+		ResultSet querystring = queryExecutor.executeQuery("SELECT UPPER(Name), UPPER(Email) "
 				+ "FROM Users WHERE "
-				+ "Name='" + username + "' "
-				+ "OR Email='" + emailAddress + "';");
+				+ "Name='" + username.toUpperCase() + "' "
+				+ "OR Email='" + emailAddress.toUpperCase() + "';");
 
 
 		// Check Query Result
@@ -177,7 +215,7 @@ public class UserDataValidatorUtil {
 					String name = querystring.getString(1);
 					String email = querystring.getString(2);
 
-					if (!name.equals(username) && !email.equals(emailAddress)) {
+					if (!name.equalsIgnoreCase(username) && !email.equalsIgnoreCase(emailAddress)) {
 						errors.add("Username or E-Mail address doe´s not exist");
 					} else {
 						emailAddress = email;
