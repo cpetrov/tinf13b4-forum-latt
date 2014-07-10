@@ -42,7 +42,7 @@
 						<tr>
 							<td><select name="id">
 								<c:forEach var="user" items="${settings.users }">
-									<option label="${user.id}" value="${user.id}">
+									<option label="${user.id}" value="${user.id}">${user.id}</option>
 								</c:forEach>
 								</select>
 							</td>
